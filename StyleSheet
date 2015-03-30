@@ -1,0 +1,178 @@
+Universidade de Brasília – UnB
+Faculdade UnB Gama – FGA
+Técnicas de Programação
+Profº: Mauricio Serrano
+
+Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
+		Cristiano Costa de Sousa		Mat: 10/44320
+		Fabrício Soares Coelho			Mat: 11/0116534
+		
+		Style Sheet for the PartyPay Softwre code in PHP
+		
+
+->Overview
+
+	- Codes MUST follow PSR-1.
+	
+	- Codes MUST use tabs, equivalent to 4 spaces for indentation.
+	
+	- The lines MUST be 80 characters or less.
+	
+	- MUST be a blank line after the namespace declaration and MUST be a blank line after the 
+	  block of statements to use.
+	  
+	- Opening keys for classes MUST be placed on the next line and lock keys MUST be placed on 
+	  the line after the body of the class.
+	  
+	- Methods opening keys MUST be placed on the next line and lock keys MUST be placed on 
+	  the line after the method body.
+	  
+	- Visibility MUST be declared in all the properties and methods; abstract and final MUST 
+	  be declared before the visibility; static MUST be declared after the visibility.
+	  
+	- Control structures keywords MUST have a space after them.  Methods and functions calls 
+	  NO.
+	
+	- Opening keys for control structures MUST be placed on the same line and lock keys MUST be 
+	  placed on the line after the body of the control structure.
+
+	- Opening parentheses for control structures MUST NOT have a space after them and closing 
+	  parentheses for control structures MUST NOT have a space before.
+	  
+	  Example:
+	  
+	  ?php
+	  namespace Vendor\Package;
+
+	  use FooInterface;
+	  use BarClass as Bar;
+	  use OtherVendor\OtherPackage\BazClass;
+
+	  class Foo extends Bar implements FooInterface
+	  {
+      	public function sampleFunction($a, $b = null)
+      	{
+        	if ($a === $b) {
+            	bar();
+        	} elseif ($a > $b) {
+            	$foo->bar($arg1);
+        	} else {
+            	BazClass::bar($arg2, $arg3);
+        	}
+      	}
+
+      	final public static function bar()
+      	{
+        	// method body
+      	}
+	  }
+	  
+
+->Files
+
+	- All PHP files MUST use the standard Unix LF (linefeed) termination lines.
+	
+	- All PHP files MUST end with a single blank line.
+	
+	- The closing tag ?> MUST be omitted in files containing PHP only.
+	
+->Indentation
+
+	- The indentation MUST be done using tab (equivalent to 4 spaces).
+	
+	
+->Lines
+
+	- The line should have a maximum of 80 characters.
+	
+	- Lines SHOULD NOT be longer than 80 characters; Longer lines that should be divided
+	  into multiple subsequent rows of no more than 80 characters each.
+	  
+	- SHOULD NOT be blank spaces at the end of lines that are not blank. Blank lines MAY be 
+	 added to improve readability and display related code blocks.
+	 
+	- MUST NOT be more than one statement per line.
+	
+	
+->Keywords and True / False / Null
+
+	- PHP Keywords MUST be in lower case.
+	
+	- The PHP constants true, false and null MUST be in lower case.
+	
+	
+->EOL Convention (End of Line)
+
+	- End of lines MUST follow the UNIX standard, they must end with a single linefeed (LF - / n).
+	
+
+->Declaring Namespace and Use
+
+	- When present, MUST be a blank line after the namespace declaration.
+
+	- When present, all statements use MUST be placed after the namespace declaration.
+
+	- MUST be only one keyword for use statement.
+
+	- There MUST be a blank line after the block of use.
+	
+	Example:
+	
+	<?php
+	namespace Vendor\Package;
+
+	use FooClass;
+	use BarClass as Bar;
+	use OtherVendor\OtherPackage\BazClass;
+
+	// ... more PHP code ...
+	
+
+->Classes, Properties and Methods
+
+	- The term class refers to all classes, interfaces and traits.
+	
+
+	#Extends and Implements
+
+	- Keywords extends and implements MUST be declared on the same line as the name of the class.
+	
+	- The key for the class MUST be placed on its own line; the closing key MUST be put on 
+	  the line after the body of the class.
+	  
+	  Example 1:
+	  
+	  <?php
+	  namespace Vendor\Package;
+
+	  use FooClass;
+	  use BarClass as Bar;
+	  use OtherVendor\OtherPackage\BazClass;
+
+	  class ClassName extends ParentClass implements \ArrayAccess, \Countable
+	  {
+	  	// constants, properties and methods
+	  }
+	  
+	  Implements lists MAY be divided into multiple lines, where each subsequent line is 
+	  indented once. When doing this, the first list item MUST be placed on the next line
+	  and MUST be only one interface per line.
+	    
+	  Example 2:
+	  
+	  <?php
+	  namespace Vendor\Package;
+
+	  use FooClass;
+	  use BarClass as Bar;
+	  use OtherVendor\OtherPackage\BazClass;
+
+	  class ClassName extends ParentClass implements
+	  	\ArrayAccess,
+      	\Countable,
+      	\Serializable
+	  {
+      	// constants, properties and methods
+	  }
+	  
+	  

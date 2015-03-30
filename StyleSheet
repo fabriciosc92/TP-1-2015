@@ -140,7 +140,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	- The key for the class MUST be placed on its own line; the closing key MUST be put on 
 	  the line after the body of the class.
 	  
-	  Example 1:
+	  Example:
 	  
 	  <?php
 	  namespace Vendor\Package;
@@ -158,7 +158,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	  indented once. When doing this, the first list item MUST be placed on the next line
 	  and MUST be only one interface per line.
 	    
-	  Example 2:
+	  Example:
 	  
 	  <?php
 	  namespace Vendor\Package;
@@ -175,4 +175,192 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
       	// constants, properties and methods
 	  }
 	  
+	#Methods
+	
+	- Visibilities MUST be declared in all methods.
+
+	- Method names SHOULD NOT be prefixed with _ to indicate visibilities protected or private.
+
+	- Method signatures SHOULD NOT be declared with a space after the name of the method. The 
+	  brace MUST be placed on its own line and the closing brace MUST be placed on the line 
+	  after the method body. MUST NOT be a space after the opening parenthesis and SHOULD NOT be 
+	  a space before the closing parenthesis.
 	  
+	  A method declaration looks like the following. Note the placement of parentheses, commas, 
+	  spaces and keys:
+	  
+	  <?php
+	  namespace Vendor\Package;
+
+	  class ClassName
+	  {
+	  	public function fooBarBaz($arg1, &$arg2, $arg3 = [])
+        {
+        	// corpo do método
+        }
+	  }
+	  
+	#Arguments of Methods
+
+	- In the list of arguments, MUST NOT be a space before each comma and MUST be a space after 
+	  each comma.
+	  
+	- Method arguments with default values MUST be placed at the end of the argument list.
+
+	Example:
+	
+	<?php
+	namespace Vendor\Package;
+
+	class ClassName
+	{
+    	public function foo($arg1, &$arg2, $arg3 = [])
+    	{
+        	// method body
+    	}
+	}
+	
+	- List of arguments MAY be divided into multiple lines, where each subsequent line is indented 
+	  once. When doing this, the first list item MUST be in the following line MUST be only one 
+	  argument per line.
+
+	- When the list of arguments is split into multiple lines, the closing parenthesis and the 
+	  key opening MUST be put together on its own line with a space between them.
+	  
+	Example:
+	
+	<?php
+	namespace Vendor\Package;
+
+	class ClassName
+	{
+    	public function aVeryLongMethodName(
+        	ClassTypeHint $arg1,
+        	&$arg2,
+        	array $arg3 = []
+    	) {
+        	// corpo do método
+    	}
+	}
+	
+->Control Structures
+
+	The general style rules for control structures are as follows:
+
+		- There MUST be a space after the keyword control structure
+
+		- SHOULD NOT be a space after the opening parenthesis
+
+		- MUST NOT be a space before the closing parenthesis
+		
+		- There MUST be a space between the parentheses of closing and opening key.
+
+		- The body of the structure must be indented once
+		
+		- The lock key MUST be placed on the line after the body structure
+
+	The body of each structure MUST be surrounded by keys. This standardizes look like structures 
+	and reduces the possibility of introducing errors as new lines are added to the body structure.
+
+	#if, elseif, else
+
+	- An if statement looks like the following. Note the placement of parentheses, spaces and keys; 
+	  and else and elseif are in the same line as the body's closing brace of the previous 
+	  structure.
+	  
+	  Example:
+	  
+	  <?php
+	  if ($expr1) {
+      	// corpo do if
+	  } elseif ($expr2) {
+      	// corpo do elseif
+	  } else {
+      	// corpo do else
+	  }
+	  
+	- The keyword elseif SHOULD be used instead of else if for all keywords control look like 
+	    a word.
+
+	#switch, case
+
+	- A switch statement looks like the following. Note the placement of parentheses, spaces and 
+	  keys. The case statement MUST be indented once the switch and the case keyword (or any other 
+	  termination keyword) MUST be indented at the same level that the body docase. There MUST be 
+	  a comment like // without break when the passage next case is intentional on a case body 
+	  that is not empty.
+	  
+	  Example:
+	  
+	  <?php
+	  switch ($expr) {
+      case 0:
+     	echo 'Primeiro case, com um break';
+        break;
+      case 1:
+        echo 'Segundo case, passando para o próximo case';
+        // without break
+      case 2:
+      case 3:
+      case 4:
+        echo 'Terceiro case, return ao invés de break';
+        return;
+      default:
+        echo 'Default case';
+        break;
+	  }
+	  
+	#while, do while
+
+	- A while structure looks like the following. Note the placement of parentheses, spaces and keys.
+	
+	<? php
+	while ($ expr) {
+    	// Body structure
+	}
+
+	- Similarly, a structure while it looks like the following. Note the placement of parentheses, 
+	  spaces and keys.
+	  
+	Example:
+	  
+	<? php
+	do {
+    	// Body structure
+	} While ($ expr);
+
+	#for
+	
+	- A structure for looks like the following. Note the placement of parentheses, spaces and keys.
+
+	<? php
+	for ($ i = 0; $ i <10; $ i ++) {
+    	// Body is
+	}
+
+	#foreach
+	
+	- A foreach structure looks like the following. Note the placement of parentheses, spaces 
+	  and keys.
+
+	<? php
+	foreach ($ iterable as $ key => $ value) {
+    	// Body foreach
+	}
+
+	#try, catch
+	
+	- A try catch structure looks like the following. Note the placement of parentheses, spaces 
+	  and keys.
+
+	<? php
+	try {
+    	// Try body
+	} Catch (FirstExceptionType $ e) {
+    	// Catch body
+	} Catch (OtherExceptionType $ e) {
+    	// Catch body
+	}
+	
+	
+* Code Standard used PSR-1, material available in: http://www.php-fig.org/psr/psr-2/pt-br/  

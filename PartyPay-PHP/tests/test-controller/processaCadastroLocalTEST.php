@@ -2,15 +2,19 @@
 
 include '../../model/Local.php';
 
-class processaCadastroLocalTEST extends PHPUnit_Framework_TestCase {
-
+class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase 
+{
     public $test;
 
-    public function setUp() {
+    // Signal the start of the test process, creating a new local.
+    public function setUp() 
+    {
         $this->test = new Local();
     }
 
-    public function testFuncaoPersist() {
+    // Unit test for the method Persist in the class Local. Registering a new local.
+    public function testFuncaoPersist() 
+    {
         $this->test->setBairro("Oeste");
         $this->test->setCep("724250000");
         $this->test->setCidade("Gama");
@@ -18,11 +22,8 @@ class processaCadastroLocalTEST extends PHPUnit_Framework_TestCase {
         $this->test->setEndereco("Quadra A");
         $this->test->setNome("Fazenda");
         $this->test->setPais("Brasil");
-	$this->test->setEstado("Distrito Federal");
+		$this->test->setEstado("Distrito Federal");
         $resultadoTEST = $this->test->persist();
         $this->assertTrue($resultadoTEST == !Null);
     }
-	
 }
-
-?>

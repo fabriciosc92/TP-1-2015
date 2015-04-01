@@ -1,4 +1,5 @@
 <?php
+// Class responsible for user's registration
 
 include '../model/Pessoa.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';

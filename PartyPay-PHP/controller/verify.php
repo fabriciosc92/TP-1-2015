@@ -1,4 +1,5 @@
 <?php
+// Class responsible for checking register
 
 $op_codigo_verificador = $_GET['op'];
 $user_email = $_GET['email'];

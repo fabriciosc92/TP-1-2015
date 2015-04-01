@@ -1,4 +1,5 @@
 <?php
+// Class responsible for user's loggin
 
 include '../model/Pessoa.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';
@@ -7,7 +8,6 @@ include 'gerarCodConfirmacao.php';
 session_start();
 
 // Nesta parte do código pode ser utilzado o arquivo conexao.php
-// Eu só não sei como! HuEHEhEHueheu! BR? BR? BR!
 $host = "localhost"; // Host name 
 $username = "root"; // Mysql username - MUDE AQUI O USERNAME DO SEU MYSQL
 $password = ""; // Mysql password - MUDE AQUI A SENHA DO SEU MYSQL
@@ -27,7 +27,7 @@ $email = addslashes($_POST['email']);
 $mypassword = addslashes($_POST['password']);
 $encrypted_mypassword = md5($mypassword);
 
-// Não faço ideia o pq de usar addslashes, mas...
+
 $strList = "\\\'\"&\n\r<>";
 addcslashes($email, $strList);
 addcslashes($mypassword, $strList);

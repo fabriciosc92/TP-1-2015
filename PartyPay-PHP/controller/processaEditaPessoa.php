@@ -1,4 +1,5 @@
 <?php
+// Class responsible for edits of user's data
 
 include '../model/Pessoa.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';

@@ -18,7 +18,8 @@ $Mensagem = "Oi!\n\nEsta é a sua nova senha: $password\n";
 require_once("phpmailer/class.phpmailer.php");
 
 // Function to control sending emails
-function smtpmailer($para, $de, $de_nome, $assunto, $corpo) {
+function smtpmailer($para, $de, $de_nome, $assunto, $corpo) 
+{
 
     global $error;
 

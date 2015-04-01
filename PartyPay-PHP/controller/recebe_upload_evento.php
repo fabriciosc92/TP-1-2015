@@ -1,4 +1,5 @@
 <?php
+// Class responsible for uploading the event image
 
 require 'canvas.php';
 // Pasta onde o arquivo vai ser salvo

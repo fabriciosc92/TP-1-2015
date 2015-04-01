@@ -1,4 +1,5 @@
 <?php
+// Class responsible for local registration
 
 require_once '../model/Local.php';
 require_once '../model/DAC/EventoLocalDAC.php';

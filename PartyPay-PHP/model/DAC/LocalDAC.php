@@ -2,7 +2,8 @@
 
 class LocalDAC {
 
-    public static function persist(Local $local) {
+    public static function persist(Local $local) 
+    {
         include_once 'conexao.php';
         $sql = "INSERT INTO `locais`(`id`, `endereco`, `coordenadasGoogleMaps`, 
             `nome`, `numero`, `complemento`, `bairro`, `cidade`, `cep`, `pais`, 
@@ -27,14 +28,16 @@ class LocalDAC {
         return $mat['0'];
     }
 
-    public static function updateInfo(Local $local, $atributo, $atributoNovo) {
+    public static function updateInfo(Local $local, $atributo, $atributoNovo) 
+
         include_once 'conexao.php';
         $sql = "UPDATE `locais` SET `$atributo`=$atributoNovo WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($conexao);
     }
 
-    public static function delete(Local $local) {
+    public static function delete(Local $local) 
+    {
         include_once 'conexao.php';
         $sql = "DELETE FROM `locais` WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());

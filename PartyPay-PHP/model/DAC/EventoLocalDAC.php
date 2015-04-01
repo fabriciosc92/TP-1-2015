@@ -1,8 +1,10 @@
 <?php
+// Class to connect to the database
 
 class EventoLocal {
 
-    public static function persist($eventoId, $localId) {
+    public static function persist($eventoId, $localId) 
+    {
         require 'conexao.php';
         $sql = "INSERT INTO `locaisdoseventos` (
             `id` ,

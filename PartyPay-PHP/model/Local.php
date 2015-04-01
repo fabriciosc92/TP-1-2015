@@ -1,4 +1,5 @@
 <?php
+// Class responsible to define model elements in local.
 
 require_once 'DAC/LocalDAC.php';
 
@@ -18,123 +19,153 @@ class Local {
     private $estado;
     private $miniatura;
 
-    public function getMiniatura() {
+    public function getMiniatura() 
+    {
         return $this->miniatura;
     }
 
-    public function setMiniatura($miniatura) {
+    public function setMiniatura($miniatura) 
+    {
         $this->miniatura = $miniatura;
     }
 
-    public function getEstado() {
+    public function getEstado() 
+    {
         return $this->estado;
     }
 
-    public function setEstado($estado) {
+    public function setEstado($estado) 
+    {
         $this->estado = $estado;
     }
 
-    function __construct() {
+    function __construct() 
+    {
         
     }
 
-    public function getNumero() {
+    public function getNumero() 
+    {
         return $this->numero;
     }
 
-    public function setNumero($numero) {
+    public function setNumero($numero) 
+    {
         $this->numero = $numero;
     }
 
-    public function getComplemento() {
+    public function getComplemento() 
+    {
         return $this->complemento;
     }
 
-    public function setComplemento($complemento) {
+    public function setComplemento($complemento) 
+    {
         $this->complemento = $complemento;
     }
 
-    public function getBairro() {
+    public function getBairro() 
+    {
         return $this->bairro;
     }
 
-    public function setBairro($bairro) {
+    public function setBairro($bairro) 
+    {
         $this->bairro = $bairro;
     }
 
-    public function getCidade() {
+    public function getCidade() 
+    {
         return $this->cidade;
     }
 
-    public function setCidade($cidade) {
+    public function setCidade($cidade) 
+    {
         $this->cidade = $cidade;
     }
 
-    public function getCep() {
+    public function getCep() 
+    {
         return $this->cep;
     }
 
-    public function setCep($cep) {
+    public function setCep($cep) 
+    {
         $this->cep = $cep;
     }
 
-    public function getPais() {
+    public function getPais() 
+    {
         return $this->pais;
     }
 
-    public function setPais($pais) {
+    public function setPais($pais) 
+    {
         $this->pais = $pais;
     }
 
-    public function getNome() {
+    public function getNome() 
+    {
         return $this->nome;
     }
 
-    public function setNome($nome) {
+    public function setNome($nome) 
+    {
         $this->nome = $nome;
     }
 
-    public function getId() {
+    public function getId() 
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id) 
+    {
         $this->id = $id;
     }
 
-    public function getEndereco() {
+    public function getEndereco() 
+    {
         return $this->endereço;
     }
 
-    public function setEndereco($endereco) {
+    public function setEndereco($endereco) 
+    {
         $this->endereço = $endereco;
     }
 
-    public function getCoordenadaGoogleMaps() {
+    public function getCoordenadaGoogleMaps() 
+    {
         return $this->coordenadaGoogleMaps;
     }
 
-    public function setCoordenadaGoogleMaps($coordenadaGoogleMaps) {
+    public function setCoordenadaGoogleMaps($coordenadaGoogleMaps) 
+    {
         $this->coordenadaGoogleMaps = $coordenadaGoogleMaps;
     }
 
-    public function getFotos() {
+    public function getFotos() 
+    {
         return $this->fotos;
     }
 
-    public function setFotos($fotos) {
+    public function setFotos($fotos) 
+    {
         $this->fotos = $fotos;
     }
 
-    public function persist() {
+    public function persist() 
+    {
         return LocalDAC::persist($this);
     }
 
-    public function updateInfo($atributo, $novoValor) {
+    public function updateInfo($atributo, $novoValor) 
+    {
         LocalDAC::updateInfo($this, $atributo, $novoValor);
     }
 
-    public function delete() {
+    public function delete() 
+    {
         LocalDAC::delete($this);
     }
 

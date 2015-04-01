@@ -1,8 +1,10 @@
 <?php
+// Class to connect to the database
 
 class EventoDAC {
 
-    public static function persist(Evento $evento) {
+    public static function persist(Evento $evento) 
+    {
         include_once 'conexao.php';
         $sql = "INSERT INTO `eventos`(`nome`, 
             `dataInicio`, `dataTermino`, `imagem`,
@@ -36,21 +38,24 @@ class EventoDAC {
         return $mat['0'];
     }
 
-    public static function updateInfo($evento, $atributo, $atributoNovo) {
+    public static function updateInfo($evento, $atributo, $atributoNovo) 
+    {
         include_once 'conexao.php';
         $sql = "UPDATE `eventos` SET `$atributo`=$atributoNovo WHERE id=" . $evento->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($conexao);
     }
 
-    public static function delete($evento) {
+    public static function delete($evento) 
+    {
         include_once 'conexao.php';
         $sql = "DELETE FROM `eventos` WHERE id=" . $evento->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($conexao);
     }
 
-    public static function recupere($evento, $id) {
+    public static function recupere($evento, $id) 
+    {
         include_once 'conexao.php';
         $sql = "SELECT * FROM eventos WHERE id=$id";
         $resultado = mysql_query($sql) or die(mysql_error());

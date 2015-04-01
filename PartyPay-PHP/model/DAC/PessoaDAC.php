@@ -1,8 +1,10 @@
 <?php
+// Class to connect to the database
 
 class PessoaDAC {
 
-    public static function persist($pessoa) {
+    public static function persist($pessoa) 
+    {
 
         include_once 'conexao.php';
         $sql = "INSERT INTO pessoas(`primeiroNome`, `sobreNome`, `email`, `senha`,`sexo`, 
@@ -19,14 +21,16 @@ class PessoaDAC {
         return $mat['0'];
     }
 
-    public static function updateInfo(Pessoa $pessoa, $atributo, $atributoNovo) {
+    public static function updateInfo(Pessoa $pessoa, $atributo, $atributoNovo) 
+    {
         include_once 'conexao.php';
         $sql = "UPDATE `pessoas` SET `$atributo`=$atributoNovo WHERE id=". $pessoa->getId();
         mysql_query($sql) or die(mysql_error());
 
     }
 
-    public static function atualizar($pessoa){
+    public static function atualizar($pessoa)
+    {
         include_once 'conexao.php';
         $sql = "UPDATE pessoas SET
         primeiroNome='" . $pessoa->getPrimeiroNome() . "',
@@ -38,13 +42,15 @@ class PessoaDAC {
         mysql_query($sql) or die(mysql_error());
     }
 
-    public static function delete($pessoa) {
+    public static function delete($pessoa) 
+    {
         include_once 'conexao.php';
         $sql = "DELETE FROM `pessoas` WHERE id=";
         mysql_query($sql) or die(mysql_error());
     }
 
-    public static function recupere($pessoa, $id) {
+    public static function recupere($pessoa, $id) 
+    {
         include_once 'conexao.php';
         $sql = "SELECT * FROM pessoas WHERE id=$id";
         $resultado = mysql_query($sql) or die(mysql_error());
@@ -65,7 +71,8 @@ class PessoaDAC {
         }
     }
 
-    public static function verifiqueDispo($email) {
+    public static function verifiqueDispo($email) 
+    {
         include_once 'conexao.php';
         $sql = "SELECT email FROM pessoas WHERE email='$email'";
         $result = mysql_query($sql);

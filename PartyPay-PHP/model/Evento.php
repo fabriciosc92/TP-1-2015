@@ -1,4 +1,5 @@
 <?php
+// Class responsible to define model elements in events..
 
 require_once 'DAC/EventoDAC.php';
 
@@ -22,159 +23,198 @@ class Evento {
     private $classificacao;
     private $Id;
 
-    public function getClassificacao() {
+    public function getClassificacao() 
+    {
         return $this->classificacao;
     }
 
-    public function setClassificacao($classificacao) {
+    public function setClassificacao($classificacao) 
+    {
         $this->classificacao = $classificacao;
     }
 
-    public function getId() {
+    public function getId() 
+    {
         return $this->Id;
     }
 
-    public function setId($Id) {
+    public function setId($Id) 
+    {
         $this->Id = $Id;
     }
 
-    public function getMiniatura() {
+    public function getMiniatura() 
+    {
         return $this->miniatura;
     }
 
-    public function setMiniatura($miniatura) {
+    public function setMiniatura($miniatura) 
+    {
         $this->miniatura = $miniatura;
     }
 
-    public function getHoraInicio() {
+    public function getHoraInicio() 
+    {
         return $this->horaInicio;
     }
 
-    public function setHoraInicio($horaInicio) {
+    public function setHoraInicio($horaInicio) 
+    {
         $this->horaInicio = $horaInicio;
     }
 
-    public function getHoraTermino() {
+    public function getHoraTermino() 
+    {
         return $this->horaTermino;
     }
 
-    public function setHoraTermino($horaTermino) {
+    public function setHoraTermino($horaTermino) 
+    {
         $this->horaTermino = $horaTermino;
     }
 
-    function __construct() {
+    function __construct() 
+    {
         
     }
 
-    public function getNumeroIngressos() {
+    public function getNumeroIngressos() 
+    {
         return $this->numeroIngressos;
     }
 
-    public function setNumeroIngressos($numeroIngressos) {
+    public function setNumeroIngressos($numeroIngressos) 
+    {
         $this->numeroIngressos = $numeroIngressos;
     }
 
-    public function getDataCriacao() {
+    public function getDataCriacao() 
+    {
         return $this->dataCriacao;
     }
 
-    public function setDataCriacao($dataCriacao) {
+    public function setDataCriacao($dataCriacao) 
+    {
         $this->dataCriacao = $dataCriacao;
     }
 
-    public function getImagem() {
+    public function getImagem() 
+    {
         return $this->imagem;
     }
 
-    public function setImagem($imagem) {
+    public function setImagem($imagem) 
+    {
         $this->imagem = $imagem;
     }
 
-    public function getDescricao() {
+    public function getDescricao() 
+    {
         return $this->descricao;
     }
 
-    public function setDescricao($descricao) {
+    public function setDescricao($descricao) 
+    {
         $this->descricao = $descricao;
     }
 
-    public function getFacebookEventPage() {
+    public function getFacebookEventPage() 
+    {
         return $this->facebookEventPage;
     }
 
-    public function setFacebookEventPage($facebookEventPage) {
+    public function setFacebookEventPage($facebookEventPage) 
+    {
         $this->facebookEventPage = $facebookEventPage;
     }
 
-    public function getNome() {
+    public function getNome() 
+    {
         return $this->nome;
     }
 
-    public function setNome($nome) {
+    public function setNome($nome) 
+    {
         $this->nome = $nome;
     }
 
-    public function getDataInicio() {
+    public function getDataInicio() 
+    {
         return $this->dataInicio;
     }
 
-    public function setDataInicio($dataInicio) {
+    public function setDataInicio($dataInicio) 
+    {
         $this->dataInicio = $dataInicio;
     }
 
-    public function getDataTermino() {
+    public function getDataTermino() 
+    {
         return $this->dataTermino;
     }
 
-    public function setDataTermino($dataTermino) {
+    public function setDataTermino($dataTermino) 
+    {
         $this->dataTermino = $dataTermino;
     }
 
-    public function getPrecoMasc() {
+    public function getPrecoMasc() 
+    {
         return $this->precoMasc;
     }
 
-    public function setPrecoMasc($precoMasc) {
+    public function setPrecoMasc($precoMasc) 
+    {
         $this->precoMasc = $precoMasc;
     }
 
-    public function getPrecoFem() {
+    public function getPrecoFem() 
+    {
         return $this->precoFem;
     }
 
-    public function setPrecoFem($precoFem) {
+    public function setPrecoFem($precoFem) 
+    {
         $this->precoFem = $precoFem;
     }
 
-    public function getOrganizador() {
+    public function getOrganizador() 
+    {
         return $this->organizador;
     }
 
-    public function setOrganizador($organizador) {
+    public function setOrganizador($organizador) 
+    {
         $this->organizador = $organizador;
     }
 
-    public function getLocal() {
+    public function getLocal() 
+    {
         return $this->local;
     }
 
-    public function setLocal($local) {
+    public function setLocal($local) 
+    {
         $this->local = $local;
     }
 
-    public function persist() {
+    public function persist() 
+    {
         return EventoDAC::persist($this);
     }
 
-    public function updateInfo($atributo, $novoValor) {
+    public function updateInfo($atributo, $novoValor) 
+    {
         EventoDAC::updateInfo($this, $atributo, $novoValor);
     }
 
-    public function delete() {
+    public function delete() 
+    {
         EventoDAC::delete($this);
     }
 
-    public function eventoPorId($Id){
+    public function eventoPorId($Id)
+    {
         EventoDAC::recupere($this, $Id);
     }
 

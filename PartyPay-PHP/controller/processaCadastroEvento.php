@@ -1,4 +1,5 @@
 <?php
+// Class responsible for event registration
 
 require_once '../model/Evento.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';

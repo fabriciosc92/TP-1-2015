@@ -1,7 +1,8 @@
-
 <?php
+// This class controls emails confimation
 
 include 'gerarCodConfirmacao.php';
+
 // multiple recipients
 $to = $_GET['email'];
 $cod = $_GET['cod'];
@@ -16,7 +17,8 @@ $message = '
   <title>Confirme seu cadastro no PartyPay!</title>
 </head>
 <body>
-  <p>Clique <a href="http://www.partypay.webuda.com/controller/verify.php?op=' . $cod . '&e=' . $to . '">aqui</a> para confirmar seu cadastro</p>
+  <p>Clique <a href="http://www.partypay.webuda.com/controller/verify.php?op=' 
+  			. $cod . '&e=' . $to . '">aqui</a> para confirmar seu cadastro</p>
  
 </body>
 </html>

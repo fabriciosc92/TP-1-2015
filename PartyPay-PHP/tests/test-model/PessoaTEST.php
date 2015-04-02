@@ -2,12 +2,13 @@
 
 include '../../model/Pessoa.php';
 
-class PessoaTEST extends PHPUnit_Framework_TestCase {
-
+class PessoaTEST extends PHPUnit_Framework_TestCase 
+{
     public $test;
 
     // Signal the start of the test process by creating a new person.
-    public function setUp() {
+    public function setUp() 
+    {
         $this->test = new Pessoa();
     }
 

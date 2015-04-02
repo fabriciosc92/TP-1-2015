@@ -2,12 +2,13 @@
 
 include '../../model/Local.php';
 
-class LocalTEST extends PHPUnit_Framework_TestCase {
-
+class LocalTEST extends PHPUnit_Framework_TestCase 
+{
     public $test;
 
     // Signal the start of the test process by creating a new local.
-    public function setUp() {
+    public function setUp() 
+    {
         $this->test = new Local();
     }
 

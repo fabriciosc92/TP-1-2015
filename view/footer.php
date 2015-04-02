@@ -1,4 +1,6 @@
-
+<?php
+//Page responsible to be the the footer of all pages.
+?>
 <footer>
 
     <div class="container">	

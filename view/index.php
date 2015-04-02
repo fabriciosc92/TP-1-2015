@@ -1,4 +1,8 @@
-<?php require_once 'header.php'; ?>
+<?php 
+//Page responsible to be the first page to run.
+
+require_once 'header.php'; 
+?>
 <div id="hero" class="">
     <ul>
         <li><img src="view/img/slide.jpg" alt="" /></li>
@@ -26,7 +30,7 @@
                 $num = ultimoEvento();
 
                 for ($i = 0; $i < 6; $i++) {
-                    ?>
+				?>
 
                     <li class="span4">
                         <div class="thumbnail">
@@ -47,7 +51,9 @@
                             </div>
                         </div>
                     </li>
-                <?php } ?>
+                <?php 
+				}
+				?>
             </ul>
         </div>
 

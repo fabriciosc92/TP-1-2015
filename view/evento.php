@@ -1,16 +1,18 @@
 <?php
+//Page responsible to show the event info.
+
 require_once ('header.php');
 
 if (isset($evento)) {
     unset($evento);
 }
+
 $evento = new Evento();
 
 $idEvento = $_GET['id'];
 $evento->eventoPorID($idEvento);
 
 $nomeEvento = $evento->getNome();
-
 $dataInicio = $evento->getDataInicio();
 $dataTermino = $evento->getDataTermino();
 $imagem = $evento->getImagem();
@@ -38,7 +40,12 @@ $classificacao = $evento->getClassificacao();
         <div class="span4">
             <div class="data well">
                 <h4>Data</h4>
-                <span class="horario"><?php echo ("De " . $dataInicio . " at&eacute; " . $dataTermino); ?></span>
+                <span class="horario">
+					<?php
+						echo ("De " . $dataInicio . " at&eacute; "
+													. $dataTermino); 
+					?>
+				</span>
             </div>
             <div class="Local well">
                 <h4>Local</h4>
@@ -54,4 +61,7 @@ $classificacao = $evento->getClassificacao();
     </div>
 </div>
 
-<?php require_once ('footer.php'); ?>
+<?php
+require_once ('footer.php');
+
+?>

@@ -1,7 +1,4 @@
-<?php 
-	//Page responsible to show the person edition form.
-	require_once('header.php'); 
-?>
+<?php require_once('header.php'); ?>
 <section class="container">
     <h3>Editar dados</h3>
     <div class="row"><h3><?php echo $_SESSION['id']; ?></h3>
@@ -62,7 +59,4 @@
         </form>
     </div>
 </section>
-<?php
-	require_once('footer.php'); 
-	
-?>
+<?php require_once('footer.php'); ?>

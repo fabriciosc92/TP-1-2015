@@ -1,7 +1,4 @@
-<?php 
-	//Page responsible the local event registering form.
-	require_once ('header.php'); 
-?>
+<?php require_once ('header.php'); ?>
 <section class="container">
     <h3>Local</h3>
     <div class="row">
@@ -74,7 +71,4 @@
         </form>
     </div>
 </section>
-<?php 
-	require_once ('footer.php');
-
-?>
+<?php require_once ('footer.php'); ?>

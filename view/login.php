@@ -1,5 +1,4 @@
 <?php
-//Page responsible to sign in.
 
 include 'model/Pessoa.php';
 

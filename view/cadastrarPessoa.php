@@ -1,7 +1,4 @@
-<?php
-	//Page responsible to show the person registering form.
-	require_once('header.php'); 
-?>
+<?php require_once('header.php'); ?>
 <section class="container">
     <h3>Novo Usu&aacute;rio</h3>
     <div class="row">
@@ -63,7 +60,4 @@
         </form>
     </div>
 </section>
-<?php 
-	require_once('footer.php'); 
-
-?>
+<?php require_once('footer.php'); ?>

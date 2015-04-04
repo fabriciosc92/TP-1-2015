@@ -1,6 +1,8 @@
 <?php
+//Page responsible to be the header of all pages.
+
 include 'model/Pessoa.php';
-include "controller/functions.php";
+include 'controller/functions.php';
 
 
 session_start();
@@ -13,6 +15,7 @@ if (isset($_SESSION['id'])) {
     $email = $_SESSION['email'];
     $sexo = $_SESSION['sexo'];
     $cpf = $_SESSION['cpf'];
+	
 }
 ?>
 
@@ -34,31 +37,39 @@ if (isset($_SESSION['id'])) {
                     <ul class="nav">
                         <li class="active"><a href="index.php">Home</a></li>
                         <li><a href="#">Sobre</a></li>
-                        <?php if (!isset($_SESSION['id'])) { ?>
+                        <?php 
+						if (!isset($_SESSION['id'])) {
+						?>
                             <li><a href="#myModal" data-toggle="modal">Entrar</a></li>
                             <li><a href="#cadastrar" data-toggle="modal">Sign up</a></li>
-                        <?php } else {
-                            
-                        }
+                        <?php 
+						} else {
+							//Nothing to do
+						}
                         ?>
                     </ul>
                     <a class="btn btn-success pull-right" href="cadastrarEvento.php">Divulgar seu evento</a>
-<?php if (isset($_SESSION['id'])) { ?>
-                        <div id="usuario" class="btn-group pull-right">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-    <?php echo "$primeiroNome $sobreNome"; ?>
-                                </button>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="editarPessoa.php">Editar cadastro</a></li>
-                                <li><a href="logout.php">Sair</a></li>
-                            </ul>
-                        </div>
-                    <?php } else {
-                        
-                    }
-                    ?>
+						<?php 
+						if (isset($_SESSION['id'])) {
+						?>
+							<div id="usuario" class="btn-group pull-right">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+									<?php 
+									echo "$primeiroNome $sobreNome"; 
+									?>
+									</button>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="editarPessoa.php">Editar cadastro</a></li>
+									<li><a href="logout.php">Sair</a></li>
+								</ul>
+							</div>
+						<?php 
+						} else {
+							//Nothing to do
+						}
+						?>
                 </div>
                 <!-- Modal Login-->
                 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -1,0 +1,56 @@
+Class name: Pessoa -> User
+
+Functions: persist -> insertUser
+		   updateInfo -> updateUserInformation
+		   delete -> deleteUser
+		   atualizar -> updateUser
+
+Variables:
+
+		   // Store the user last name.
+		   sobreNome -> userLastName
+
+		   // Keeps the user email.
+    	   email -> userEmail
+    	   
+    	   // User id in database.
+    	   id -> userId
+    
+    	   // Password to access the site.
+           password -> userPassord
+    	   
+           // Gender of the user.
+    	   sexo -> userSex.
+    	   
+    	   // Confirmation code when finishes the registering.
+    	   codConfirmacao -> confirmationCode
+    
+    	   // Keeps the user cpf.
+    	   cpf -> userCpf
+    	   
+    	   // Keeps what the user is buying.
+    	   compras;
+    	   
+    	   // Credit cards that will be using to buy the tickets.
+    	   cartoesDeCredito -> userCreditCard
+    	   
+    	   // Keeps the cnpj.
+    	   cnpj -> userCnpj
+    	   
+    	   // Events that the user chose.
+    	   eventos -> userEvents
+    	   
+    	   // User bank information.
+    	   informaçoesBancarias -> bankInformation
+    	   
+    	   // Telefone to contact the user.
+    	   telefoneContato -> userPhone
+    	   
+    	   // Store the fantasy name.
+    	   nomeFantasia -> userFantasyName
+    	   
+    	   // Keeps the website
+    	   website 
+    	
+    	   // User facebook fan page.
+    	   facebookFanPage -> userFacebookFanPage

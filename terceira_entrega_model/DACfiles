@@ -1,0 +1,32 @@
+EventoDac.php
+	class: EventoDac -> new name: EventDac
+
+	Functions: persist -> new name: insertEventDAC
+			   updateInfo -> new name: updateInformationEventDAC
+			   delete -> new name: deleteEventDAC
+			   recupere -> new name: recoveryEventDAC
+
+
+EventoLocalDAC.php
+	class: EventoLocalDAC -> new name: LocalEventDAC
+
+	Functions: persist -> newm name: insertLocalEventDac
+
+
+LocalDAC.php
+	class: LocalDac 
+
+	Functions: persist -> new name: insertLocalDAC
+			   updateInfo -> new name: updateInformationDAC
+			   delete -> new name: deleteLocalDAC
+
+
+PessoaDAC.php
+	class: PessoaDAC -> UserDAC
+
+	Functions: persist -> new name: insertUserDAC
+			   updateInfo -> new name: updateInformationUserDAC
+			   atualizar -> new name: updateUserDAC
+			   delete -> new name: deleteUserDAC
+			   recupere -> new name: recoverUserDAC
+			   verifiqueDispo -> new name: verifyDisposition

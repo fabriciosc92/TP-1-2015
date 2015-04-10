@@ -1,0 +1,46 @@
+Class name: Local
+
+Functions: persist -> insertLocal
+		   updateInfo -> updateLocalInformation
+		   delete -> deleteLocal
+
+Variables:
+
+		   // Keeps the address of the event.
+		   endereco -> eventAddress
+    	   
+		   // Store the address number
+    	   numero -> addressNumber
+    	   
+    	   // Address complement
+    	   complemento -> addressComplement
+    	   
+    	   // Store the neighborhood.
+    	   bairro -> eventNeighborhood
+    	   
+    	   // Event city.
+    	   cidade -> eventCity
+    	   
+    	   // Cep of the local of the event.
+    	   cep -> localCep
+    
+    	   // Countrt where the event is happening.
+    	   pais -> eventCountry
+    	   
+    	   // Coordanate of the event in the google maps.
+    	   coordenadaGoogleMaps -> googleMapsCoordanate
+    	   
+    	   // Pictures of the local of the event.
+    	   fotos -> eventLocalPictures
+    	   
+    	   // Local id in database.
+    	   id -> localId
+    	   
+    	   // Name of the place of the event.
+    	   nome -> eventLocalName
+    	   
+    	   // Estate of the place of the event.
+    	   estado -> eventState
+    	   
+    	   // Local Miniature
+    	   miniatura -> localMiniature

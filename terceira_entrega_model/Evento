@@ -1,0 +1,60 @@
+Class name: Evento -> new name: Event
+
+
+Functions: eventoPorId -> eventById
+		   delete -> deleteEvent
+		   updateInfo -> updateInformationEvent
+		   persist -> insertEvent
+
+
+Variables:  
+			// Store the name of the event.
+			nome -> eventName
+
+   			// Keeps date when the event was created.
+   			dataCriacao -> eventCriationDate
+    
+   			// Date when the event begun.
+    		dataInicio -> eventBeginDate
+
+    		// Date when the event is over.
+    		dataTermino -> eventEndDate
+
+    		// Store the image of the event.
+    		imagem -> eventImage
+    		
+    		// Price that a man has to pay for the event.
+    		precoMasc -> masculineEventPrice
+    		
+    		// Price that a woman has to pay for the event	
+    		precoFem -> femaleEventPrice
+    		
+    		// Store the person that is organizing the event.
+    		organizador; //nao precisa
+    		
+    		// Local where the event is happening.
+    		local -> eventLocal
+    		
+    		// Keeps the linking to the facebook page of the event.
+    		facebookEventPage
+    		
+    		// Description of the event.
+    		descricao -> eventDescription
+    		
+    		// Number of tickets avaible in the event.
+    		numeroIngressos -> numberOfTickets
+    		
+    		// Begin time of the event.
+    		horaInicio -> beginHour
+    		
+    		// Event end time
+    		horaTermino -> endHour
+    		
+    		// Miniature of the event.
+    		miniatura -> miniatureEvent
+    		
+    		// Minimum age to enter in the event.
+    		classificacao -> ageClassification
+    		
+    		// Database id of the event.
+    		Id -> eventId

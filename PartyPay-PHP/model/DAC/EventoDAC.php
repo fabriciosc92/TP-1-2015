@@ -1,8 +1,13 @@
 <?php
-// Class to connect to the database
 
-class EventoDAC {
+/**
+ * Class name: EventoDac
+ * Class to connect Evento to the database.
+ */
+class EventoDAC 
+{
 
+    // Inserts data from Evento into database.
     public static function persist(Evento $evento) 
     {
         include_once 'conexao.php';
@@ -38,6 +43,7 @@ class EventoDAC {
         return $mat['0'];
     }
 
+    // Update data in database from  Evento.
     public static function updateInfo($evento, $atributo, $atributoNovo) 
     {
         include_once 'conexao.php';
@@ -46,6 +52,7 @@ class EventoDAC {
         mysql_close($conexao);
     }
 
+    // Delete data from database.
     public static function delete($evento) 
     {
         include_once 'conexao.php';
@@ -54,6 +61,7 @@ class EventoDAC {
         mysql_close($conexao);
     }
 
+    // Recover data from database to Evento.
     public static function recupere($evento, $id) 
     {
         include_once 'conexao.php';
@@ -86,5 +94,3 @@ class EventoDAC {
     }
 
 }
-
-?>

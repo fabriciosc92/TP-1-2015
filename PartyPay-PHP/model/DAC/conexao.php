@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * File name: conexao
+ * Connection  with database.
+ */
+
 $server = 'localhost';
 $db = 'payparty';
 //MODIFIQUE AQUI O USER.NAME E A SENHA DO SEU MYSQL
@@ -8,4 +13,5 @@ $password = '';
 
 $conexao = mysql_connect($server, $user, $password);
 @mysql_select_db($db) OR DIE("Banco não encontrado.");
+
 ?>

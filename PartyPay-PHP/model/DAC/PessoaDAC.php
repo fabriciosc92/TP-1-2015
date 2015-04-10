@@ -1,8 +1,13 @@
 <?php
-// Class to connect to the database
 
-class PessoaDAC {
+/**
+ * Class name: PessoaDac
+ * Class to connect Pessoa to the database.
+ */
+class PessoaDAC 
+{
 
+    // Insert data from Pessoa into database.
     public static function persist($pessoa) 
     {
 
@@ -21,6 +26,7 @@ class PessoaDAC {
         return $mat['0'];
     }
 
+    // Update data from Pessoa in database.
     public static function updateInfo(Pessoa $pessoa, $atributo, $atributoNovo) 
     {
         include_once 'conexao.php';
@@ -29,6 +35,7 @@ class PessoaDAC {
 
     }
 
+    // Update changes in Pessoa data into database.
     public static function atualizar($pessoa)
     {
         include_once 'conexao.php';
@@ -42,6 +49,7 @@ class PessoaDAC {
         mysql_query($sql) or die(mysql_error());
     }
 
+    // Delete data from Pessoa in database.
     public static function delete($pessoa) 
     {
         include_once 'conexao.php';
@@ -49,6 +57,7 @@ class PessoaDAC {
         mysql_query($sql) or die(mysql_error());
     }
 
+    // Recover data from database to Pessoa.
     public static function recupere($pessoa, $id) 
     {
         include_once 'conexao.php';

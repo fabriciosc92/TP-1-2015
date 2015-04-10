@@ -1,8 +1,13 @@
 <?php
-// Class to connect to the database
 
-class EventoLocal {
+/**
+ * Class name: EventoLocal
+ * Class to connect EventoLocal to the database.
+ */
+class EventoLocal 
+{
 
+    // Insert data from EventoLocal into database.
     public static function persist($eventoId, $localId) 
     {
         require 'conexao.php';
@@ -19,5 +24,3 @@ class EventoLocal {
     }
 
 }
-
-?>

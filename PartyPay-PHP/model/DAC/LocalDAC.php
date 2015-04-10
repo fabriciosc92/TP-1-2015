@@ -1,7 +1,13 @@
 <?php
 
-class LocalDAC {
+/**
+ * Class name: LocalDac
+ * Class to connect Local to the database
+ */
+class LocalDAC 
+{
 
+    // Insert data from Local into database.
     public static function persist(Local $local) 
     {
         include_once 'conexao.php';
@@ -28,6 +34,7 @@ class LocalDAC {
         return $mat['0'];
     }
 
+    // Update data from Local in database.
     public static function updateInfo(Local $local, $atributo, $atributoNovo) 
 
         include_once 'conexao.php';
@@ -36,6 +43,7 @@ class LocalDAC {
         mysql_close($conexao);
     }
 
+    // Delete data from Local in database.
     public static function delete(Local $local) 
     {
         include_once 'conexao.php';
@@ -45,5 +53,3 @@ class LocalDAC {
     }
 
 }
-
-?>

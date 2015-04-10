@@ -2,6 +2,11 @@
 
 include '../../model/Evento.php';
 
+/**
+ * Class name: ProcessaCadastroLocalTest.
+ * Tests function in class ProcessaCadastroLocal.
+ */
+
 class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -12,7 +17,7 @@ class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase
         $this->test = new Evento();
     }
 
-    // Unit test for the method Persist in the class Evento. Registering a new event.
+    // Unit test for the function Persist in the class Evento. Registering a new event.
     public function testFuncaoPersist() 
     {
         $this->test->setNome("Festa Junina do Gama");

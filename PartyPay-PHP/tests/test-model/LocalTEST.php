@@ -2,6 +2,11 @@
 
 include '../../model/Local.php';
 
+/**
+ * Class name: LocalTest
+ * Tests the functions in class Local.
+ */
+
 class LocalTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -12,7 +17,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->test = new Local();
     }
 
-    // Tests the methods set and get InsercaoEndereco in class Local.
+    // Tests the functions set and get InsercaoEndereco in class Local.
     public function testInsercaoEndereco() 
     {
         $endereco = $this->test->setEndereco("Quadra 2");
@@ -20,7 +25,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Quadra 2", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoNumero in class Local.
+    // Tests the functions set and get InsercaoNumero in class Local.
     public function testInsercaoNumero() 
     {
         $numero = $this->test->setNumero("Casa 2");
@@ -28,7 +33,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Casa 2", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoComplemento in class Local.
+    // Tests the functions set and get InsercaoComplemento in class Local.
     public function testInsercaoComplemento() 
     {
         $complemento = $this->test->setComplemento("complemento teste");
@@ -36,7 +41,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("complemento teste", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoBairro in class Local.
+    // Tests the functions set and get InsercaoBairro in class Local.
     public function testInsercaoBairro() 
     {
         $bairro = $this->test->setBairro("Setor Oeste");
@@ -44,7 +49,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Setor Oeste", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCidade in class Local.
+    // Tests the functions set and get InsercaoCidade in class Local.
     public function testInsercaoCidade() 
     {
         $cidade = $this->test->setCidade("Gama");
@@ -52,7 +57,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Gama", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCep in class Local.
+    // Tests the functions set and get InsercaoCep in class Local.
     public function testInsercaoCep() 
     {
         $cep = $this->test->setCep("72.000-000");
@@ -60,7 +65,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("72.000-000", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoPais in class Local.
+    // Tests the functions set and get InsercaoPais in class Local.
     public function testInsercaoPais() 
     {
         $pais = $this->test->setPais("Brasil");
@@ -68,7 +73,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Brasil", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCoordenadaGoogleMaps in class Local.
+    // Tests the functions set and get InsercaoCoordenadaGoogleMaps in class Local.
     public function testInsercaoCoordenadaGoogleMaps() 
     {
         $coordenadaGoogleMaps = $this->test->setCoordenadaGoogleMaps("-15, +12");
@@ -76,7 +81,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("-15, +12", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoFotos in class Local.
+    // Tests the functions set and get InsercaoFotos in class Local.
     public function testInsercaoFotos() 
     {
         $fotos = $this->test->setFotos("Foto 0001");
@@ -84,7 +89,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Foto 0001", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoId in class Local.
+    // Tests the functions set and get InsercaoId in class Local.
     public function testInsercaoId() 
     {
         $id = $this->test->setId("150");
@@ -92,7 +97,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("150", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoNome in class Local.
+    // Tests the functions set and get InsercaoNome in class Local.
     public function testInsercaoNome() 
     {
         $nome = $this->test->setNome("Nome do evento TESTE");
@@ -100,7 +105,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Nome do evento TESTE", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoEstado in class Local.
+    // Tests the functions set and get InsercaoEstado in class Local.
     public function testInsercaoEstado() 
     {
         $estado = $this->test->setEstado("Distrito Federal");
@@ -108,7 +113,7 @@ class LocalTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Distrito Federal", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoMiniatura in class Local.
+    // Tests the functions set and get InsercaoMiniatura in class Local.
     public function testInsercaoMiniatura() 
     {
         $miniatura = $this->test->setMiniatura("Miniatura 001");

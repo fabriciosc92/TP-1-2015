@@ -2,6 +2,11 @@
 
 include '../../model/Local.php';
 
+/**
+ * Class name: ProcessaCadastroLocalTest.
+ * Tests function in class ProcessaCadastroLocal.
+ */
+
 class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -12,7 +17,7 @@ class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase
         $this->test = new Local();
     }
 
-    // Unit test for the method Persist in the class Local. Registering a new local.
+    // Unit test for the function Persist in the class Local. Registering a new local.
     public function testFuncaoPersist() 
     {
         $this->test->setBairro("Oeste");

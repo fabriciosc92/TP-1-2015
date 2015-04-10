@@ -2,6 +2,11 @@
 
 include '../../model/Pessoa.php';
 
+/**
+ * Class name: PessoaTest
+ * Tests the functions in model Pessoa.
+ */
+
 class PessoaTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -12,7 +17,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->test = new Pessoa();
     }
 
-    // Tests the methods set and get InsercaoPrimeiroNome in class Pessoa.
+    // Tests the function set and get InsercaoPrimeiroNome in class Pessoa.
     public function testInsercaoPrimeiroNome() 
     {
         $primeiroNome = $this->test->setPrimeiroNome("nome");
@@ -20,7 +25,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("nome", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoSobreNome in class Pessoa.
+    // Tests the function set and get InsercaoSobreNome in class Pessoa.
     public function testInsercaoSobreNome() 
     {
         $sobreNome = $this->test->setSobreNome("sobrenome");
@@ -28,7 +33,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("sobrenome", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoEmail in class Pessoa.
+    // Tests the function set and get InsercaoEmail in class Pessoa.
     public function testInsercaoEmail() 
     {
         $email = $this->test->setEmail("email");
@@ -36,14 +41,14 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("email", $nomeTeste);
     }
     
-    // Tests the methods set and get InsercaoId in class Pessoa.
+    // Tests the function set and get InsercaoId in class Pessoa.
     public function testInsercaoId() {
         $Id = $this->test->setId("Id");
         $nomeTeste = $this->test->getId();
         $this->assertEquals("Id", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoPassword in class Pessoa.
+    // Tests the function set and get InsercaoPassword in class Pessoa.
     public function testInsercaoPassword() 
     {
         $password = $this->test->setPassword("Password");
@@ -51,7 +56,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Password", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoSexo in class Pessoa.
+    // Tests the function set and get InsercaoSexo in class Pessoa.
     public function testInsercaoSexo() 
     {
         $sexo = $this->test->setSexo("Feminino");
@@ -59,7 +64,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Feminino", $nomeTeste);
     }
 
-    /* 
+    /**
      * TODO continuar daqui
      * O último teste está falhando para marcar a continuação apartir daqui
      * test de inserção de Sexo passando, era só uma modificação no setSexo,
@@ -67,7 +72,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
      * Fazer os demais parametros
      */
 
-    // Tests the methods set and get InsercaoCodConfirmacao in class Pessoa.
+    // Tests the function set and get InsercaoCodConfirmacao in class Pessoa.
     public function testInsercaoCodConfirmacao() 
     {
         $codConfirmacaoprimeiroNome = $this->test->setCodConfirmacao("132456");
@@ -75,7 +80,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("132456", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCpf in class Pessoa.
+    // Tests the function set and get InsercaoCpf in class Pessoa.
     public function testInsercaoCpf() 
     {
         $cpf = $this->test->setCpf("111.111.111-11");
@@ -83,7 +88,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("111.111.111-11", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCompras in class Pessoa.
+    // Tests the function set and get InsercaoCompras in class Pessoa.
     public function testInsercaoCompras() 
     {
         $compras = $this->test->setCompras("compra01");
@@ -91,7 +96,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("compra01", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCartoesDeCredito in class Pessoa.
+    // Tests the function set and get InsercaoCartoesDeCredito in class Pessoa.
     public function testInsercaoCartoesDeCredito() 
     {
         $cartoesDeCredito = $this->test->setCartoesDeCredito("cartão01");
@@ -99,7 +104,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("cartão01", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoCnpj in class Pessoa.
+    // Tests the function set and get InsercaoCnpj in class Pessoa.
     public function testInsercaoCnpj() 
     {
         $cnpj = $this->test->setCnpj("02.449.992/0056-38");
@@ -107,7 +112,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("02.449.992/0056-38", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoEventos in class Pessoa.
+    // Tests the function set and get InsercaoEventos in class Pessoa.
     public function testInsercaoEventos() 
     {
         $eventos = $this->test->setEventos("PartyHard, Show do Metallica");
@@ -115,7 +120,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("PartyHard, Show do Metallica", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoInformacoesBancarias in class Pessoa.
+    // Tests the function set and get InsercaoInformacoesBancarias in class Pessoa.
     public function testInsercaoInformacoesBancarias() 
     {
         $informaçoesBancarias = $this->test->setInformaçoesBancarias("Visa: 666");
@@ -123,7 +128,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Visa: 666", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoTelefoneContato in class Pessoa.
+    // Tests the function set and get InsercaoTelefoneContato in class Pessoa.
     public function testInsercaoTelefoneContato() 
     {
         $telefoneContato = $this->test->setTelefoneContato("(11) 1111-1111");
@@ -131,7 +136,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("(11) 1111-1111", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoNomeFantasia in class Pessoa.
+    // Tests the function set and get InsercaoNomeFantasia in class Pessoa.
     public function testInsercaoNomeFantasia() 
     {
         $nomeFantasia = $this->test->setNomeFantasia("I'm Batman!");
@@ -139,7 +144,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("I'm Batman!", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoWebsite in class Pessoa.
+    // Tests the function set and get InsercaoWebsite in class Pessoa.
     public function testInsercaoWebsite() 
     {
         $website = $this->test->setWebsite("www.github.com/alvarofernandoms/PartyPay");
@@ -147,7 +152,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("www.github.com/alvarofernandoms/PartyPay", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoFanPage in class Pessoa.
+    // Tests the function set and get InsercaoFanPage in class Pessoa.
     public function testInsercaoFacebookFanPage() 
     {
         $facebookFanPage = $this->test->setFacebookFanPage("www.facebook.com/dreamtheaterofficial");

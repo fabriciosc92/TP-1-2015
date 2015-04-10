@@ -2,6 +2,11 @@
 
 include '../../model/Evento.php';
 
+/**
+ * Class name: EventoTest
+ * Tests functions in class Evento to check the entries.
+ */
+
 class EventoTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -12,7 +17,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->test = new Evento();
     }   
     
-	// Tests the methods set and get InsercaoNome in class Evento.
+	// Tests the functions set and get InsercaoNome in class Evento.
     public function testInsercaoNome() 
     {
         $nome = $this->test->setNome("nome");
@@ -20,7 +25,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("nome", $nomeTeste);
     }
 	
-    // Tests the methods set and get InsercaoDataCriacao in class Evento.
+    // Tests the functions set and get InsercaoDataCriacao in class Evento.
     public function testInsercaoDataCriacao() 
     {
         $dataCriacao = $this->test->setDataCriacao("25/12/1999");
@@ -28,7 +33,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("25/12/1999", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoDataInicio in class Evento.
+    // Tests the functions set and get InsercaoDataInicio in class Evento.
     public function testInsercaoDataInicio() 
     {
         $dataInicio = $this->test->setDataInicio("26/12/2001");
@@ -36,7 +41,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("26/12/2001", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoDataTermino in class Evento.
+    // Tests the functions set and get InsercaoDataTermino in class Evento.
     public function testInsercaoDataTermino() 
     {
         $dataTermino = $this->test->setDataTermino("28/12/2001");
@@ -44,7 +49,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("28/12/2001", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoImagem in class Evento.
+    // Tests the functions set and get InsercaoImagem in class Evento.
     public function testInsercaoImagem() 
     {
         $imagem = $this->test->setImagem("imagem001");
@@ -52,7 +57,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("imagem001", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoPrecoMasc in class Evento.
+    // Tests the functions set and get InsercaoPrecoMasc in class Evento.
     public function testInsercaoPrecoMasc() 
     {
         $precoMasc = $this->test->setPrecoMasc(50.00);
@@ -60,7 +65,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals(50.00, $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoPrecoFem in class Evento.
+    // Tests the functions set and get InsercaoPrecoFem in class Evento.
     public function testInsercaoPrecoFem() 
     {
         $precoFem = $this->test->setPrecoFem(25.00);
@@ -68,7 +73,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals(25.00, $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoOrganizador in class Evento.
+    // Tests the functions set and get InsercaoOrganizador in class Evento.
     public function testInsercaoOrganizador() 
     {
         $organizador = $this->test->setOrganizador("Promotor Fulano");
@@ -76,7 +81,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Promotor Fulano", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoLocal in class Evento.
+    // Tests the functions set and get InsercaoLocal in class Evento.
     public function testInsercaoLocal() 
     {
         $local = $this->test->setLocal("Gama - DF");
@@ -84,7 +89,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Gama - DF", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoFacebookEventPage in class Evento.
+    // Tests the functions set and get InsercaoFacebookEventPage in class Evento.
     public function testInsercaoFacebookEventPage() 
     {
         $facebookEventPage = $this->test->setFacebookEventPage("www.facebook.com/dreamtheaterofficial");
@@ -92,7 +97,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("www.facebook.com/dreamtheaterofficial", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoDescricao in class Evento.
+    // Tests the functions set and get InsercaoDescricao in class Evento.
     public function testInsercaoDescricao()
     {
         $descricao = $this->test->setDescricao("Descrição sagaz");
@@ -100,7 +105,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("Descrição sagaz", $nomeTeste);
     }
     
-    // Tests the methods set and get InsercaoNumeroIngressos in class Evento.
+    // Tests the functions set and get InsercaoNumeroIngressos in class Evento.
     public function testInsercaoNumeroIngressos() 
     {
         $numeroIngressos = $this->test->setNumeroIngressos(500);
@@ -108,7 +113,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals(500, $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoHoraInicio in class Evento.
+    // Tests the functions set and get InsercaoHoraInicio in class Evento.
     public function testInsercaoHoraInicio() 
     {
         $horaInicio = $this->test->setHoraInicio("22:00");
@@ -116,7 +121,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("22:00", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoHoraTermino in class Evento.
+    // Tests the functions set and get InsercaoHoraTermino in class Evento.
     public function testInsercaoHoraTermino() 
     {
         $horaTermino = $this->test->setHoraTermino("08:00");
@@ -124,7 +129,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("08:00", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoMiniatura in class Evento.
+    // Tests the functions set and get InsercaoMiniatura in class Evento.
     public function testInsercaoMiniatura() 
     {
         $miniatura = $this->test->setMiniatura("miniaturaImagem001");
@@ -132,7 +137,7 @@ class EventoTEST extends PHPUnit_Framework_TestCase
         $this->assertEquals("miniaturaImagem001", $nomeTeste);
     }
 
-    // Tests the methods set and get InsercaoClassificacao in class Evento.
+    // Tests the functions set and get InsercaoClassificacao in class Evento.
     public function testInsercaoClassificacao() 
     {
         $classificacao = $this->test->setClassificacao("Livre");

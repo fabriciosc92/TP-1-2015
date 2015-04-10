@@ -2,6 +2,11 @@
 
 include '../../model/Pessoa.php';
 
+/**
+ * Class name: ProcessaCadastroPessoaTEST.
+ * Tests function in class ProcessaCadastroPessoa.
+ */
+
 class ProcessaCadastroPessoaTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
@@ -11,7 +16,7 @@ class ProcessaCadastroPessoaTEST extends PHPUnit_Framework_TestCase
         $this->test = new Pessoa();
     }
 
-    // Unit test for the method Persist in the class Pessoa. Registering a new person.
+    // Unit test for the function Persist in the class Pessoa. Registering a new person.
     public function testFuncaoPersist() 
     {
         $this->test->setEmail("alvaro@gmail.com");

@@ -10,7 +10,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 		Style Sheet for the PartyPay Softwre code in PHP
 		
 
-->Overview
+1) Overview
 
 	- Codes MUST follow PSR-1.
 	
@@ -68,7 +68,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	  }
 	  
 
-->Files
+2) Files
 
 	- All PHP files MUST use the standard Unix LF (linefeed) termination lines.
 	
@@ -76,12 +76,12 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	
 	- The closing tag ?> MUST be omitted in files containing PHP only.
 	
-->Indentation
+3) Indentation
 
 	- The indentation MUST be done using tab (equivalent to 4 spaces).
 	
 	
-->Lines
+4) Lines
 
 	- The line should have a maximum of 80 characters.
 	
@@ -94,19 +94,19 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	- MUST NOT be more than one statement per line.
 	
 	
-->Keywords and True / False / Null
+5) Keywords and True / False / Null
 
 	- PHP Keywords MUST be in lower case.
 	
 	- The PHP constants true, false and null MUST be in lower case.
 	
 	
-->EOL Convention (End of Line)
+6) EOL Convention (End of Line)
 
 	- End of lines MUST follow the UNIX standard, they must end with a single linefeed (LF - / n).
 	
 
-->Declaring Namespace and Use
+7) Declaring Namespace and Use
 
 	- When present, MUST be a blank line after the namespace declaration.
 
@@ -128,12 +128,12 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	// ... more PHP code ...
 	
 
-->Classes, Properties and Methods
+8) Classes, Properties and Methods
 
 	- The term class refers to all classes, interfaces and traits.
 	
 
-	#Extends and Implements
+	8.1) Extends and Implements
 
 	- Keywords extends and implements MUST be declared on the same line as the name of the class.
 	
@@ -175,7 +175,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
       	// constants, properties and methods
 	  }
 	  
-	#Methods
+	8.2) Methods
 	
 	- Visibilities MUST be declared in all methods.
 
@@ -200,7 +200,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
         }
 	  }
 	  
-	#Arguments of Methods
+	8.3) Arguments of Methods
 
 	- In the list of arguments, MUST NOT be a space before each comma and MUST be a space after 
 	  each comma.
@@ -243,7 +243,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
     	}
 	}
 	
-->Control Structures
+9) Control Structures
 
 	The general style rules for control structures are as follows:
 
@@ -262,7 +262,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	The body of each structure MUST be surrounded by keys. This standardizes look like structures 
 	and reduces the possibility of introducing errors as new lines are added to the body structure.
 
-	#if, elseif, else
+	9.1) if, elseif, else
 
 	- An if statement looks like the following. Note the placement of parentheses, spaces and keys; 
 	  and else and elseif are in the same line as the body's closing brace of the previous 
@@ -282,7 +282,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	- The keyword elseif SHOULD be used instead of else if for all keywords control look like 
 	    a word.
 
-	#switch, case
+	9.2) switch, case
 
 	- A switch statement looks like the following. Note the placement of parentheses, spaces and 
 	  keys. The case statement MUST be indented once the switch and the case keyword (or any other 
@@ -310,7 +310,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
         break;
 	  }
 	  
-	#while, do while
+	9.3) while, do while
 
 	- A while structure looks like the following. Note the placement of parentheses, spaces and keys.
 	
@@ -329,7 +329,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
     	// Body structure
 	} While ($ expr);
 
-	#for
+	9.4) for
 	
 	- A structure for looks like the following. Note the placement of parentheses, spaces and keys.
 
@@ -338,7 +338,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
     	// Body is
 	}
 
-	#foreach
+	9.5) foreach
 	
 	- A foreach structure looks like the following. Note the placement of parentheses, spaces 
 	  and keys.
@@ -348,7 +348,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
     	// Body foreach
 	}
 
-	#try, catch
+	9.6) try, catch
 	
 	- A try catch structure looks like the following. Note the placement of parentheses, spaces 
 	  and keys.

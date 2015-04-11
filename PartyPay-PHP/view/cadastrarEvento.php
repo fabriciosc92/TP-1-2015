@@ -1,6 +1,13 @@
 <?php
-	//Page responsible to show the Form
-	require_once('header.php');
+
+/**
+ * File name: cadastrarPessoa
+ * Shows the event registering form
+ */
+
+
+require_once('header.php');
+
 ?>
 <section class="container">
     <h3>Novo Evento</h3>
@@ -269,6 +276,7 @@
     </div>
 </section>
 <?php
-	require_once('footer.php');
+
+require_once('footer.php');
 
 ?>

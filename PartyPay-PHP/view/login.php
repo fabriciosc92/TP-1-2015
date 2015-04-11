@@ -1,8 +1,11 @@
 <?php
-//Page responsible to sign in.
+
+/**
+ * File name: login
+ * Login the user creating a new session
+ */
 
 include 'model/Pessoa.php';
-
 
 session_start();
 
@@ -24,4 +27,5 @@ $_SESSION['cpf'] = $cpf;
 $_SESSION['telefoneContato'] = $telefone;
 
 header("location: index.php");
+
 ?>

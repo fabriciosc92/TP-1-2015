@@ -1,6 +1,12 @@
 <?php
-	//Page responsible to show the person registering form.
-	require_once('header.php'); 
+
+/**
+ * File name: cadastrarPessoa
+ * Shows the person registering form
+ */
+	
+require_once('header.php'); 
+
 ?>
 <section class="container">
     <h3>Novo Usu&aacute;rio</h3>
@@ -63,7 +69,8 @@
         </form>
     </div>
 </section>
-<?php 
-	require_once('footer.php'); 
+<?php
+
+require_once('footer.php'); 
 
 ?>

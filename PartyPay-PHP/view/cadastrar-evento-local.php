@@ -1,6 +1,12 @@
-<?php 
-	//Page responsible the local event registering form.
-	require_once ('header.php'); 
+<?php
+
+/**
+ * File name: cadastrarPessoa
+ * Shows the local event registering form
+ */
+ 
+require_once ('header.php'); 
+
 ?>
 <section class="container">
     <h3>Local</h3>
@@ -74,7 +80,8 @@
         </form>
     </div>
 </section>
-<?php 
-	require_once ('footer.php');
+<?php
+
+require_once ('footer.php');
 
 ?>

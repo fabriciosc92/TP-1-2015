@@ -1,5 +1,9 @@
 <?php
-//Page responsible to show the event info.
+
+/**
+ * File name: evento
+ * Page responsible to show the event information
+ */
 
 require_once ('header.php');
 

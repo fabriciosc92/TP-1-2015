@@ -1,7 +1,12 @@
 <?php 
-//Page responsible to be the first page to run.
+
+/**
+ * File name: index
+ * First UI page to be seen
+ */
 
 require_once 'header.php'; 
+
 ?>
 <div id="hero" class="">
     <ul>

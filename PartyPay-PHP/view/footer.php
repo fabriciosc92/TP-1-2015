@@ -1,5 +1,10 @@
 <?php
-//Page responsible to be the the footer of all pages.
+
+/**
+ * File name: footer
+ * Page responsible to be the footer of all view pages
+ */
+ 
 ?>
 <footer>
 

@@ -1,6 +1,12 @@
 <?php 
-	//Page responsible to show the person edition form.
-	require_once('header.php'); 
+
+/**
+ * File name: editarPessoa
+ * Shows the user edition form
+ */
+
+require_once('header.php'); 
+
 ?>
 <section class="container">
     <h3>Editar dados</h3>
@@ -63,6 +69,7 @@
     </div>
 </section>
 <?php
-	require_once('footer.php'); 
+
+require_once('footer.php'); 
 	
 ?>

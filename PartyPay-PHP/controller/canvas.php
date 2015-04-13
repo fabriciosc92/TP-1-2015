@@ -1,48 +1,46 @@
 <?php
 /**
  *
- * Classe para manipulação de imagens utilizando a extensão GD
- * e recursos avançados de filtros. Requer PHP 5 ou superior.
+ * Class for image manipulation using the GD extension and advanced features filters. 
+ * Requires PHP 5 or higher.
  *
- * @author     Davi Ferreira <contato@daviferreira.com>
- * @version    1.0 $ 2010-10-17 19:11:51 $
-*/
+ **/
 
 class canvas {
 	
     /**
-     * Variáveis para armazenamento de arquivos/imgs
+     * Variables for storing files/imgs
      **/
     private $origem, $img, $img_temp;
 
     /**
-     * Armazenam as dimensões da imagem atual e da nova imagem caso exista
+     * Store the size of the current image and the new image if available
      **/
     private $largura, $altura, $nova_largura, $nova_altura, $tamanho_html;
     
     /**
-    * Variáveis para o posicionamento do crop
+    * Variables for positioning the crop
     **/
     private $pos_x, $pos_y;
     
     /**
-     * Informações sobre o arquivo enviado e diretório
+     * Information about the uploaded file and directory
      **/
     private $formato, $extensao, $tamanho, $arquivo, $diretorio;
 
     /**
-     * Array RGB para resize com preenchimendo do fundo
+     * Array RGB resize with background fill
      **/
     private $rgb;
 
     /**
-     * Coordenadas para posicionamento do crop
+     * Coordinates for positioning crop
      **/
     private $posicao_crop;
 
     /**
-     * Construtor
-     * @param $string caminho da imagem a ser carregada [opcional]
+     * Constructor
+     * @param $string path to image to be loaded [optional]
      * @return void
      **/
      public function __construct( $origem = '' )
@@ -55,15 +53,16 @@ class canvas {
                $this->dados();
           }
 
-          // RGB padrão -> branco
+          // RGB default -> white
      $this->rgb( 255, 255, 255 );
-     } // fim construtor
+     } // end constructor
      
      /**
-     * Reseta variáveis para poder reutilizar objeto em encadeamentos longos
+     * Reset variables in order to use object in long threads
      * @return void
      **/
-     public function resetar(){
+     public function resetar()
+     {
 			
 		$this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
 		$this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
@@ -71,34 +70,34 @@ class canvas {
 		$this->diretorio = $this->posicao_crop = NULL;
 	
 	    	$this->rgb( 255, 255, 255 );
-     }// fim resetar
+     }// end resetar
      
 
      /**
-      * Retorna dados da imagem
+      * Return image data
       * @return void
       **/
      private function dados()
      {
 
-          // verifica se imagem existe
+          // checks for image
           if ( is_file( $this->origem ) )
           {
 
-               // dados do arquivo
+               // files data
                $this->dadosArquivo();
 
-               // verifica se é imagem
+               // checks if is an image
                if ( !$this->eImagem() )
                {
                     trigger_error( 'Erro: Arquivo '.$this->origem.' não é uma imagem!', E_USER_ERROR );
                }
                else
                {
-                    // busca dimensões da imagem enviada
+                    // search dimensions of the sent image
                     $this->dimensoes();
 
-                    // cria imagem para php
+                    // create image for php
                     $this->criaImagem();
                }
           }
@@ -107,22 +106,22 @@ class canvas {
                trigger_error( 'Erro: Arquivo de imagem não encontrado!', E_USER_ERROR );
           }
 
-     } // fim dadosImagem
+     } // end dadosImagem
 
      /**
-      * Carrega uma nova imagem, fora do construtor
-      * @param String caminho da imagem a ser carregada
-      * @return Object instância atual do objeto, para métodos encadeados
+      * Load a new image outside builder
+      * @param String path of the image to load
+      * @return Object current instance of the object, for chained method
       **/
      public function carrega( $origem = '' )
      {
           $this->origem = $origem;
           $this->dados();
           return $this;
-     } // fim carrega
+     } // end carrega
 
      /**
-      * Busca dimensões e formato real da imagem
+      * Search dimensions and real image format
       * @return void
       **/
      private function dimensoes()
@@ -136,28 +135,28 @@ class canvas {
     **/
     $this->formato               = $dimensoes[2];
     $this->tamanho_html          = $dimensoes[3];
-     } // fim dimensoes
+     } // end dimensoes
 
      /**
-      * Busca dados do arquivo
+      * Search file data
       * @return void
       **/
      private function dadosArquivo()
      {
-          // imagem de origem
+          // source image
           $pathinfo            = pathinfo( $this->origem );
           $this->extensao = array_key_exists('extension', $pathinfo) ? strtolower($pathinfo['extension']) : strtolower(str_replace('image/', '', $obj['mime']));
           $this->arquivo       = $pathinfo['basename'];
           $this->diretorio     = $pathinfo['dirname'];
-     } // fim dadosArquivo
+     } // end dadosArquivo
 
      /**
-      * Verifica se o arquivo indicado é uma imagem
+      * Checks if the specified file is an image
       * @return Boolean true/false
       **/
      private function eImagem()
      {
-          // filtra extensão
+          // filter extension
           $valida = getimagesize( $this->origem );
           if ( !is_array( $valida ) || empty( $valida ) )
           {
@@ -167,14 +166,14 @@ class canvas {
           {
                return true;
           }
-     } // fim validaImagem
+     } // end validaImagem
 
      /**
-      * Cria uma nova imagem para ser trabalhada com textos, etc.
-      * OBS: a cor da imagem deve ser passada antes, via rgb() ou hex()
-      * @param String $largura da imagem a ser criada
-      * @param String $altura da imagem a ser criada
-      * @return Object instância atual do objeto, para métodos encadeados
+      * Create a new image to be worked with texts, etc.
+      * Note: the color image must be passed before, via rgb () or hex ()
+      * @param String $largura of the image to be created
+      * @param String $altura of the image to be created
+      * @return Object current instance of the object, for chained method
       **/
      public function novaImagem( $largura, $altura )
      {
@@ -185,13 +184,13 @@ class canvas {
           imagefill( $this->img, 0, 0, $cor_fundo );
           $this->extensao = 'jpg';
           return $this;
-    } // fim novaImagem
+    } // end novaImagem
 
     /**
-     * Carrega uma imagem via URL
-     * OBS: depente das configurações do servidor para acesso remoto de arquivos
-     * @param String $url endereço da imagem
-      * @return Object instância atual do objeto, para métodos encadeados
+     * Upload an image via URL
+     * Note: depends on the server settings for remote access files
+     * @param String $url image path
+      * @return Object current instance of the object, for chained method
      **/
      public function carregaUrl( $url )
      {
@@ -220,10 +219,10 @@ class canvas {
      $this->largura     = imagesx( $this->img );
           $this->altura     = imagesy( $this->img );
           return $this;
-     } // fim carregaUrl
+     } // end carregaUrl
 
      /**
-      * Cria objeto de imagem para manipulação no GD
+      * Create image object for manipulation in GD
       * @return void
       **/
      private function criaImagem()
@@ -250,23 +249,23 @@ class canvas {
                     trigger_error( 'Arquivo inválido!', E_USER_ERROR );
                     break;
           }
-     } // fim criaImagem
+     } // end criaImagem
 
      /**
-      * Armazena os valores RGB para redimensionamento com preenchimento
-      * @param Valores R, G e B
-      * @return Object instância atual do objeto, para métodos encadeados
+      * Stores the RGB values for resizing to fill
+      * @param Values R, G e B
+      * @return Object current instance of the object, for chained method
       **/
      public function rgb( $r, $g, $b )
      {
           $this->rgb = array( $r, $g, $b );
           return $this;
-     } // fim rgb
+     } // end rgb
 
      /**
-      * Converte hexadecimal para RGB
+      * Convert hexadecimal for RGB
       * @param String $cor cor hexadecimal
-      * @return Object instância atual do objeto, para métodos encadeados
+      * @return Object current instance of the object, for chained method
       **/
      public function hexa( $cor )
      {
@@ -280,42 +279,42 @@ class canvas {
             hexdec( substr( $cor, 4, 2 ) ),
           );
           return $this;
-     }  // fim hexa
+     }  // end hexa
 
      /**
-      * Armazena posições x e y para crop
-      * @param Int x - posicao x do crop
-			* @param Int y - posicao y do crop
+      * Stores positions x and y for crop
+      * @param Int x - position x of crop
+			* @param Int y - position y of crop
 			* @param Int w - width  - larguraOrigem (by OctaAugusto)
 			* @param Int h - height - alturaOrigem (by OctaAugusto)
-      * @return Object instância atual do objeto, para métodos encadeados
+      * @return Object current instance of the object, for chained method
       **/
      public function posicaoCrop( $x, $y, $w=0, $h=0 )
      {
-          // sem largura ou altura setada manualmente, pega original da imagem
+          // no width or manually sitting height, image original handle
 		  		if(!$w) $w = $this->largura;
 		  		if(!$h) $h = $this->altura;
 		  
           $this->posicao_crop = array( $x, $y, $w, $h );
 
           return $this;
-     } // fim posicao_crop
+     } // end posicao_crop
 
      /**
-      * Redimensiona imagem
-      * @param Int $nova_largura valor em pixels da nova largura da imagem
-      * @param Int $nova_altura valor em pixels da nova altura da imagem
-      * @param String $tipo método para redimensionamento (padrão [vazio], preenchimento ou crop)
-      * @return Object instância atual do objeto, para métodos encadeados
+      * Resize image
+      * @param Int $nova_largura value in pixels of the new image largura
+      * @param Int $nova_altura value in pixels of the new image altura
+      * @param String $tipo method for scaling (default [empty], fill or crop)
+      * @return Object current instance of the object, for chained method
       **/
      public function redimensiona( $nova_largura = 0, $nova_altura = 0, $tipo = '' )
      {
 
-          // seta variáveis passadas via parâmetro
+          // to set variables passed via parameter
           $this->nova_largura         = $nova_largura;
           $this->nova_altura          = $nova_altura;
 
-          // verifica se passou altura ou largura como porcentagem
+          // checks went height or width in percent
           // largura %
           $pos = strpos( $this->nova_largura, '%' );
           if( $pos !== false && $pos > 0 )
@@ -331,23 +330,23 @@ class canvas {
                $this->nova_altura          = $this->altura * $porcentagem;
           }
 
-          // define se só passou nova largura ou altura
+          // sets whether just passed new width or height
           if ( !$this->nova_largura && !$this->nova_altura )
           {
                return false;
           }
-          // só passou altura
+          // just pass altura
           elseif ( !$this->nova_largura )
           {
                $this->nova_largura = $this->largura / ( $this->altura/$this->nova_altura );
           }
-          // só passou largura
+          // just pass largura
           elseif ( !$this->nova_altura )
           {
                $this->nova_altura = $this->altura / ( $this->largura/$this->nova_largura );
           }
 
-          // redimensiona de acordo com tipo
+          // resize according if type
           switch( $tipo )
           {
                case 'crop':
@@ -357,7 +356,7 @@ class canvas {
                     $this->redimensionaPreenchimento();
                     break;
                case 'proporcional': 
-                   // modo proporcional sem preenchimento adicionado por Fernando VR (goo.gl/iDtmP)
+                   // proportionally unfilled
                     $this->redimensionaProporcional();
                     break;		
                default:
@@ -365,36 +364,36 @@ class canvas {
                     break;
           }
 
-          // atualiza dimensões da imagem
+          // update image dimensions
           $this->altura     = $this->nova_altura;
           $this->largura     = $this->nova_largura;
 
           return $this;
-     } // fim redimensiona
+     } // end redimensiona
 
      /**
-      * Redimensiona imagem, modo padrão, sem crop ou preenchimento
-      * (distorcendo caso tenha passado ambos altura e largura)
+      * Resize image, standard mode without crop or fill
+      * (distorting case has passed both height and width)
       * @return void
       **/
      private function redimensionaSimples()
      {
-          // cria imagem de destino temporária
+          // create temporary destination image
           $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 
           imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->nova_largura, $this->nova_altura, $this->largura, $this->altura );
           $this->img     = $this->img_temp;
-     } // fim redimensiona()
+     } // end redimensiona()
 
      /**
-      * Adiciona cor de fundo à imagem
+      * Add image to the background color
       * @return void
       **/
      private function preencheImagem()
      {
           $cor_fundo = imagecolorallocate( $this->img_temp, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
           imagefill( $this->img_temp, 0, 0, $cor_fundo );
-     } // fim preencheImagem
+     } // end preencheImagem
 
      /**
       * Redimensiona imagem sem cropar, proporcionalmente,

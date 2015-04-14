@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File name: cadastrarPessoa
+ * File name: signUp
  * Shows the person registering form
  */
 	

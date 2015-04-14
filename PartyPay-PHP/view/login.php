@@ -5,26 +5,26 @@
  * Login the user creating a new session
  */
 
-include 'model/Pessoa.php';
+include 'model/Person.php';
 
 session_start();
 
-$fulano = new Pessoa;
-$fulano->construaPorId($_SESSION['id']);
+$soAndSo = new Person;
+$soAndSo->constructById($_SESSION['id']);
 
-$primeiroNome = $fulano->getPrimeiroNome();
-$sobreNome = $fulano->getSobreNome();
-$email = $fulano->getEmail();
-$sexo = $fulano->getSexo();
-$cpf = $fulano->getCpf();
-$telefone = $fulano->getTelefoneContato();
+$firstName = $soAndSo->getFirstName();
+$surName = $soAndSo->getSurName();
+$email = $soAndSo->getEmail();
+$gender = $soAndSo->getGender();
+$idNumber = $soAndSo->getIdNumber();
+$phoneNumber = $soAndSo->getContactNumber();
 
-$_SESSION['primeiroNome'] = $primeiroNome;
-$_SESSION['sobreNome'] = $sobreNome;
+$_SESSION['firstName'] = $firstName;
+$_SESSION['surName'] = $surName;
 $_SESSION['email'] = $email;
-$_SESSION['sexo'] = $sexo;
-$_SESSION['cpf'] = $cpf;
-$_SESSION['telefoneContato'] = $telefone;
+$_SESSION['gender'] = $gender;
+$_SESSION['idNumber'] = $idNumber;
+$_SESSION['phoneNumber'] = $phoneNumber;
 
 header("location: index.php");
 

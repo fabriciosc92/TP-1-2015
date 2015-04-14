@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File name: cadastrarPessoa
+ * File name: registerEvent
  * Shows the event registering form
  */
 
@@ -12,36 +12,36 @@ require_once('header.php');
 <section class="container">
     <h3>Novo Evento</h3>
     <div class="row">
-        <form class="form-horizontal" method="post" action="controller/processaCadastroEvento.php" enctype="multipart/form-data">
+        <form class="form-horizontal" method="post" action="controller/doRegisterEvent.php" enctype="multipart/form-data">
             <div class="control-group">
                 <label class="control-label" for="nome">Nome</label>
                 <div class="controls">
-                    <input type="text" name="nome" placeholder="Nome do evento" required>
+                    <input type="text" name="name" placeholder="Nome do evento" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="nome">Data de In&iacute;cio</label>
                 <div class="controls">
-                    <input type="date" name="dataInicio" required>
+                    <input type="date" name="startingDate" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="nome">Data de T&aacute;rmino</label>
                 <div class="controls">
-                    <input type="date" name="dataTermino" required>
+                    <input type="date" name="endingDate" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="numero">Banner</label>
                 <div class="controls">
-                    <input type="file" name="arquivo" required>
+                    <input type="file" name="file" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="endereco">Pre&ccedil;o</label>
                 <div class="controls">
-                    <input type="text" id="preco" name="precoMasc" placeholder="Masculino" required>
-                    <input type="text" id="precof" name="precoFem" placeholder="Feminino" required>
+                    <input type="text" id="preco" name="menPrice" placeholder="Masculino" required>
+                    <input type="text" id="precof" name="womenPrice" placeholder="Feminino" required>
                 </div>
             </div>
             <div class="control-group">
@@ -53,20 +53,20 @@ require_once('header.php');
             <div class="control-group">
                 <label class="control-label" for="descicao">Descri&ccedil;&atilde;o</label>
                 <div class="controls">
-                    <textarea rows="3" name="descricao"></textarea>
+                    <textarea rows="3" name="description"></textarea>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="numeroIngressos">Vagas</label>
                 <div class="controls">
-                    <input type="text" id="vagas" name="numeroIngressos" placeholder="N&uacute;mero de vagas" required>
+                    <input type="text" id="vagas" name="ticketsLot" placeholder="N&uacute;mero de vagas" required>
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="numero">Classifica&ccedil;&atilde;o</label>
                 <div class="controls">
-                    <select name="classificacao">
+                    <select name="ageRecommendation">
                         <option value="livre">Livre</option>
                         <option value="10">10</option>
                         <option value="12">12</option>
@@ -82,7 +82,7 @@ require_once('header.php');
                 <div class="control-group">
                     <label class="control-label" for="numero">Hora de Inc&iacute;o</label>
                     <div class="controls">
-                        <select name="horaInicio">
+                        <select name="startingHour">
                             <option value="00">00</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -108,7 +108,7 @@ require_once('header.php');
                             <option value="22">22</option>
                             <option value="23">23</option>
                         </select>
-                        <select name="minutoInicio">
+                        <select name="startingMinute">
                             <option value="00">00</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -176,7 +176,7 @@ require_once('header.php');
                 <div class="control-group">
                     <label class="control-label" for="numero">Hora de T&eacute;rmino</label>
                     <div class="controls">
-                        <select name="horaTermino">
+                        <select name="endingHour">
                             <option value="00">00</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -202,7 +202,7 @@ require_once('header.php');
                             <option value="22">22</option>
                             <option value="23">23</option>
                         </select>
-                        <select name="minutoTermino">
+                        <select name="endingMinute">
                             <option value="00">00</option>
                             <option value="01">01</option>
                             <option value="02">02</option>

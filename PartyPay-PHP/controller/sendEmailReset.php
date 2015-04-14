@@ -1,19 +1,24 @@
 <?php
-// This class is responsible for sending a message of password reset
 
-$user_email = $_POST['email'];
+/**
+*
+* This class is responsible for sending a message of password reset
+*
+**/
 
-$CaracteresAceitos = 'ghijklmABCEF0123456789';
-$max = strlen($CaracteresAceitos) - 1;
-$novasenha = '';
-$password = '';
+$user_email = $_POST['email']; // Receive input user e-mail
+
+$AcceptedChars = 'ghijklmABCEF0123456789'; // Test acceptable characteres
+$maxChars = strlen($AcceptedChars) - 1; // Test max acceptable characteres in user e-mail
+$newPassword = ''; //Store the new password entered
+$password = ''; // Compare the new password entered again
 
 for ($i = 0; $i < 8; $i++) {
-    $password .= $CaracteresAceitos{mt_rand(0, $max)};
-    $novasenha = md5($password);
+    $password .= $AcceptedChars{mt_rand(0, $maxChars)};
+    $newPassword = md5($password);
 }
 
-$Mensagem = "Oi!\n\nEsta é a sua nova senha: $password\n";
+$Message = "Oi!\n\nEsta é a sua nova senha: $password\n"; // Message to the user new password confirmation
 
 require_once("phpmailer/class.phpmailer.php");
 
@@ -23,7 +28,7 @@ function smtpmailer($para, $de, $de_nome, $assunto, $corpo)
 
     global $error;
 
-    $mail = new PHPMailer();
+    $mail = new PHPMailer(); // Receive e-mail configuration parameters
 
     $mail->IsSMTP();  // Ativar SMTP
     $mail->SMTPDebug = 0;  // Debugar: 1 = erros e mensagens, 2 = mensagens apenas
@@ -53,13 +58,13 @@ $retorno = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($retorno) === 1) {
 
-    $sql_update = "UPDATE `pessoas` SET `senha` = '$novasenha' 
+    $sql_update = "UPDATE `pessoas` SET `senha` = '$newPassword' 
                     WHERE `pessoas`.`email` ='$user_email';";
 
     mysql_query($sql_update) or die(mysql_error());
 
     smtpmailer($user_email, 'partypay.eventos@gmail.com', "PartyPay", 
-                                "Nova senha - PartyPay!", $Mensagem);
+                                "Nova senha - PartyPay!", $Message);
 
     if (!empty($error))
         echo $error;

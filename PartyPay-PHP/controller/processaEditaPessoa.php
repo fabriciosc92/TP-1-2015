@@ -56,6 +56,6 @@ $_SESSION['cpf'] = $cpf;
 $_SESSION['telefoneContato'] = $telefoneContato;
 
 echo "efetuado com sucesso " . $id;
-// header("Location:../controller/EnviarEmailConfirmacao.php?e=".$_POST['email']."&cod=".$codigo);
+// header("Location:../controller/sendEmailConfirmation.php?e=".$_POST['email']."&cod=".$codigo);
 header("Location: ../editarPessoa.php");
 ?>

@@ -1,7 +1,11 @@
 <?php
-// This class controls emails confimation
 
 include 'gerarCodConfirmacao.php';
+/**
+* sendEmailConfirmation.php
+* This class controls emails confimation
+*
+**/
 
 // multiple recipients
 $to = $_GET['email'];

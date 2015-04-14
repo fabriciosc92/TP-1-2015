@@ -1,42 +1,47 @@
 <?php
-// Class of functions
+
+/**
+*
+* Class of application functions
+*
+**/
 
 require_once 'model/Evento.php';
 
 // Function that receives the name of the event
-function the_nome($id) 
+function event_name($id) 
 {
-    $evento = new Evento;
-    $evento->eventoPorId($id);
-    echo $evento->getNome();
+    $eventName = new Evento; // Variable to receive Events name data
+    $eventName->eventoPorId($id);
+    echo $eventName->getNome();
 }
 
 // Function that receives the thumbnail of the image event
-function the_miniatura($id) 
+function event_thumb($id) 
 {
-    $eventod = new Evento;
-    $eventod->eventoPorId($id);
-    echo $eventod->getMiniatura();
+    $eventThumb = new Evento; // Variable to receive thumbnail event data
+    $eventThumb->eventoPorId($id);
+    echo $eventThumb->getMiniatura();
 }
 
 // Function that receives the description of the event
-function the_descricao($id) 
+function event_description($id) 
 {
-    $event = new Evento;
-    $event->eventoPorId($id);
-    echo $event->getDescricao();
+    $eventDescription = new Evento; // Variable to receive description event data
+    $eventDescription->eventoPorId($id);
+    echo $eventDescription->getDescricao();
 }
 
 // Function that receives the image of the event
-function the_imagem($id) 
+function the_image($id) 
 {
-    $evento = new Evento;
-    $evento->eventoPorId($id);
-    echo $evento->getImagem();
+    $eventImage = new Evento; // Variable to receive image event data
+    $eventImage->eventoPorId($id);
+    echo $eventImage->getImagem();
 }
 
 // Function that returns the last registered event
-function ultimoEvento() 
+function lastEvent() 
 {
     $mysqli = new mysqli("localhost", "root", "", "payparty");
     $result = $mysqli->query("SELECT MAX(id) FROM eventos");

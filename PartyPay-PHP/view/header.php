@@ -102,7 +102,7 @@ if (isset($_SESSION['id'])) {
                         <h3>Login</h3>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="controller/EnviarEmailNovaSenha.php" name="login_form">
+                        <form method="post" action="controller/SendEmailReset.php" name="login_form">
                             <p>Email de recupera&ccedil;&atilde;o</p>
                             <p><input type="text" class="span3" name="email" id="email" placeholder="Email" required></p>
                             <p><button type="submit" class="btn btn-primary">Enviar</button>

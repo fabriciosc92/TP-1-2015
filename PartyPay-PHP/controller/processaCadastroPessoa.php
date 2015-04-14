@@ -48,7 +48,7 @@ $pessoa->setTelefoneContato($telefoneContato);
 $pessoa->setCodConfirmacao($codigo);
 $pessoa->persist();
 echo "efetuado com sucesso";
-// header("Location:../controller/EnviarEmailConfirmacao.php?e=".$_POST['email']."&cod=".$codigo);
+// header("Location:../controller/SendEmailConfirmation.php?e=".$_POST['email']."&cod=".$codigo);
 header("Location: ../login.php");
 
 session_start();

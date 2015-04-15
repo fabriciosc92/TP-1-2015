@@ -35,9 +35,9 @@ if ($_FILES['arquivo']['error'] != 0) {
 // Caso script chegue a esse ponto, não houve erro com o upload e o PHP pode continuar
 // Faz a verificação da extensão do arquivo
 $var = explode('.', $_FILES['arquivo']['name']);
-$extensao = strtolower(end($var));
+$extension = strtolower(end($var));
 
-if (array_search($extensao, $_UP['extensoes']) === false) {
+if (array_search($extension, $_UP['extensoes']) === false) {
     echo "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
 }
 
@@ -61,9 +61,9 @@ else {
     if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta'] . $nome_final)) {
         $local->setFotos($_UP['pasta'] . $nome_final);
         $thumb = new canvas($local->getFotos());
-        $largura = 80;
-        $altura = 80;
-        $thumb->redimensiona($largura, $altura, 'proporcional');
+        $width = 80;
+        $heigth = 80;
+        $thumb->redimensiona($width, $heigth, 'proporcional');
         $thumb->grava($_UP['pasta'] . "thumb" . $nome_final, 100);
         $local->setMiniatura($_UP['pasta'] . "thumb" . $nome_final);
     } else {

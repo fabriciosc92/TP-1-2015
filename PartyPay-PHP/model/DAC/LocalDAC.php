@@ -8,7 +8,7 @@ class LocalDAC
 {
 
     // Insert data from Local into database.
-    public static function persist(Local $local) 
+    public static function insertLocalDAC(Local $local) 
     {
         include_once 'conexao.php';
         $sql = "INSERT INTO `locais`(`id`, `endereco`, `coordenadasGoogleMaps`, 
@@ -35,7 +35,7 @@ class LocalDAC
     }
 
     // Update data from Local in database.
-    public static function updateInfo(Local $local, $atributo, $atributoNovo) 
+    public static function updateInformationDAC(Local $local, $atributo, $atributoNovo) 
 
         include_once 'conexao.php';
         $sql = "UPDATE `locais` SET `$atributo`=$atributoNovo WHERE id=" . $local->getId();
@@ -43,11 +43,11 @@ class LocalDAC
         mysql_close($conexao);
     }
 
-    // Delete data from Local in database.
-    public static function delete(Local $local) 
+    // deleteLocalDAC data from Local in database.
+    public static function deleteLocalDAC(Local $local) 
     {
         include_once 'conexao.php';
-        $sql = "DELETE FROM `locais` WHERE id=" . $local->getId();
+        $sql = "deleteLocalDAC FROM `locais` WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($conexao);
     }

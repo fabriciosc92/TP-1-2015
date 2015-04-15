@@ -1,6 +1,6 @@
 <?php
 
-include 'DAC/PessoaDAC.php';
+include 'DAC/UserDAC.php';
 
 /**
  * Class name: Pessoa

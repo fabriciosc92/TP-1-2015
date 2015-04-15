@@ -30,7 +30,7 @@ Variables:
     		precoFem -> femaleEventPrice
     		
     		// Store the person that is organizing the event.
-    		organizador; //nao precisa
+    		organizador -> eventOrganizer
     		
     		// Local where the event is happening.
     		local -> eventLocal

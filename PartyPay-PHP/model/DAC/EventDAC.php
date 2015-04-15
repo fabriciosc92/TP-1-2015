@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Class name: EventoDac
+ * Class name: EventDac
  * Class to connect Evento to the database.
  */
-class EventoDAC 
+class EventDac 
 {
 
     // Inserts data from Evento into database.
-    public static function persist(Evento $evento) 
+    public static function insertEventDAC(Evento $evento) 
     {
         include_once 'conexao.php';
         $sql = "INSERT INTO `eventos`(`nome`, 
@@ -44,7 +44,7 @@ class EventoDAC
     }
 
     // Update data in database from  Evento.
-    public static function updateInfo($evento, $atributo, $atributoNovo) 
+    public static function updateInformationEventDAC($evento, $atributo, $atributoNovo) 
     {
         include_once 'conexao.php';
         $sql = "UPDATE `eventos` SET `$atributo`=$atributoNovo WHERE id=" . $evento->getId();
@@ -52,17 +52,17 @@ class EventoDAC
         mysql_close($conexao);
     }
 
-    // Delete data from database.
-    public static function delete($evento) 
+    // deleteEventDAC data from database.
+    public static function deleteEventDAC($evento) 
     {
         include_once 'conexao.php';
-        $sql = "DELETE FROM `eventos` WHERE id=" . $evento->getId();
+        $sql = "deleteEventDAC FROM `eventos` WHERE id=" . $evento->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($conexao);
     }
 
     // Recover data from database to Evento.
-    public static function recupere($evento, $id) 
+    public static function recoveryEventDAC($evento, $id) 
     {
         include_once 'conexao.php';
         $sql = "SELECT * FROM eventos WHERE id=$id";

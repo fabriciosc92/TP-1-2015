@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Class name: PessoaDac
+ * Class name: UserDAC
  * Class to connect Pessoa to the database.
  */
-class PessoaDAC 
+class UserDAC 
 {
 
     // Insert data from Pessoa into database.
-    public static function persist($pessoa) 
+    public static function insertUserDAC($pessoa) 
     {
 
         include_once 'conexao.php';
@@ -19,7 +19,7 @@ class PessoaDAC
                 '" . $pessoa->getSexo() . "','0','" . $pessoa->getCodConfirmacao() . "',
                 '" . $pessoa->getCpf() . "','" . $pessoa->getTelefoneContato() . "');";
 
-        mysql_query($sql) or die(mysql_error() . "pessoaDAC - Persist");
+        mysql_query($sql) or die(mysql_error() . "UserDAC - insertUserDAC");
         $RES = mysql_query("SELECT LAST_INSERT_ID()");
         $mat = mysql_fetch_array($RES);
         mysql_close($conexao);
@@ -27,7 +27,7 @@ class PessoaDAC
     }
 
     // Update data from Pessoa in database.
-    public static function updateInfo(Pessoa $pessoa, $atributo, $atributoNovo) 
+    public static function updateInformationUserDAC(Pessoa $pessoa, $atributo, $atributoNovo) 
     {
         include_once 'conexao.php';
         $sql = "UPDATE `pessoas` SET `$atributo`=$atributoNovo WHERE id=". $pessoa->getId();
@@ -36,7 +36,7 @@ class PessoaDAC
     }
 
     // Update changes in Pessoa data into database.
-    public static function atualizar($pessoa)
+    public static function updateUserDAC($pessoa)
     {
         include_once 'conexao.php';
         $sql = "UPDATE pessoas SET
@@ -49,16 +49,16 @@ class PessoaDAC
         mysql_query($sql) or die(mysql_error());
     }
 
-    // Delete data from Pessoa in database.
-    public static function delete($pessoa) 
+    // deleteUserDAC data from Pessoa in database.
+    public static function deleteUserDAC($pessoa) 
     {
         include_once 'conexao.php';
-        $sql = "DELETE FROM `pessoas` WHERE id=";
+        $sql = "deleteUserDAC FROM `pessoas` WHERE id=";
         mysql_query($sql) or die(mysql_error());
     }
 
     // Recover data from database to Pessoa.
-    public static function recupere($pessoa, $id) 
+    public static function recoverUserDAC($pessoa, $id) 
     {
         include_once 'conexao.php';
         $sql = "SELECT * FROM pessoas WHERE id=$id";
@@ -80,7 +80,7 @@ class PessoaDAC
         }
     }
 
-    public static function verifiqueDispo($email) 
+    public static function verifyDisposition($email) 
     {
         include_once 'conexao.php';
         $sql = "SELECT email FROM pessoas WHERE email='$email'";

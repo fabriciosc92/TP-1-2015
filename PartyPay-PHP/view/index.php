@@ -32,7 +32,7 @@ require_once 'header.php';
 
             <ul class="thumbnails">
                 <?php
-                $num = ultimoEvento();
+                $num = lastEvent();
 
                 for ($i = 0; $i < 6; $i++) {
 				?>

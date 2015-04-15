@@ -396,25 +396,24 @@ class canvas {
      } // end preencheImagem
 
      /**
-      * Redimensiona imagem sem cropar, proporcionalmente,
-      * preenchendo espaço vazio com cor rgb especificada
+      * Resize image whitout crop, propotionaly
+      * filling empty space with specified RGB color
       * @return void
       **/
      private function redimensionaPreenchimento()
      {
-          // cria imagem de destino temporária
+          // create a temporary image
           $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 
-          // adiciona cor de fundo à nova imagem
+          // add background color to new image
           $this->preencheImagem();
 
-          // salva variáveis para centralização
+          // save variables to centralization
           $dif_x = $dif_w = $this->nova_largura;
           $dif_y = $dif_h = $this->nova_altura;
 
           /**
-      		 * Verifica altura e largura
-      		 * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
+      		 * Check height and width
       		 */
           if ( ($this->largura / $this->nova_largura ) > ( $this->altura / $this->nova_altura ) )
           {
@@ -425,22 +424,21 @@ class canvas {
           $dif_w = $this->largura / $fator;
           $dif_h = $this->altura  / $fator;
 
-          // copia com o novo tamanho, centralizando
+          // copies with the new size, centralizing
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, $this->largura, $this->altura );
           $this->img     = $this->img_temp;
-     } // fim redimensionaPreenchimento()
+     } // end redimensionaPreenchimento()
 
      /**
-      * Redimensiona imagem sem cropar, proporcionalmente e sem preenchimento.
-      * Modo proporcional adicionado por Fernando VR ( http://goo.gl/iDtmP )
+      * Resize image without cutting in proportion and unfilled.
       * @return void
       **/
      private function redimensionaProporcional()
      {
 	   /**
-           * Verifica altura e largura proporcional.
+           * Check height and width proportionaly.
            **/
 		   $ratio_orig = $this->largura/$this->altura;
 
@@ -452,24 +450,24 @@ class canvas {
 			   $dif_h = $this->nova_largura/$ratio_orig;
 			}
 
-          // cria imagem de destino temporária
+          // create e temporary image
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
 		 
           // Resample
 	  imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura, $this->altura);
           $this->img   = $this->img_temp;
-     } // fim redimensionaProporcional()
+     } // end redimensionaProporcional()
 
 
      /**
-      * Calcula a posição do crop
-      * Os índices 0 e 1 correspondem à posição x e y do crop na imagem
-      * Os índices 2 e 3 correspondem ao tamanho do crop
+      * Calculate crop position
+      * Indices 0 and 1 correspond to the x and y position of the crop in the image
+      * The 2 indexes and 3 correspond to the size of the crop
       * @return void
       **/
      private function calculaPosicaoCrop()
      {
-          // média altura/largura
+          // media widht/height
           $hm     = $this->altura / $this->nova_altura;
           $wm     = $this->largura / $this->nova_largura;
 
@@ -496,37 +494,32 @@ class canvas {
                     $this->posicao_crop[1]     = ( $this->posicao_crop[3] / 2 ) - $h_height;
                }
           }
-     } // fim calculaPosicaoCrop
+     } // end calculaPosicaoCrop
 
      /**
-      * Redimensiona imagem, cropando para encaixar no novo tamanho, sem sobras
-      * baseado no script original de Noah Winecoff
-      * http://www.findmotive.com/2006/12/13/php-crop-image/
-      * atualizado para receber o posicionamento X e Y e/ou Coordenadas Inteligentes
-      * do crop na imagem.
-      * Coordenadas Inteligentes implementado por Aires Gonçalves <contato@airesgoncalves.com.br>
+      * Resize image
       * @return void
       **/
      private function redimensionaCrop()
      {
-          // calcula posicionamento do crop automaticamente
+          // calculate crop position automaticaly
           if(!is_array($this->posicao_crop))
           {
           	$auto=1; 
           	$this->calculaPosicaoCrop(); 
 		  		}
-		  		// posicionamento do crop setado manualmente
+		  		// crop position manualy
 		  		else {
 		  			$auto = 0;
 		  		}
 
-          // cria imagem de destino temporária
+          // create temporary image
           $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 
-          // adiciona cor de fundo à nova imagem
+          // add background color 
           $this->preencheImagem();
           
-          //coordenadas inteligentes
+          //inteligents arrays
           switch( $this->posicao_crop[ 0 ]  ){
           	
           	case 'esquerdo':
@@ -590,14 +583,12 @@ class canvas {
 		  		else 				imagecopyresampled( $this->img_temp, $this->img, 0, 0, $this->posicao_crop[0], $this->posicao_crop[1], $this->nova_largura, $this->nova_altura, $this->posicao_crop[2], $this->posicao_crop[3] );
 
           $this->img     = $this->img_temp;
-     } // fim redimensionaCrop
+     } // end redimensionaCrop
 
      /**
-      * flipa/inverte imagem
-      * baseado no script original de Noah Winecoff
-      * http://www.php.net/manual/en/ref.image.php#62029
-      * @param String $tipo tipo de espelhamento: h - horizontal, v - vertical
-      * @return Object instância atual do objeto, para métodos encadeados
+      * flip/invert image
+      * @param String $tipo flip type: h - horizontal, v - vertical
+      * @return Object current instance of the object, for chained method
       **/
      public function flip( $tipo = 'h' )
      {
@@ -626,10 +617,10 @@ class canvas {
           $this->img     = $this->img_temp;
 
           return $this;
-     } // fim flip
+     } // end flip
 
      /**
-      * gira imagem
+      * Rotate image
       * @param Int $graus grau para giro
       * @return Object instância atual do objeto, para métodos encadeados
       **/
@@ -645,15 +636,14 @@ class canvas {
      } // fim girar
 
      /**
-      * adiciona texto à imagem
-      * @param String $texto texto a ser inserido
-      * @param Int $tamanho tamanho da fonte
-      *            Ver: http://br2.php.net/imagestring
-      * @param Int $x posição x do texto na imagem
-      * @param Int $y posição y do texto na imagem
-      * @param Array/String $cor_fundo array com cores RGB ou string com cor hexadecimal
-      * @param Boolean $truetype true para utilizar fonte truetype, false para fonte do sistema
-      * @param String $fonte nome da fonte truetype a ser utilizada
+      * add text in the image
+      * @param String $texto text to be added
+      * @param Int $tamanho font size
+      * @param Int $x x position text in the image
+      * @param Int $y y position text in the image
+      * @param Array/String $cor_fundo array whith RGB colors or string with hexadecimal colors
+      * @param Boolean $truetype true for font truetype, false for system font
+      * @param String $fonte font name truetype to use
       * @return void
       **/
      public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', $truetype = false, $fonte = '' )
@@ -661,7 +651,7 @@ class canvas {
           $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
 
           /**
-           * Define tamanho da legenda para posições fixas e fundo da legenda
+           * Sets size of the caption for fixed positions and legend background
            **/
           if( $truetype  === true )
           {
@@ -682,7 +672,7 @@ class canvas {
           }
 
           /**
-           * Cria uma nova imagem para usar de fundo da legenda
+           * Create a new image to use Legend background
            **/
           if( $cor_fundo )
           {
@@ -702,7 +692,6 @@ class canvas {
                imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $largura_texto, $altura_texto );
           }
 
-          // truetype ou fonte do sistema?
           if ( $truetype === true )
           {
                $y = $y + $tamanho;
@@ -713,19 +702,19 @@ class canvas {
                imagestring( $this->img, $tamanho, $x, $y, $texto, $cor_texto );
           }
           return $this;
-     } // fim legenda
+     } // end legenda
 
     /**
-     * Calcula a posição da legenda de acordo com string passada via parâmetro
+     * Calculates the position of the legend according to string passed via parameter
      *
-     * @param String $posicao valores pré-definidos (topo_esquerda, meio_centro etc.)
-     * @param Integer $largura largura da imagem
-     * @param Integer $altura altura da imagem
+     * @param String $posicao predefined values(topo_esquerda, meio_centro etc.)
+     * @param Integer $largura image widht
+     * @param Integer $altura image height
      * @return void
      **/
      private function calculaPosicaoLegenda( $posicao, $largura, $altura )
      {
-          // define X e Y para posicionamento
+          // sets X and Y to position
           switch( $posicao )
           {
                case 'topo_esquerda':
@@ -770,22 +759,22 @@ class canvas {
           } // end switch posicao
 
           return array( $x, $y );
-     } // fim calculaPosicaoLegenda
+     } // end calculaPosicaoLegenda
 
      /**
-      * adiciona imagem de marca d'água
-      * @param String $imagem caminho da imagem de marca d'água
-      * @param Int/String $x posição x da marca na imagem ou constante para marcaFixa()
-      * @param Int/Sring $y posição y da marca na imagem ou constante para marcaFixa()
-      * @return Boolean true/false dependendo do resultado da operação
-      * @param Int $alfa valor para transparência (0-100)
-      *                 -> se utilizar alfa, a função imagecopymerge não preserva
-      *                 -> o alfa nativo do PNG
-      * @return Object instância atual do objeto, para métodos encadeados
+      * add image watermark
+      * @param String $imagem watermark image path
+      * @param Int/String $x x position of the brand in the picture or constant for marcaFixa()
+      * @param Int/Sring $y y position of the brand in the picture or constant for marcaFixa()
+      * @return Boolean true/false depending on the result of the operation
+      * @param Int $alfa alpha value (0-100)
+      *                 -> using alpha, the imagecopymerge function does not preserve
+      *                 -> the native alpha PNG
+      * @return Object current instance of the object, for chained method
       **/
      public function marca( $imagem, $x = 0, $y = 0, $alfa = 100 )
      {
-          // cria imagem temporária para merge
+          // create temporary image for merge
           if ( $imagem ) {
 
                if( is_string( $x ) && is_string( $y ) )
@@ -818,25 +807,22 @@ class canvas {
           {
                return false;
           }
-          // dimensões
+          // sizes
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
-          // retorna imagens com marca d'água
+          // return images with whatemarks
           if ( is_numeric( $alfa ) && ( ( $alfa > 0 ) && ( $alfa < 100 ) ) ) {
                imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
           } else {
                imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
           }
           return $this;
-     } // fim marca
+     } // end marca
 
      /**
-      * adiciona imagem de marca d'água, com valores fixos
-      * ex: topo_esquerda, topo_direita etc.
-      * Implementação original por Giolvani <inavloig@gmail.com>
-      * @param String $imagem caminho da imagem de marca d'água
+      * add image watermark, with fixed values
+      * @param String $imagem image path with whatermark
       * @param String $posicao posição/orientação fixa da marca d'água
-      *       [topo, meio, baixo] + [esquerda, centro, direita]
       * @param Int $alfa valor para transparência (0-100)
       * @return void
       **/

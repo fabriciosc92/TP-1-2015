@@ -1,10 +1,10 @@
 <?php
 
 /**
- * File name: evento
- * Calls include file evento in view folder
+ * File name: event
+ * Calls include file event in view folder
  */
 
-require_once("view/evento.php");
+require_once("view/event.php");
 
 ?>

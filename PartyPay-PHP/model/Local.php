@@ -9,42 +9,42 @@ require_once 'DAC/LocalDAC.php';
 class Local 
 {
 
-    private $endereco;
-    private $numero;
-    private $complemento;
-    private $bairro;
-    private $cidade;
-    private $cep;
-    private $pais;
-    private $coordenadaGoogleMaps;
-    private $fotos;
-    private $id;
-    private $nome;
-    private $estado;
-    private $miniatura;
+    private $eventAddress; // Keeps the address of the event.
+    private $addressNumber; // Store the address number
+    private $addressComplement; // Address complement
+    private $eventNeighborhood; // Store the neighborhood.
+    private $eventCity; // Event city.
+    private $localCep; // localCep of the local of the event.
+    private $eventCountry; // Countrt where the event is happening.
+    private $googleMapsCoordanate; // Coordanate of the event in the google maps.
+    private $eventLocalPictures; // Pictures of the local of the event.
+    private $id; // Local id in database.
+    private $eventLocalName; // Name of the place of the event.
+    private $eventState; // Estate of the place of the event.
+    private $localMiniature; // Local Miniature
 
-    // Access variable miniatura.
-    public function getMiniatura() 
+    // Access variable localMiniature.
+    public function getLocalMiniature() 
     {
-        return $this->miniatura;
+        return $this->localMiniature;
     }
 
-    // Modify variable miniatura.
-    public function setMiniatura($miniatura) 
+    // Modify variable localMiniature.
+    public function setLocalMiniature($localMiniature) 
     {
-        $this->miniatura = $miniatura;
+        $this->localMiniature = $localMiniature;
     }
 
-    // Access variable estado
-    public function getEstado() 
+    // Access variable eventState
+    public function getEventState() 
     {
-        return $this->estado;
+        return $this->eventState;
     }
 
-    // Modify variable estado.
-    public function setEstado($estado) 
+    // Modify variable eventState.
+    public function setEventState($eventState) 
     {
-        $this->estado = $estado;
+        $this->eventState = $eventState;
     }
 
     function __construct() 
@@ -52,88 +52,88 @@ class Local
         
     }
 
-    // Access variable numero.
-    public function getNumero() 
+    // Access variable addressNumber.
+    public function getAddressNumber() 
     {
-        return $this->numero;
+        return $this->addressNumber;
     }
 
-    // Modify variable numero.
-    public function setNumero($numero) 
+    // Modify variable addressNumber.
+    public function setAddressNumber($addressNumber) 
     {
-        $this->numero = $numero;
+        $this->addressNumber = $addressNumber;
     }
 
-    // Access variable complemento.
-    public function getComplemento() 
+    // Access variable addressComplement.
+    public function getAddressComplement() 
     {
-        return $this->complemento;
+        return $this->addressComplement;
     }
 
-    // Modify variable complemento.
-    public function setComplemento($complemento) 
+    // Modify variable addressComplement.
+    public function setAddressComplement($addressComplement) 
     {
-        $this->complemento = $complemento;
+        $this->addressComplement = $addressComplement;
     }
 
-    // Access variable bairro.
-    public function getBairro() 
+    // Access variable eventNeighborhood.
+    public function getEventNeighborhood() 
     {
-        return $this->bairro;
+        return $this->eventNeighborhood;
     }
 
-    // Modify variable bairro.
-    public function setBairro($bairro) 
+    // Modify variable eventNeighborhood.
+    public function setEventNeighborhood($eventNeighborhood) 
     {
-        $this->bairro = $bairro;
+        $this->eventNeighborhood = $eventNeighborhood;
     }
 
-    // Access variable cidade.
-    public function getCidade() 
+    // Access variable eventCity.
+    public function getEventCity() 
     {
-        return $this->cidade;
+        return $this->eventCity;
     }
 
-    // Modify variable cidade.
-    public function setCidade($cidade) 
+    // Modify variable eventCity.
+    public function setEventCity($eventCity) 
     {
-        $this->cidade = $cidade;
+        $this->eventCity = $eventCity;
     }
 
-    // Access variable cep.
-    public function getCep() 
+    // Access variable localCep.
+    public function getLocalCep() 
     {
-        return $this->cep;
+        return $this->localCep;
     }
 
-    // Modify variable cep.
-    public function setCep($cep) 
+    // Modify variable localCep.
+    public function setLocalCep($localCep) 
     {
-        $this->cep = $cep;
+        $this->localCep = $localCep;
     }
 
-    // Access variable pais.
-    public function getPais() 
+    // Access variable eventCountry.
+    public function getEventCountry() 
     {
-        return $this->pais;
+        return $this->eventCountry;
     }
 
-    // Modify variable pais.
-    public function setPais($pais) 
+    // Modify variable eventCountry.
+    public function setEventCountry($eventCountry) 
     {
-        $this->pais = $pais;
+        $this->eventCountry = $eventCountry;
     }
 
-    // Access variable nome.
-    public function getNome() 
+    // Access variable eventLocalName.
+    public function getEventLocalName() 
     {
-        return $this->nome;
+        return $this->eventLocalName;
     }
 
-    // Modify variable nome.
-    public function setNome($nome) 
+    // Modify variable eventLocalName.
+    public function setEventLocalName($eventLocalName) 
     {
-        $this->nome = $nome;
+        $this->eventLocalName = $eventLocalName;
     }
 
     // Access variable id.
@@ -148,58 +148,59 @@ class Local
         $this->id = $id;
     }
 
-    // Access variable endereco.
-    public function getEndereco() 
+    // Access variable eventAddress.
+    public function getEventAddress() 
     {
         return $this->endereço;
     }
 
-    // Modify variable endereco.
-    public function setEndereco($endereco) 
+    // Modify variable eventAddress.
+    public function setEventAddress($eventAddress) 
     {
-        $this->endereço = $endereco;
+        $this->endereço = $eventAddress;
     }
 
-    // Access variable coordenadaGoogleMaps.
-    public function getCoordenadaGoogleMaps() 
+    // Access variable googleMapsCoordanate.
+    public function getGoogleMapsCoordanate() 
     {
-        return $this->coordenadaGoogleMaps;
+        return $this->googleMapsCoordanate;
     }
 
     // Modify variable coordenadaGooleMaps.
-    public function setCoordenadaGoogleMaps($coordenadaGoogleMaps) 
+    public function setGoogleMapsCoordanate($googleMapsCoordanate) 
     {
-        $this->coordenadaGoogleMaps = $coordenadaGoogleMaps;
+        $this->googleMapsCoordanate = $googleMapsCoordanate;
+    }
+    
+
+    // Access variable eventLocalPictures.
+    public function getEventLocalPictures() 
+    {
+        return $this->eventLocalPictures;
     }
 
-    // Access variable fotos.
-    public function getFotos() 
+    // Modify variable eventLocalPictures.
+    public function setEventLocalPictures($eventLocalPictures) 
     {
-        return $this->fotos;
-    }
-
-    // Modify variable fotos.
-    public function setFotos($fotos) 
-    {
-        $this->fotos = $fotos;
+        $this->eventLocalPictures = $eventLocalPictures;
     }
 
     // Inserts a local in database.
-    public function persist() 
+    public function insertLocal() 
     {
-        return LocalDAC::persist($this);
+        return LocalDAC::insertLocal($this);
     }
 
     // Update changes in local information.
-    public function updateInfo($atributo, $novoValor) 
+    public function updateLocalInformation($atributo, $novoValor) 
     {
-        LocalDAC::updateInfo($this, $atributo, $novoValor);
+        LocalDAC::updateLocalInformation($this, $atributo, $novoValor);
     }
 
-    // Delete a local in database.
-    public function delete() 
+    // deleteLocal a local in database.
+    public function deleteLocal() 
     {
-        LocalDAC::delete($this);
+        LocalDAC::deleteLocal($this);
     }
     
 }

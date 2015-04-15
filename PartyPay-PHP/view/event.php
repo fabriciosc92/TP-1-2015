@@ -1,44 +1,44 @@
 <?php
 
 /**
- * File name: evento
+ * File name: event
  * Page responsible to show the event information
  */
 
 require_once ('header.php');
 
-if (isset($evento)) {
-    unset($evento);
+if (isset($event)) {
+    unset($event);
 }
 
-$evento = new Evento();
+$event = new Event();
 
-$idEvento = $_GET['id'];
-$evento->eventoPorID($idEvento);
+$eventId = $_GET['id'];
+$event->eventById($eventId);
 
-$nomeEvento = $evento->getNome();
-$dataInicio = $evento->getDataInicio();
-$dataTermino = $evento->getDataTermino();
-$imagem = $evento->getImagem();
-$precoMasc = $evento->getPrecoMasc();
-$precoFem = $evento->getPrecoFem();
-$organizador = $evento->getOrganizador();
-$facebook = $evento->getFacebookEventPage();
-$dataCriacao = $evento->getDataCriacao();
-$descricao = $evento->getDescricao();
-$numeroIngressos = $evento->getNumeroIngressos();
-$horaInicio = $evento->getHoraInicio();
-$horaTermino = $evento->getHoraTermino();
-$miniatura = $evento->getMiniatura();
-$classificacao = $evento->getClassificacao();
+$eventName = $event->getName();
+$startingDate = $event->getStartingDate();
+$endingDate = $event->getEndingDate();
+$image = $event->getImage();
+$menPrice = $event->getMenPrice();
+$womenPrice = $event->getWomenPrice();
+$promoter = $event->getPromoter();
+$facebook = $event->getFacebookEventPage();
+$creationDate = $event->getCreationDate();
+$description = $event->getDescription();
+$ticketsLot = $event->getTicketsLot();
+$startingTime = $event->getStartingTime();
+$endingTime = $event->getEndingTime();
+$thumbnail = $event->getThumbnail();
+$ageRecommendation = $event->getAgeRecommendation();
 ?>
 
 <div class="container">
-    <h1><?php echo $nomeEvento; ?></h1>
+    <h1><?php echo $eventName; ?></h1>
     <div class="row">
         <div class="span8 conteudo">
-            <img src="<?php echo $imagem; ?>" alt="">
-            <p><?php echo $descricao; ?></p>
+            <img src="<?php echo $image; ?>" alt="">
+            <p><?php echo $description; ?></p>
 
         </div>
         <div class="span4">
@@ -46,8 +46,8 @@ $classificacao = $evento->getClassificacao();
                 <h4>Data</h4>
                 <span class="horario">
 					<?php
-						echo ("De " . $dataInicio . " at&eacute; "
-													. $dataTermino); 
+						echo ("De " . $startingDate . " at&eacute; "
+													. $endingDate); 
 					?>
 				</span>
             </div>

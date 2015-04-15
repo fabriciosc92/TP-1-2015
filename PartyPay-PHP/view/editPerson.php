@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * File name: editarPessoa
+ * File name: editPerson
  * Shows the user edition form
  */
 
@@ -15,13 +15,13 @@ require_once('header.php');
             <div class="control-group">
                 <label class="control-label" for="nome">Primeiro Nome</label>
                 <div class="controls">
-                    <input type="text" name="primeiroNome" placeholder="Primeiro nome" value="<?php echo $primeiroNome; ?>" required>
+                    <input type="text" name="firstName" placeholder="Primeiro nome" value="<?php echo $firstName; ?>" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="nome">Sobrenome</label>
                 <div class="controls">
-                    <input type="text" name="sobreNome" placeholder="Sobrenome"  value="<?php echo $sobreNome; ?>" required>
+                    <input type="text" name="surName" placeholder="Sobrenome"  value="<?php echo $surName; ?>" required>
                 </div>
             </div>
             <div class="control-group">
@@ -39,7 +39,7 @@ require_once('header.php');
                 <label class="control-label" for="sexo">Sexo</label>
 
                 <div class="controls">
-                    <select name="sexo">
+                    <select name="gender">
                         <option>Feminino</option>
                         <option>Masculino</option>
                     </select>
@@ -50,13 +50,13 @@ require_once('header.php');
                 <div class="control-group">
                     <label class="control-label" for="cpf">CPF</label>
                     <div class="controls">
-                        <input type="text" id="cpf" name="cpf" placeholder="CPF" value="<?php echo $cpf; ?>" required>
+                        <input type="text" id="cpf" name="idNumber" placeholder="CPF" value="<?php echo $idNumber; ?>" required>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="telefoneContato">Telefone de Contato</label>
                     <div class="controls">
-                        <input type="text" id="telefone" name="telefoneContato" placeholder="Telefone de Contato" value="<?php echo $telefone; ?>" required>
+                        <input type="text" id="telefone" name="phoneNumber" placeholder="Telefone de Contato" value="<?php echo $phoneNumber; ?>" required>
                     </div>
                 </div>
                 <?php $id = 9; // consultar id na sessao ?>

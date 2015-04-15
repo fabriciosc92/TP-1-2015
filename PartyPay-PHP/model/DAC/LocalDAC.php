@@ -8,48 +8,48 @@ class LocalDAC
 {
 
     // Insert data from Local into database.
-    public static function persist(Local $local) 
+    public static function insertLocalDAC(Local $local) 
     {
-        include_once 'conexao.php';
-        $sql = "INSERT INTO `locais`(`id`, `endereco`, `coordenadasGoogleMaps`, 
-            `nome`, `numero`, `complemento`, `bairro`, `cidade`, `cep`, `pais`, 
-            `fotos`, `estado`,`miniatura`) 
-            VALUES (NULL,'" . $local->getEndereco() . "','"
-                . $local->getCoordenadaGoogleMaps() . "','"
-                . $local->getNome() . "','"
-                . $local->getNumero() . "','"
-                . $local->getComplemento() . "','"
-                . $local->getBairro() . "','"
-                . $local->getCidade() . "','"
-                . $local->getCep() . "','"
-                . $local->getPais() . "','"
-                . $local->getFotos() . "','"
-                . $local->getEstado() . "','"
-                . $local->getMiniatura() . "')";
+        include_once 'connection.php';
+        $sql = "INSERT INTO `locais`(`id`, `eventAddress`, `coordenadasGoogleMaps`, 
+            `eventLocalName`, `addressNumber`, `addressComplement`, `eventNeighborhood`, `eventCity`, `localCep`, `eventCountry`, 
+            `eventLocalPictures`, `eventState`,`localMiniature`) 
+            VALUES (NULL,'" . $local->getEventAddress() . "','"
+                . $local->getGoogleMapsCoordanate() . "','"
+                . $local->getEventLocalName() . "','"
+                . $local->getAddressNumber() . "','"
+                . $local->getAddressComplement() . "','"
+                . $local->getEventNeighborhood() . "','"
+                . $local->getEventCity() . "','"
+                . $local->getLocalCep() . "','"
+                . $local->getEventCountry() . "','"
+                . $local->getEventLocalPictures() . "','"
+                . $local->getEventState() . "','"
+                . $local->getLocalMiniature() . "')";
         mysql_query($sql) or die(mysql_error());
         $RES = mysql_query("SELECT LAST_INSERT_ID()");
         $mat = mysql_fetch_array($RES);
-        mysql_close($conexao);
+        mysql_close($connection);
 
         return $mat['0'];
     }
 
     // Update data from Local in database.
-    public static function updateInfo(Local $local, $atributo, $atributoNovo) 
+    public static function updateInformationDAC(Local $local, $atributo, $atributoNovo) 
 
-        include_once 'conexao.php';
+        include_once 'connection.php';
         $sql = "UPDATE `locais` SET `$atributo`=$atributoNovo WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
-        mysql_close($conexao);
+        mysql_close($connection);
     }
 
-    // Delete data from Local in database.
-    public static function delete(Local $local) 
+    // deleteLocalDAC data from Local in database.
+    public static function deleteLocalDAC(Local $local) 
     {
-        include_once 'conexao.php';
-        $sql = "DELETE FROM `locais` WHERE id=" . $local->getId();
+        include_once 'connection.php';
+        $sql = "deleteLocalDAC FROM `locais` WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
-        mysql_close($conexao);
+        mysql_close($connection);
     }
 
 }

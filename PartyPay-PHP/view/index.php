@@ -39,18 +39,18 @@ require_once 'header.php';
 
                     <li class="span4">
                         <div class="thumbnail">
-                            <a href="evento.php?id=<?php echo (ultimoEvento() - $i); ?>">
-                                <img src="<?php the_imagem($num - $i); ?>" alt="">
+                            <a href="event.php?id=<?php echo (lastEvent() - $i); ?>">
+                                <img src="<?php the_image($num - $i); ?>" alt="">
                             </a>
                             <div class="caption">
                                 <h3>
-                                    <a href="evento.php?id=<?php echo (ultimoEvento() - $i); ?>">
-                                        <?php the_nome($num - $i); ?>
+                                    <a href="event.php?id=<?php echo (lastEvent() - $i); ?>">
+                                        <?php the_name($num - $i); ?>
                                     </a>
                                 </h3>
-                                <p><?php the_descricao($num - $i); ?></p>
+                                <p><?php the_description($num - $i); ?></p>
                                 <p>
-                                    <a href="evento.php?id=<?php echo (ultimoEvento() - $i); ?>" class="btn">Ver</a>
+                                    <a href="event.php?id=<?php echo (lastEvent() - $i); ?>" class="btn">Ver</a>
                                     <a href="#" class="btn btn-success">Comprar ingresso</a>
                                 </p>
                             </div>

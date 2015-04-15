@@ -8,7 +8,7 @@ EventoDac.php
 
 
 EventoLocalDAC.php
-	class: EventoLocalDAC -> new name: LocalEventDAC
+	class: EventoLocalDAC -> new name: EventLocalDAC
 
 	Functions: persist -> newm name: insertLocalEventDac
 

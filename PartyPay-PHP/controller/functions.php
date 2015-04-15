@@ -6,7 +6,7 @@
 *
 **/
 
-require_once 'model/Evento.php';
+require_once 'model/Event.php';
 
 // Function that receives the name of the event
 function event_name($id) 

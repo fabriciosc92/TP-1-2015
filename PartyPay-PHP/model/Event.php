@@ -25,7 +25,7 @@ class Event
     private $endHour; // Event end time.
     private $eventMiniature; // Miniature of the event.
     private $ageClassification; // Minimum age to enter in the event.
-    private $eventId;
+    private $id; // Database id of the event.
 
     // Access variable ageClassification.
     public function getAgeClassification() 
@@ -39,16 +39,16 @@ class Event
         $this->ageClassification = $ageClassification;
     }
 
-    // Access variable eventId.
-    public function getEventId() 
+    // Access variable id.
+    public function getId() 
     {
-        return $this->eventId;
+        return $this->id;
     }
 
-    // Modify variable eventId.
-    public function setEventId($eventId) 
+    // Modify variable id.
+    public function setId($id) 
     {
-        $this->eventId = $eventId;
+        $this->id = $id;
     }
 
     // Access variable eventMiniature.
@@ -256,9 +256,9 @@ class Event
     }
 
     // Recovery an event.
-    public function eventById($eventId)
+    public function eventByid($id)
     {
-        EventDAC::recupere($this, $eventId);
+        EventDAC::recoveryEventDAC($this, $id);
     }
 
 }

@@ -3,87 +3,87 @@
 include 'DAC/UserDAC.php';
 
 /**
- * Class name: Pessoa
+ * Class name: User
  * Class responsible to define model elements in users.
  */
-class Pessoa 
+class User
 {
 
-    private $primeiroNome;
-    private $sobreNome;
-    private $email;
-    private $id;
-    private $password;
-    private $sexo;
-    private $codConfirmacao;
-    private $cpf;
-    private $compras;
-    private $cartoesDeCredito;
-    private $cnpj;
-    private $eventos;
-    private $informaçoesBancarias;
-    private $telefoneContato;
-    private $nomeFantasia;
-    private $website;
-    private $facebookFanPage;
+    private $userFirstName; // Keeps user first name.
+    private $userLastName; // Store the user last name.
+    private $userEmail; // Keeps the user email.
+    private $id; // User id in database.
+    private $userPassword; // Password to access the site.
+    private $userSex; // Gender of the user.
+    private $confirmationCode; // Confirmation code when finishes the registering.
+    private $userCpf; // Keeps the user cpf.
+    private $userShopping; // Keeps what the user is buying.
+    private $userCreditCard; // Credit cards that will be using to buy the tickets.
+    private $userCnpj; // Keeps the user Cnpj.
+    private $userEvents;  // Events that the user chose.
+    private $bankInformation; // User bank information.
+    private $userPhone; // Telefone to contact the user.
+    private $userFantasyName; // Store the fantasy name.
+    private $website; // Keeps the website
+    private $facebookFanPage; // User facebook fan page.
 
-    // Access variable cnpj.
-    public function getCnpj() 
+    // Access variable userCnpj.
+    public function getUserCnpj() 
     {
-        return $this->cnpj;
+        return $this->userCnpj;
     }
 
-    // Modify variable cnpj.
-    public function setCnpj($cnpj) 
+    // Modify variable userCnpj.
+    public function setUserCnpj($userCnpj) 
     {
-        $this->cnpj = $cnpj;
+        $this->userCnpj = $userCnpj;
     }
 
-    // Access variable eventos.
-    public function getEventos() 
+    // Access variable userEvents.
+    public function getUserEvents() 
     {
-        return $this->eventos;
+        return $this->userEvents;
     }
 
-    // Modify variable eventos.
-    public function setEventos($eventos) 
+    // Modify variable userEvents.
+    public function setUserEvents($userEvents) 
     {
-        $this->eventos = $eventos;
+        $this->userEvents = $userEvents;
     }
 
     // Access variable informacoesBancarias.
-    public function getInformaçoesBancarias() 
+    public function getBankInformation() 
     {
-        return $this->informaçoesBancarias;
+        return $this->bankInformation;
     }
 
     // Modify variable informacoesBancarias.
-    public function setInformaçoesBancarias($informaçoesBancarias) 
+    public function setBankInformation($bankInformation) 
     {
-        $this->informaçoesBancarias = $informaçoesBancarias;
+        $this->bankInformation = $bankInformation;
     }
 
-    // Access variable telefoneContato.
-    public function getTelefoneContato() 
+    // Access variable userPhone.
+    public function getUserPhone() 
     {
-        return $this->telefoneContato;
+        return $this->userPhone;
     }
 
-    public function setTelefoneContato($telefoneContato) 
+    public function setUserPhone($userPhone) 
     {
-        $this->telefoneContato = $telefoneContato;
+        $this->userPhone = $userPhone;
     }
 
-    // Access variable nomeFantasia.
-    public function getNomeFantasia() 
+    // Access variable userFantasyName.
+    public function getUserFantasyName() 
     {
-        return $this->nomeFantasia;
+        return $this->userFantasyName;
     }
 
-    // Modify variable nomeFantasia.
-    public function setNomeFantasia($nomeFantasia) 
+    // Modify variable userFantasyName.
+    public function setUserFantasyName($userFantasyName) 
     {
-        $this->nomeFantasia = $nomeFantasia;
+        $this->userFantasyName = $userFantasyName;
     }
 
     // Access variable website.
@@ -110,52 +110,52 @@ class Pessoa
         $this->facebookFanPage = $facebookFanPage;
     }
 
-    // Access variable cpf.
-    public function getCpf() 
+    // Access variable userCpf.
+    public function getUserCpf() 
     {
-        return $this->cpf;
+        return $this->userCpf;
     }
 
-    // Modify variable cpf.
-    public function setCpf($cpf) 
+    // Modify variable userCpf.
+    public function setUserCpf($userCpf) 
     {
-        $this->cpf = $cpf;
+        $this->userCpf = $userCpf;
     }
 
-    // Access variable compras.
-    public function getCompras() 
+    // Access variable userShopping.
+    public function getUserShopping() 
     {
-        return $this->compras;
+        return $this->userShopping;
     }
 
-    // Modify variable compras.
-    public function setCompras($compras) 
+    // Modify variable userShopping.
+    public function setUserShopping($userShopping) 
     {
-        $this->compras = $compras;
+        $this->userShopping = $userShopping;
     }
 
-    // Access variable cartoesDeCredito.
-    public function getCartoesDeCredito() 
+    // Access variable userCreditCard.
+    public function getUserCreditCard() 
     {
-        return $this->cartoesDeCredito;
+        return $this->userCreditCard;
     }
 
-    // Modify variable cartoesDeCredito.
-    public function setCartoesDeCredito($cartoesDeCredito) 
+    // Modify variable userCreditCard.
+    public function setUserCreditCard($userCreditCard) 
     {
-        $this->cartoesDeCredito = $cartoesDeCredito;
+        $this->userCreditCard = $userCreditCard;
     }
 
-    // Access variable codConfirmacao.
-    public function getCodConfirmacao() 
+    // Access variable confirmationCode.
+    public function getConfirmationCode() 
     {
-        return $this->codConfirmacao;
+        return $this->confirmationCode;
     }
 
-    // Modify variable codConfirmacao.
-    public function setCodConfirmacao($codConfirmacao) 
+    // Modify variable confirmationCode.
+    public function setConfirmationCode($confirmationCode) 
     {
-        $this->codConfirmacao = $codConfirmacao;
+        $this->confirmationCode = $confirmationCode;
     }
 
     function __construct() 
@@ -163,69 +163,69 @@ class Pessoa
         
     }
 
-    public function construaPorId($id) 
+    public function builById($id) 
     {
-        PessoaDAC::recupere($this, $id);
+        UserDAC::recoverUserDAC($this, $id);
     }
 
-    // Access variable sexo.
-    public function getSexo()
+    // Access variable userSex.
+    public function getUserSex()
     {
-        return $this->sexo;
+        return $this->userSex;
     }
 
-    // Modify variable sexo.
-    public function setSexo($sexo) 
+    // Modify variable userSex.
+    public function setUserSex($userSex) 
     {
-        $this->sexo = $sexo;
+        $this->userSex = $userSex;
     }
 
-    // Access variable password.
-    public function getPassword() 
+    // Access variable userPassword.
+    public function getUserPassword() 
     {
-        return $this->password;
+        return $this->userPassword;
     }
 
-    // Modify variable password.
-    public function setPassword($password) 
+    // Modify variable userPassword.
+    public function setUserPassword($userPassword) 
     {
-        $this->password = $password;
+        $this->userPassword = $userPassword;
     }
 
-    // Access variable email.
-    public function getEmail() 
+    // Access variable userEmail.
+    public function getUserEmail() 
     {
-        return $this->email;
+        return $this->userEmail;
     }
 
-    // Modify variable email.
-    public function setEmail($email) 
+    // Modify variable userEmail.
+    public function setUserEmail($userEmail) 
     {
-        $this->email = $email;
+        $this->userEmail = $userEmail;
     }
 
-    // Access variable primeiroNome.
-    public function getPrimeiroNome() 
+    // Access variable userFirstName.
+    public function getUserFirstName() 
     {
-        return $this->primeiroNome;
+        return $this->userFirstName;
     }
 
-    // Modify variable primeiroNome.
-    public function setPrimeiroNome($primeiroNome) 
+    // Modify variable userFirstName.
+    public function setUserFirstName($userFirstName) 
     {
-        $this->primeiroNome = $primeiroNome;
+        $this->userFirstName = $userFirstName;
     }
 
-    // Access variable sobrenome.
-    public function getSobreNome() 
+    // Access variable userLastName.
+    public function getUserLastName() 
     {
-        return $this->sobreNome;
+        return $this->userLastName;
     }
 
-    // Modify variable sobrenome.
-    public function setSobreNome($sobreNome) 
+    // Modify variable userLastName.
+    public function setUserLastName($userLastName) 
     {
-        $this->sobreNome = $sobreNome;
+        $this->userLastName = $userLastName;
     }
 
     // Access variable id.
@@ -241,27 +241,27 @@ class Pessoa
     }
 
     // Inserts a person in database.
-    public function persist() 
+    public function insertUser() 
     {
-        return PessoaDAC::persist($this);
+        return UserDAC::insertUser($this);
     }
 
     // Update changes tha person do as a user.
-    public function updateInfo($atributo, $novoValor) 
+    public function updateInformationUserDAC($atributo, $novoValor) 
     {
-        PessoaDAC::updateInfo($this, $atributo, $novoValor);
+        UserDAC::updateInformationUserDAC($this, $atributo, $novoValor);
     }
 
-    // Deletes a person from database.
-    public function delete() 
+    // deleteUsers a person from database.
+    public function deleteUser() 
     {
-        PessoaDAC::delete($this);
+        UserDAC::deleteUser($this);
     }
 
     // Updates a person in database.
-    public function atualizar() 
+    public function updateUser() 
     {
-        PessoaDAC::atualizar($this);
+        UserDAC::updateUser($this);
     }
 
 }

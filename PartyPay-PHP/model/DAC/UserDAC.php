@@ -11,25 +11,25 @@ class UserDAC
     public static function insertUserDAC($pessoa) 
     {
 
-        include_once 'conexao.php';
-        $sql = "INSERT INTO pessoas(`primeiroNome`, `sobreNome`, `email`, `senha`,`sexo`, 
-            `emailConfirmado` , `codConfirmacao`, `cpf`, `telefoneContato`) VALUES 
-            ('" . $pessoa->getPrimeiroNome() . "','" . $pessoa->getSobreNome() . "',
-                '" . $pessoa->getEmail() . "','" . $pessoa->getPassword() . "',
-                '" . $pessoa->getSexo() . "','0','" . $pessoa->getCodConfirmacao() . "',
-                '" . $pessoa->getCpf() . "','" . $pessoa->getTelefoneContato() . "');";
+        include_once 'connection.php';
+        $sql = "INSERT INTO pessoas(`firstName`, `userLastName`, `userEmail`, `senha`,`userSex`, 
+            `userEmailConfirmado` , `confirmationCode`, `userCpf`, `userPhone`) VALUES 
+            ('" . $pessoa->getFirstName() . "','" . $pessoa->getUserLastName() . "',
+                '" . $pessoa->getUserEmail() . "','" . $pessoa->getUserPassword() . "',
+                '" . $pessoa->getUserSex() . "','0','" . $pessoa->getConfirmationCode() . "',
+                '" . $pessoa->getUserCpf() . "','" . $pessoa->getUserPhone() . "');";
 
         mysql_query($sql) or die(mysql_error() . "UserDAC - insertUserDAC");
         $RES = mysql_query("SELECT LAST_INSERT_ID()");
         $mat = mysql_fetch_array($RES);
-        mysql_close($conexao);
+        mysql_close($connection);
         return $mat['0'];
     }
 
     // Update data from Pessoa in database.
     public static function updateInformationUserDAC(Pessoa $pessoa, $atributo, $atributoNovo) 
     {
-        include_once 'conexao.php';
+        include_once 'connection.php';
         $sql = "UPDATE `pessoas` SET `$atributo`=$atributoNovo WHERE id=". $pessoa->getId();
         mysql_query($sql) or die(mysql_error());
 
@@ -38,13 +38,13 @@ class UserDAC
     // Update changes in Pessoa data into database.
     public static function updateUserDAC($pessoa)
     {
-        include_once 'conexao.php';
+        include_once 'connection.php';
         $sql = "UPDATE pessoas SET
-        primeiroNome='" . $pessoa->getPrimeiroNome() . "',
-        sobreNome='" . $pessoa->getSobreNome() . "',
-        sexo='" . $pessoa->getSexo() . "',
-        cpf='" . $pessoa->getCpf() . "',
-        telefoneContato='" . $pessoa->getTelefoneContato() . "'
+        FirstName='" . $pessoa->getFirstName() . "',
+        UserLastName='" . $pessoa->getUserLastName() . "',
+        UserSex='" . $pessoa->getUserSex() . "',
+        UserCpf='" . $pessoa->getUserCpf() . "',
+        UserPhone='" . $pessoa->getUserPhone() . "'
         WHERE id='". $pessoa->getId() ."'";
         mysql_query($sql) or die(mysql_error());
     }
@@ -52,7 +52,7 @@ class UserDAC
     // deleteUserDAC data from Pessoa in database.
     public static function deleteUserDAC($pessoa) 
     {
-        include_once 'conexao.php';
+        include_once 'connection.php';
         $sql = "deleteUserDAC FROM `pessoas` WHERE id=";
         mysql_query($sql) or die(mysql_error());
     }
@@ -60,17 +60,17 @@ class UserDAC
     // Recover data from database to Pessoa.
     public static function recoverUserDAC($pessoa, $id) 
     {
-        include_once 'conexao.php';
+        include_once 'connection.php';
         $sql = "SELECT * FROM pessoas WHERE id=$id";
         $resultado = mysql_query($sql) or die(mysql_error());
         $row = mysql_fetch_array($resultado);
 
         if (mysql_num_rows($resultado)==1){
-           $pessoa->setPrimeiroNome($row['primeiroNome']);
-           $pessoa->setSobreNome($row['sobreNome']);
-           $pessoa->setEmail($row['email']);
-           $pessoa->setTelefoneContato($row['telefoneContato']);
-           $pessoa->setCpf($row['cpf']);
+           $pessoa->setFirstName($row['firstName']);
+           $pessoa->setUserLastName($row['userLastName']);
+           $pessoa->setUserEmail($row['userEmail']);
+           $pessoa->setUserPhone($row['userPhone']);
+           $pessoa->setUserCpf($row['userCpf']);
            $pessoa->setId($row['id']);
            //$pessoa->setDataNasc($row['dataNasc']);
            //$pessoa->setImage($row['image']);
@@ -80,10 +80,10 @@ class UserDAC
         }
     }
 
-    public static function verifyDisposition($email) 
+    public static function verifyDisposition($UserEmail) 
     {
-        include_once 'conexao.php';
-        $sql = "SELECT email FROM pessoas WHERE email='$email'";
+        include_once 'connection.php';
+        $sql = "SELECT userEmail FROM pessoas WHERE userEmail='$userEmail'";
         $result = mysql_query($sql);
         if (mysql_num_rows($result) == 0) {
             return 1;

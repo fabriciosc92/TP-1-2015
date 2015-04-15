@@ -1,18 +1,17 @@
 <?php
 
 /**
- * Class name: LocalEventDAC
- * Class to connect LocalEventDAC to the database.
+ * Class name: EventLocaDAC
+ * Class to connect EventLocaDAC to the database.
  */
-class LocalEventDAC
- 
+class EventLocaDAC 
 {
 
-    // Insert data from LocalEventDAC
+    // Insert data from EventLocaDAC
  into database.
-    public static function insertLocalEventDac($eventoId, $localId) 
+    public static function insertEventLocaDAC($eventoId, $localId) 
     {
-        require 'conexao.php';
+        require 'connection.php';
         $sql = "INSERT INTO `locaisdoseventos` (
             `id` ,
             `localID` ,
@@ -21,9 +20,9 @@ class LocalEventDAC
             VALUES (
             NULL ,  '$localId',  '$eventoId'
             );";
-        mysql_query($sql) or die(mysql_error() . "LocalEventDAC
+        mysql_query($sql) or die(mysql_error() . "EventLocaDAC
 DAC.php inserçao de dados na tabela");
-        mysql_close($conexao);
+        mysql_close($connection);
     }
 
 }

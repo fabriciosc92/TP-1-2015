@@ -1,9 +1,15 @@
 <?php
-// Class responsible for user's loggin
 
 include '../model/Pessoa.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';
 include 'gerarCodConfirmacao.php';
+
+/**
+*
+* Class responsible for user's loggin
+*
+**/
+
 
 session_start();
 

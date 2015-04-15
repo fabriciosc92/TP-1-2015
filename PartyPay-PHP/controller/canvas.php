@@ -822,17 +822,17 @@ class canvas {
      /**
       * add image watermark, with fixed values
       * @param String $imagem image path with whatermark
-      * @param String $posicao posição/orientação fixa da marca d'água
-      * @param Int $alfa valor para transparência (0-100)
+      * @param String $posicao position / orientation fixed watermark
+      * @param Int $alfa value for transparency (0-100)
       * @return void
       **/
      private function marcaFixa( $imagem, $posicao, $alfa = 100 )
      {
 
-          // dimensões da marca d'água
+          // watermark size
           list( $marca_w, $marca_h ) = getimagesize( $imagem );
 
-          // define X e Y para posicionamento
+          // sets X and Y to position
           switch( $posicao )
           {
                case 'topo_esquerda':
@@ -876,20 +876,20 @@ class canvas {
                     break;
           } // end switch posicao
 
-          // cria marca
+          // create brand
           $this->marca( $imagem, $x, $y, $alfa );
           return $this;
-     } // fim marcaFixa
+     } // end marcaFixa
 
     /**
-      * Aplica filtros avançados como brilho, contraste, pixelate, blur
-      * Requer o GD compilado com a função imagefilter()
+      * Apply advanced filters to the brightness, contrast, pixelate, blur
+      * Requires GD compiled with the imagefilter function ()
       * http://br.php.net/imagefilter
-      * @param String $filtro constante/nome do filtro
-      * @param Integer $quantidade número de vezes que o filtro deve ser aplicado
-      *            utilizado em blur, edge, emboss, pixel e rascunho
-      * @param $arg1, $arg2 e $arg3 - ver manual da função imagefilter
-      * @return Object instância atual do objeto, para métodos encadeados
+      * @param String $filtro constant / filter name
+      * @param Integer $quantidade number of times the filter should be applied
+      *            used in blur, edge, emboss, and pixel draft
+      * @param $arg1, $arg2 e $arg3 - see function manual imagefilter
+      * @return Object current instance of the object, for chained method
      **/
     public function filtra( $filtro, $quantidade = 1, $arg1 = NULL, $arg2 = NULL, $arg3 = NULL, $arg4 = NULL )
     {
@@ -988,7 +988,7 @@ class canvas {
                     imagefilter( $this->img, IMG_FILTER_SMOOTH, $arg1 );
                 }
                 break;
-            // SOMENTE 5.3 ou superior
+            // JUST 5.3 or higher
             case 'pixel':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
@@ -1006,12 +1006,12 @@ class canvas {
                 break;
          }
           return $this;
-    } // fim filtrar
+    } // end filtrar
     
     
     /**  
-    Adiciona o melhor filtro para as imagens o sharpen | Jefferson Oliveira 
-    Usa GD image objects 
+    Adds the best filter to sharpen the images
+    Use GD image objects 
     **/
     
    
@@ -1032,21 +1032,21 @@ class canvas {
     
 
      /**
-      * retorna saída para tela ou arquivo
-      * @param String $destino caminho e nome do arquivo a serem criados
-      * @param Int $qualidade qualidade da imagem no caso de JPEG (0-100)
+      * return output to screen or file
+      * @param String $destino path and file name to be created
+      * @param Int $qualidade image quality in the case of JPEG (0-100)
       * @return void
       **/
      public function grava( $destino='', $qualidade = 100 )
      {
-          // dados do arquivo de destino
+          // target file data
           if ( $destino )
           {
                $pathinfo               = pathinfo( $destino );
                $dir_destino          = $pathinfo['dirname'];
                $extensao_destino     = strtolower( $pathinfo['extension'] );
 
-               // valida diretório
+               // validate directory
                if ( !is_dir( $dir_destino ) )
                {
                     trigger_error( 'Diretório de destino inválido ou inexistente', E_USER_ERROR );
@@ -1105,13 +1105,13 @@ class canvas {
           
      return $this;
 
-     } // fim grava
+     } // end grava
 
-} // fim da classe
+} // end of class
 
 
 //------------------------------------------------------------------------------
-// suporte para a manipulação de arquivos BMP
+// Support for handling BMP
 
 /*********************************************/
 /* Function: ImageCreateFromBMP              */

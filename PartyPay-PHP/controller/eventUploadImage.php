@@ -46,9 +46,9 @@ if ($_FILES['arquivo']['error'] != 0) {
 // Faz a verificação da extensão do arquivo
 $var = explode('.', $_FILES['arquivo']['name']);
 
-$extensao = strtolower(end($var));
+$extension = strtolower(end($var));
 
-if (array_search($extensao, $_UP['extensoes']) === false) {
+if (array_search($extension, $_UP['extensoes']) === false) {
 
     echo "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
 }
@@ -72,31 +72,31 @@ else {
 
 // Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
 
-        $nome_final = time() . '.jpg';
+        $finalName = time() . '.jpg';
     } else {
 
 // Mantém o nome original do arquivo
 
-        $nome_final = $_FILES['arquivo']['name'];
+        $finalName = $_FILES['arquivo']['name'];
     }
 
 
 
 // Depois verifica se é possível mover o arquivo para a pasta escolhida
 
-    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta'] . $nome_final)) {
+    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta'] . $finalName)) {
 
 
-        $evento->setImagem($_UP['pasta'] . $nome_final);
-        $thumb = new canvas($evento->getImagem());
+        $event->setImagem($_UP['pasta'] . $finalName);
+        $thumb = new canvas($event->getImagem());
 
-        $largura = 80;
-        $altura = 80;
+        $width = 80;
+        $heigth = 80;
 
 
-        $thumb->redimensiona($largura, $altura, 'proporcional');
-        $thumb->grava($_UP['pasta'] . "thumb" . $nome_final, 100);
-        $evento->setMiniatura($_UP['pasta'] . "thumb" . $nome_final);
+        $thumb->redimensiona($widht, $heigth, 'proporcional');
+        $thumb->grava($_UP['pasta'] . "thumb" . $finalName, 100);
+        $event->setMiniatura($_UP['pasta'] . "thumb" . $finalName);
     } else {
 
 // Não foi possível fazer o upload, provavelmente a pasta está incorreta

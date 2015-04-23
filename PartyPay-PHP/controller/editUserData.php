@@ -1,8 +1,8 @@
 <?php
 
-include '../model/Pessoa.php';
+include '../model/User.php';
 include '../tratamentoDeExcecao/ValidaCadastro.php';
-include 'gerarCodConfirmacao.php';
+include 'generateConfimationCode.php';
 
 /**
 *
@@ -12,19 +12,19 @@ include 'gerarCodConfirmacao.php';
 
 session_start();
 
-$firstName = addslashes($_POST['firstName']);
-$sobreNome = addslashes($_POST['lastName']);
-$sexo = addslashes($_POST['gender']);
-$cpf = addslashes($_POST['cpf']);
-$telefoneContato = addslashes($_POST['phone']);
+$userFirstName = addslashes($_POST['userFirstName']);
+$userLastName = addslashes($_POST['lastName']);
+$userSex = addslashes($_POST['userSex']);
+$userCpf = addslashes($_POST['userCpf']);
+$useruserPhone = addslashes($_POST['userPhone']);
 $id = $_SESSION['id'];
 
 $strList = "\\\'\"&\n\r<>";
-addcslashes($firstName, $strList);
+addcslashes($userFirstName, $strList);
 addcslashes($lastName, $strList);
-addcslashes($gender, $strList);
-addcslashes($cpf, $strList);
-addcslashes($phone, $strList);
+addcslashes($userSex, $strList);
+addcslashes($userCpf, $strList);
+addcslashes($userPhone, $strList);
 
 //Validação comentada para rodar no localhost
 //$validator= new ValidaCadastro();
@@ -33,34 +33,34 @@ addcslashes($phone, $strList);
 //$mensagem=$validator->msg;
 //echo "<script>alert('$mensagem');</script>";
 
-$codeConfirmation = generateCodConfimation();
-$user = new Pessoa();
+$confirmationCode = generateConfirmationCode();
+$user = new User();
 
-$user->setFirstName($firstName);
-$user->setLastName($lastName);
-$user->setGender($gender);
-$user->setCpf($cpf);
-$user->setPhone($phone);
+$user->setUserFirstName($userFirstName);
+$user->setUserLastName($lastName);
+$user->setUserSex($userSex);
+$user->setUserCpf($userCpf);
+$user->setUserPhone($userPhone);
 $user->setId($id);
 
-$user->setCodConfirmacao($codeConfirmation);
+$user->setConfirmationCode($confirmationCode);
 //$user->updateInfo("lastName", "lastName");
 
 $user->atualizar();
 
-unset($_SESSION['firstName']);
-unset($_SESSION['lastName']);
-unset($_SESSION['gender']);
-unset($_SESSION['cpf']);
-unset($_SESSION['phone']);
+unset($_SESSION['userFirstName']);
+unset($_SESSION['userLastName']);
+unset($_SESSION['userSex']);
+unset($_SESSION['userCpf']);
+unset($_SESSION['userPhone']);
 
-$_SESSION['firstName'] = $firstName;
-$_SESSION['lastName'] = $lastName;
-$_SESSION['gender'] = $gender;
-$_SESSION['cpf'] = $cpf;
-$_SESSION['phone'] = $phone;
+$_SESSION['userFirstName'] = $userFirstName;
+$_SESSION['userLastName'] = $lastName;
+$_SESSION['userSex'] = $userSex;
+$_SESSION['userCpf'] = $userCpf;
+$_SESSION['userPhone'] = $userPhone;
 
 echo "efetuado com sucesso " . $id;
-// header("Location:../controller/sendEmailConfirmation.php?e=".$_POST['email']."&cod=".$codeConfirmation);
-header("Location: ../editarPerson.php");
+// header("Location:../controller/sendEmailConfirmation.php?e=".$_POST['email']."&cod=".$confirmationCode);
+header("Location: ../editPerson.php");
 ?>

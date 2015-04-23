@@ -12,7 +12,7 @@
  *
  * @author Fagner-note
  */
-require_once '../model/DAC/PessoaDAC.php';
+require_once '../model/DAC/UserDAC.php';
 
 class ValidaCadastro {
 

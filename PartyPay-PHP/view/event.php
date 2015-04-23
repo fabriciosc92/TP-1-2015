@@ -16,21 +16,21 @@ $event = new Event();
 $eventId = $_GET['id'];
 $event->eventById($eventId);
 
-$eventName = $event->getName();
-$startingDate = $event->getStartingDate();
-$endingDate = $event->getEndingDate();
-$image = $event->getImage();
-$menPrice = $event->getMenPrice();
-$womenPrice = $event->getWomenPrice();
-$promoter = $event->getPromoter();
-$facebook = $event->getFacebookEventPage();
-$creationDate = $event->getCreationDate();
-$description = $event->getDescription();
-$ticketsLot = $event->getTicketsLot();
-$startingTime = $event->getStartingTime();
-$endingTime = $event->getEndingTime();
-$thumbnail = $event->getThumbnail();
-$ageRecommendation = $event->getAgeRecommendation();
+$eventName = $event->getEventName();
+$eventBeginDate = $event->getEventBeginDate();
+$eventEndDate = $event->getEventEndDate();
+$eventImage = $event->getEventImage();
+$masculineEventPrice = $event->getMasculineEventPrice();
+$femaleEventPrice = $event->getFemaleEventPrice();
+$eventOrganizer = $event->getEventOrganizer();
+$facebookEventPage = $event->getFacebookEventPage();
+$eventCreationDate = $event->getEventCriationDate();
+$eventDescription = $event->getEventDescription();
+$numberOfTickets = $event->getNumberOfTickets();
+$beginHour = $event->getBeginHour();
+$endHour = $event->getEndHour();
+$eventMiniature = $event->getEventMiniature();
+$ageClassification = $event->getAgeClassification();
 ?>
 
 <div class="container">

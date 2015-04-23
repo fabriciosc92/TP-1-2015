@@ -13,12 +13,12 @@ session_start();
 
 if (isset($_SESSION['id'])) {
 
-    $firstName = $_SESSION['firstName'];
-    $phoneNumber = $_SESSION['phoneNumber'];
-    $surName = $_SESSION['surName'];
-    $email = $_SESSION['email'];
-    $gender = $_SESSION['gender'];
-    $idNumber = $_SESSION['idNumber'];
+    $userFirstName = $_SESSION['userFirstName'];
+    $userPhone = $_SESSION['userPhone'];
+    $userLastName = $_SESSION['userLastName'];
+    $userEmail = $_SESSION['userEmail'];
+    $userSex = $_SESSION['userSex'];
+    $id = $_SESSION['id'];
 	
 }
 ?>
@@ -59,7 +59,7 @@ if (isset($_SESSION['id'])) {
 							<div id="usuario" class="btn-group pull-right">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 									<?php 
-									echo "$firstName $surName"; 
+									echo "$userFirstName $userLastName"; 
 									?>
 									</button>
 									<span class="caret"></span>
@@ -83,7 +83,7 @@ if (isset($_SESSION['id'])) {
                     </div>
                     <div class="modal-body">
                         <form method="post" action="controller/doLogin.php" name="login_form">
-                            <p><input type="email" class="span3" name="email" id="email" placeholder="Email" required></p>
+                            <p><input type="userEmail" class="span3" name="userEmail" id="userEmail" placeholder="userEmail" required></p>
                             <p><input type="password" class="span3" name="password" placeholder="password" required></p>
                             <p><button type="submit" class="btn btn-primary">Entrar</button>
                                 <a href="#recuperarSenha" data-toggle="modal" onclick="$('#myModal').modal('hide')">Esqueci a senha</a>
@@ -102,9 +102,9 @@ if (isset($_SESSION['id'])) {
                         <h3>Login</h3>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="controller/SendEmailReset.php" name="login_form">
-                            <p>Email de recupera&ccedil;&atilde;o</p>
-                            <p><input type="text" class="span3" name="email" id="email" placeholder="Email" required></p>
+                        <form method="post" action="controller/SenduserEmailReset.php" name="login_form">
+                            <p>userEmail de recupera&ccedil;&atilde;o</p>
+                            <p><input type="text" class="span3" name="userEmail" id="userEmail" placeholder="userEmail" required></p>
                             <p><button type="submit" class="btn btn-primary">Enviar</button>
                             </p>
                         </form>
@@ -126,19 +126,19 @@ if (isset($_SESSION['id'])) {
                                 <div class="control-group">
                                     <label class="control-label" for="nome">Primeiro Nome</label>
                                     <div class="controls">
-                                        <input type="text" name="firstName" placeholder="Primeiro nome" required>
+                                        <input type="text" name="userFirstName" placeholder="Primeiro nome" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="nome">Sobrenome</label>
                                     <div class="controls">
-                                        <input type="text" name="surName" placeholder="Sobrenome" required>
+                                        <input type="text" name="userLastName" placeholder="Sobrenome" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="nome">email</label>
+                                    <label class="control-label" for="nome">userEmail</label>
                                     <div class="controls">
-                                        <input type="email" name="email" placeholder="email" required>
+                                        <input type="userEmail" name="userEmail" placeholder="userEmail" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -150,7 +150,7 @@ if (isset($_SESSION['id'])) {
                                 <div class="control-group">
                                     <label class="control-label" for="nome">Sexo</label>
                                     <div class="controls">
-                                        <select name="gender">
+                                        <select name="userSex">
                                             <option>Feminino</option>
                                             <option>Masculino</option>
                                         </select>
@@ -162,13 +162,13 @@ if (isset($_SESSION['id'])) {
                                 <div class="control-group">
                                     <label class="control-label" for="nome">CPF</label>
                                     <div class="controls">
-                                        <input type="text" id="cpf" name="idNumber" placeholder="CPF" required>
+                                        <input type="text" id="cpf" name="id" placeholder="CPF" required>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label" for="nome">Telefone de Contato</label>
                                     <div class="controls">
-                                        <input type="text" id="telefone" name="phoneNumber" placeholder="Telefone de Contato" required>
+                                        <input type="text" id="telefone" name="userPhone" placeholder="Telefone de Contato" required>
                                     </div>
                                 </div>
 

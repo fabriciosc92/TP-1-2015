@@ -2,36 +2,36 @@
 
 /**
  * Class name: EventDac
- * Class to connect Evento to the database.
+ * Class to connect event to the database.
  */
 class EventDac 
 {
 
-    // Inserts data from Evento into database.
-    public static function insertEventDAC(Evento $evento) 
+    // Inserts data from event into database.
+    public static function insertEventDAC(event $event) 
     {
         include_once 'connection.php';
-        $sql = "INSERT INTO `eventos`(`eventName`, 
+        $sql = "INSERT INTO `events`(`eventName`, 
             `eventBeginDate`, `eventEndDate`, `eventImage`,
-            `masculineEventPrice`, `femaleEventPrice`, `eventOrganizerID`,
+            `masculineEventPrice`, `femaleEventPrice`, `eventrganizerID`,
             `facebookEventPage`, `id`,
             `eventCriationDate`, `eventDescription`, `numberOfTickets`,
             `beginHour`, `endHour`, `eventMiniature`,`ageClassification`) VALUES ('";
-        $sql.=$evento->getEventName() . "','";
-        $sql.=$evento->getEventBeginDate() . "','";
-        $sql.=$evento->getEventEndDate() . "','";
-        $sql.=$evento->getEventImage() . "','";
-        $sql.=$evento->getMasculineEventPrice() . "','";
-        $sql.=$evento->getFemaleEventPrice() . "','";
-        $sql.=$evento->getEventOrganizer() . "','";
-        $sql.=$evento->getFacebookEventPage() . "', NULL,'";
-        $sql.=$evento->getEventCriationDate() . "','";
-        $sql.=$evento->getEventDescription() . "','";
-        $sql.=$evento->getNumberOfTickets() . "','";
-        $sql.=$evento->getBeginHour() . "','";
-        $sql.=$evento->getEndHour() . "','";
-        $sql.=$evento->getEventMiniature() . "','";
-        $sql.=$evento->getAgeClassification() . "');";
+        $sql.=$event->getEventName() . "','";
+        $sql.=$event->getEventBeginDate() . "','";
+        $sql.=$event->getEventEndDate() . "','";
+        $sql.=$event->getEventImage() . "','";
+        $sql.=$event->getMasculineEventPrice() . "','";
+        $sql.=$event->getFemaleEventPrice() . "','";
+        $sql.=$event->getEventOrganizer() . "','";
+        $sql.=$event->getFacebookEventPage() . "', NULL,'";
+        $sql.=$event->getEventCriationDate() . "','";
+        $sql.=$event->getEventDescription() . "','";
+        $sql.=$event->getNumberOfTickets() . "','";
+        $sql.=$event->getBeginHour() . "','";
+        $sql.=$event->getEndHour() . "','";
+        $sql.=$event->getEventMiniature() . "','";
+        $sql.=$event->getAgeClassification() . "');";
 
         mysql_query($sql) or die(mysql_error());
 
@@ -43,48 +43,48 @@ class EventDac
         return $mat['0'];
     }
 
-    // Update data in database from  Evento.
-    public static function updateInformationEventDAC($evento, $atributo, $atributoNovo) 
+    // Update data in database from  event.
+    public static function updateInformationEventDAC($event, $atributo, $atributoNovo) 
     {
         include_once 'connection.php';
-        $sql = "UPDATE `eventos` SET `$atributo`=$atributoNovo WHERE id=" . $evento->getId();
+        $sql = "UPDATE `events` SET `$atributo`=$atributoNovo WHERE id=" . $event->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($connection);
     }
 
     // deleteEventDAC data from database.
-    public static function deleteEventDAC($evento) 
+    public static function deleteEventDAC($event) 
     {
         include_once 'connection.php';
-        $sql = "deleteEventDAC FROM `eventos` WHERE id=" . $evento->getId();
+        $sql = "deleteEventDAC FROM `events` WHERE id=" . $event->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($connection);
     }
 
-    // Recover data from database to Evento.
-    public static function recoveryEventDAC($evento, $id) 
+    // Recover data from database to event.
+    public static function recoveryEventDAC($event, $id) 
     {
         include_once 'connection.php';
-        $sql = "SELECT * FROM eventos WHERE id=$id";
+        $sql = "SELECT * FROM events WHERE id=$id";
         $resultado = mysql_query($sql) or die(mysql_error());
         $row = mysql_fetch_array($resultado);
 
         if (mysql_num_rows($resultado) == 1) {
-            $evento->setEventName($row['eventName']);
-            $evento->setEventBeginDate($row['eventBeginDate']);
-            $evento->setEventEndDate($row['eventEndDate']);
-            $evento->setEventImage($row['eventImage']);
-            $evento->setMasculineEventPrice($row['masculineEventPrice']);
-            $evento->setFemaleEventPrice($row['femaleEventPrice']);
-            $evento->setEventOrganizer($row['eventOrganizerID']);
-            $evento->setFacebookEventPage($row['facebookEventPage']);
-            $evento->setEventCriationDate($row['eventCriationDate']);
-            $evento->setEventDescription($row['eventDescription']);
-            $evento->setNumberOfTickets($row['numberOfTickets']);
-            $evento->setBeginHour($row['beginHour']);
-            $evento->setEndHour($row['endHour']);
-            $evento->setEventMiniature($row['eventMiniature']);
-            $evento->setAgeClassification($row['ageClassification']);
+            $event->setEventName($row['eventName']);
+            $event->setEventBeginDate($row['eventBeginDate']);
+            $event->setEventEndDate($row['eventEndDate']);
+            $event->setEventImage($row['eventImage']);
+            $event->setMasculineEventPrice($row['masculineEventPrice']);
+            $event->setFemaleEventPrice($row['femaleEventPrice']);
+            $event->seteventrganizer($row['eventrganizerID']);
+            $event->setFacebookEventPage($row['facebookEventPage']);
+            $event->setEventCriationDate($row['eventCriationDate']);
+            $event->setEventDescription($row['eventDescription']);
+            $event->setNumberOfTickets($row['numberOfTickets']);
+            $event->setBeginHour($row['beginHour']);
+            $event->setEndHour($row['endHour']);
+            $event->setEventMiniature($row['eventMiniature']);
+            $event->setAgeClassification($row['ageClassification']);
 
             return 1;
         } else {

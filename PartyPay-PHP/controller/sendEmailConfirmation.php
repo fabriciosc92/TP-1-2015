@@ -1,6 +1,6 @@
 <?php
 
-include 'gerarCodConfirmacao.php';
+include 'generateConfirmationCode.php';
 /**
 * sendEmailConfirmation.php
 * This class controls emails confimation

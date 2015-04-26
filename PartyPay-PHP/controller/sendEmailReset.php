@@ -6,7 +6,7 @@
 *
 **/
 
-$user_email = $_POST['email']; // Receive input user e-mail
+$user_email = $_POST['userEmail']; // Receive input user e-mail
 
 $AcceptedChars = 'ghijklmABCEF0123456789'; // Test acceptable characteres
 $maxChars = strlen($AcceptedChars) - 1; // Test max acceptable characteres in user e-mail

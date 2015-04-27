@@ -521,14 +521,24 @@ class PHPMailer {
    * @access public
    */
   public static function ValidateAddress($address) {
-    if (function_exists('filter_var')) { //Introduced in PHP 5.2
-      if(filter_var($address, FILTER_VALIDATE_EMAIL) === FALSE) {
+
+    if (function_exists('filter_var')) 
+    { //Introduced in PHP 5.2
+      if(filter_var($address, FILTER_VALIDATE_EMAIL) === FALSE) 
+      {
         return false;
-      } else {
+      }
+      else 
+      {
         return true;
       }
-    } else {
-      return preg_match('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!\.)){0,61}[a-zA-Z0-9_-]?\.)+[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!$)){0,61}[a-zA-Z0-9_]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/', $address);
+    } 
+    else 
+    {
+      return preg_match('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*
+        [\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!\.))
+          {0,61}[a-zA-Z0-9_-]?\.)+[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!$)){0,61}[a-zA-Z0-9_]?)|
+      (?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/', $address);
     }
   }
 
@@ -649,41 +659,72 @@ class PHPMailer {
     $to = implode(', ', $toArr);
 
     $params = sprintf("-oi -f %s", $this->Sender);
-    if ($this->Sender != '' && strlen(ini_get('safe_mode'))< 1) {
+
+    if ($this->Sender != '' && strlen(ini_get('safe_mode'))< 1) 
+    {
       $old_from = ini_get('sendmail_from');
       ini_set('sendmail_from', $this->Sender);
-      if ($this->SingleTo === true && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+
+      if ($this->SingleTo === true && count($toArr) > 1) 
+      {
+        foreach ($toArr as $key => $val) 
+        {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
           $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
         }
-      } else {
+      } 
+      else 
+      {
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
         // implement call back function if it exists
         $isSent = ($rt == 1) ? 1 : 0;
         $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
       }
-    } else {
-      if ($this->SingleTo === true && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+    } 
+    else
+    {
+      if ($this->SingleTo === true && count($toArr) > 1) 
+      {
+        foreach ($toArr as $key => $val)
+         {
+
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
-          $isSent = ($rt == 1) ? 1 : 0;
+          if ($rt == 1) 
+          {
+               $isSent = 1;  
+          }
+          else
+          {
+               %isSent = 0;
+          }
+        
           $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
         }
       } else {
+
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header);
         // implement call back function if it exists
-        $isSent = ($rt == 1) ? 1 : 0;
+        if ($rt == 1) 
+          {
+               $isSent = 1;  
+          }
+          else
+          {
+               %isSent = 0;
+          }
+        
         $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
       }
     }
-    if (isset($old_from)) {
+    if (isset($old_from)) 
+    {
       ini_set('sendmail_from', $old_from);
     }
-    if(!$rt) {
+    if(!$rt) 
+    {
       throw new phpmailerException($this->Lang('instantiate'), self::STOP_CRITICAL);
     }
     return true;
@@ -815,7 +856,8 @@ class PHPMailer {
             }
           }
         }
-        $index++;
+
+        $index = $index + 1;
         if (!$connection) {
           throw new phpmailerException($this->Lang('connect_host'));
         }
@@ -942,22 +984,35 @@ class PHPMailer {
 
     $line = explode($this->LE, $message);
     $message = '';
-    for ($i=0 ;$i < count($line); $i++) {
+
+    for ($i=0 ;$i < count($line); $i = $i + 1) 
+    {
       $line_part = explode(' ', $line[$i]);
       $buf = '';
-      for ($e = 0; $e<count($line_part); $e++) {
+
+      for ($e = 0; $e<count($line_part); $e = $e + 1) 
+      {
         $word = $line_part[$e];
-        if ($qp_mode and (strlen($word) > $length)) {
+
+        if ($qp_mode and (strlen($word) > $length)) 
+        {
           $space_left = $length - strlen($buf) - 1;
-          if ($e != 0) {
-            if ($space_left > 20) {
+          if ($e != 0) 
+          {
+            if ($space_left > 20) 
+            {
               $len = $space_left;
-              if ($is_utf8) {
+              if ($is_utf8) 
+              {
                 $len = $this->UTF8CharBoundary($word, $len);
-              } elseif (substr($word, $len - 1, 1) == "=") {
-                $len--;
-              } elseif (substr($word, $len - 2, 1) == "=") {
-                $len -= 2;
+              } 
+              elseif (substr($word, $len - 1, 1) == "=") 
+              {
+                $len = $len - 1;
+              } 
+              elseif (substr($word, $len - 2, 1) == "=") 
+              {
+                $len = $len - 2;
               }
               $part = substr($word, 0, $len);
               $word = substr($word, $len);
@@ -968,14 +1023,21 @@ class PHPMailer {
             }
             $buf = '';
           }
-          while (strlen($word) > 0) {
+          while (strlen($word) > 0) 
+          {
             $len = $length;
-            if ($is_utf8) {
+
+            if ($is_utf8)
+            {
               $len = $this->UTF8CharBoundary($word, $len);
-            } elseif (substr($word, $len - 1, 1) == "=") {
-              $len--;
-            } elseif (substr($word, $len - 2, 1) == "=") {
-              $len -= 2;
+            }
+            elseif (substr($word, $len - 1, 1) == "=") 
+            {
+              $len = $len -1;
+            } 
+            elseif (substr($word, $len - 2, 1) == "=") 
+            {
+              $len = $len - 2;
             }
             $part = substr($word, 0, $len);
             $word = substr($word, $len);
@@ -1217,7 +1279,8 @@ class PHPMailer {
         break;
       case 'alt_attachments':
         $body .= sprintf("--%s%s", $this->boundary[1], $this->LE);
-        $body .= sprintf("Content-Type: %s;%s" . "\tboundary=\"%s\"%s", 'multipart/alternative', $this->LE, $this->boundary[2], $this->LE.$this->LE);
+        $body .= sprintf("Content-Type: %s;%s" . "\tboundary=\"%s\"%s", 'multipart/alternative',
+         $this->LE, $this->boundary[2], $this->LE.$this->LE);
         $body .= $this->GetBoundary($this->boundary[2], '', 'text/plain', '') . $this->LE; // Create text body
         $body .= $this->EncodeString($this->AltBody, $this->Encoding);
         $body .= $this->LE.$this->LE;
@@ -1262,14 +1325,29 @@ class PHPMailer {
    */
   private function GetBoundary($boundary, $charSet, $contentType, $encoding) {
     $result = '';
-    if($charSet == '') {
+    if($charSet == '') 
+    {
       $charSet = $this->CharSet;
     }
-    if($contentType == '') {
+    else
+    {
+
+    }
+    if($contentType == '') 
+    {
       $contentType = $this->ContentType;
     }
-    if($encoding == '') {
+    else
+    {
+
+    }
+    if($encoding == '') 
+    {
       $encoding = $this->Encoding;
+    }
+    else 
+    {
+
     }
     $result .= $this->TextLine('--' . $boundary);
     $result .= sprintf("Content-Type: %s; charset = \"%s\"", $contentType, $charSet);
@@ -2014,8 +2092,11 @@ class PHPMailer {
           $mimeType  = self::_mime_types($ext);
           if ( strlen($basedir) > 1 && substr($basedir,-1) != '/') { $basedir .= '/'; }
           if ( strlen($directory) > 1 && substr($directory,-1) != '/') { $directory .= '/'; }
-          if ( $this->AddEmbeddedImage($basedir.$directory.$filename, md5($filename), $filename, 'base64',$mimeType) ) {
-            $message = preg_replace("/".$images[1][$i]."=\"".preg_quote($url, '/')."\"/Ui", $images[1][$i]."=\"".$cid."\"", $message);
+          if ( $this->AddEmbeddedImage($basedir.$directory.$filename, md5($filename), $filename,
+           'base64',$mimeType) ) 
+          {
+            $message = preg_replace("/".$images[1][$i]."=\"".preg_quote($url, '/')."\"/Ui",
+             $images[1][$i]."=\"".$cid."\"", $message);
           }
         }
       }

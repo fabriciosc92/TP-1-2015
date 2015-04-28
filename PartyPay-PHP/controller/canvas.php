@@ -346,12 +346,21 @@ class canvas {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_largura ) ) / 100;
                $this->nova_largura          = round( $this->largura * $porcentagem );
           }
+          else
+          {
+
+          }
           // altura %
           $pos = strpos( $this->nova_altura, '%' );
+
           if( $pos !== false && $pos > 0 )
           {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_altura ) ) / 100;
                $this->nova_altura          = $this->altura * $porcentagem;
+          }
+          else
+          {
+
           }
 
           // define se só passou nova largura ou altura
@@ -449,7 +458,8 @@ class canvas {
           if ( ($this->largura / $this->nova_largura ) > ( $this->altura / $this->nova_altura ) )
           {
               $fator = $this->largura / $this->nova_largura;
-          } else 
+          } 
+          else 
           {
               $fator = $this->altura / $this->nova_altura;
           }
@@ -657,7 +667,7 @@ class canvas {
           // vertical
           if ( 'v' == $tipo )
           {
-               for ( $y = 0; $y < $h; $y++ )
+               for ( $y = 0; $y < $h; $y = $y + 1 )
                {
                     imagecopy( $this->img_temp, $this->img, 0, $y, 0, $h - $y - 1, $w, 1 );
                }
@@ -665,7 +675,7 @@ class canvas {
           // horizontal
           elseif ( 'h' == $tipo )
           {
-               for ( $x = 0; $x < $w; $x++ )
+               for ( $x = 0; $x < $w; $x = $x + 1 )
                {
                     imagecopy( $this->img_temp, $this->img, $x, 0, $w - $x - 1, 0, 1, $h );
                }
@@ -710,7 +720,8 @@ class canvas {
       * @param String $fonte nome da fonte truetype a ser utilizada
       * @return void
       **/
-     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', $truetype = false, $fonte = '' )
+     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', $
+        truetype = false, $fonte = '' )
      {
           $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
 
@@ -973,7 +984,7 @@ class canvas {
              case 'blur':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_GAUSSIAN_BLUR );
                     }
@@ -986,7 +997,7 @@ class canvas {
             case 'blur2':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SELECTIVE_BLUR );
                     }
@@ -1011,7 +1022,7 @@ class canvas {
             case 'edge':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EDGEDETECT );
                     }
@@ -1024,7 +1035,7 @@ class canvas {
             case 'emboss':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EMBOSS );
                     }
@@ -1040,7 +1051,7 @@ class canvas {
             case 'ruido':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_MEAN_REMOVAL );
                     }
@@ -1053,7 +1064,7 @@ class canvas {
             case 'suave':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SMOOTH, $arg1 );
                     }
@@ -1067,7 +1078,7 @@ class canvas {
             case 'pixel':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_PIXELATE, $arg1, $arg2 );
                     }
@@ -1198,18 +1209,41 @@ class canvas {
 
 function imagecreatefrombmp($filename) {
  //Ouverture du fichier en mode binaire
-   if (! $f1 = fopen($filename,"rb")) return FALSE;
+   if (! $f1 = fopen($filename,"rb")) 
+   {
+        return FALSE;
+   }
+   else
+   {
+
+   }
+    
 
  //1 : Chargement des ent?tes FICHIER
    $FILE = unpack("vfile_type/Vfile_size/Vreserved/Vbitmap_offset", fread($f1,14));
-   if ($FILE['file_type'] != 19778) return FALSE;
+   if ($FILE['file_type'] != 19778)
+   {
+        return FALSE;
+   }
+   else
+   {
+
+   } 
 
  //2 : Chargement des ent?tes BMP
    $BMP = unpack('Vheader_size/Vwidth/Vheight/vplanes/vbits_per_pixel'.
                      '/Vcompression/Vsize_bitmap/Vhoriz_resolution'.
                      '/Vvert_resolution/Vcolors_used/Vcolors_important', fread($f1,40));
    $BMP['colors'] = pow(2,$BMP['bits_per_pixel']);
-   if ($BMP['size_bitmap'] == 0) $BMP['size_bitmap'] = $FILE['file_size'] - $FILE['bitmap_offset'];
+   if ($BMP['size_bitmap'] == 0)
+   {
+        $BMP['size_bitmap'] = $FILE['file_size'] - $FILE['bitmap_offset'];
+   }
+   else
+   {
+
+   }
+
    $BMP['bytes_per_pixel'] = $BMP['bits_per_pixel']/8;
    $BMP['bytes_per_pixel2'] = ceil($BMP['bytes_per_pixel']);
    $BMP['decal'] = ($BMP['width']*$BMP['bytes_per_pixel']/4);
@@ -1222,6 +1256,10 @@ function imagecreatefrombmp($filename) {
    if ($BMP['colors'] < 16777216)
    {
      $PALETTE = unpack('V'.$BMP['colors'], fread($f1,$BMP['colors']*4));
+   }
+   else
+   {
+
    }
 
  //4 : Cr?ation de l'image
@@ -1237,7 +1275,9 @@ function imagecreatefrombmp($filename) {
      while ($X < $BMP['width'])
      {
       if ($BMP['bits_per_pixel'] == 24)
+      {
           $COLOR = @unpack("V",substr($IMG,$P,3).$VIDE);
+      }
       elseif ($BMP['bits_per_pixel'] == 16)
       {
           $COLOR = @unpack("n",substr($IMG,$P,2));
@@ -1257,24 +1297,52 @@ function imagecreatefrombmp($filename) {
       elseif ($BMP['bits_per_pixel'] == 1)
       {
           $COLOR = @unpack("n",$VIDE.substr($IMG,floor($P),1));
-          if     (($P*8)%8 == 0) $COLOR[1] =  $COLOR[1]          >>7;
-          elseif (($P*8)%8 == 1) $COLOR[1] = ($COLOR[1] & 0x40)>>6;
-          elseif (($P*8)%8 == 2) $COLOR[1] = ($COLOR[1] & 0x20)>>5;
-          elseif (($P*8)%8 == 3) $COLOR[1] = ($COLOR[1] & 0x10)>>4;
-          elseif (($P*8)%8 == 4) $COLOR[1] = ($COLOR[1] & 0x8)>>3;
-          elseif (($P*8)%8 == 5) $COLOR[1] = ($COLOR[1] & 0x4)>>2;
-          elseif (($P*8)%8 == 6) $COLOR[1] = ($COLOR[1] & 0x2)>>1;
-          elseif (($P*8)%8 == 7) $COLOR[1] = ($COLOR[1] & 0x1);
+          if     (($P*8)%8 == 0) 
+          {
+            $COLOR[1] =  $COLOR[1] >>7;
+          }
+          elseif (($P*8)%8 == 1)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x40)>>6;
+          } 
+          elseif (($P*8)%8 == 2) 
+          {
+            $COLOR[1] = ($COLOR[1] & 0x20)>>5; 
+          }
+          elseif (($P*8)%8 == 3)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x10)>>4;
+          } 
+          elseif (($P*8)%8 == 4)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x8)>>3;
+          }
+          elseif (($P*8)%8 == 5)
+          {
+             $COLOR[1] = ($COLOR[1] & 0x4)>>2;
+          }
+          elseif (($P*8)%8 == 6)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x2)>>1;
+          } 
+          elseif (($P*8)%8 == 7)
+          {
+             $COLOR[1] = ($COLOR[1] & 0x1);
+          }
+
           $COLOR[1] = $PALETTE[$COLOR[1]+1];
       }
       else
-          return FALSE;
+      {
+        return FALSE;
+      }    
+
       imagesetpixel($res,$X,$Y,$COLOR[1]);
-      $X++;
-      $P += $BMP['bytes_per_pixel'];
+      $X = $X + 1;
+      $P = $P + $BMP['bytes_per_pixel'];
      }
-     $Y--;
-     $P+=$BMP['decal'];
+     $Y = $Y - 1;
+     $P = $P + $BMP['decal'];
    }
 
  //Fermeture du fichier

@@ -146,8 +146,16 @@ class canvas {
      {
           // imagem de origem
           $pathinfo            = pathinfo( $this->origem );
-          $this->extensao = array_key_exists('extension', $pathinfo) ? strtolower($pathinfo['extension'])
-           : strtolower(str_replace('image/', '', $obj['mime']));
+          
+          if(array_key_exists('extension', $pathinfo))
+          {
+                $this->extensao = strtolower($pathinfo['extension']);
+          }
+          else
+          {
+                $this->extensao = strtolower(str_replace('image/', '', $obj['mime']));
+          }
+             
           $this->arquivo       = $pathinfo['basename'];
           $this->diretorio     = $pathinfo['dirname'];
      } // fim dadosArquivo
@@ -469,6 +477,7 @@ class canvas {
           // copia com o novo tamanho, centralizando
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
+          
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
             $this->largura, $this->altura );
           $this->img     = $this->img_temp;
@@ -720,8 +729,8 @@ class canvas {
       * @param String $fonte nome da fonte truetype a ser utilizada
       * @return void
       **/
-     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', $
-        truetype = false, $fonte = '' )
+     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', 
+        $truetype = false, $fonte = '' )
      {
           $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
 
@@ -784,7 +793,7 @@ class canvas {
 
      public function color_background($cor_fundo)
      {
-        $cor_fundo     = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+        $cor_fundo = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
      }
 
     /**
@@ -844,6 +853,8 @@ class canvas {
           return array( $x, $y );
      } // fim calculaPosicaoLegenda
 
+     const MAX_TRANSPARENCE_QUALITY = 100;
+
      /**
       * adiciona imagem de marca d'água
       * @param String $imagem caminho da imagem de marca d'água
@@ -855,7 +866,7 @@ class canvas {
       *                 -> o alfa nativo do PNG
       * @return Object instância atual do objeto, para métodos encadeados
       **/
-     public function marca( $imagem, $x = 0, $y = 0, $alfa = 100 )
+     public function marca( $imagem, $x = 0, $y = 0, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
           // cria imagem temporária para merge
           if ( $imagem ) {
@@ -912,7 +923,7 @@ class canvas {
       * @param Int $alfa valor para transparência (0-100)
       * @return void
       **/
-     private function marcaFixa( $imagem, $posicao, $alfa = 100 )
+     private function marcaFixa( $imagem, $posicao, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
 
           // dimensões da marca d'água
@@ -1116,6 +1127,7 @@ class canvas {
         return $this;
     }   
     
+    const MAX_IMAGE_QUALITY = 100;
 
      /**
       * retorna saída para tela ou arquivo
@@ -1123,7 +1135,7 @@ class canvas {
       * @param Int $qualidade qualidade da imagem no caso de JPEG (0-100)
       * @return void
       **/
-     public function grava( $destino='', $qualidade = 100 )
+     public function grava( $destino='', $qualidade = MAX_IMAGE_QUALITY )
      {
           // dados do arquivo de destino
           if ( $destino )

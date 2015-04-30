@@ -605,42 +605,76 @@ class PHPMailer {
    * @access protected
    * @return bool
    */
-  protected function SendmailSend($header, $body) {
-    if ($this->Sender != '') {
+  protected function SendmailSend($header, $body) 
+  {
+    if ($this->Sender != '') 
+    {
       $sendmail = sprintf("%s -oi -f %s -t", escapeshellcmd($this->Sendmail), escapeshellarg($this->Sender));
-    } else {
+    } 
+    else 
+    {
       $sendmail = sprintf("%s -oi -t", escapeshellcmd($this->Sendmail));
     }
-    if ($this->SingleTo === true) {
-      foreach ($this->SingleToArray as $key => $val) {
-        if(!@$mail = popen($sendmail, 'w')) {
+    if ($this->SingleTo === true) 
+    {
+      foreach ($this->SingleToArray as $key => $val)
+      {
+        if(!@$mail = popen($sendmail, 'w')) 
+        {
           throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
         }
+
         fputs($mail, "To: " . $val . "\n");
         fputs($mail, $header);
         fputs($mail, $body);
         $result = pclose($mail);
+        
         // implement call back function if it exists
-        $isSent = ($result == 0) ? 1 : 0;
+        if($result == 0)
+        {
+          $isSent = 1;
+        }
+        else
+        {
+          $isSent = 0;
+        }
+       
         $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
-        if($result != 0) {
+
+        if($result != 0) 
+        {
           throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
         }
       }
-    } else {
-      if(!@$mail = popen($sendmail, 'w')) {
+    } 
+    else 
+    {
+      if(!@$mail = popen($sendmail, 'w')) 
+      {
         throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
       }
       fputs($mail, $header);
       fputs($mail, $body);
       $result = pclose($mail);
+
       // implement call back function if it exists
-      $isSent = ($result == 0) ? 1 : 0;
+       if($result == 0)
+        {
+          $isSent = 1;
+        }
+        else
+        {
+          $isSent = 0;
+        }
+
       $this->doCallback($isSent,$this->to,$this->cc,$this->bcc,$this->Subject,$body);
-      if($result != 0) {
+
+      if($result != 0) 
+      {
         throw new phpmailerException($this->Lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
       }
     }
+
     return true;
   }
 
@@ -678,8 +712,17 @@ class PHPMailer {
       else 
       {
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+
         // implement call back function if it exists
-        $isSent = ($rt == 1) ? 1 : 0;
+        if($rt==1)
+        {
+          $isSent = 1;
+        }
+        else
+        {
+          $isSent = 0;
+        }
+        
         $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
       }
     } 
@@ -698,7 +741,7 @@ class PHPMailer {
           }
           else
           {
-               %isSent = 0;
+               $isSent = 0;
           }
         
           $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
@@ -740,64 +783,96 @@ class PHPMailer {
    * @return bool
    */
   protected function SmtpSend($header, $body) {
+
     require_once $this->PluginDir . 'class.smtp.php';
     $bad_rcpt = array();
 
-    if(!$this->SmtpConnect()) {
+    if(!$this->SmtpConnect()) 
+    {
       throw new phpmailerException($this->Lang('smtp_connect_failed'), self::STOP_CRITICAL);
     }
-    $smtp_from = ($this->Sender == '') ? $this->From : $this->Sender;
-    if(!$this->smtp->Mail($smtp_from)) {
+
+    if($this->Sender == '')
+    {
+      $smtp_from = $this->From;
+    }
+    else
+    {
+      $smtp_from = $this->Sender;
+    }
+    
+    if(!$this->smtp->Mail($smtp_from)) 
+    {
       throw new phpmailerException($this->Lang('from_failed') . $smtp_from, self::STOP_CRITICAL);
     }
 
     // Attempt to send attach all recipients
-    foreach($this->to as $to) {
+    foreach($this->to as $to) 
+    {
       if (!$this->smtp->Recipient($to[0])) {
         $bad_rcpt[] = $to[0];
+
         // implement call back function if it exists
         $isSent = 0;
         $this->doCallback($isSent,$to[0],'','',$this->Subject,$body);
-      } else {
+      }
+      else 
+      {
+
         // implement call back function if it exists
         $isSent = 1;
         $this->doCallback($isSent,$to[0],'','',$this->Subject,$body);
       }
     }
-    foreach($this->cc as $cc) {
-      if (!$this->smtp->Recipient($cc[0])) {
+
+    foreach($this->cc as $cc) 
+    {
+      if (!$this->smtp->Recipient($cc[0])) 
+      {
         $bad_rcpt[] = $cc[0];
         // implement call back function if it exists
         $isSent = 0;
         $this->doCallback($isSent,'',$cc[0],'',$this->Subject,$body);
-      } else {
+      } 
+      else 
+      {
         // implement call back function if it exists
         $isSent = 1;
         $this->doCallback($isSent,'',$cc[0],'',$this->Subject,$body);
       }
     }
-    foreach($this->bcc as $bcc) {
-      if (!$this->smtp->Recipient($bcc[0])) {
+    foreach($this->bcc as $bcc) 
+    {
+      if (!$this->smtp->Recipient($bcc[0])) 
+      {
         $bad_rcpt[] = $bcc[0];
+
         // implement call back function if it exists
         $isSent = 0;
         $this->doCallback($isSent,'','',$bcc[0],$this->Subject,$body);
-      } else {
+      } 
+      else 
+      {
         // implement call back function if it exists
         $isSent = 1;
         $this->doCallback($isSent,'','',$bcc[0],$this->Subject,$body);
       }
     }
 
+    if (count($bad_rcpt) > 0 ) 
+    { 
 
-    if (count($bad_rcpt) > 0 ) { //Create error message for any bad addresses
+      //Create error message for any bad addresses
       $badaddresses = implode(', ', $bad_rcpt);
       throw new phpmailerException($this->Lang('recipients_failed') . $badaddresses);
     }
-    if(!$this->smtp->Data($header . $body)) {
+
+    if(!$this->smtp->Data($header . $body)) 
+    {
       throw new phpmailerException($this->Lang('data_not_accepted'), self::STOP_CRITICAL);
     }
-    if($this->SMTPKeepAlive == true) {
+    if($this->SMTPKeepAlive == true) 
+    {
       $this->smtp->Reset();
     }
     return true;
@@ -1831,7 +1906,8 @@ class PHPMailer {
    * @param string $type File extension (MIME) type.
    * @return void
    */
-  public function AddStringAttachment($string, $filename, $encoding = 'base64', $type = 'application/octet-stream') {
+  public function AddStringAttachment($string, $filename, $encoding = 'base64', 
+    $type = 'application/octet-stream') {
     // Append to $attachment array
     $this->attachment[] = array(
       0 => $string,
@@ -1858,7 +1934,8 @@ class PHPMailer {
    * @param string $type File extension (MIME) type.
    * @return bool
    */
-  public function AddEmbeddedImage($path, $cid, $name = '', $encoding = 'base64', $type = 'application/octet-stream') {
+  public function AddEmbeddedImage($path, $cid, $name = '', $encoding = 'base64', 
+    $type = 'application/octet-stream') {
 
     if ( !@is_file($path) ) {
       $this->SetError($this->Lang('file_access') . $path);
@@ -2272,17 +2349,24 @@ class PHPMailer {
    * @param string $key_filename Parameter File Name
    * @param string $key_pass Password for private key
    */
-  public function DKIM_QP($txt) {
+  public function DKIM_QP($txt) 
+  {
     $tmp="";
     $line="";
-    for ($i=0;$i<strlen($txt);$i++) {
+
+    for ($i=0;$i<strlen($txt);$i = $i + 1) 
+    {
       $ord=ord($txt[$i]);
-      if ( ((0x21 <= $ord) && ($ord <= 0x3A)) || $ord == 0x3C || ((0x3E <= $ord) && ($ord <= 0x7E)) ) {
+      if ( ((0x21 <= $ord) && ($ord <= 0x3A)) || $ord == 0x3C || ((0x3E <= $ord) && ($ord <= 0x7E)) ) 
+      {
         $line.=$txt[$i];
-      } else {
+      } 
+      else 
+      {
         $line.="=".sprintf("%02X",$ord);
       }
     }
+    
     return $line;
   }
 

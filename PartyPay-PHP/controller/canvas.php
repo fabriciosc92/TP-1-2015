@@ -63,14 +63,17 @@ class canvas {
      * Reseta variáveis para poder reutilizar objeto em encadeamentos longos
      * @return void
      **/
-     public function resetar(){
-            
-        $this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
+     public function resetar()
+     {
+        
+        $reset_variables = $this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
         $this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
         $this->pos_y = $this->formato = $this->extensao = $this->tamanho = $this->arquivo = 
-        $this->diretorio = $this->posicao_crop = NULL;
+        $this->diretorio = $this->posicao_crop;
+
+        $reset_variables = NULL;
     
-            $this->rgb( 255, 255, 255 );
+        $this->rgb( 255, 255, 255 );
      }// fim resetar
      
 
@@ -209,6 +212,7 @@ class canvas {
           $this->origem = $url;
           $pathinfo = pathinfo( $this->origem );
           $this->extensao = strtolower( $pathinfo['extension'] );
+
           switch( $this->extensao )
           {
                case 'jpg':
@@ -227,10 +231,12 @@ class canvas {
                default:
                     break;
      }
-          $this->criaImagem();
-     $this->largura     = imagesx( $this->img );
-          $this->altura     = imagesy( $this->img );
-          return $this;
+
+        $this->criaImagem();
+        $this->largura     = imagesx( $this->img );
+        $this->altura     = imagesy( $this->img );
+
+     return $this;
      } // fim carregaUrl
 
      /**
@@ -268,9 +274,9 @@ class canvas {
       * @param Valores R, G e B
       * @return Object instância atual do objeto, para métodos encadeados
       **/
-     public function rgb( $r, $g, $b )
+     public function rgb( $red, $green, $blue )
      {
-          $this->rgb = array( $r, $g, $b );
+          $this->rgb = array( $red, $green, $blue );
           return $this;
      } // fim rgb
 
@@ -477,7 +483,7 @@ class canvas {
           // copia com o novo tamanho, centralizando
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
-          
+
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
             $this->largura, $this->altura );
           $this->img     = $this->img_temp;
@@ -854,6 +860,7 @@ class canvas {
      } // fim calculaPosicaoLegenda
 
      const MAX_TRANSPARENCE_QUALITY = 100;
+     const LOWER_TRANSPARENCE_QUALITY = 0;
 
      /**
       * adiciona imagem de marca d'água
@@ -901,13 +908,19 @@ class canvas {
           {
                return false;
           }
+
           // dimensões
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
+
           // retorna imagens com marca d'água
-          if ( is_numeric( $alfa ) && ( ( $alfa > 0 ) && ( $alfa < 100 ) ) ) {
+          if ( is_numeric( $alfa ) && ( ( $alfa > LOWER_TRANSPARENCE_QUALITY ) && 
+            ( $alfa < MAX_TRANSPARENCE_QUALITY ) ) ) 
+          {
                imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
-          } else {
+          } 
+          else 
+          {
                imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
           }
           return $this;

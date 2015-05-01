@@ -13,7 +13,7 @@ class EventoDAC
         include_once 'conexao.php';
         $sql = "INSERT INTO `eventos`(`nome`, 
             `dataInicio`, `dataTermino`, `imagem`,
-            `precoMasc`, `precoFem`, `organizadorID`,
+            `precoMasc`, `precoFem`, `organizadorId`,
             `facebookEventPage`, `id`,
             `dataCriacao`, `descricao`, `numeroIngressos`,
             `horaInicio`, `horaTermino`, `miniatura`,`classificacao`) VALUES ('";

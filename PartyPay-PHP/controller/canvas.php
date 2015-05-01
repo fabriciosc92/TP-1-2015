@@ -9,7 +9,7 @@
 */
 
 class canvas {
-	
+    
     /**
      * Variáveis para armazenamento de arquivos/imgs
      **/
@@ -63,14 +63,17 @@ class canvas {
      * Reseta variáveis para poder reutilizar objeto em encadeamentos longos
      * @return void
      **/
-     public function resetar(){
-			
-		$this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
-		$this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
-		$this->pos_y = $this->formato = $this->extensao = $this->tamanho = $this->arquivo = 
-		$this->diretorio = $this->posicao_crop = NULL;
-	
-	    	$this->rgb( 255, 255, 255 );
+     public function resetar()
+     {
+        
+        $reset_variables = $this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
+        $this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
+        $this->pos_y = $this->formato = $this->extensao = $this->tamanho = $this->arquivo = 
+        $this->diretorio = $this->posicao_crop;
+
+        $reset_variables = NULL;
+    
+        $this->rgb( 255, 255, 255 );
      }// fim resetar
      
 
@@ -146,7 +149,16 @@ class canvas {
      {
           // imagem de origem
           $pathinfo            = pathinfo( $this->origem );
-          $this->extensao = array_key_exists('extension', $pathinfo) ? strtolower($pathinfo['extension']) : strtolower(str_replace('image/', '', $obj['mime']));
+          
+          if(array_key_exists('extension', $pathinfo))
+          {
+                $this->extensao = strtolower($pathinfo['extension']);
+          }
+          else
+          {
+                $this->extensao = strtolower(str_replace('image/', '', $obj['mime']));
+          }
+             
           $this->arquivo       = $pathinfo['basename'];
           $this->diretorio     = $pathinfo['dirname'];
      } // fim dadosArquivo
@@ -181,7 +193,9 @@ class canvas {
           $this->largura     = $largura;
           $this->altura     = $altura;
           $this->img = imagecreatetruecolor( $this->largura, $this->altura );
-          $cor_fundo = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+          
+          $cor_fundo = color_background();
+
           imagefill( $this->img, 0, 0, $cor_fundo );
           $this->extensao = 'jpg';
           return $this;
@@ -198,6 +212,7 @@ class canvas {
           $this->origem = $url;
           $pathinfo = pathinfo( $this->origem );
           $this->extensao = strtolower( $pathinfo['extension'] );
+
           switch( $this->extensao )
           {
                case 'jpg':
@@ -216,10 +231,12 @@ class canvas {
                default:
                     break;
      }
-          $this->criaImagem();
-     $this->largura     = imagesx( $this->img );
-          $this->altura     = imagesy( $this->img );
-          return $this;
+
+        $this->criaImagem();
+        $this->largura     = imagesx( $this->img );
+        $this->altura     = imagesy( $this->img );
+
+     return $this;
      } // fim carregaUrl
 
      /**
@@ -257,9 +274,9 @@ class canvas {
       * @param Valores R, G e B
       * @return Object instância atual do objeto, para métodos encadeados
       **/
-     public function rgb( $r, $g, $b )
+     public function rgb( $red, $green, $blue )
      {
-          $this->rgb = array( $r, $g, $b );
+          $this->rgb = array( $red, $green, $blue );
           return $this;
      } // fim rgb
 
@@ -272,7 +289,16 @@ class canvas {
      {
           $cor = str_replace( '#', '', $cor );
 
-          if( strlen( $cor ) == 3 ) $cor .= $cor; // #fff, #000 etc.
+          if( strlen( $cor ) == 3 ) 
+          {
+            
+            $cor .= $cor; // #fff, #000 etc.
+
+          } 
+          else 
+          {
+
+          }
 
           $this->rgb = array(
             hexdec( substr( $cor, 0, 2 ) ),
@@ -285,17 +311,27 @@ class canvas {
      /**
       * Armazena posições x e y para crop
       * @param Int x - posicao x do crop
-			* @param Int y - posicao y do crop
-			* @param Int w - width  - larguraOrigem (by OctaAugusto)
-			* @param Int h - height - alturaOrigem (by OctaAugusto)
+            * @param Int y - posicao y do crop
+            * @param Int w - width  - larguraOrigem (by OctaAugusto)
+            * @param Int h - height - alturaOrigem (by OctaAugusto)
       * @return Object instância atual do objeto, para métodos encadeados
       **/
      public function posicaoCrop( $x, $y, $w=0, $h=0 )
      {
           // sem largura ou altura setada manualmente, pega original da imagem
-		  		if(!$w) $w = $this->largura;
-		  		if(!$h) $h = $this->altura;
-		  
+                if(!$w) 
+                {
+                    $w = $this->largura;
+                } 
+                elseif(!$h) 
+                {
+                    $h = $this->altura;
+                }
+                else
+                {
+
+                }
+          
           $this->posicao_crop = array( $x, $y, $w, $h );
 
           return $this;
@@ -318,17 +354,27 @@ class canvas {
           // verifica se passou altura ou largura como porcentagem
           // largura %
           $pos = strpos( $this->nova_largura, '%' );
+
           if( $pos !== false && $pos > 0 )
           {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_largura ) ) / 100;
                $this->nova_largura          = round( $this->largura * $porcentagem );
           }
+          else
+          {
+
+          }
           // altura %
           $pos = strpos( $this->nova_altura, '%' );
+
           if( $pos !== false && $pos > 0 )
           {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_altura ) ) / 100;
                $this->nova_altura          = $this->altura * $porcentagem;
+          }
+          else
+          {
+
           }
 
           // define se só passou nova largura ou altura
@@ -346,6 +392,10 @@ class canvas {
           {
                $this->nova_altura = $this->altura / ( $this->largura/$this->nova_largura );
           }
+          else
+          {
+
+          }  
 
           // redimensiona de acordo com tipo
           switch( $tipo )
@@ -359,7 +409,7 @@ class canvas {
                case 'proporcional': 
                    // modo proporcional sem preenchimento adicionado por Fernando VR (goo.gl/iDtmP)
                     $this->redimensionaProporcional();
-                    break;		
+                    break;      
                default:
                     $this->redimensionaSimples();
                     break;
@@ -382,7 +432,8 @@ class canvas {
           // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 
-          imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->nova_largura, $this->nova_altura, $this->largura, $this->altura );
+          imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->nova_largura, 
+            $this->nova_altura, $this->largura, $this->altura );
           $this->img     = $this->img_temp;
      } // fim redimensiona()
 
@@ -392,7 +443,8 @@ class canvas {
       **/
      private function preencheImagem()
      {
-          $cor_fundo = imagecolorallocate( $this->img_temp, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+          $cor_fundo = color_background();
+          
           imagefill( $this->img_temp, 0, 0, $cor_fundo );
      } // fim preencheImagem
 
@@ -414,13 +466,15 @@ class canvas {
           $dif_y = $dif_h = $this->nova_altura;
 
           /**
-      		 * Verifica altura e largura
-      		 * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
-      		 */
+             * Verifica altura e largura
+             * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
+             */
           if ( ($this->largura / $this->nova_largura ) > ( $this->altura / $this->nova_altura ) )
           {
               $fator = $this->largura / $this->nova_largura;
-          } else {
+          } 
+          else 
+          {
               $fator = $this->altura / $this->nova_altura;
           }
           $dif_w = $this->largura / $fator;
@@ -429,7 +483,9 @@ class canvas {
           // copia com o novo tamanho, centralizando
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
-          imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, $this->largura, $this->altura );
+
+          imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
+            $this->largura, $this->altura );
           $this->img     = $this->img_temp;
      } // fim redimensionaPreenchimento()
 
@@ -440,24 +496,26 @@ class canvas {
       **/
      private function redimensionaProporcional()
      {
-	   /**
+       /**
            * Verifica altura e largura proporcional.
            **/
-		   $ratio_orig = $this->largura/$this->altura;
+           $ratio_orig = $this->largura/$this->altura;
 
-			if ($this->nova_largura/$this->nova_altura > $ratio_orig) {
-			   $dif_w = $this->nova_altura*$ratio_orig;
-			   $dif_h = $this->nova_altura;
-			} else {
-				$dif_w = $this->nova_largura;
-			   $dif_h = $this->nova_largura/$ratio_orig;
-			}
+            if ($this->nova_largura/$this->nova_altura > $ratio_orig) {
+               $dif_w = $this->nova_altura*$ratio_orig;
+               $dif_h = $this->nova_altura;
+            } else 
+            {
+               $dif_w = $this->nova_largura;
+               $dif_h = $this->nova_largura/$ratio_orig;
+            }
 
           // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
-		 
+         
           // Resample
-	  imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura, $this->altura);
+      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura,
+       $this->altura);
           $this->img   = $this->img_temp;
      } // fim redimensionaProporcional()
 
@@ -496,6 +554,10 @@ class canvas {
                     $this->posicao_crop[0]     = 0;
                     $this->posicao_crop[1]     = ( $this->posicao_crop[3] / 2 ) - $h_height;
                }
+               else
+               {
+
+               }
           }
      } // fim calculaPosicaoCrop
 
@@ -513,13 +575,14 @@ class canvas {
           // calcula posicionamento do crop automaticamente
           if(!is_array($this->posicao_crop))
           {
-          	$auto=1; 
-          	$this->calculaPosicaoCrop(); 
-		  		}
-		  		// posicionamento do crop setado manualmente
-		  		else {
-		  			$auto = 0;
-		  		}
+            $auto=1; 
+            $this->calculaPosicaoCrop(); 
+          }
+                // posicionamento do crop setado manualmente
+                else 
+                {
+                    $auto = 0;
+                }
 
           // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
@@ -529,67 +592,76 @@ class canvas {
           
           //coordenadas inteligentes
           switch( $this->posicao_crop[ 0 ]  ){
-          	
-          	case 'esquerdo':
-          	          		
-          		$this->pos_x = 0;
-          	
-          	break;
-			
-		case 'direito':
-		
-			$this->pos_x = $this->largura - $this->nova_largura;
-			
-		break;
-			
-		case 'meio':
-			
-			$this->pos_x = ( $this->largura - $this->nova_largura ) / 2;
-			
-		break;
-			
-		default:
-			
-			$this->pos_x = $this->posicao_crop[ 0 ];
-				
-		break;
-		
+            
+            case 'esquerdo':
+                            
+                $this->pos_x = 0;
+            
+            break;
+            
+        case 'direito':
+        
+            $this->pos_x = $this->largura - $this->nova_largura;
+            
+        break;
+            
+        case 'meio':
+            
+            $this->pos_x = ( $this->largura - $this->nova_largura ) / 2;
+            
+        break;
+            
+        default:
+            
+            $this->pos_x = $this->posicao_crop[ 0 ];
+                
+        break;
+        
            }
           
            switch( $this->posicao_crop[ 1 ] ){
-          	
-          	case 'topo':
-          		
-          		$this->pos_y = 0;
-			
-		break;
-			
-		case 'inferior':
-			
-			$this->pos_y = $this->altura - $this->nova_altura;
-			
-		break;
-			
-		case 'meio':
-			
-			$this->pos_y = ( $this->altura - $this->nova_altura ) / 2;
-				
-		break;
-			
-		default:
-			
-			$this->pos_y = $this->posicao_crop[ 1 ];
-				
-		break;
-			
-	 }
-		
-	  $this->posicao_crop[ 0 ] = $this->pos_x;
-	  $this->posicao_crop[ 1 ] = $this->pos_y;
+            
+            case 'topo':
+                
+                $this->pos_y = 0;
+            
+        break;
+            
+        case 'inferior':
+            
+            $this->pos_y = $this->altura - $this->nova_altura;
+            
+        break;
+            
+        case 'meio':
+            
+            $this->pos_y = ( $this->altura - $this->nova_altura ) / 2;
+                
+        break;
+            
+        default:
+            
+            $this->pos_y = $this->posicao_crop[ 1 ];
+                
+        break;
+            
+     }
+        
+      $this->posicao_crop[ 0 ] = $this->pos_x;
+      $this->posicao_crop[ 1 ] = $this->pos_y;
 
-          if($auto) 	imagecopyresampled( $this->img_temp, $this->img, -$this->posicao_crop[0], -$this->posicao_crop[1], 0, 0, $this->posicao_crop[2], $this->posicao_crop[3], $this->largura, $this->altura );
-		  		else 				imagecopyresampled( $this->img_temp, $this->img, 0, 0, $this->posicao_crop[0], $this->posicao_crop[1], $this->nova_largura, $this->nova_altura, $this->posicao_crop[2], $this->posicao_crop[3] );
-
+          if($auto)
+          {
+                imagecopyresampled( $this->img_temp, $this->img, -$this->posicao_crop[0],
+           -$this->posicao_crop[1], 0, 0, $this->posicao_crop[2], $this->posicao_crop[3], $this->largura,
+            $this->altura );
+          }     
+          else 
+          {
+            imagecopyresampled( $this->img_temp, $this->img, 0, 0, $this->posicao_crop[0], 
+                $this->posicao_crop[1], $this->nova_largura, $this->nova_altura, 
+                $this->posicao_crop[2], $this->posicao_crop[3] );
+          }
           $this->img     = $this->img_temp;
      } // fim redimensionaCrop
 
@@ -610,7 +682,7 @@ class canvas {
           // vertical
           if ( 'v' == $tipo )
           {
-               for ( $y = 0; $y < $h; $y++ )
+               for ( $y = 0; $y < $h; $y = $y + 1 )
                {
                     imagecopy( $this->img_temp, $this->img, 0, $y, 0, $h - $y - 1, $w, 1 );
                }
@@ -618,7 +690,7 @@ class canvas {
           // horizontal
           elseif ( 'h' == $tipo )
           {
-               for ( $x = 0; $x < $w; $x++ )
+               for ( $x = 0; $x < $w; $x = $x + 1 )
                {
                     imagecopy( $this->img_temp, $this->img, $x, 0, $w - $x - 1, 0, 1, $h );
                }
@@ -634,14 +706,20 @@ class canvas {
       * @param Int $graus grau para giro
       * @return Object instância atual do objeto, para métodos encadeados
       **/
+     
+
      public function gira( $graus )
      {
-          $cor_fundo     = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+          $cor_fundo = color_background();
+
           $this->img     = imagerotate( $this->img, $graus, $cor_fundo );
+
           imagealphablending( $this->img, true );
           imagesavealpha( $this->img, true );
+
           $this->largura = imagesx( $this->img );
           $this->altura = imagesx( $this->img );
+
           return $this;
      } // fim girar
 
@@ -657,7 +735,8 @@ class canvas {
       * @param String $fonte nome da fonte truetype a ser utilizada
       * @return void
       **/
-     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', $truetype = false, $fonte = '' )
+     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', 
+        $truetype = false, $fonte = '' )
      {
           $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
 
@@ -697,7 +776,9 @@ class canvas {
                }
 
                $this->img_temp = imagecreatetruecolor( $largura_texto, $altura_texto );
-               $cor_fundo = imagecolorallocate( $this->img_temp, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+               
+               $cor_fundo = color_background();
+
                imagefill( $this->img_temp, 0, 0, $cor_fundo );
 
                imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $largura_texto, $altura_texto );
@@ -715,6 +796,11 @@ class canvas {
           }
           return $this;
      } // fim legenda
+
+     public function color_background($cor_fundo)
+     {
+        $cor_fundo = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+     }
 
     /**
      * Calcula a posição da legenda de acordo com string passada via parâmetro
@@ -773,6 +859,9 @@ class canvas {
           return array( $x, $y );
      } // fim calculaPosicaoLegenda
 
+     const MAX_TRANSPARENCE_QUALITY = 100;
+     const LOWER_TRANSPARENCE_QUALITY = 0;
+
      /**
       * adiciona imagem de marca d'água
       * @param String $imagem caminho da imagem de marca d'água
@@ -784,7 +873,7 @@ class canvas {
       *                 -> o alfa nativo do PNG
       * @return Object instância atual do objeto, para métodos encadeados
       **/
-     public function marca( $imagem, $x = 0, $y = 0, $alfa = 100 )
+     public function marca( $imagem, $x = 0, $y = 0, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
           // cria imagem temporária para merge
           if ( $imagem ) {
@@ -819,13 +908,19 @@ class canvas {
           {
                return false;
           }
+
           // dimensões
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
+
           // retorna imagens com marca d'água
-          if ( is_numeric( $alfa ) && ( ( $alfa > 0 ) && ( $alfa < 100 ) ) ) {
+          if ( is_numeric( $alfa ) && ( ( $alfa > LOWER_TRANSPARENCE_QUALITY ) && 
+            ( $alfa < MAX_TRANSPARENCE_QUALITY ) ) ) 
+          {
                imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
-          } else {
+          } 
+          else 
+          {
                imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
           }
           return $this;
@@ -841,7 +936,7 @@ class canvas {
       * @param Int $alfa valor para transparência (0-100)
       * @return void
       **/
-     private function marcaFixa( $imagem, $posicao, $alfa = 100 )
+     private function marcaFixa( $imagem, $posicao, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
 
           // dimensões da marca d'água
@@ -913,7 +1008,7 @@ class canvas {
              case 'blur':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_GAUSSIAN_BLUR );
                     }
@@ -926,7 +1021,7 @@ class canvas {
             case 'blur2':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SELECTIVE_BLUR );
                     }
@@ -951,7 +1046,7 @@ class canvas {
             case 'edge':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EDGEDETECT );
                     }
@@ -964,7 +1059,7 @@ class canvas {
             case 'emboss':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EMBOSS );
                     }
@@ -980,7 +1075,7 @@ class canvas {
             case 'ruido':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_MEAN_REMOVAL );
                     }
@@ -993,7 +1088,7 @@ class canvas {
             case 'suave':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SMOOTH, $arg1 );
                     }
@@ -1007,7 +1102,7 @@ class canvas {
             case 'pixel':
                 if( is_numeric( $quantidade ) && $quantidade > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i++ )
+                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_PIXELATE, $arg1, $arg2 );
                     }
@@ -1043,8 +1138,9 @@ class canvas {
         imageconvolution($this->img, $qualidade, $divisao, $offset);
         
         return $this;
-    }	
+    }   
     
+    const MAX_IMAGE_QUALITY = 100;
 
      /**
       * retorna saída para tela ou arquivo
@@ -1052,7 +1148,7 @@ class canvas {
       * @param Int $qualidade qualidade da imagem no caso de JPEG (0-100)
       * @return void
       **/
-     public function grava( $destino='', $qualidade = 100 )
+     public function grava( $destino='', $qualidade = MAX_IMAGE_QUALITY )
      {
           // dados do arquivo de destino
           if ( $destino )
@@ -1138,18 +1234,41 @@ class canvas {
 
 function imagecreatefrombmp($filename) {
  //Ouverture du fichier en mode binaire
-   if (! $f1 = fopen($filename,"rb")) return FALSE;
+   if (! $f1 = fopen($filename,"rb")) 
+   {
+        return FALSE;
+   }
+   else
+   {
+
+   }
+    
 
  //1 : Chargement des ent?tes FICHIER
    $FILE = unpack("vfile_type/Vfile_size/Vreserved/Vbitmap_offset", fread($f1,14));
-   if ($FILE['file_type'] != 19778) return FALSE;
+   if ($FILE['file_type'] != 19778)
+   {
+        return FALSE;
+   }
+   else
+   {
+
+   } 
 
  //2 : Chargement des ent?tes BMP
    $BMP = unpack('Vheader_size/Vwidth/Vheight/vplanes/vbits_per_pixel'.
                      '/Vcompression/Vsize_bitmap/Vhoriz_resolution'.
                      '/Vvert_resolution/Vcolors_used/Vcolors_important', fread($f1,40));
    $BMP['colors'] = pow(2,$BMP['bits_per_pixel']);
-   if ($BMP['size_bitmap'] == 0) $BMP['size_bitmap'] = $FILE['file_size'] - $FILE['bitmap_offset'];
+   if ($BMP['size_bitmap'] == 0)
+   {
+        $BMP['size_bitmap'] = $FILE['file_size'] - $FILE['bitmap_offset'];
+   }
+   else
+   {
+
+   }
+
    $BMP['bytes_per_pixel'] = $BMP['bits_per_pixel']/8;
    $BMP['bytes_per_pixel2'] = ceil($BMP['bytes_per_pixel']);
    $BMP['decal'] = ($BMP['width']*$BMP['bytes_per_pixel']/4);
@@ -1162,6 +1281,10 @@ function imagecreatefrombmp($filename) {
    if ($BMP['colors'] < 16777216)
    {
      $PALETTE = unpack('V'.$BMP['colors'], fread($f1,$BMP['colors']*4));
+   }
+   else
+   {
+
    }
 
  //4 : Cr?ation de l'image
@@ -1177,7 +1300,9 @@ function imagecreatefrombmp($filename) {
      while ($X < $BMP['width'])
      {
       if ($BMP['bits_per_pixel'] == 24)
+      {
           $COLOR = @unpack("V",substr($IMG,$P,3).$VIDE);
+      }
       elseif ($BMP['bits_per_pixel'] == 16)
       {
           $COLOR = @unpack("n",substr($IMG,$P,2));
@@ -1197,24 +1322,52 @@ function imagecreatefrombmp($filename) {
       elseif ($BMP['bits_per_pixel'] == 1)
       {
           $COLOR = @unpack("n",$VIDE.substr($IMG,floor($P),1));
-          if     (($P*8)%8 == 0) $COLOR[1] =  $COLOR[1]          >>7;
-          elseif (($P*8)%8 == 1) $COLOR[1] = ($COLOR[1] & 0x40)>>6;
-          elseif (($P*8)%8 == 2) $COLOR[1] = ($COLOR[1] & 0x20)>>5;
-          elseif (($P*8)%8 == 3) $COLOR[1] = ($COLOR[1] & 0x10)>>4;
-          elseif (($P*8)%8 == 4) $COLOR[1] = ($COLOR[1] & 0x8)>>3;
-          elseif (($P*8)%8 == 5) $COLOR[1] = ($COLOR[1] & 0x4)>>2;
-          elseif (($P*8)%8 == 6) $COLOR[1] = ($COLOR[1] & 0x2)>>1;
-          elseif (($P*8)%8 == 7) $COLOR[1] = ($COLOR[1] & 0x1);
+          if     (($P*8)%8 == 0) 
+          {
+            $COLOR[1] =  $COLOR[1] >>7;
+          }
+          elseif (($P*8)%8 == 1)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x40)>>6;
+          } 
+          elseif (($P*8)%8 == 2) 
+          {
+            $COLOR[1] = ($COLOR[1] & 0x20)>>5; 
+          }
+          elseif (($P*8)%8 == 3)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x10)>>4;
+          } 
+          elseif (($P*8)%8 == 4)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x8)>>3;
+          }
+          elseif (($P*8)%8 == 5)
+          {
+             $COLOR[1] = ($COLOR[1] & 0x4)>>2;
+          }
+          elseif (($P*8)%8 == 6)
+          {
+            $COLOR[1] = ($COLOR[1] & 0x2)>>1;
+          } 
+          elseif (($P*8)%8 == 7)
+          {
+             $COLOR[1] = ($COLOR[1] & 0x1);
+          }
+
           $COLOR[1] = $PALETTE[$COLOR[1]+1];
       }
       else
-          return FALSE;
+      {
+        return FALSE;
+      }    
+
       imagesetpixel($res,$X,$Y,$COLOR[1]);
-      $X++;
-      $P += $BMP['bytes_per_pixel'];
+      $X = $X + 1;
+      $P = $P + $BMP['bytes_per_pixel'];
      }
-     $Y--;
-     $P+=$BMP['decal'];
+     $Y = $Y - 1;
+     $P = $P + $BMP['decal'];
    }
 
  //Fermeture du fichier

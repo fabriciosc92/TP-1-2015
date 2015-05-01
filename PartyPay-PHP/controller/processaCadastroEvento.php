@@ -19,7 +19,7 @@ $horaInicio = $_POST['horaInicio'];
 $minutoInicio = $_POST['minutoInicio'];
 $minutoTermino = $_POST['minutoTermino'];
 $horaTermino = $_POST['horaTermino'];
-$organizadorId = $_SESSION['id'];
+$organizadorId = $_SESSION['organizadorId'];
 $classificacao = $_POST['classificacao'];
 $evento = new Evento();
 

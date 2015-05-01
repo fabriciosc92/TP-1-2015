@@ -38,7 +38,10 @@
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
-if (version_compare(PHP_VERSION, '5.0.0', '<') ) exit("Sorry, this version of PHPMailer will only run on PHP version 5 or greater!\n");
+if (version_compare(PHP_VERSION, '5.0.0', '<') ) 
+  {
+    exit("Sorry, this version of PHPMailer will only run on PHP version 5 or greater!\n");
+  }
 
 class PHPMailer {
 
@@ -523,7 +526,9 @@ class PHPMailer {
   public static function ValidateAddress($address) {
 
     if (function_exists('filter_var')) 
-    { //Introduced in PHP 5.2
+    { 
+
+      //Introduced in PHP 5.2
       if(filter_var($address, FILTER_VALIDATE_EMAIL) === FALSE) 
       {
         return false;
@@ -535,10 +540,13 @@ class PHPMailer {
     } 
     else 
     {
-      return preg_match('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*
+
+      $caractares_alowed_in_address = ('/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*
         [\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!\.))
           {0,61}[a-zA-Z0-9_-]?\.)+[a-zA-Z0-9_](?:[a-zA-Z0-9_\-](?!$)){0,61}[a-zA-Z0-9_]?)|
-      (?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/', $address);
+      (?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/');
+      
+      return preg_match($caractares_alowed_in_address, $address);
     }
   }
 
@@ -685,9 +693,12 @@ class PHPMailer {
    * @access protected
    * @return bool
    */
-  protected function MailSend($header, $body) {
+  protected function MailSend($header, $body) 
+  {
     $toArr = array();
-    foreach($this->to as $t) {
+    
+    foreach($this->to as $t) 
+    {
       $toArr[] = $this->AddrFormat($t);
     }
     $to = implode(', ', $toArr);
@@ -704,8 +715,17 @@ class PHPMailer {
         foreach ($toArr as $key => $val) 
         {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+          
           // implement call back function if it exists
-          $isSent = ($rt == 1) ? 1 : 0;
+          if($rt == 1)
+          {
+            $isSent = 1;
+          }
+          else
+          {
+             $isSent = 0;
+          }
+
           $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
         }
       } 
@@ -734,6 +754,7 @@ class PHPMailer {
          {
 
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+          
           // implement call back function if it exists
           if ($rt == 1) 
           {
@@ -746,9 +767,11 @@ class PHPMailer {
         
           $this->doCallback($isSent,$val,$this->cc,$this->bcc,$this->Subject,$body);
         }
-      } else {
-
+      } 
+      else 
+      {
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header);
+        
         // implement call back function if it exists
         if ($rt == 1) 
           {
@@ -756,7 +779,7 @@ class PHPMailer {
           }
           else
           {
-               %isSent = 0;
+               $isSent = 0;
           }
         
         $this->doCallback($isSent,$to,$this->cc,$this->bcc,$this->Subject,$body);
@@ -1047,7 +1070,9 @@ class PHPMailer {
    * @return string
    */
   public function WrapText($message, $length, $qp_mode = false) {
+
     $soft_break = ($qp_mode) ? sprintf(" =%s", $this->LE) : $this->LE;
+
     // If utf-8 encoding is used, we will need to make sure we don't
     // split multibyte characters when we wrap
     $is_utf8 = (strtolower($this->CharSet) == "utf-8");
@@ -1127,7 +1152,8 @@ class PHPMailer {
           $buf_o = $buf;
           $buf .= ($e == 0) ? $word : (' ' . $word);
 
-          if (strlen($buf) > $length and $buf_o != '') {
+          if (strlen($buf) > $length and $buf_o != '') 
+          {
             $message .= $buf_o . $soft_break;
             $buf = $word;
           }
@@ -1170,7 +1196,7 @@ class PHPMailer {
           $maxLength = $maxLength - ($lookBack - $encodedCharPos);
           $foundSplitPos = true;
         } elseif ($dec < 192) { // Middle byte of a multi byte character, look further back
-          $lookBack += 3;
+          $lookBack = $lookBack + 3;
         }
       } else {
         // No encoded character found
@@ -1672,49 +1698,68 @@ class PHPMailer {
    * @access public
    * @return string
    */
-  public function EncodeHeader($str, $position = 'text') {
+  public function EncodeHeader($str, $position = 'text') 
+  {
     $x = 0;
 
-    switch (strtolower($position)) {
+    switch (strtolower($position)) 
+    {
       case 'phrase':
-        if (!preg_match('/[\200-\377]/', $str)) {
+        if (!preg_match('/[\200-\377]/', $str)) 
+        {
+
           // Can't use addslashes as we don't know what value has magic_quotes_sybase
           $encoded = addcslashes($str, "\0..\37\177\\\"");
-          if (($str == $encoded) && !preg_match('/[^A-Za-z0-9!#$%&\'*+\/=?^_`{|}~ -]/', $str)) {
+          if (($str == $encoded) && !preg_match('/[^A-Za-z0-9!#$%&\'*+\/=?^_`{|}~ -]/', $str)) 
+          {
             return ($encoded);
-          } else {
+          } 
+          else 
+          {
             return ("\"$encoded\"");
           }
         }
         $x = preg_match_all('/[^\040\041\043-\133\135-\176]/', $str, $matches);
         break;
+
       case 'comment':
         $x = preg_match_all('/[()"]/', $str, $matches);
+
         // Fall-through
       case 'text':
+
       default:
-        $x += preg_match_all('/[\000-\010\013\014\016-\037\177-\377]/', $str, $matches);
+        $x = $x + (preg_match_all('/[\000-\010\013\014\016-\037\177-\377]/', $str, $matches));
         break;
     }
 
-    if ($x == 0) {
+    if ($x == 0) 
+    {
       return ($str);
     }
 
     $maxlen = 75 - 7 - strlen($this->CharSet);
+
     // Try to select the encoding which should produce the shortest output
-    if (strlen($str)/3 < $x) {
+    if (strlen($str)/3 < $x) 
+    {
       $encoding = 'B';
-      if (function_exists('mb_strlen') && $this->HasMultiBytes($str)) {
+      if (function_exists('mb_strlen') && $this->HasMultiBytes($str)) 
+      {
+
         // Use a custom function which correctly encodes and wraps long
         // multibyte strings without breaking lines within a character
         $encoded = $this->Base64EncodeWrapMB($str);
-      } else {
+      } 
+      else 
+      {
         $encoded = base64_encode($str);
-        $maxlen -= $maxlen % 4;
+        $maxlen = $maxlen - ($maxlen % 4);
         $encoded = trim(chunk_split($encoded, $maxlen, "\n"));
       }
-    } else {
+    } 
+    else 
+    {
       $encoding = 'Q';
       $encoded = $this->EncodeQ($str, $position);
       $encoded = $this->WrapText($encoded, $maxlen, true);
@@ -1749,28 +1794,34 @@ class PHPMailer {
    * @param string $str multi-byte text to wrap encode
    * @return string
    */
-  public function Base64EncodeWrapMB($str) {
+  public function Base64EncodeWrapMB($str) 
+  {
     $start = "=?".$this->CharSet."?B?";
     $end = "?=";
     $encoded = "";
 
     $mb_length = mb_strlen($str, $this->CharSet);
+
     // Each line must have length <= 75, including $start and $end
     $length = 75 - strlen($start) - strlen($end);
+
     // Average multi-byte ratio
     $ratio = $mb_length / strlen($str);
+
     // Base64 has a 4:3 ratio
     $offset = $avgLength = floor($length * $ratio * .75);
 
-    for ($i = 0; $i < $mb_length; $i += $offset) {
+    for ($i = 0; $i < $mb_length; $i = $i + $offset) {
       $lookBack = 0;
 
-      do {
+      do 
+      {
         $offset = $avgLength - $lookBack;
         $chunk = mb_substr($str, $i, $offset, $this->CharSet);
         $chunk = base64_encode($chunk);
-        $lookBack++;
+        $lookBack = $lookBack + 1;
       }
+
       while (strlen($chunk) > $length);
 
       $encoded .= $chunk . $this->LE;
@@ -2366,7 +2417,7 @@ class PHPMailer {
         $line.="=".sprintf("%02X",$ord);
       }
     }
-    
+
     return $line;
   }
 
@@ -2454,7 +2505,8 @@ class PHPMailer {
     $DKIMlen  = strlen($body) ; // Length of body
     $DKIMb64  = base64_encode(pack("H*", sha1($body))) ; // Base64 of packed binary SHA-1 hash of body
     $ident    = ($this->DKIM_identity == '')? '' : " i=" . $this->DKIM_identity . ";";
-    $dkimhdrs = "DKIM-Signature: v=1; a=" . $DKIMsignatureType . "; q=" . $DKIMquery . "; l=" . $DKIMlen . "; s=" . $this->DKIM_selector . ";\r\n".
+    $dkimhdrs = "DKIM-Signature: v=1; a=" . $DKIMsignatureType . "; q=" . $DKIMquery . "; l=" . $DKIMlen . 
+                "; s=" . $this->DKIM_selector . ";\r\n".
                 "\tt=" . $DKIMtime . "; c=" . $DKIMcanonicalization . ";\r\n".
                 "\th=From:To:Subject;\r\n".
                 "\td=" . $this->DKIM_domain . ";" . $ident . "\r\n".
@@ -2463,7 +2515,9 @@ class PHPMailer {
                 "\t|$subject;\r\n".
                 "\tbh=" . $DKIMb64 . ";\r\n".
                 "\tb=";
-    $toSign   = $this->DKIM_HeaderC($from_header . "\r\n" . $to_header . "\r\n" . $subject_header . "\r\n" . $dkimhdrs);
+    $toSign   = $this->DKIM_HeaderC($from_header . "\r\n" . $to_header . "\r\n" . $subject_header . "\r\n" 
+      . $dkimhdrs);
+
     $signed   = $this->DKIM_Sign($toSign);
     return "X-PHPMAILER-DKIM: phpmailer.worxware.com\r\n".$dkimhdrs.$signed."\r\n";
   }

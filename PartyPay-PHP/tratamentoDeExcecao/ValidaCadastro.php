@@ -27,7 +27,7 @@ class ValidaCadastro {
         $this->msg[1] = "CEP com formato inválido (Ex: XXXXX-XXX) <br />"; // CEP
         $this->msg[2] = "Data em formato inválido, informe data como (Ex: DD/MM/AAAA) <br />"; // DATA
         $this->msg[3] = "Hora em formato inválido <br />"; // HORA
-        $this->msg[4] = "Telefone inválido (Ex: 61-33333333) <br />"; // TELEFONE
+        $this->msg[4] = "Telefone inválido (Ex: (61) 1234-1234) <br />"; // TELEFONE
         $this->msg[5] = "CPF inválido (Ex: 11111111111) <br />"; // CPF
         $this->msg[6] = "Preencha o campo " . $campo . " com numeros <br />"; // APENAS NUMEROS
         $this->msg[7] = "Por favor Preencha o campo " . $campo . " <br />"; // CAMPO VAZIO
@@ -153,9 +153,9 @@ class ValidaCadastro {
         }
     }
 
-    // Validar Telefone (61-32363810)
+    // Validar Telefone ((61) 1234-1234)
     function validarTelefone($telefone) {
-        if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $telefone)) {
+        if (!preg_match("/^\([0-9]{2}\) [0-9]{4}-[0-9]{4}$/", $telefone)) {
             echo $this->mensagens(4, 'telefone', null, null);
             exit();
         }

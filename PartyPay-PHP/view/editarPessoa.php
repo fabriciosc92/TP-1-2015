@@ -40,8 +40,11 @@ require_once('header.php');
 
                 <div class="controls">
                     <select name="sexo">
-                        <option>Feminino</option>
-                        <option>Masculino</option>
+						<?php
+							echo ($sexo=="Feminino")
+								? "<option selected>Feminino</option><option>Masculino</option>"
+								: "<option>Feminino</option><option selected>Masculino</option>";							
+						?>
                     </select>
                 </div>
 

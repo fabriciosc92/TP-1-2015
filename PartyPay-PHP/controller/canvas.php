@@ -16,17 +16,17 @@ class canvas {
     /**
      * Store the size of the current image and the new image if available
      **/
-    private $largura, $altura, $nova_largura, $nova_altura, $tamanho_html;
+    private $widht, $height, $new_widht, $new_heigth, $size_html;
     
     /**
     * Variables for positioning the crop
     **/
-    private $pos_x, $pos_y;
+    private $position_x, $position_y;
     
     /**
      * Information about the uploaded file and directory
      **/
-    private $formato, $extensao, $tamanho, $arquivo, $diretorio;
+    private $format, $extension, $size, $file, $path;
 
     /**
      * Array RGB resize with background fill
@@ -36,7 +36,7 @@ class canvas {
     /**
      * Coordinates for positioning crop
      **/
-    private $posicao_crop;
+    private $position_crop;
 
     /**
      * Constructor
@@ -63,21 +63,21 @@ class canvas {
      **/
      public function resetar()
      {
-<<<<<<< HEAD
+<<<<<< HEAD
 			
-		$this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
-		$this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
-		$this->pos_y = $this->formato = $this->extensao = $this->tamanho = $this->arquivo = 
-		$this->diretorio = $this->posicao_crop = NULL;
+		$this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+		$this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
+		$this->position_y = $this->format = $this->extension = $this->size = $this->file = 
+		$this->path = $this->position_crop = NULL;
 	
 	    	$this->rgb( 255, 255, 255 );
      }// end resetar
 =======
         
-        $reset_variables = $this->origem = $this->img = $this->img_temp = $this->largura = $this->altura = 
-        $this->nova_largura = $this->nova_altura = $this->tamanho_html = $this->pos_x = 
-        $this->pos_y = $this->formato = $this->extensao = $this->tamanho = $this->arquivo = 
-        $this->diretorio = $this->posicao_crop;
+        $reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+        $this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
+        $this->position_y = $this->format = $this->extension = $this->size = $this->file = 
+        $this->path = $this->position_crop;
 
         $reset_variables = NULL;
     
@@ -98,12 +98,12 @@ class canvas {
           {
 
                // files data
-               $this->dadosArquivo();
+               $this->dadosfile();
 
                // checks if is an image
                if ( !$this->eImagem() )
                {
-                    trigger_error( 'Erro: Arquivo '.$this->origem.' não é uma imagem!', E_USER_ERROR );
+                    trigger_error( 'Erro: file '.$this->origem.' não é uma imagem!', E_USER_ERROR );
                }
                else
                {
@@ -116,7 +116,7 @@ class canvas {
           }
           else
           {
-               trigger_error( 'Erro: Arquivo de imagem não encontrado!', E_USER_ERROR );
+               trigger_error( 'Erro: file de imagem não encontrado!', E_USER_ERROR );
           }
 
      } // end dadosImagem
@@ -140,37 +140,37 @@ class canvas {
      private function dimensoes()
      {
     $dimensoes                  = getimagesize( $this->origem );
-    $this->largura              = $dimensoes[0];
-    $this->altura               = $dimensoes[1];
+    $this->widht              = $dimensoes[0];
+    $this->height               = $dimensoes[1];
     /**
     * 1 = gif, 2 = jpeg, 3 = png, 6 = BMP
     * http://br2.php.net/manual/en/function.exif-imagetype.php
     **/
-    $this->formato               = $dimensoes[2];
-    $this->tamanho_html          = $dimensoes[3];
+    $this->format               = $dimensoes[2];
+    $this->size_html          = $dimensoes[3];
      } // end dimensoes
 
      /**
       * Search file data
       * @return void
       **/
-     private function dadosArquivo()
+     private function dadosfile()
      {
           // source image
           $pathinfo            = pathinfo( $this->origem );
           
           if(array_key_exists('extension', $pathinfo))
           {
-                $this->extensao = strtolower($pathinfo['extension']);
+                $this->extension = strtolower($pathinfo['extension']);
           }
           else
           {
-                $this->extensao = strtolower(str_replace('image/', '', $obj['mime']));
+                $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
           }
              
-          $this->arquivo       = $pathinfo['basename'];
-          $this->diretorio     = $pathinfo['dirname'];
-     } // end dadosArquivo
+          $this->file       = $pathinfo['basename'];
+          $this->path     = $pathinfo['dirname'];
+     } // end dadosfile
 
      /**
       * Checks if the specified file is an image
@@ -193,20 +193,20 @@ class canvas {
      /**
       * Create a new image to be worked with texts, etc.
       * Note: the color image must be passed before, via rgb () or hex ()
-      * @param String $largura of the image to be created
-      * @param String $altura of the image to be created
+      * @param String $widht of the image to be created
+      * @param String $height of the image to be created
       * @return Object current instance of the object, for chained method
       **/
-     public function novaImagem( $largura, $altura )
+     public function novaImagem( $widht, $height )
      {
-          $this->largura     = $largura;
-          $this->altura     = $altura;
-          $this->img = imagecreatetruecolor( $this->largura, $this->altura );
+          $this->widht     = $widht;
+          $this->height     = $height;
+          $this->img = imagecreatetruecolor( $this->widht, $this->height );
           
           $cor_fundo = color_background();
 
           imagefill( $this->img, 0, 0, $cor_fundo );
-          $this->extensao = 'jpg';
+          $this->extension = 'jpg';
           return $this;
     } // end novaImagem
 
@@ -220,37 +220,37 @@ class canvas {
      {
           $this->origem = $url;
           $pathinfo = pathinfo( $this->origem );
-          $this->extensao = strtolower( $pathinfo['extension'] );
+          $this->extension = strtolower( $pathinfo['extension'] );
 
-          switch( $this->extensao )
+          switch( $this->extension )
           {
                case 'jpg':
                case 'jpeg':
-                    $this->formato = 2;
+                    $this->format = 2;
                     break;
                case 'gif':
-                    $this->formato = 1;
+                    $this->format = 1;
                     break;
                case 'png':
-                    $this->formato = 3;
+                    $this->format = 3;
                     break;
                case 'bmp':
-                    $this->formato = 6;
+                    $this->format = 6;
                     break;
                default:
                     break;
      }
-<<<<<<< HEAD
+<<<<<< HEAD
           $this->criaImagem();
-     $this->largura     = imagesx( $this->img );
-          $this->altura     = imagesy( $this->img );
+     $this->widht     = imagesx( $this->img );
+          $this->height     = imagesy( $this->img );
           return $this;
      } // end carregaUrl
 =======
 
         $this->criaImagem();
-        $this->largura     = imagesx( $this->img );
-        $this->altura     = imagesy( $this->img );
+        $this->widht     = imagesx( $this->img );
+        $this->height     = imagesy( $this->img );
 
      return $this;
      } // fim carregaUrl
@@ -262,26 +262,26 @@ class canvas {
       **/
      private function criaImagem()
      {
-          switch ( $this->formato )
+          switch ( $this->format )
           {
                case 1:
                     $this->img = imagecreatefromgif( $this->origem );
-                    $this->extensao = 'gif';
+                    $this->extension = 'gif';
                     break;
                case 2:
                     $this->img = imagecreatefromjpeg( $this->origem );
-                    $this->extensao = 'jpg';
+                    $this->extension = 'jpg';
                     break;
                case 3:
                     $this->img = imagecreatefrompng( $this->origem );
-                    $this->extensao = 'png';
+                    $this->extension = 'png';
                     break;
                case 6:
                     $this->img = imagecreatefrombmp( $this->origem );
-                    $this->extensao = 'bmp';
+                    $this->extension = 'bmp';
                     break;
                default:
-                    trigger_error( 'Arquivo inválido!', E_USER_ERROR );
+                    trigger_error( 'file inválido!', E_USER_ERROR );
                     break;
           }
      } // end criaImagem
@@ -330,34 +330,34 @@ class canvas {
       * Stores positions x and y for crop
       * @param Int x - position x of crop
 			* @param Int y - position y of crop
-			* @param Int w - width  - larguraOrigem (by OctaAugusto)
-			* @param Int h - height - alturaOrigem (by OctaAugusto)
+			* @param Int w - width  - widhtOrigem (by OctaAugusto)
+			* @param Int h - height - heightOrigem (by OctaAugusto)
       * @return Object current instance of the object, for chained method
       **/
      public function posicaoCrop( $x, $y, $w=0, $h=0 )
      {
           // no width or manually sitting height, image original handle
-		  		if(!$w) $w = $this->largura;
-		  		if(!$h) $h = $this->altura;
+		  		if(!$w) $w = $this->widht;
+		  		if(!$h) $h = $this->height;
 		  
 =======
       * Armazena posições x e y para crop
       * @param Int x - posicao x do crop
             * @param Int y - posicao y do crop
-            * @param Int w - width  - larguraOrigem (by OctaAugusto)
-            * @param Int h - height - alturaOrigem (by OctaAugusto)
+            * @param Int w - width  - widhtOrigem (by OctaAugusto)
+            * @param Int h - height - heightOrigem (by OctaAugusto)
       * @return Object instância atual do objeto, para métodos encadeados
       **/
      public function posicaoCrop( $x, $y, $w=0, $h=0 )
      {
-          // sem largura ou altura setada manualmente, pega original da imagem
+          // sem widht ou height setada manualmente, pega original da imagem
                 if(!$w) 
                 {
-                    $w = $this->largura;
+                    $w = $this->widht;
                 } 
                 elseif(!$h) 
                 {
-                    $h = $this->altura;
+                    $h = $this->height;
                 }
                 else
                 {
@@ -365,45 +365,45 @@ class canvas {
                 }
           
 >>>>>>> master
-          $this->posicao_crop = array( $x, $y, $w, $h );
+          $this->position_crop = array( $x, $y, $w, $h );
 
           return $this;
-     } // end posicao_crop
+     } // end position_crop
 
      /**
       * Resize image
-      * @param Int $nova_largura value in pixels of the new image largura
-      * @param Int $nova_altura value in pixels of the new image altura
+      * @param Int $new_widht value in pixels of the new image widht
+      * @param Int $new_heigth value in pixels of the new image height
       * @param String $tipo method for scaling (default [empty], fill or crop)
       * @return Object current instance of the object, for chained method
       **/
-     public function redimensiona( $nova_largura = 0, $nova_altura = 0, $tipo = '' )
+     public function redimensiona( $new_widht = 0, $new_heigth = 0, $tipo = '' )
      {
 
           // to set variables passed via parameter
-          $this->nova_largura         = $nova_largura;
-          $this->nova_altura          = $nova_altura;
+          $this->new_widht         = $new_widht;
+          $this->new_heigth          = $new_heigth;
 
           // checks went height or width in percent
-          // largura %
-          $pos = strpos( $this->nova_largura, '%' );
+          // widht %
+          $pos = strpos( $this->new_widht, '%' );
 
           if( $pos !== false && $pos > 0 )
           {
-               $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_largura ) ) / 100;
-               $this->nova_largura          = round( $this->largura * $porcentagem );
+               $porcentagem               = ( ( int ) str_replace( '%', '', $this->new_widht ) ) / 100;
+               $this->new_widht          = round( $this->widht * $porcentagem );
           }
           else
           {
 
           }
-          // altura %
-          $pos = strpos( $this->nova_altura, '%' );
+          // height %
+          $pos = strpos( $this->new_heigth, '%' );
 
           if( $pos !== false && $pos > 0 )
           {
-               $porcentagem               = ( ( int ) str_replace( '%', '', $this->nova_altura ) ) / 100;
-               $this->nova_altura          = $this->altura * $porcentagem;
+               $porcentagem               = ( ( int ) str_replace( '%', '', $this->new_heigth ) ) / 100;
+               $this->new_heigth          = $this->height * $porcentagem;
           }
           else
           {
@@ -411,19 +411,19 @@ class canvas {
           }
 
           // sets whether just passed new width or height
-          if ( !$this->nova_largura && !$this->nova_altura )
+          if ( !$this->new_widht && !$this->new_heigth )
           {
                return false;
           }
-          // just pass altura
-          elseif ( !$this->nova_largura )
+          // just pass height
+          elseif ( !$this->new_widht )
           {
-               $this->nova_largura = $this->largura / ( $this->altura/$this->nova_altura );
+               $this->new_widht = $this->widht / ( $this->height/$this->new_heigth );
           }
-          // just pass largura
-          elseif ( !$this->nova_altura )
+          // just pass widht
+          elseif ( !$this->new_heigth )
           {
-               $this->nova_altura = $this->altura / ( $this->largura/$this->nova_largura );
+               $this->new_heigth = $this->height / ( $this->widht/$this->new_widht );
           }
           else
           {
@@ -449,8 +449,8 @@ class canvas {
           }
 
           // update image dimensions
-          $this->altura     = $this->nova_altura;
-          $this->largura     = $this->nova_largura;
+          $this->height     = $this->new_heigth;
+          $this->widht     = $this->new_widht;
 
           return $this;
      } // end redimensiona
@@ -463,10 +463,10 @@ class canvas {
      private function redimensionaSimples()
      {
           // create temporary destination image
-          $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
+          $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
-          imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->nova_largura, 
-            $this->nova_altura, $this->largura, $this->altura );
+          imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->new_widht, 
+            $this->new_heigth, $this->widht, $this->height );
           $this->img     = $this->img_temp;
      } // end redimensiona()
 
@@ -489,41 +489,41 @@ class canvas {
      private function redimensionaPreenchimento()
      {
           // create a temporary image
-          $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
+          $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
           // add background color to new image
           $this->preencheImagem();
 
           // save variables to centralization
-          $dif_x = $dif_w = $this->nova_largura;
-          $dif_y = $dif_h = $this->nova_altura;
+          $dif_x = $dif_w = $this->new_widht;
+          $dif_y = $dif_h = $this->new_heigth;
 
           /**
 <<<<<<< HEAD
       		 * Check height and width
       		 */
 =======
-             * Verifica altura e largura
+             * Verifica height e widht
              * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
              */
 >>>>>>> master
-          if ( ($this->largura / $this->nova_largura ) > ( $this->altura / $this->nova_altura ) )
+          if ( ($this->widht / $this->new_widht ) > ( $this->height / $this->new_heigth ) )
           {
-              $fator = $this->largura / $this->nova_largura;
+              $fator = $this->widht / $this->new_widht;
           } 
           else 
           {
-              $fator = $this->altura / $this->nova_altura;
+              $fator = $this->height / $this->new_heigth;
           }
-          $dif_w = $this->largura / $fator;
-          $dif_h = $this->altura  / $fator;
+          $dif_w = $this->widht / $fator;
+          $dif_h = $this->height  / $fator;
 
           // copies with the new size, centralizing
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
 
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
-            $this->largura, $this->altura );
+            $this->widht, $this->height );
           $this->img     = $this->img_temp;
      } // end redimensionaPreenchimento()
 
@@ -533,31 +533,31 @@ class canvas {
       **/
      private function redimensionaProporcional()
      {
-<<<<<<< HEAD
+<<<<<< HEAD
 	   /**
            * Check height and width proportionaly.
 =======
        /**
-           * Verifica altura e largura proporcional.
+           * Verifica height e widht proporcional.
 >>>>>>> master
            **/
-           $ratio_orig = $this->largura/$this->altura;
+           $ratio_orig = $this->widht/$this->height;
 
-            if ($this->nova_largura/$this->nova_altura > $ratio_orig) {
-               $dif_w = $this->nova_altura*$ratio_orig;
-               $dif_h = $this->nova_altura;
+            if ($this->new_widht/$this->new_heigth > $ratio_orig) {
+               $dif_w = $this->new_heigth*$ratio_orig;
+               $dif_h = $this->new_heigth;
             } else 
             {
-               $dif_w = $this->nova_largura;
-               $dif_h = $this->nova_largura/$ratio_orig;
+               $dif_w = $this->new_widht;
+               $dif_h = $this->new_widht/$ratio_orig;
             }
 
           // create e temporary image
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
          
           // Resample
-      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura,
-       $this->altura);
+      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->widht,
+       $this->height);
           $this->img   = $this->img_temp;
      } // end redimensionaProporcional()
 
@@ -571,30 +571,30 @@ class canvas {
      private function calculaPosicaoCrop()
      {
           // media widht/height
-          $hm     = $this->altura / $this->nova_altura;
-          $wm     = $this->largura / $this->nova_largura;
+          $hm     = $this->height / $this->new_heigth;
+          $wm     = $this->widht / $this->new_widht;
 
           // 50% para cálculo do crop
-          $h_height = $this->nova_altura / 2;
-          $h_width  = $this->nova_largura / 2;
+          $h_height = $this->new_heigth / 2;
+          $h_width  = $this->new_widht / 2;
 
-          // calcula novas largura e altura
-          if( !is_array( $this->posicao_crop ) )
+          // calcula novas widht e height
+          if( !is_array( $this->position_crop ) )
           {
                if ( $wm > $hm )
                {
-                    $this->posicao_crop[2]     = $this->largura / $hm;
-                    $this->posicao_crop[3]     = $this->nova_altura;
-                    $this->posicao_crop[0]     = ( $this->posicao_crop[2] / 2 ) - $h_width;
-                    $this->posicao_crop[1]     = 0;
+                    $this->position_crop[2]     = $this->widht / $hm;
+                    $this->position_crop[3]     = $this->new_heigth;
+                    $this->position_crop[0]     = ( $this->position_crop[2] / 2 ) - $h_width;
+                    $this->position_crop[1]     = 0;
                }
-               // largura <= altura
+               // widht <= height
                elseif ( ( $wm <= $hm ) )
                {
-                    $this->posicao_crop[2]     = $this->nova_largura;
-                    $this->posicao_crop[3]     = $this->altura / $wm;
-                    $this->posicao_crop[0]     = 0;
-                    $this->posicao_crop[1]     = ( $this->posicao_crop[3] / 2 ) - $h_height;
+                    $this->position_crop[2]     = $this->new_widht;
+                    $this->position_crop[3]     = $this->height / $wm;
+                    $this->position_crop[0]     = 0;
+                    $this->position_crop[1]     = ( $this->position_crop[3] / 2 ) - $h_height;
                }
                else
                {
@@ -610,9 +610,9 @@ class canvas {
      private function redimensionaCrop()
      {
           // calculate crop position automaticaly
-          if(!is_array($this->posicao_crop))
+          if(!is_array($this->position_crop))
           {
-<<<<<<< HEAD
+<<<<<< HEAD
           	$auto=1; 
           	$this->calculaPosicaoCrop(); 
 		  		}
@@ -632,82 +632,82 @@ class canvas {
 >>>>>>> master
 
           // create temporary image
-          $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
+          $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
           // add background color 
           $this->preencheImagem();
           
           //inteligents arrays
-          switch( $this->posicao_crop[ 0 ]  ){
+          switch( $this->position_crop[ 0 ]  ){
             
             case 'esquerdo':
                             
-                $this->pos_x = 0;
+                $this->position_x = 0;
             
             break;
             
         case 'direito':
         
-            $this->pos_x = $this->largura - $this->nova_largura;
+            $this->position_x = $this->widht - $this->new_widht;
             
         break;
             
         case 'meio':
             
-            $this->pos_x = ( $this->largura - $this->nova_largura ) / 2;
+            $this->position_x = ( $this->widht - $this->new_widht ) / 2;
             
         break;
             
         default:
             
-            $this->pos_x = $this->posicao_crop[ 0 ];
+            $this->position_x = $this->position_crop[ 0 ];
                 
         break;
         
            }
           
-           switch( $this->posicao_crop[ 1 ] ){
+           switch( $this->position_crop[ 1 ] ){
             
             case 'topo':
                 
-                $this->pos_y = 0;
+                $this->position_y = 0;
             
         break;
             
         case 'inferior':
             
-            $this->pos_y = $this->altura - $this->nova_altura;
+            $this->position_y = $this->height - $this->new_heigth;
             
         break;
             
         case 'meio':
             
-            $this->pos_y = ( $this->altura - $this->nova_altura ) / 2;
+            $this->position_y = ( $this->height - $this->new_heigth ) / 2;
                 
         break;
             
         default:
             
-            $this->pos_y = $this->posicao_crop[ 1 ];
+            $this->position_y = $this->position_crop[ 1 ];
                 
         break;
             
      }
         
-      $this->posicao_crop[ 0 ] = $this->pos_x;
-      $this->posicao_crop[ 1 ] = $this->pos_y;
+      $this->position_crop[ 0 ] = $this->position_x;
+      $this->position_crop[ 1 ] = $this->position_y;
 
           if($auto)
           {
-                imagecopyresampled( $this->img_temp, $this->img, -$this->posicao_crop[0],
-           -$this->posicao_crop[1], 0, 0, $this->posicao_crop[2], $this->posicao_crop[3], $this->largura,
-            $this->altura );
+                imagecopyresampled( $this->img_temp, $this->img, -$this->position_crop[0],
+           -$this->position_crop[1], 0, 0, $this->position_crop[2], $this->position_crop[3], $this->widht,
+            $this->height );
           }     
           else 
           {
-            imagecopyresampled( $this->img_temp, $this->img, 0, 0, $this->posicao_crop[0], 
-                $this->posicao_crop[1], $this->nova_largura, $this->nova_altura, 
-                $this->posicao_crop[2], $this->posicao_crop[3] );
+            imagecopyresampled( $this->img_temp, $this->img, 0, 0, $this->position_crop[0], 
+                $this->position_crop[1], $this->new_widht, $this->new_heigth, 
+                $this->position_crop[2], $this->position_crop[3] );
           }
           $this->img     = $this->img_temp;
      } // end redimensionaCrop
@@ -762,8 +762,8 @@ class canvas {
           imagealphablending( $this->img, true );
           imagesavealpha( $this->img, true );
 
-          $this->largura = imagesx( $this->img );
-          $this->altura = imagesx( $this->img );
+          $this->widht = imagesx( $this->img );
+          $this->height = imagesx( $this->img );
 
           return $this;
      } // fim girar
@@ -771,7 +771,7 @@ class canvas {
      /**
       * add text in the image
       * @param String $texto text to be added
-      * @param Int $tamanho font size
+      * @param Int $size font size
       * @param Int $x x position text in the image
       * @param Int $y y position text in the image
       * @param Array/String $cor_fundo array whith RGB colors or string with hexadecimal colors
@@ -779,7 +779,7 @@ class canvas {
       * @param String $fonte font name truetype to use
       * @return void
       **/
-     public function legenda( $texto, $tamanho = 5, $x = 0, $y = 0, $cor_fundo = '', 
+     public function legenda( $texto, $size = 5, $x = 0, $y = 0, $cor_fundo = '', 
         $truetype = false, $fonte = '' )
      {
           $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
@@ -789,20 +789,20 @@ class canvas {
            **/
           if( $truetype  === true )
           {
-               $dimensoes_texto     = imagettfbbox( $tamanho, 0, $fonte, $texto );
-               $largura_texto          = $dimensoes_texto[4];
-               $altura_texto          = $tamanho;
+               $dimensoes_texto     = imagettfbbox( $size, 0, $fonte, $texto );
+               $widht_texto          = $dimensoes_texto[4];
+               $height_texto          = $size;
           }
           else
           {
-               if( $tamanho > 5 ) $tamanho = 5;
-               $largura_texto     = imagefontwidth( $tamanho ) * strlen( $texto );
-               $altura_texto     = imagefontheight( $tamanho );
+               if( $size > 5 ) $size = 5;
+               $widht_texto     = imagefontwidth( $size ) * strlen( $texto );
+               $height_texto     = imagefontheight( $size );
           }
 
           if( is_string( $x ) && is_string( $y ) )
           {
-               list( $x, $y ) = $this->calculaPosicaoLegenda( $x . '_' . $y, $largura_texto, $altura_texto );
+               list( $x, $y ) = $this->calculaPosicaoLegenda( $x . '_' . $y, $widht_texto, $height_texto );
           }
 
           /**
@@ -819,23 +819,23 @@ class canvas {
                     $this->hexa( $cor_fundo );
                }
 
-               $this->img_temp = imagecreatetruecolor( $largura_texto, $altura_texto );
+               $this->img_temp = imagecreatetruecolor( $widht_texto, $height_texto );
                
                $cor_fundo = color_background();
 
                imagefill( $this->img_temp, 0, 0, $cor_fundo );
 
-               imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $largura_texto, $altura_texto );
+               imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $widht_texto, $height_texto );
           }
 
           if ( $truetype === true )
           {
-               $y = $y + $tamanho;
-               imagettftext( $this->img, $tamanho, 0, $x, $y, $cor_texto, $fonte, $texto );
+               $y = $y + $size;
+               imagettftext( $this->img, $size, 0, $x, $y, $cor_texto, $fonte, $texto );
           }
           else
           {
-               imagestring( $this->img, $tamanho, $x, $y, $texto, $cor_texto );
+               imagestring( $this->img, $size, $x, $y, $texto, $cor_texto );
           }
           return $this;
      } // end legenda
@@ -849,11 +849,11 @@ class canvas {
      * Calculates the position of the legend according to string passed via parameter
      *
      * @param String $posicao predefined values(topo_esquerda, meio_centro etc.)
-     * @param Integer $largura image widht
-     * @param Integer $altura image height
+     * @param Integer $widht image widht
+     * @param Integer $height image height
      * @return void
      **/
-     private function calculaPosicaoLegenda( $posicao, $largura, $altura )
+     private function calculaPosicaoLegenda( $posicao, $widht, $height )
      {
           // sets X and Y to position
           switch( $posicao )
@@ -863,36 +863,36 @@ class canvas {
                     $y = 0;
                     break;
                case 'topo_centro':
-                    $x = ( $this->largura - $largura ) / 2;
+                    $x = ( $this->widht - $widht ) / 2;
                     $y = 0;
                     break;
                case 'topo_direita':
-                    $x = $this->largura - $largura;
+                    $x = $this->widht - $widht;
                     $y = 0;
                     break;
                case 'meio_esquerda':
                     $x = 0;
-                    $y = ( $this->altura / 2 ) - ( $altura / 2 );
+                    $y = ( $this->height / 2 ) - ( $height / 2 );
                     break;
                case 'meio_centro':
-                    $x = ( $this->largura - $largura ) / 2;
-                    $y = ( $this->altura - $altura ) / 2 ;
+                    $x = ( $this->widht - $widht ) / 2;
+                    $y = ( $this->height - $height ) / 2 ;
                     break;
                case 'meio_direita':
-                    $x = $this->largura - $largura;
-                    $y = ( $this->altura / 2) - ( $altura / 2 );
+                    $x = $this->widht - $widht;
+                    $y = ( $this->height / 2) - ( $height / 2 );
                     break;
                case 'baixo_esquerda':
                     $x = 0;
-                    $y = $this->altura - $altura;
+                    $y = $this->height - $height;
                     break;
                case 'baixo_centro':
-                    $x = ( $this->largura - $largura ) / 2;
-                    $y = $this->altura - $altura;
+                    $x = ( $this->widht - $widht ) / 2;
+                    $y = $this->height - $height;
                     break;
                case 'baixo_direita':
-                    $x = $this->largura - $largura;
-                    $y = $this->altura - $altura;
+                    $x = $this->widht - $widht;
+                    $y = $this->height - $height;
                     break;
                default:
                     return false;
@@ -943,7 +943,7 @@ class canvas {
                          $marcadagua = imagecreatefrombmp( $imagem );
                          break;
                     default:
-                         trigger_error( 'Arquivo de marca d\'água inválido.', E_USER_ERROR );
+                         trigger_error( 'file de marca d\'água inválido.', E_USER_ERROR );
                          return false;
                }
           }
@@ -951,7 +951,7 @@ class canvas {
           {
                return false;
           }
-<<<<<<< HEAD
+<<<<<<  HEAD
           // sizes
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
@@ -998,36 +998,36 @@ class canvas {
                     $y = 0;
                     break;
                case 'topo_centro':
-                    $x = ( $this->largura - $marca_w ) / 2;
+                    $x = ( $this->widht - $marca_w ) / 2;
                     $y = 0;
                     break;
                case 'topo_direita':
-                    $x = $this->largura - $marca_w;
+                    $x = $this->widht - $marca_w;
                     $y = 0;
                     break;
                case 'meio_esquerda':
                     $x = 0;
-                    $y = ( $this->altura / 2 ) - ( $marca_h / 2 );
+                    $y = ( $this->height / 2 ) - ( $marca_h / 2 );
                     break;
                case 'meio_centro':
-                    $x = ( $this->largura - $marca_w ) / 2;
-                    $y = ( $this->altura / 2 ) - ( $marca_h / 2 );
+                    $x = ( $this->widht - $marca_w ) / 2;
+                    $y = ( $this->height / 2 ) - ( $marca_h / 2 );
                     break;
                case 'meio_direita':
-                    $x = $this->largura - $marca_w;
-                    $y = ( $this->altura / 2) - ( $marca_h / 2 );
+                    $x = $this->widht - $marca_w;
+                    $y = ( $this->height / 2) - ( $marca_h / 2 );
                     break;
                case 'baixo_esquerda':
                     $x = 0;
-                    $y = $this->altura - $marca_h;
+                    $y = $this->height - $marca_h;
                     break;
                case 'baixo_centro':
-                    $x = ( $this->largura - $marca_w ) / 2;
-                    $y = $this->altura - $marca_h;
+                    $x = ( $this->widht - $marca_w ) / 2;
+                    $y = $this->height - $marca_h;
                     break;
                case 'baixo_direita':
-                    $x = $this->largura - $marca_w;
-                    $y = $this->altura - $marca_h;
+                    $x = $this->widht - $marca_w;
+                    $y = $this->height - $marca_h;
                     break;
                default:
                     return false;
@@ -1203,7 +1203,7 @@ class canvas {
           {
                $pathinfo               = pathinfo( $destino );
                $dir_destino          = $pathinfo['dirname'];
-               $extensao_destino     = strtolower( $pathinfo['extension'] );
+               $extension_destino     = strtolower( $pathinfo['extension'] );
 
                // validate directory
                if ( !is_dir( $dir_destino ) )
@@ -1212,12 +1212,12 @@ class canvas {
                }
           }
 
-          if ( !isset( $extensao_destino ) )
+          if ( !isset( $extension_destino ) )
           {
-               $extensao_destino = $this->extensao;
+               $extension_destino = $this->extension;
           }
 
-          switch( $extensao_destino )
+          switch( $extension_destino )
           {
                case 'jpg':
                case 'jpeg':

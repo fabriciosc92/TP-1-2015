@@ -28,7 +28,7 @@ $idOrganizer = $_SESSION['idOrganizer']; // Organizer registration code
 $ageClassification = $_POST['ageClassification']; // Age rating of the event
 $event = new Event(); // Varible that receives event's data
 
-require_once 'recebe_upload_evento.php';
+require_once 'eventUploadImage.php';
 
 $event->setEventName($eventName);
 $event->setEventBeginDate($eventBeginDate);
@@ -55,5 +55,5 @@ $validator->validarPreco($femaleEventPrice);
 $validator->validarVaga($numberOfTickets);
 
 $_SESSION['id'] = $event->insertEvent();
-header("Location:../cadastrar-evento-local.php");
+header("Location:../localRegistrationProcess.php");
 ?>

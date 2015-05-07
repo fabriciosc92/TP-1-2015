@@ -52,7 +52,7 @@ if (isset($_SESSION['id'])) {
 						}
                         ?>
                     </ul>
-                    <a class="btn btn-success pull-right" href="cadastrarEvento.php">Divulgar seu evento</a>
+                    <a class="btn btn-success pull-right" href="registerEvent.php">Divulgar seu evento</a>
 						<?php 
 						if (isset($_SESSION['id'])) {
 						?>

@@ -36,7 +36,7 @@ addcslashes($state, $strList);
 
 $local = new Local(); // Variable that receives local data
 
-require_once "recebe_upload_local.php";
+require_once "localUploadImage.php";
 
 $local->setDistrict($district);
 $local->setZipCode($zipCode);
@@ -55,5 +55,5 @@ EventoLocal::persist($idEvento, $idLocal);
 
 echo "cadastro efetuado";
 
-header("Location: ../evento.php?id=$idEvento");
+header("Location: ../Event.php?id=$idEvento");
 ?>

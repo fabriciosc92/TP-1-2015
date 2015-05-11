@@ -342,7 +342,8 @@ class PHPMailer {
    * Constructor
    * @param boolean $exceptions Should we throw external exceptions?
    */
-  public function __construct($exceptions = false) {
+  public function __construct($exceptions = false) 
+  {
     $this->exceptions = ($exceptions == true);
   }
 
@@ -351,10 +352,14 @@ class PHPMailer {
    * @param bool $ishtml
    * @return void
    */
-  public function IsHTML($ishtml = true) {
-    if ($ishtml) {
+  public function IsHTML($ishtml = true) 
+  {
+    if ($ishtml) 
+    {
       $this->ContentType = 'text/html';
-    } else {
+    } 
+    else 
+    {
       $this->ContentType = 'text/plain';
     }
   }
@@ -363,7 +368,8 @@ class PHPMailer {
    * Sets Mailer to send message using SMTP.
    * @return void
    */
-  public function IsSMTP() {
+  public function IsSMTP() 
+  {
     $this->Mailer = 'smtp';
   }
 
@@ -371,7 +377,8 @@ class PHPMailer {
    * Sets Mailer to send message using PHP mail() function.
    * @return void
    */
-  public function IsMail() {
+  public function IsMail() 
+  {
     $this->Mailer = 'mail';
   }
 
@@ -379,8 +386,10 @@ class PHPMailer {
    * Sets Mailer to send message using the $Sendmail program.
    * @return void
    */
-  public function IsSendmail() {
-    if (!stristr(ini_get('sendmail_path'), 'sendmail')) {
+  public function IsSendmail() 
+  {
+    if (!stristr(ini_get('sendmail_path'), 'sendmail')) 
+    {
       $this->Sendmail = '/var/qmail/bin/sendmail';
     }
     $this->Mailer = 'sendmail';
@@ -390,8 +399,10 @@ class PHPMailer {
    * Sets Mailer to send message using the qmail MTA.
    * @return void
    */
-  public function IsQmail() {
-    if (stristr(ini_get('sendmail_path'), 'qmail')) {
+  public function IsQmail() 
+  {
+    if (stristr(ini_get('sendmail_path'), 'qmail')) 
+    {
       $this->Sendmail = '/var/qmail/bin/sendmail';
     }
     $this->Mailer = 'sendmail';
@@ -407,7 +418,8 @@ class PHPMailer {
    * @param string $name
    * @return boolean true on success, false if address already used
    */
-  public function AddAddress($address, $name = '') {
+  public function AddAddress($address, $name = '') 
+  {
     return $this->AddAnAddress('to', $address, $name);
   }
 
@@ -418,7 +430,8 @@ class PHPMailer {
    * @param string $name
    * @return boolean true on success, false if address already used
    */
-  public function AddCC($address, $name = '') {
+  public function AddCC($address, $name = '') 
+  {
     return $this->AddAnAddress('cc', $address, $name);
   }
 
@@ -429,7 +442,8 @@ class PHPMailer {
    * @param string $name
    * @return boolean true on success, false if address already used
    */
-  public function AddBCC($address, $name = '') {
+  public function AddBCC($address, $name = '') 
+  {
     return $this->AddAnAddress('bcc', $address, $name);
   }
 
@@ -439,7 +453,8 @@ class PHPMailer {
    * @param string $name
    * @return boolean
    */
-  public function AddReplyTo($address, $name = '') {
+  public function AddReplyTo($address, $name = '') 
+  {
     return $this->AddAnAddress('ReplyTo', $address, $name);
   }
 
@@ -452,29 +467,44 @@ class PHPMailer {
    * @return boolean true on success, false if address already used or invalid in some way
    * @access private
    */
-  private function AddAnAddress($kind, $address, $name = '') {
-    if (!preg_match('/^(to|cc|bcc|ReplyTo)$/', $kind)) {
+  private function AddAnAddress($kind, $address, $name = '') 
+  {
+    if (!preg_match('/^(to|cc|bcc|ReplyTo)$/', $kind)) 
+    {
       echo 'Invalid recipient array: ' . kind;
       return false;
     }
+    else
+    {
+
+    }
+
     $address = trim($address);
     $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
-    if (!self::ValidateAddress($address)) {
+    
+    if (!self::ValidateAddress($address)) 
+    {
       $this->SetError($this->Lang('invalid_address').': '. $address);
-      if ($this->exceptions) {
+      if ($this->exceptions) 
+      {
         throw new phpmailerException($this->Lang('invalid_address').': '.$address);
       }
       echo $this->Lang('invalid_address').': '.$address;
       return false;
     }
-    if ($kind != 'ReplyTo') {
-      if (!isset($this->all_recipients[strtolower($address)])) {
+    if ($kind != 'ReplyTo') 
+    {
+      if (!isset($this->all_recipients[strtolower($address)])) 
+      {
         array_push($this->$kind, array($address, $name));
         $this->all_recipients[strtolower($address)] = true;
         return true;
       }
-    } else {
-      if (!array_key_exists(strtolower($address), $this->ReplyTo)) {
+    } 
+    else 
+    {
+      if (!array_key_exists(strtolower($address), $this->ReplyTo)) 
+      {
         $this->ReplyTo[strtolower($address)] = array($address, $name);
       return true;
     }
@@ -488,26 +518,40 @@ class PHPMailer {
  * @param string $name
  * @return boolean
  */
-  public function SetFrom($address, $name = '',$auto=1) {
+  public function SetFrom($address, $name = '',$auto=1) 
+  {
     $address = trim($address);
     $name = trim(preg_replace('/[\r\n]+/', '', $name)); //Strip breaks and trim
-    if (!self::ValidateAddress($address)) {
+
+    if (!self::ValidateAddress($address)) 
+    {
       $this->SetError($this->Lang('invalid_address').': '. $address);
-      if ($this->exceptions) {
+
+      if ($this->exceptions) 
+      {
         throw new phpmailerException($this->Lang('invalid_address').': '.$address);
       }
       echo $this->Lang('invalid_address').': '.$address;
       return false;
     }
+    
     $this->From = $address;
     $this->FromName = $name;
-    if ($auto) {
-      if (empty($this->ReplyTo)) {
+    
+    if ($auto) 
+    {
+      if (empty($this->ReplyTo)) 
+      {
         $this->AddAnAddress('ReplyTo', $address, $name);
       }
-      if (empty($this->Sender)) {
+      if (empty($this->Sender)) 
+      {
         $this->Sender = $address;
       }
+    }
+    else
+    {
+
     }
     return true;
   }
@@ -560,9 +604,12 @@ class PHPMailer {
    * variable to view description of the error.
    * @return bool
    */
-  public function Send() {
-    try {
-      if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
+  public function Send() 
+  {
+    try 
+    {
+      if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) 
+      {
         throw new phpmailerException($this->Lang('provide_address'), self::STOP_CRITICAL);
       }
 
@@ -576,18 +623,21 @@ class PHPMailer {
       $header = $this->CreateHeader();
       $body = $this->CreateBody();
 
-      if (empty($this->Body)) {
+      if (empty($this->Body)) 
+      {
         throw new phpmailerException($this->Lang('empty_message'), self::STOP_CRITICAL);
       }
 
       // digitally sign with DKIM if enabled
-      if ($this->DKIM_domain && $this->DKIM_private) {
+      if ($this->DKIM_domain && $this->DKIM_private) 
+      {
         $header_dkim = $this->DKIM_Add($header,$this->Subject,$body);
         $header = str_replace("\r\n","\n",$header_dkim) . $header;
       }
 
       // Choose the mailer and send through it
-      switch($this->Mailer) {
+      switch($this->Mailer) 
+      {
         case 'sendmail':
           return $this->SendmailSend($header, $body);
         case 'smtp':
@@ -596,9 +646,11 @@ class PHPMailer {
           return $this->MailSend($header, $body);
       }
 
-    } catch (phpmailerException $e) {
+    } catch (phpmailerException $e) 
+    {
       $this->SetError($e->getMessage());
-      if ($this->exceptions) {
+      if ($this->exceptions) 
+      {
         throw $e;
       }
       echo $e->getMessage()."\n";

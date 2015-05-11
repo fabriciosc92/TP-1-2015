@@ -65,24 +65,17 @@ class canvas {
      {
 <<<<<< HEAD
 			
-		$this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
-		$this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
-		$this->position_y = $this->format = $this->extension = $this->size = $this->file = 
-		$this->path = $this->position_crop = NULL;
-	
-	    	$this->rgb( 255, 255, 255 );
-     }// end resetar
-=======
-        
-        $reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+		$reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
         $this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
         $this->position_y = $this->format = $this->extension = $this->size = $this->file = 
         $this->path = $this->position_crop;
 
         $reset_variables = NULL;
-    
-        $this->rgb( 255, 255, 255 );
-     }// fim resetar
+	
+	    $this->rgb( 255, 255, 255 );
+     }// end resetar
+=======
+        
 >>>>>>> master
      
 
@@ -546,7 +539,8 @@ class canvas {
             if ($this->new_widht/$this->new_heigth > $ratio_orig) {
                $dif_w = $this->new_heigth*$ratio_orig;
                $dif_h = $this->new_heigth;
-            } else 
+            } 
+            else 
             {
                $dif_w = $this->new_widht;
                $dif_h = $this->new_widht/$ratio_orig;

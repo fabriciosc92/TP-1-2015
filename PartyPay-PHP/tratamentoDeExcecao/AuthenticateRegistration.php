@@ -49,7 +49,7 @@ class AuthenticateRegistration
         $this->errorMessage[6] = "Preencha o campo " . $field . " com numeros <br />";
 
         // Notify that the field is empty.
-        $this->errorMessage[7] = "Por favor Preencha o campo " . $field . " <br />";
+        $this->errorMessage[7] = "Por favor preencha o campo " . $field . " <br />";
 
         // Year informed is below to the current year.
         $this->errorMessage[8] = "Ano informado e inferior ao ano corrente <br />";
@@ -64,7 +64,7 @@ class AuthenticateRegistration
         $this->errorMessage[12] = "Informe um preço válido <br />";
 
         // Notify the user to input a valid vacancy.
-        $this->errorMessage[13] = "Informe um número de vagas válida <br />";
+        $this->errorMessage[13] = "Informe um número de vagas válido <br />";
 
         return $this->errorMessage[$number];
     }
@@ -82,7 +82,7 @@ class AuthenticateRegistration
             exit();
 
         } 
-        elseif (PessoaDAC::verifiqueDispo($email) == 0) 
+        elseif (UserDAC::verifiqueDispo($email) == 0) 
         {
                 
                 echo $this->messages(10, 'email', null, null);
@@ -107,9 +107,9 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(2, 'data', null, null);
+            echo $this->messages(2, 'date', null, null);
 
-            return $this->messages(2, 'data', null, null);
+            return $this->messages(2, 'date', null, null);
             exit();
         }
 
@@ -117,121 +117,124 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(2, 'data', null, null);
+            echo $this->messages(2, 'date', null, null);
 
-            return $this->messages(2, 'data', null, null);
+            return $this->messages(2, 'date', null, null);
             exit();
         }
 
-        $data = explode("/", $date);
-        $d = $data[0];
-        $m = $data[1];
-        $y = $data[2];
+        $date = explode("/", $date);
+        $day = $date[0];
+        $month = $date[1];
+        $year = $date[2];
         
-        if ($y < 2013) 
+        // Checks if the year is below the current one. 
+        if ($year < 2013) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(8, 'data', null, null);
+            echo $this->messages(8, 'date', null, null);
 
-            return $this->messages(8, 'data', null, null);
+            return $this->messages(8, 'date', null, null);
             exit();
         }
 
-        $result = checkdate($m, $d, $y);
+        $result = checkdate($month, $day, $year);
+
         if ($result == FALSE) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(2, 'data', null, null);
-            return $this->messages(2, 'data', null, null);
+            echo $this->messages(2, 'date', null, null);
+
+            return $this->messages(2, 'date', null, null);
             exit();
         }
     }
 
-    // Authenticate HORA (23:59)
-    function authenticateTime($hora, $minuto) 
+    // Authenticate hour (23:59)
+    function authenticateTime($hour, $minute) 
     {
-        if (!is_numeric($hora)) 
+        if (!is_numeric($hour)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(3, 'hora', null, null);
+            echo $this->messages(3, 'hour', null, null);
             exit();
         }
-        if (!is_numeric($minuto)) 
+        if (!is_numeric($minute)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(11, 'hora', null, null);
+            echo $this->messages(11, 'hour', null, null);
             exit();
         }
-        if (!preg_match('/^[0-23]{2,2}?$/', $hora)) 
+        if (!preg_match('/^[0-23]{2,2}?$/', $hour)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(3, 'hora', null, null);
+            echo $this->messages(3, 'hour', null, null);
             exit();
         }
-        if (!preg_match('/^[0-59]{2,2}?$/', $minuto)) {
+        if (!preg_match('/^[0-59]{2,2}?$/', $minute)) {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(11, 'hora', null, null);
+            echo $this->messages(11, 'hour', null, null);
             exit();
         }
     }
 
-    function authenticatePrice($preco) 
+    function authenticatePrice($price) 
     {
-        if (!is_numeric($preco)) 
+        if (!is_numeric($price)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(12, 'hora', null, null);
+            echo $this->messages(12, 'hour', null, null);
 
-            return $this->messages(12, 'hora', null, null);
+            return $this->messages(12, 'hour', null, null); 
             exit();
         } 
-        elseif ($preco < 0) 
+        elseif ($price < 0) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(12, 'hora', null, null);
+            echo $this->messages(12, 'hour', null, null);
 
-            return $this->messages(12, 'hora', null, null);
+            return $this->messages(12, 'hour', null, null);
             exit();
         }
     }
 
-    // Authenticate HORA (23:59)
-    function authenticateVacancy($vaga) 
+    // Authenticate hour (23:59)
+    function authenticateVacancy($vacancy) 
     {
-        if (!is_numeric($vaga)) 
+        if (!is_numeric($vacancy)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(13, 'hora', null, null);
+            echo $this->messages(13, 'hour', null, null);
 
-            return $this->messages(13, 'hora', null, null);
+            return $this->messages(13, 'hour', null, null);
             exit();
 
         } 
-        elseif ($vaga < 0) 
+        elseif ($vacancy < 0) 
         {
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(13, 'hora', null, null);
+            echo $this->messages(13, 'hour', null, null);
 
-            return $this->messages(13, 'hora', null, null);
+            return $this->messages(13, 'hour', null, null);
             exit();
         }
     }
 
     // Authenticate Phone number (61-32363810)
-    function authenticatePhone($telefone) 
+    function authenticatePhone($phone) 
     {
-        if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $telefone)) 
+        if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $phone)) 
         {
-            echo $this->messages(4, 'telefone', null, null);
+            echo $this->messages(4, 'phone', null, null);
             exit();
         }
     }
@@ -240,12 +243,12 @@ class AuthenticateRegistration
     function authenticateCpf($cpf)
     {
         $cpf         = preg_replace("/[^0-9]/", "", $cpf);
-        $digitoUm     = 0;
-        $digitoDois = 0;
+        $firstDigit     = 0;
+        $secondDigit = 0;
          
         for($i = 0, $x = 10; $i <= 8; $i++, $x--)
         {
-            $digitoUm += $cpf[$i] * $x;
+            $firstDigit += $cpf[$i] * $x;
         }
         for($i = 0, $x = 11; $i <= 9; $i++, $x--)
         {
@@ -254,13 +257,13 @@ class AuthenticateRegistration
                 echo $this->messages(5, 'cpf', null, null);
                 exit();
             }
-            $digitoDois += $cpf[$i] * $x;
+            $secondDigit += $cpf[$i] * $x;
         }
          
-        $calculoUm  = (($digitoUm%11) < 2) ? 0 : 11-($digitoUm%11);
-        $calculoDois = (($digitoDois%11) < 2) ? 0 : 11-($digitoDois%11);
+        $firstCalculation  = (($firstDigit%11) < 2) ? 0 : 11-($firstDigit%11);
+        $secondCalculation = (($secondDigit%11) < 2) ? 0 : 11-($secondDigit%11);
 
-        if($calculoUm <> $cpf[9] || $calculoDois <> $cpf[10])
+        if($firstCalculation <> $cpf[9] || $secondCalculation <> $cpf[10])
         {
             echo $this->messages(5, 'cpf', null, null);
             exit();

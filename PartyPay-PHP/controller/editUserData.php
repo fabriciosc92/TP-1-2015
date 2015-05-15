@@ -16,7 +16,7 @@ $userFirstName = addslashes($_POST['userFirstName']);
 $userLastName = addslashes($_POST['lastName']);
 $userSex = addslashes($_POST['userSex']);
 $userCpf = addslashes($_POST['userCpf']);
-$useruserPhone = addslashes($_POST['userPhone']);
+$userPhone = addslashes($_POST['userPhone']);
 $id = $_SESSION['id'];
 
 $strList = "\\\'\"&\n\r<>";

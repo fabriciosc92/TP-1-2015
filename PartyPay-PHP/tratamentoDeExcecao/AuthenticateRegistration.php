@@ -239,29 +239,50 @@ class AuthenticateRegistration
         }
     }
 
+    const CPF_SIZE = "11";
+
     // Authenticate CPF (99999999999)
     function authenticateCpf($cpf)
     {
         $cpf         = preg_replace("/[^0-9]/", "", $cpf);
         $firstDigit     = 0;
         $secondDigit = 0;
-         
-        for($i = 0, $x = 10; $i <= 8; $i++, $x--)
+        
+        // Calculate first digit.
+        for($i = 0, $x = 10; $i <= 8; $i = $i + 1, $x = $x - 1)
         {
-            $firstDigit += $cpf[$i] * $x;
+            $firstDigit = $firstDigit + $cpf[$i] * $x;
         }
-        for($i = 0, $x = 11; $i <= 9; $i++, $x--)
+
+        // Calculate second digit.
+        for($i = 0, $x = 11; $i <= 9; $i = $i + 1, $x = $x - 1)
         {
             if(str_repeat($i, 11) == $cpf)
             {
                 echo $this->messages(5, 'cpf', null, null);
                 exit();
             }
-            $secondDigit += $cpf[$i] * $x;
+            $secondDigit = $secondDigit + $cpf[$i] * $x;
         }
          
-        $firstCalculation  = (($firstDigit%11) < 2) ? 0 : 11-($firstDigit%11);
-        $secondCalculation = (($secondDigit%11) < 2) ? 0 : 11-($secondDigit%11);
+        
+        if(($firstDigit%CPF_SIZE) < 2)
+        {
+            $firstCalculation = 0;
+        }
+        else
+        {
+            $firstCalculation = CPF_SIZE-($firstDigit%CPF_SIZE);
+        }
+
+        if(($secondDigit%CPF_SIZE) < 2)
+        {
+            $secondCalculation = 0;
+        }
+        else
+        {
+            $secondCalculation = CPF_SIZE-($secondDigit%CPF_SIZE);
+        }
 
         if($firstCalculation <> $cpf[9] || $secondCalculation <> $cpf[10])
         {
@@ -279,11 +300,13 @@ class AuthenticateRegistration
         }
     }
 
+    const EMPTY_FIELD = " ";
+
     // Simple verification (empty field, max/min numbers of caracters).
     function authenticateField($field, $value) 
     {
         
-        if ($value == "") 
+        if ($value == EMPTY_FIELD) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");

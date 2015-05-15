@@ -367,7 +367,7 @@ Alunos: Ana Carolina Lopes da Silva		Mat: 09/0078659
 	// This is a comment in one line.
 
 	- Over one line:
-	/*
+	/**
 	 * This is a comment
 	 * in more than one line.
 	 */

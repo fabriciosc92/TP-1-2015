@@ -8,20 +8,24 @@
  */
 
 /**
- * Description of ValidacaoPessoa
+ * Class: AuthenticateRegistration
+ * Description: Class that validate registrations fields.
  *
  * @author Fagner-note
  */
+
 require_once '../model/DAC/UserDAC.php';
 
-class AuthenticateRegistration {
+class AuthenticateRegistration 
+{
 
     var $field;
     var $value;
     var $errorMessage = array();
 
     // Defines error messages. 
-    public function messages($number, $field) {
+    public function messages($number, $field) 
+    {
 
         // Notify the user when the email is invalid.
         $this->errorMessage[0] = "Preencha o campo com um email válido <br />"; 
@@ -66,60 +70,77 @@ class AuthenticateRegistration {
     }
 
     // Authenticate Email
-    function authenticateEmail($email) {
-        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $email)) {
+    function authenticateEmail($email) 
+    {
+        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', 
+            $email)) 
+        {
             
             echo $this->messages(0, 'email', null, null);
-            return $this->messages(0, 'email', null, null);
-            exit;
 
-        } elseif (PessoaDAC::verifiqueDispo($email) == 0) {
+            return $this->messages(0, 'email', null, null);
+            exit();
+
+        } 
+        elseif (PessoaDAC::verifiqueDispo($email) == 0) 
+        {
                 
                 echo $this->messages(10, 'email', null, null);
-                
-                exit;
+                exit();
         }
     }
 
     // Authenticate CEP (xxxxx-xxx)
-    function authenticateCep($cep) {
-        if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) {
+    function authenticateCep($cep) 
+    {
+        if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) 
+        {
             echo $this->messages(1, 'cep', null, null);
             exit();
         }
     }
 
     // Authenticate Date (DD/MM/AAAA)
-    function authenticateDate($date) {        
-        if (!isset($date) || $date == "") {
+    function authenticateDate($date) 
+    {        
+        if (!isset($date) || $date == "") 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(2, 'data', null, null);
+
             return $this->messages(2, 'data', null, null);
             exit();
         }
 
-        if (!preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $date)) {
+        if (!preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $date)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(2, 'data', null, null);
+
             return $this->messages(2, 'data', null, null);
             exit();
         }
+
         $data = explode("/", $date);
         $d = $data[0];
         $m = $data[1];
         $y = $data[2];
         
-        if ($y < 2013) {
+        if ($y < 2013) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(8, 'data', null, null);
+
             return $this->messages(8, 'data', null, null);
             exit();
         }
+
         $result = checkdate($m, $d, $y);
-        if ($result == FALSE) {
+        if ($result == FALSE) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(2, 'data', null, null);
@@ -129,20 +150,24 @@ class AuthenticateRegistration {
     }
 
     // Authenticate HORA (23:59)
-    function authenticateTime($hora, $minuto) {
-        if (!is_numeric($hora)) {
+    function authenticateTime($hora, $minuto) 
+    {
+        if (!is_numeric($hora)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(3, 'hora', null, null);
             exit();
         }
-        if (!is_numeric($minuto)) {
+        if (!is_numeric($minuto)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(11, 'hora', null, null);
             exit();
         }
-        if (!preg_match('/^[0-23]{2,2}?$/', $hora)) {
+        if (!preg_match('/^[0-23]{2,2}?$/', $hora)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(3, 'hora', null, null);
@@ -156,57 +181,76 @@ class AuthenticateRegistration {
         }
     }
 
-    function authenticatePrice($preco) {
-        if (!is_numeric($preco)) {
+    function authenticatePrice($preco) 
+    {
+        if (!is_numeric($preco)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(12, 'hora', null, null);
+
             return $this->messages(12, 'hora', null, null);
             exit();
-        } elseif ($preco < 0) {
+        } 
+        elseif ($preco < 0) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(12, 'hora', null, null);
+
             return $this->messages(12, 'hora', null, null);
             exit();
         }
     }
 
     // Authenticate HORA (23:59)
-    function authenticateVacancy($vaga) {
-        if (!is_numeric($vaga)) {
+    function authenticateVacancy($vaga) 
+    {
+        if (!is_numeric($vaga)) 
+        {
 
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(13, 'hora', null, null);
+
             return $this->messages(13, 'hora', null, null);
             exit();
-        } elseif ($vaga < 0) {
+
+        } 
+        elseif ($vaga < 0) 
+        {
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(13, 'hora', null, null);
+
             return $this->messages(13, 'hora', null, null);
             exit();
         }
     }
 
     // Authenticate Phone number (61-32363810)
-    function authenticatePhone($telefone) {
-        if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $telefone)) {
+    function authenticatePhone($telefone) 
+    {
+        if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $telefone)) 
+        {
             echo $this->messages(4, 'telefone', null, null);
             exit();
         }
     }
 
     // Authenticate CPF (99999999999)
-function authenticateCpf($cpf){
+    function authenticateCpf($cpf)
+    {
         $cpf         = preg_replace("/[^0-9]/", "", $cpf);
         $digitoUm     = 0;
         $digitoDois = 0;
          
-        for($i = 0, $x = 10; $i <= 8; $i++, $x--){
+        for($i = 0, $x = 10; $i <= 8; $i++, $x--)
+        {
             $digitoUm += $cpf[$i] * $x;
         }
-        for($i = 0, $x = 11; $i <= 9; $i++, $x--){
-            if(str_repeat($i, 11) == $cpf){
+        for($i = 0, $x = 11; $i <= 9; $i++, $x--)
+        {
+            if(str_repeat($i, 11) == $cpf)
+            {
                 echo $this->messages(5, 'cpf', null, null);
                 exit();
             }
@@ -215,24 +259,30 @@ function authenticateCpf($cpf){
          
         $calculoUm  = (($digitoUm%11) < 2) ? 0 : 11-($digitoUm%11);
         $calculoDois = (($digitoDois%11) < 2) ? 0 : 11-($digitoDois%11);
-        if($calculoUm <> $cpf[9] || $calculoDois <> $cpf[10]){
+
+        if($calculoUm <> $cpf[9] || $calculoDois <> $cpf[10])
+        {
             echo $this->messages(5, 'cpf', null, null);
             exit();
         }
     }
     
 // Authenticate fields with numbers.
-    function authenticateNumber($field, $number) {
-        if (!is_numeric($number)) {
+    function authenticateNumber($field, $number) 
+    {
+        if (!is_numeric($number)) 
+        {
             return $this->messages(6, $field, null, null);
         }
     }
 
     // Simple verification (empty field, max/min numbers of caracters).
-    function authenticateField($field, $value) {
+    function authenticateField($field, $value) 
+    {
         
-        if ($value == "") {
-            
+        if ($value == "") 
+        {
+
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(7, $field);
             exit();
@@ -240,14 +290,17 @@ function authenticateCpf($cpf){
     }
 
 // Verify if there are errors.
-    function verifyErrors() {
-        if (sizeof($this->errorMessage) == 0) {
+    function verifyErrors() 
+    {
+        if (sizeof($this->errorMessage) == 0) 
+        {
             return true;
-        } else {
+        } 
+        else 
+        {
             return false;
         }
     }
-
 }
 
 //$coverage->stop();
@@ -255,4 +308,3 @@ function authenticateCpf($cpf){
 //$writer = new PHP_CodeCoverage_Report_Clover;
 //$writer->process($coverage, '/tmp/clover.xml');
 
-?>  

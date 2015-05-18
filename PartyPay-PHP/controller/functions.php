@@ -49,4 +49,8 @@ function lastEvent()
     return $row[0];
 }
 
+function log_it($error_message){
+	error_log($error_message, 3, "\\PartyPay-PHP\php_error.log");
+}
+
 ?>

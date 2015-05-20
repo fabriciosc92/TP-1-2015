@@ -1,7 +1,7 @@
 <?php
 
 require_once '../model/Event.php';
-include '../tratamentoDeExcecao/ValidaCadastro.php';
+include '../tratamentoDeExcecao/AuthenticateRegistration.php';
 
 /**
 *

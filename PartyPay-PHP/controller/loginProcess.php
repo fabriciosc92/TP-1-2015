@@ -1,8 +1,8 @@
 <?php
 
-include '../model/Pessoa.php';
-include '../tratamentoDeExcecao/ValidaCadastro.php';
-include 'gerarCodConfirmacao.php';
+include '../model/User.php';
+include '../tratamentoDeExcecao/AuthenticateRegistration.php';
+include 'generateConfirmationCode.php';
 
 /**
 *
@@ -62,10 +62,12 @@ if ($count == 1) {
     $_SESSION['id'] = $row['id'];
 
     //Para testar se o id está sendo passado corretamente:
-    //DESCOMENTE ESTA LINHA, E COMENTE A DO HEADER!
     //echo $_SESSION['id'];
     header("location: ../login.php");
 } else {
+
+    log_it("Attempt loggin failed, wrong username or password");
+    
     echo "Wrong Username or Password";
 }
 ob_end_flush();

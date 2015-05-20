@@ -1,7 +1,7 @@
 <?php
 
 include '../model/User.php';
-include '../tratamentoDeExcecao/ValidaCadastro.php';
+include '../tratamentoDeExcecao/AuthenticateRegistration.php';
 include 'generateConfimationCode.php';
 
 /**

@@ -96,7 +96,8 @@ class canvas {
                // checks if is an image
                if ( !$this->eImagem() )
                {
-                    trigger_error( 'Erro: file '.$this->origem.' não é uma imagem!', E_USER_ERROR );
+                    trigger_error( 'Erro: file '.$this->origem.' is not a image!', E_USER_ERROR );
+                    log_it("File is not a image: " $this->origem.);
                }
                else
                {
@@ -109,7 +110,8 @@ class canvas {
           }
           else
           {
-               trigger_error( 'Erro: file de imagem não encontrado!', E_USER_ERROR );
+               trigger_error( 'Erro: image file not found!', E_USER_ERROR );
+               log_it("Image file not found!");
           }
 
      } // end dadosImagem
@@ -275,6 +277,7 @@ class canvas {
                     break;
                default:
                     trigger_error( 'file inválido!', E_USER_ERROR );
+                    log_it("Invalid file!" E_USER_ERROR);
                     break;
           }
      } // end criaImagem
@@ -937,7 +940,8 @@ class canvas {
                          $marcadagua = imagecreatefrombmp( $imagem );
                          break;
                     default:
-                         trigger_error( 'file de marca d\'água inválido.', E_USER_ERROR );
+                         trigger_error( 'Invalid whatermak file!', E_USER_ERROR );
+                         log_it("Invalid whatermak file!");
                          return false;
                }
           }
@@ -1202,7 +1206,8 @@ class canvas {
                // validate directory
                if ( !is_dir( $dir_destino ) )
                {
-                    trigger_error( 'Diretório de destino inválido ou inexistente', E_USER_ERROR );
+                    trigger_error( 'Invalid or absent path!', E_USER_ERROR );
+                    log_it("Invalid or absent path!");
                }
           }
 

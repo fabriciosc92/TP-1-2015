@@ -49,6 +49,8 @@ $user->setUserPhone($userPhone);
 
 $user->setCodConfirmacao($codeConfirmation);
 $user->insertUser();
+
+echo("<script>console.log('PHP: ".$user."');</script>");
 echo "sucess!";
 
 header("Location: ../login.php");

@@ -14,7 +14,7 @@ $userFirstName = addslashes($_POST['userFirstName']); // First name of the user
 $userLastName = addslashes($_POST['userLastName']); // Last name of the user
 $userEmail = addslashes($_POST['userEmail']); // User userEmail
 $userPassword = addslashes($_POST['userPassword']); // User userPassword
-$userSex = addslashes($_POST['userSex']); // User userSex
+$userGender = addslashes($_POST['userGender']); // User userGender
 $userCpf = addslashes($_POST['userCpf']); // User userCpf
 $userPhone = addslashes($_POST['userPhone']); // User phone
 
@@ -23,7 +23,7 @@ addcslashes($userFirstName, $strList);
 addcslashes($userLastName, $strList);
 addcslashes($userEmail, $strList);
 addcslashes($userPassword, $strList);
-addcslashes($userSex, $strList);
+addcslashes($userGender, $strList);
 addcslashes($userCpf, $strList);
 addcslashes($userPhone, $strList);
 
@@ -33,9 +33,6 @@ $validator->validaruserEmail($userEmail);
 $validator->validarTelefone($phone);
 $validator->validaruserCpf($userCpf);
 
-//inclua aqui o resto das chamadas dos metodos de validaçao;
-//echo "<script>alert('$mensagem');</script>";
-
 
 $codeConfirmation = generateConfirmationCode(); // Code confirmation
 $user = new User(); // Responsible for creating instance of user
@@ -44,16 +41,16 @@ $user = new User(); // Responsible for creating instance of user
 $user->setUserEmail($userEmail);
 $user->setUserFirstName($userFirstName);
 $user->setUserLastName($userLastName);
-$user->setUserPassword(md5($userPassword)); //criptografia md5 para o userPassword
-$user->setUserSex($userSex);
+$user->setUserPassword(md5($userPassword)); // md5 criptografy for userPassword
+$user->setUserGender($userGender);
 $user->setUserCpf($userCpf);
 $user->setUserPhone($userPhone);
 
 
 $user->setCodConfirmacao($codeConfirmation);
 $user->insertUser();
-echo "efetuado com sucesso";
-// header("Location:../controller/SenduserEmailConfirmation.php?e=".$_POST['userEmail']."&cod=".$codeConfirmation);
+echo "sucess!";
+
 header("Location: ../login.php");
 
 session_start();

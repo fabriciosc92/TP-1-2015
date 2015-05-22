@@ -11,7 +11,7 @@ require_once 'model/Event.php';
 // Function that receives the name of the event
 function event_name($id) 
 {
-    $eventName = new Evento; // Variable to receive Events name data
+    $eventName = new Event; // Variable to receive Events name data
     $eventName->eventoPorId($id);
     echo $eventName->getNome();
 }
@@ -19,7 +19,7 @@ function event_name($id)
 // Function that receives the thumbnail of the image event
 function event_thumb($id) 
 {
-    $eventThumb = new Evento; // Variable to receive thumbnail event data
+    $eventThumb = new Event; // Variable to receive thumbnail event data
     $eventThumb->eventoPorId($id);
     echo $eventThumb->getMiniatura();
 }
@@ -27,7 +27,7 @@ function event_thumb($id)
 // Function that receives the description of the event
 function event_description($id) 
 {
-    $eventDescription = new Evento; // Variable to receive description event data
+    $eventDescription = new Event; // Variable to receive description event data
     $eventDescription->eventoPorId($id);
     echo $eventDescription->getDescricao();
 }
@@ -35,7 +35,7 @@ function event_description($id)
 // Function that receives the image of the event
 function the_image($id) 
 {
-    $eventImage = new Evento; // Variable to receive image event data
+    $eventImage = new Event; // Variable to receive image event data
     $eventImage->eventoPorId($id);
     echo $eventImage->getImagem();
 }

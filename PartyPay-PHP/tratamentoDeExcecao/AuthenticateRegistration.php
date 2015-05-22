@@ -11,14 +11,16 @@
  *
  * @author Fagner-note
  */
+
 require_once '../model/DAC/UserDAC.php';
+
 class AuthenticateRegistration 
 {
     var $field;
     var $value;
     var $errorMessage = array();
-    // Defines error messages. 
 
+    // Defines error messages. 
     public function messages($number, $field) 
     {
         // Notify the user when the email is invalid.
@@ -49,9 +51,10 @@ class AuthenticateRegistration
         $this->errorMessage[12] = "Informe um preço válido <br />";
         // Notify the user to input a valid vacancy.
         $this->errorMessage[13] = "Informe um número de vagas válido <br />";
-        
+
         return $this->errorMessage[$number];
     }
+
     // Authenticate Email
     function authenticateEmail($email) 
     {
@@ -70,6 +73,7 @@ class AuthenticateRegistration
                 exit();
         }
     }
+
     // Authenticate CEP (xxxxx-xxx)
     function authenticateCep($cep) 
     {
@@ -79,6 +83,7 @@ class AuthenticateRegistration
             exit();
         }
     }
+
     // Authenticate Date (DD/MM/AAAA)
     function authenticateDate($date) 
     {        
@@ -118,6 +123,7 @@ class AuthenticateRegistration
             exit();
         }
     }
+
     // Authenticate hour (23:59)
     function authenticateTime($hour, $minute) 
     {
@@ -140,11 +146,13 @@ class AuthenticateRegistration
             exit();
         }
         if (!preg_match('/^[0-59]{2,2}?$/', $minute)) {
+            
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(11, 'hour', null, null);
             exit();
         }
     }
+
     function authenticatePrice($price) 
     {
         if (!is_numeric($price)) 
@@ -162,6 +170,7 @@ class AuthenticateRegistration
             exit();
         }
     }
+
     // Authenticate hour (23:59)
     function authenticateVacancy($vacancy) 
     {
@@ -180,6 +189,7 @@ class AuthenticateRegistration
             exit();
         }
     }
+
     // Authenticate Phone number (61-32363810)
     function authenticatePhone($phone) 
     {
@@ -189,7 +199,9 @@ class AuthenticateRegistration
             exit();
         }
     }
+
     const CPF_SIZE = 11;
+
     // Authenticate CPF (99999999999)
     function authenticateCpf($cpf)
     {
@@ -213,7 +225,6 @@ class AuthenticateRegistration
             $secondDigit = $secondDigit + $cpf[$i] * $x;
         }
          
-        
         if(($firstDigit%CPF_SIZE) < 2)
         {
             $firstCalculation = 0;
@@ -245,7 +256,9 @@ class AuthenticateRegistration
             return $this->messages(6, $field, null, null);
         }
     }
+
     const EMPTY_FIELD = " ";
+
     // Simple verification (empty field, max/min numbers of caracters).
     function authenticateField($field, $value) 
     {
@@ -257,6 +270,7 @@ class AuthenticateRegistration
             exit();
         }
     }
+
 // Verify if there are errors.
     function verifyErrors() 
     {
@@ -270,6 +284,7 @@ class AuthenticateRegistration
         }
     }
 }
+
 //$coverage->stop();
 //$writer = new PHP_CodeCoverage_Report_Clover;
 //$writer->process($coverage, '/tmp/clover.xml');

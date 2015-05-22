@@ -23,49 +23,62 @@ class AuthenticateRegistration
     var $value;
     var $errorMessage = array();
 
+    const VALIDATE_EMAIL = 0;
+    const CEP_FORMAT = 1;
+    const DATA_FORMAT = 2;
+    const HOUR_FORMAT = 3;
+    const INVALID_PHONE = 4;
+    const INVALID_CPF = 5;
+    const NUMBER_FIELD =6;
+    const EMPTY_FIELD_MSG = 7;
+    const CURRENT_YEAR = 8;
+    const EXISTING_EMAIL = 10;
+    const MINUTE_FORMAT =  11;
+    const VALID_PRICE = 12;
+    const VALID_VACANCY = 13;
 
     // Defines error messages. 
     public function messages($number, $field) 
     {
 
         // Notify the user when the email is invalid.
-        $this->errorMessage[0] = "Preencha o campo com um email válido <br />"; 
+        $this->errorMessage[VALIDATE_EMAIL] = "Preencha o campo com um email válido <br />"; 
 
         // Notify the user when cep is in the wrong format.
-        $this->errorMessage[1] = "CEP com formato inválido (Ex: XXXXX-XXX) <br />";
+        $this->errorMessage[CEP_FORMAT] = "CEP com formato inválido (Ex: XXXXX-XXX) <br />";
 
         // Notify the user when date is in the wrong format. 
-        $this->errorMessage[2] = "Data em formato inválido, informe data como (Ex: DD/MM/AAAA) <br />";
+        $this->errorMessage[DATA_FORMAT] = "Data em formato inválido, informe data como (Ex: DD/MM/AAAA) <br />";
         
         // Notify the user when hour is in the wrong format.
-        $this->errorMessage[3] = "Hora em formato inválido <br />";
+        $this->errorMessage[HOUR_FORMAT] = "Hora em formato inválido <br />";
 
         // Notify the user when phone number is invalid.
-        $this->errorMessage[4] = "Telefone inválido (Ex: 61-33333333) <br />";
+        $this->errorMessage[INVALID_PHONE] = "Telefone inválido (Ex: 61-33333333) <br />";
 
         // Notify the user when CPF is invalid.
-        $this->errorMessage[5] = "CPF inválido (Ex: 11111111111) <br />"; 
+        $this->errorMessage[INVALID_CPF] = "CPF inválido (Ex: 11111111111) <br />"; 
 
         // Shows this fields has only numbers.
-        $this->errorMessage[6] = "Preencha o campo " . $field . " com numeros <br />";
+        $this->errorMessage[NUMBER_FIELD] = "Preencha o campo " . $field . " com numeros <br />";
 
         // Notify that the field is empty.
-        $this->errorMessage[7] = "Por favor preencha o campo " . $field . " <br />";
+        $this->errorMessage[EMPTY_FIELD_MSG] = "Por favor preencha o campo " . $field . " <br />";
 
         // Year informed is below to the current year.
-        $this->errorMessage[8] = "Ano informado e inferior ao ano corrente <br />";
+        $this->errorMessage[CURRENT_YEAR] = "Ano informado e inferior ao ano corrente <br />";
         
         // Notify that the email already exists.
-        $this->errorMessage[10] = "E-mail já existe, cadastre outro e-mail <br />";
+        $this->errorMessage[EXISTING_EMAIL] = "E-mail já existe, cadastre outro e-mail <br />";
 
         // Notify user that minute is in the wrong format.
-        $this->errorMessage[11] = "Minuto em formato inválido <br />";
+        $this->errorMessage[MINUTE_FORMAT] = "Minuto em formato inválido <br />";
 
         // Notify the user to input a valid price.
-        $this->errorMessage[12] = "Informe um preço válido <br />";
+        $this->errorMessage[VALID_PRICE] = "Informe um preço válido <br />";
 
         // Notify the user to input a valid vacancy.
-        $this->errorMessage[13] = "Informe um número de vagas válido <br />";
+        $this->errorMessage[VALID_VACANCY] = "Informe um número de vagas válido <br />";
 
         return $this->errorMessage[$number];
     }
@@ -77,16 +90,16 @@ class AuthenticateRegistration
             $email)) 
         {
             
-            echo $this->messages(0, 'email', null, null);
+            echo $this->messages(VALIDATE_EMAIL, 'email', null, null);
 
-            return $this->messages(0, 'email', null, null);
+            return $this->messages(VALIDATE_EMAIL, 'email', null, null);
             exit();
 
         } 
         elseif (UserDAC::verifiqueDispo($email) == 0) 
         {
                 
-                echo $this->messages(10, 'email', null, null);
+                echo $this->messages(EXISTING_EMAIL, 'email', null, null);
                 exit();
         }
     }
@@ -96,7 +109,7 @@ class AuthenticateRegistration
     {
         if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) 
         {
-            echo $this->messages(1, 'cep', null, null);
+            echo $this->messages(CEP_FORMAT, 'cep', null, null);
             exit();
         }
     }
@@ -118,9 +131,9 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(2, 'date', null, null);
+            echo $this->messages(DATA_FORMAT, 'date', null, null);
 
-            return $this->messages(2, 'date', null, null);
+            return $this->messages(DATA_FORMAT, 'date', null, null);
             exit();
         }
 
@@ -134,9 +147,9 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(8, 'date', null, null);
+            echo $this->messages(CURRENT_YEAR, 'date', null, null);
 
-            return $this->messages(8, 'date', null, null);
+            return $this->messages(CURRENT_YEAR, 'date', null, null);
             exit();
         }
 
@@ -146,9 +159,9 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(2, 'date', null, null);
+            echo $this->messages(DATA_FORMAT, 'date', null, null);
 
-            return $this->messages(2, 'date', null, null);
+            return $this->messages(DATA_FORMAT, 'date', null, null);
             exit();
         }
     }
@@ -160,27 +173,27 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(3, 'hour', null, null);
+            echo $this->messages(HOUR_FORMAT, 'hour', null, null);
             exit();
         }
         if (!is_numeric($minute)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(11, 'hour', null, null);
+            echo $this->messages(MINUTE_FORMAT, 'hour', null, null);
             exit();
         }
         if (!preg_match('/^[0-23]{2,2}?$/', $hour)) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(3, 'hour', null, null);
+            echo $this->messages(HOUR_FORMAT, 'hour', null, null);
             exit();
         }
         if (!preg_match('/^[0-59]{2,2}?$/', $minute)) {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(11, 'hour', null, null);
+            echo $this->messages(MINUTE_FORMAT, 'hour', null, null);
             exit();
         }
     }
@@ -191,18 +204,18 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(12, 'hour', null, null);
+            echo $this->messages(VALID_PRICE, 'hour', null, null);
 
-            return $this->messages(12, 'hour', null, null); 
+            return $this->messages(VALID_PRICE, 'hour', null, null); 
             exit();
         } 
         elseif ($price < 0) 
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(12, 'hour', null, null);
+            echo $this->messages(VALID_PRICE, 'hour', null, null);
 
-            return $this->messages(12, 'hour', null, null);
+            return $this->messages(VALID_PRICE, 'hour', null, null);
             exit();
         }
     }
@@ -214,18 +227,18 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(13, 'hour', null, null);
+            echo $this->messages(VALID_VACANCY, 'hour', null, null);
 
-            return $this->messages(13, 'hour', null, null);
+            return $this->messages(VALID_VACANCY, 'hour', null, null);
             exit();
 
         } 
         elseif ($vacancy < 0) 
         {
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(13, 'hour', null, null);
+            echo $this->messages(VALID_VACANCY, 'hour', null, null);
 
-            return $this->messages(13, 'hour', null, null);
+            return $this->messages(VALID_VACANCY, 'hour', null, null);
             exit();
         }
     }
@@ -235,7 +248,7 @@ class AuthenticateRegistration
     {
         if (!preg_match('^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^', $phone)) 
         {
-            echo $this->messages(4, 'phone', null, null);
+            echo $this->messages(INVALID_PHONE, 'phone', null, null);
             exit();
         }
     }
@@ -260,7 +273,7 @@ class AuthenticateRegistration
         {
             if(str_repeat($i, 11) == $cpf)
             {
-                echo $this->messages(5, 'cpf', null, null);
+                echo $this->messages(INVALID_CPF, 'cpf', null, null);
                 exit();
             }
             $secondDigit = $secondDigit + $cpf[$i] * $x;
@@ -287,7 +300,7 @@ class AuthenticateRegistration
 
         if($firstCalculation <> $cpf[9] || $secondCalculation <> $cpf[10])
         {
-            echo $this->messages(5, 'cpf', null, null);
+            echo $this->messages(INVALID_CPF, 'cpf', null, null);
             exit();
         }
     }
@@ -297,7 +310,7 @@ class AuthenticateRegistration
     {
         if (!is_numeric($number)) 
         {
-            return $this->messages(6, $field, null, null);
+            return $this->messages(NUMBER_FIELD, $field, null, null);
         }
     }
 
@@ -311,7 +324,7 @@ class AuthenticateRegistration
         {
 
             //header("refresh:5;url=../cadastrarEvento.php");
-            echo $this->messages(7, $field);
+            echo $this->messages(EMPTY_FIELD_MSG, $field);
             exit();
         }
     }

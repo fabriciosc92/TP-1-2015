@@ -12,7 +12,8 @@
  * @author Fagner-note
  */
 
-require_once '../model/DAC/UserDAC.php';
+require_once '../model/DAC/UserDAC.php'
+    or log_it("Could not include UserDAC file");
 
 class AuthenticateRegistration 
 {
@@ -62,6 +63,7 @@ class AuthenticateRegistration
             $email)) 
         {
             
+            echo("<script>console.log('PHP: ".$email."');</script>");
             echo $this->messages(0, 'email', null, null);
             return $this->messages(0, 'email', null, null);
             exit();
@@ -146,7 +148,7 @@ class AuthenticateRegistration
             exit();
         }
         if (!preg_match('/^[0-59]{2,2}?$/', $minute)) {
-            
+
             //header("refresh:5;url=../cadastrarEvento.php");
             echo $this->messages(11, 'hour', null, null);
             exit();
@@ -283,7 +285,6 @@ class AuthenticateRegistration
             return false;
         }
     }
-}
 
 //$coverage->stop();
 //$writer = new PHP_CodeCoverage_Report_Clover;

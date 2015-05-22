@@ -1,7 +1,8 @@
 <?php
 
 require_once '../model/Local.php';
-require_once '../model/DAC/EventoLocalDAC.php';
+require_once '../model/DAC/EventoLocalDAC.php' 
+	or log.it("Could not include EventoLocalDAC file");
 
 /**
 *
@@ -53,6 +54,7 @@ $idLocal = $local->persist(); // Local identifier
 // Responsible for linking the event to the local
 EventoLocal::persist($idEvento, $idLocal);
 
+log_it('PHP: Registration not completed');
 echo "cadastro efetuado";
 
 header("Location: ../Event.php?id=$idEvento");

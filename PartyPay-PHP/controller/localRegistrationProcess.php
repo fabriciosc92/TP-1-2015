@@ -1,8 +1,10 @@
 <?php
 
-require_once '../model/Local.php';
+require_once '../model/Local.php'
+	or log_it("Could not include Local");
+
 require_once '../model/DAC/EventoLocalDAC.php' 
-	or log.it("Could not include EventoLocalDAC file");
+	or log_it("Could not include EventoLocalDAC file");
 
 /**
 *
@@ -12,8 +14,6 @@ require_once '../model/DAC/EventoLocalDAC.php'
 
 session_start();
 $address = $_POST['address']; // Receives the address of the event
-//$coordenadaGoogleMaps = $_POST['coordenadas'];
-//$foto=
 $name = $_POST['name']; // Receives the name of the event address
 $number = $_POST['number']; // Receives the number of the event address
 $complement = $_POST['complement']; // Receives the complement of the event address
@@ -37,7 +37,8 @@ addcslashes($state, $strList);
 
 $local = new Local(); // Variable that receives local data
 
-require_once "localUploadImage.php";
+require_once "localUploadImage.php"
+	or log_it("Couldnt include localUploadImage");
 
 $local->setDistrict($district);
 $local->setZipCode($zipCode);

@@ -13,7 +13,8 @@ $maxChars = strlen($AcceptedChars) - 1; // Test max acceptable characteres in us
 $newPassword = ''; //Store the new password entered
 $password = ''; // Compare the new password entered again
 
-for ($i = 0; $i < 8; $i = i+1) {
+for ($i = 0; $i < 8; $i = $i+1) 
+{
     $password .= $AcceptedChars{mt_rand(0, $maxChars)};
     $newPassword = md5($password);
 }
@@ -83,7 +84,8 @@ if (mysql_num_rows($retorno) === 1)
  }   
 else 
 {
-    echo "Desculpe! Email n&atilde;o cadastrado!";
+    echo "Sorry! Email not found!";
+    log_it("Email not found!");
 }
 
 mysql_close($conexao);

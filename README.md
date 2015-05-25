@@ -7,3 +7,6 @@ ministrada na Faculdade UnB Gama - FGA pelo professor Maurício Serrano.
 *Cristiano Costa
 *Fabrício Coelho
 
+## Ferramenta de Análise Estática
+A ferramenta utilizada no projeto está sendo a PHP_CodeSniffer.
+

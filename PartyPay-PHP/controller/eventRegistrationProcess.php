@@ -1,13 +1,14 @@
 <?php
 
-require_once '../model/Event.php';
-include '../tratamentoDeExcecao/ValidaCadastro.php';
+require_once '../model/Event.php'
+	or log_it("Couldnt include Event.php");
 
-/**
-*
-* Class responsible for event registration
-*
-**/
+include '../tratamentoDeExcecao/AuthenticateRegistration.php';
+
+/*
+ * File: eventRegistrationProcess.
+ * File responsible for event registration.
+ */
 
 session_start();
 
@@ -28,7 +29,8 @@ $idOrganizer = $_SESSION['idOrganizer']; // Organizer registration code
 $ageClassification = $_POST['ageClassification']; // Age rating of the event
 $event = new Event(); // Varible that receives event's data
 
-require_once 'eventUploadImage.php';
+require_once 'eventUploadImage.php'
+	or log_it("Couldnt include eventUploadImage");
 
 $event->setEventName($eventName);
 $event->setEventBeginDate($eventBeginDate);

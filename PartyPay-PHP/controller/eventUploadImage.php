@@ -1,7 +1,8 @@
 <?php
 // Class responsible for uploading the event image
 
-require 'canvas.php';
+require 'canvas.php'
+	or log_it("Could not include canvas.php file");
 // Pasta onde o arquivo vai ser salvo
 
 $_UP['pasta'] = 'view/images/';
@@ -35,6 +36,8 @@ $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 if ($_FILES['arquivo']['error'] != 0) {
 
+	log_it("Error on image upload: "$_UP['erros'][$_FILES['arquivo']['error']]);
+
     die("Não foi possível fazer o upload, erro:<br />" . $_UP['erros'][$_FILES['arquivo']['error']]);
 
     exit; // Para a execução do script
@@ -49,7 +52,9 @@ $var = explode('.', $_FILES['arquivo']['name']);
 $extension = strtolower(end($var));
 
 if (array_search($extension, $_UP['extensoes']) === false) {
-
+	
+	log_it("Error on image upload: invalid file extension");
+	
     echo "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
 }
 
@@ -57,6 +62,8 @@ if (array_search($extension, $_UP['extensoes']) === false) {
 
 // Faz a verificação do tamanho do arquivo
 else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
+
+	log_it("Error on image upload: invalid file fize");
 
     echo "O arquivo enviado é muito grande, envie arquivos de até 2Mb.";
 }
@@ -100,7 +107,8 @@ else {
     } else {
 
 // Não foi possível fazer o upload, provavelmente a pasta está incorreta
-
+		log_it("Error on image upload: unable to move uploaded file");
+		
         echo "Não foi possível enviar o arquivo, tente novamente";
     }
 }

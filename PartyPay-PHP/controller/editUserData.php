@@ -1,7 +1,7 @@
 <?php
 
 include '../model/User.php';
-include '../tratamentoDeExcecao/ValidaCadastro.php';
+include '../tratamentoDeExcecao/AuthenticateRegistration.php';
 include 'generateConfimationCode.php';
 
 /**
@@ -60,7 +60,9 @@ $_SESSION['userSex'] = $userSex;
 $_SESSION['userCpf'] = $userCpf;
 $_SESSION['userPhone'] = $userPhone;
 
+echo("<script>console.log('PHP: ".$id."');</script>");
 echo "efetuado com sucesso " . $id;
+
 // header("Location:../controller/sendEmailConfirmation.php?e=".$_POST['email']."&cod=".$confirmationCode);
 header("Location: ../editPerson.php");
 ?>

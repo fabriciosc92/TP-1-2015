@@ -83,7 +83,8 @@ if (mysql_num_rows($retorno) === 1)
  }   
 else 
 {
-    echo "Desculpe! Email n&atilde;o cadastrado!";
+    echo "Sorry! Email not found!";
+    log_it("Email not found!");
 }
 
 mysql_close($conexao);

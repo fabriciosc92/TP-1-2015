@@ -58,14 +58,13 @@ class canvas {
      } // end constructor
      
      /**
-     * Reset variables in order to use object in long threads
-     * @return void
-     **/
+      * Reset variables in order to use object in long threads
+      * @return void
+      **/
      public function resetar()
      {
-<<<<<< HEAD
-			
-		$reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+	
+		    $reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
         $this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
         $this->position_y = $this->format = $this->extension = $this->size = $this->file = 
         $this->path = $this->position_crop;
@@ -74,15 +73,11 @@ class canvas {
 	
 	    $this->rgb( 255, 255, 255 );
      }// end resetar
-=======
-        
->>>>>>> master
-     
 
-     /**
-      * Return image data
-      * @return void
-      **/
+    /**
+     * Return image data
+     * @return void
+     **/
      private function dados()
      {
 
@@ -134,15 +129,16 @@ class canvas {
       **/
      private function dimensoes()
      {
-    $dimensoes                  = getimagesize( $this->origem );
-    $this->widht              = $dimensoes[0];
-    $this->height               = $dimensoes[1];
-    /**
-    * 1 = gif, 2 = jpeg, 3 = png, 6 = BMP
-    * http://br2.php.net/manual/en/function.exif-imagetype.php
-    **/
-    $this->format               = $dimensoes[2];
-    $this->size_html          = $dimensoes[3];
+        $dimensoes                  = getimagesize( $this->origem );
+        $this->widht              = $dimensoes[0];
+        $this->height               = $dimensoes[1];
+
+       /**
+        * 1 = gif, 2 = jpeg, 3 = png, 6 = BMP
+        * http://br2.php.net/manual/en/function.exif-imagetype.php
+        **/
+        $this->format               = $dimensoes[2];
+        $this->size_html          = $dimensoes[3];
      } // end dimensoes
 
      /**
@@ -209,7 +205,7 @@ class canvas {
      * Upload an image via URL
      * Note: depends on the server settings for remote access files
      * @param String $url image path
-      * @return Object current instance of the object, for chained method
+     * @return Object current instance of the object, for chained method
      **/
      public function carregaUrl( $url )
      {
@@ -234,22 +230,13 @@ class canvas {
                     break;
                default:
                     break;
-     }
-<<<<<< HEAD
-          $this->criaImagem();
+          }
+
+     $this->criaImagem();
      $this->widht     = imagesx( $this->img );
-          $this->height     = imagesy( $this->img );
-          return $this;
-     } // end carregaUrl
-=======
-
-        $this->criaImagem();
-        $this->widht     = imagesx( $this->img );
-        $this->height     = imagesy( $this->img );
-
+     $this->height     = imagesy( $this->img );
      return $this;
-     } // fim carregaUrl
->>>>>>> master
+     } // end carregaUrl
 
      /**
       * Create image object for manipulation in GD
@@ -319,7 +306,7 @@ class canvas {
             hexdec( substr( $cor, 4, 2 ) ),
           );
           return $this;
-     }  // end hexa
+     }// end hexa
 
      /**
       * Stores positions x and y for crop
@@ -506,24 +493,26 @@ class canvas {
       **/
      private function redimensionaProporcional()
      {
-       /**
+          /**
            * Verifica altura e largura proporcional.
            **/
-           $ratio_orig = $this->largura/$this->altura;
+            $ratio_orig = $this->largura/$this->altura;
             if ($this->nova_largura/$this->nova_altura > $ratio_orig) {
                $dif_w = $this->nova_altura*$ratio_orig;
                $dif_h = $this->nova_altura;
-            } else 
+            } 
+            else 
             {
                $dif_w = $this->nova_largura;
                $dif_h = $this->nova_largura/$ratio_orig;
             }
+
           // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
          
           // Resample
-      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura,
-       $this->altura);
+          imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura,
+          $this->altura);
           $this->img   = $this->img_temp;
      } // fim redimensionaProporcional()
 
@@ -1136,12 +1125,10 @@ class canvas {
     
     
     /**  
-    Adds the best filter to sharpen the images
-    Use GD image objects 
-    **/
-    
-   
-   function imagesharpen() {
+     *Adds the best filter to sharpen the images
+     *Use GD image objects 
+     **/
+    function imagesharpen() {
     
         $qualidade = array(
             array(-1, -1, -1),

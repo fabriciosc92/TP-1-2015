@@ -322,7 +322,6 @@ class canvas {
      }  // end hexa
 
      /**
-<<<<<<< HEAD
       * Stores positions x and y for crop
       * @param Int x - position x of crop
 			* @param Int y - position y of crop
@@ -333,38 +332,19 @@ class canvas {
      public function posicaoCrop( $x, $y, $w=0, $h=0 )
      {
           // no width or manually sitting height, image original handle
-		  		if(!$w) $w = $this->widht;
-		  		if(!$h) $h = $this->height;
-		  
-=======
-      * Armazena posições x e y para crop
-      * @param Int x - posicao x do crop
-            * @param Int y - posicao y do crop
-            * @param Int w - width  - widhtOrigem (by OctaAugusto)
-            * @param Int h - height - heightOrigem (by OctaAugusto)
-      * @return Object instância atual do objeto, para métodos encadeados
-      **/
-     public function posicaoCrop( $x, $y, $w=0, $h=0 )
-     {
-          // sem widht ou height setada manualmente, pega original da imagem
-                if(!$w) 
-                {
-                    $w = $this->widht;
-                } 
-                elseif(!$h) 
-                {
-                    $h = $this->height;
-                }
-                else
-                {
+		  		if(!$w)
+          {
+            $w = $this->widht;
+          }
+		  		if(!$h)
+          {
+            $h = $this->height;
+          } 
 
-                }
-          
->>>>>>> master
           $this->position_crop = array( $x, $y, $w, $h );
 
           return $this;
-     } // end position_crop
+     }
 
      /**
       * Resize image
@@ -462,7 +442,7 @@ class canvas {
           $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
           imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->new_widht, 
-            $this->new_heigth, $this->widht, $this->height );
+          $this->new_heigth, $this->widht, $this->height );
           $this->img     = $this->img_temp;
      } // end redimensiona()
 
@@ -484,42 +464,39 @@ class canvas {
       **/
      private function redimensionaPreenchimento()
      {
-          // create a temporary image
-          $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
+          // cria imagem de destino temporária
+          $this->img_temp = imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 
-          // add background color to new image
+          // adiciona cor de fundo à nova imagem
           $this->preencheImagem();
 
-          // save variables to centralization
-          $dif_x = $dif_w = $this->new_widht;
-          $dif_y = $dif_h = $this->new_heigth;
+          // salva variáveis para centralização
+          $dif_x = $dif_w = $this->nova_largura;
+          $dif_y = $dif_h = $this->nova_altura;
 
-          /**
-<<<<<<< HEAD
-      		 * Check height and width
-      		 */
-=======
-             * Verifica height e widht
-             * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
-             */
->>>>>>> master
-          if ( ($this->widht / $this->new_widht ) > ( $this->height / $this->new_heigth ) )
+         /**
+          * Verifica altura e largura
+          * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
+          */
+          if ( ($this->largura / $this->nova_largura ) > ( $this->altura / $this->nova_altura ) )
           {
-              $fator = $this->widht / $this->new_widht;
+              $fator = $this->largura / $this->nova_largura;
           } 
           else 
           {
-              $fator = $this->height / $this->new_heigth;
+              $fator = $this->altura / $this->nova_altura;
           }
-          $dif_w = $this->widht / $fator;
-          $dif_h = $this->height  / $fator;
 
-          // copies with the new size, centralizing
+          $dif_w = $this->largura / $fator;
+          $dif_h = $this->altura  / $fator;
+
+          // copia com o novo tamanho, centralizando
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
 
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
-            $this->widht, $this->height );
+
+          $this->largura, $this->altura );
           $this->img     = $this->img_temp;
      } // end redimensionaPreenchimento()
 
@@ -529,34 +506,26 @@ class canvas {
       **/
      private function redimensionaProporcional()
      {
-<<<<<< HEAD
-	   /**
-           * Check height and width proportionaly.
-=======
        /**
-           * Verifica height e widht proporcional.
->>>>>>> master
+           * Verifica altura e largura proporcional.
            **/
-           $ratio_orig = $this->widht/$this->height;
-
-            if ($this->new_widht/$this->new_heigth > $ratio_orig) {
-               $dif_w = $this->new_heigth*$ratio_orig;
-               $dif_h = $this->new_heigth;
-            } 
-            else 
+           $ratio_orig = $this->largura/$this->altura;
+            if ($this->nova_largura/$this->nova_altura > $ratio_orig) {
+               $dif_w = $this->nova_altura*$ratio_orig;
+               $dif_h = $this->nova_altura;
+            } else 
             {
-               $dif_w = $this->new_widht;
-               $dif_h = $this->new_widht/$ratio_orig;
+               $dif_w = $this->nova_largura;
+               $dif_h = $this->nova_largura/$ratio_orig;
             }
-
-          // create e temporary image
+          // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
          
           // Resample
-      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->widht,
-       $this->height);
+      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->largura,
+       $this->altura);
           $this->img   = $this->img_temp;
-     } // end redimensionaProporcional()
+     } // fim redimensionaProporcional()
 
 
      /**
@@ -585,6 +554,7 @@ class canvas {
                     $this->position_crop[0]     = ( $this->position_crop[2] / 2 ) - $h_width;
                     $this->position_crop[1]     = 0;
                }
+
                // widht <= height
                elseif ( ( $wm <= $hm ) )
                {

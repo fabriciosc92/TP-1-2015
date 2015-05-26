@@ -152,11 +152,11 @@ class canvas {
           
           if(array_key_exists('extension', $pathinfo))
           {
-                $this->extension = strtolower($pathinfo['extension']);
+              $this->extension = strtolower($pathinfo['extension']);
           }
           else
           {
-                $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
+              $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
           }
              
           $this->file       = $pathinfo['basename'];
@@ -173,11 +173,11 @@ class canvas {
           $valida = getimagesize( $this->origem );
           if ( !is_array( $valida ) || empty( $valida ) )
           {
-               return false;
+              return false;
           }
           else
           {
-               return true;
+              return true;
           }
      } // end validaImagem
 
@@ -874,14 +874,12 @@ class canvas {
       **/
      public function marca( $imagem, $x = 0, $y = 0, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
-          // create temporary image for merge
+          // cria imagem temporária para merge
           if ( $imagem ) {
-
                if( is_string( $x ) && is_string( $y ) )
                {
                     return $this->marcaFixa( $imagem, $x . '_' . $y, $alfa );
                }
-
                $pathinfo = pathinfo( $imagem );
                switch( strtolower( $pathinfo['extension'] ) )
                {
@@ -899,8 +897,7 @@ class canvas {
                          $marcadagua = imagecreatefrombmp( $imagem );
                          break;
                     default:
-                         trigger_error( 'Invalid whatermak file!', E_USER_ERROR );
-                         log_it("Invalid whatermak file!");
+                         trigger_error( 'Arquivo de marca d\'água inválido.', E_USER_ERROR );
                          return false;
                }
           }
@@ -908,23 +905,13 @@ class canvas {
           {
                return false;
           }
-<<<<<<  HEAD
-          // sizes
-          $marca_w     = imagesx( $marcadagua );
-          $marca_h     = imagesy( $marcadagua );
-          // return images with whatemarks
-          if ( is_numeric( $alfa ) && ( ( $alfa > 0 ) && ( $alfa < 100 ) ) ) {
-=======
-
           // dimensões
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
-
           // retorna imagens com marca d'água
           if ( is_numeric( $alfa ) && ( ( $alfa > LOWER_TRANSPARENCE_QUALITY ) && 
             ( $alfa < MAX_TRANSPARENCE_QUALITY ) ) ) 
           {
->>>>>>> master
                imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
           } 
           else 
@@ -932,7 +919,7 @@ class canvas {
                imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
           }
           return $this;
-     } // end marca
+     } // fim marca
 
      /**
       * add image watermark, with fixed values

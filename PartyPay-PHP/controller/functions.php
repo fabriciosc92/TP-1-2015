@@ -12,39 +12,39 @@ require_once 'model/Event.php';
 function event_name($id) 
 {
     $eventName = new Event; // Variable to receive Events name data
-    $eventName->eventoPorId($id);
-    echo $eventName->getNome();
+    $eventName->eventByid($id);
+    echo $eventName->getEventName();
 }
 
 // Function that receives the thumbnail of the image event
 function event_thumb($id) 
 {
     $eventThumb = new Event; // Variable to receive thumbnail event data
-    $eventThumb->eventoPorId($id);
-    echo $eventThumb->getMiniatura();
+    $eventThumb->eventByid($id);
+    echo $eventThumb->getEventMiniature();
 }
 
 // Function that receives the description of the event
 function event_description($id) 
 {
     $eventDescription = new Event; // Variable to receive description event data
-    $eventDescription->eventoPorId($id);
-    echo $eventDescription->getDescricao();
+    $eventDescription->eventByid($id);
+    echo $eventDescription->getEventDescription();
 }
 
 // Function that receives the image of the event
-function the_image($id) 
+function event_image($id) 
 {
     $eventImage = new Event; // Variable to receive image event data
-    $eventImage->eventoPorId($id);
-    echo $eventImage->getImagem();
+    $eventImage->eventByid($id);
+    echo $eventImage->getEventImage();
 }
 
 // Function that returns the last registered event
 function lastEvent() 
 {
-    $mysqli = new mysqli("localhost", "root", "", "payparty");
-    $result = $mysqli->query("SELECT MAX(id) FROM eventos");
+    $mysqli = new mysqli("localhost", "root", "", "partypay");
+    $result = $mysqli->query("SELECT MAX(id) FROM events");
     $row = $result->fetch_array(MYSQLI_NUM);
     return $row[0];
 }

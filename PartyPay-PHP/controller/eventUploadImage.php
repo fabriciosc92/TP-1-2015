@@ -1,25 +1,26 @@
 <?php
-// Class responsible for uploading the event image
+
+/**
+ * File name: eventUploadImage.
+ * FIle responsible for uploading the event image.
+ */   
 
 require 'canvas.php'
-	or log_it("Could not include canvas.php file");
-// Pasta onde o arquivo vai ser salvo
+or log_it("Could not include canvas.php file");
 
+// Pasta onde o arquivo vai ser salvo.
 $_UP['pasta'] = 'view/images/';
 
-// Tamanho máximo do arquivo (em Bytes)
-
+// Tamanho máximo do arquivo (em Bytes).
 $_UP['tamanho'] = 1024 * 1024 * 2; // 2Mb
-// Array com as extensões permitidas
 
+// Array com as extensões permitidas.
 $_UP['extensoes'] = array('jpg', 'png', 'gif');
 
 // Renomeia o arquivo? (Se true, o arquivo será salvo como .jpg e um nome único)
-
 $_UP['renomeia'] = true;
 
-// Array com os tipos de erros de upload do PHP
-
+// Array com os tipos de erros de upload do PHP.
 $_UP['erros'][0] = 'Não houve erro';
 
 $_UP['erros'][1] = 'O arquivo no upload é maior do que o limite do PHP';
@@ -33,66 +34,57 @@ $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 
 // Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
-
 if ($_FILES['arquivo']['error'] != 0) {
 
-	log_it("Error on image upload: "$_UP['erros'][$_FILES['arquivo']['error']]);
-
-    die("Não foi possível fazer o upload, erro:<br />" . $_UP['erros'][$_FILES['arquivo']['error']]);
+    log_it("Error on image upload: "$_UP['erros'][$_FILES['arquivo']['error']]);
+    die("Não foi possível fazer o upload, erro:<br />" . $_UP['erros']
+        [$_FILES['arquivo']['error']]);
 
     exit; // Para a execução do script
 }
 
 
-
-// Caso script chegue a esse ponto, não houve erro com o upload e o PHP pode continuar
-// Faz a verificação da extensão do arquivo
+ /**
+  * Caso script chegue a esse ponto, não houve erro com o upload e o 
+  * PHP pode continuar.
+  * Faz a verificação da extensão do arquivo.
+  */
 $var = explode('.', $_FILES['arquivo']['name']);
 
 $extension = strtolower(end($var));
 
 if (array_search($extension, $_UP['extensoes']) === false) {
-	
-	log_it("Error on image upload: invalid file extension");
-	
+    
+    log_it("Error on image upload: invalid file extension");
+    
     echo "Por favor, envie arquivos com as seguintes extensões: jpg, png ou gif";
-}
 
+  // Faz a verificação do tamanho do arquivo
+} else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
 
-
-// Faz a verificação do tamanho do arquivo
-else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
-
-	log_it("Error on image upload: invalid file fize");
+    log_it("Error on image upload: invalid file fize");
 
     echo "O arquivo enviado é muito grande, envie arquivos de até 2Mb.";
-}
 
+ /**
+  * O arquivo passou em todas as verificações, hora de 
+  * tentar movê-lo para a pasta.
+  */
+} else {
 
-
-// O arquivo passou em todas as verificações, hora de tentar movê-lo para a pasta
-else {
-
-// Primeiro verifica se deve trocar o nome do arquivo
-
+    // Primeiro verifica se deve trocar o nome do arquivo
     if ($_UP['renomeia'] == true) {
 
-// Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
-
+        // Cria um nome baseado no UNIX TIMESTAMP atual e com extensão .jpg
         $finalName = time() . '.jpg';
     } else {
 
-// Mantém o nome original do arquivo
-
+        // Mantém o nome original do arquivo
         $finalName = $_FILES['arquivo']['name'];
     }
 
-
-
-// Depois verifica se é possível mover o arquivo para a pasta escolhida
-
+    // Depois verifica se é possível mover o arquivo para a pasta escolhida
     if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta'] . $finalName)) {
-
 
         $event->setImagem($_UP['pasta'] . $finalName);
         $thumb = new canvas($event->getImagem());
@@ -105,11 +97,10 @@ else {
         $thumb->grava($_UP['pasta'] . "thumb" . $finalName, 100);
         $event->setMiniatura($_UP['pasta'] . "thumb" . $finalName);
     } else {
-
-// Não foi possível fazer o upload, provavelmente a pasta está incorreta
-		log_it("Error on image upload: unable to move uploaded file");
-		
+        
+        // Não foi possível fazer o upload, provavelmente a pasta está incorreta
+        log_it("Error on image upload: unable to move uploaded file");
+        
         echo "Não foi possível enviar o arquivo, tente novamente";
     }
 }
-?>

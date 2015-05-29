@@ -5,10 +5,9 @@ include '../tratamentoDeExcecao/AuthenticateRegistration.php';
 include 'generateConfimationCode.php';
 
 /**
-*
-* Class responsible for edits of user's data
-*
-**/
+ * Class name: editUserData.
+ * Class responsible for edits of user's data.
+ **/
 
 session_start();
 
@@ -65,4 +64,3 @@ echo "efetuado com sucesso " . $id;
 
 // header("Location:../controller/sendEmailConfirmation.php?e=".$_POST['email']."&cod=".$confirmationCode);
 header("Location: ../editPerson.php");
-?>

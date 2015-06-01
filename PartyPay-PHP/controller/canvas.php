@@ -11,7 +11,7 @@ class canvas {
     /**
      * Variables for storing files/imgs
      **/
-    private $origem, $img, $img_temp;
+    private $origin, $img, $img_temp;
 
     /**
      * Store the size of the current image and the new image if available
@@ -43,14 +43,14 @@ class canvas {
      * @param $string path to image to be loaded [optional]
      * @return void
      **/
-     public function __construct( $origem = '' )
+     public function __construct( $origin = '' )
      {
 
-          $this->origem = $origem;
+          $this->origin = $origin;
 
-          if ( $this->origem )
+          if ( $this->origin )
           {
-               $this->dados();
+               $this->data();
           }
 
           // RGB default -> white
@@ -61,10 +61,10 @@ class canvas {
       * Reset variables in order to use object in long threads
       * @return void
       **/
-     public function resetar()
+     public function reset()
      {
 	
-		    $reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+		    $reset_variables = $this->origin = $this->img = $this->img_temp = $this->widht = $this->height = 
         $this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
         $this->position_y = $this->format = $this->extension = $this->size = $this->file = 
         $this->path = $this->position_crop;
@@ -78,21 +78,21 @@ class canvas {
      * Return image data
      * @return void
      **/
-     private function dados()
+     private function data()
      {
 
           // checks for image
-          if ( is_file( $this->origem ) )
+          if ( is_file( $this->origin ) )
           {
 
                // files data
-               $this->dadosfile();
+               $this->datafile();
 
                // checks if is an image
                if ( !$this->eImagem() )
                {
-                    trigger_error( 'Erro: file '.$this->origem.' is not a image!', E_USER_ERROR );
-                    log_it("File is not a image: " $this->origem.);
+                    trigger_error( 'Erro: file '.$this->origin.' is not a image!', E_USER_ERROR );
+                    log_it("File is not a image: " $this->origin.);
                }
                else
                {
@@ -109,17 +109,17 @@ class canvas {
                log_it("Image file not found!");
           }
 
-     } // end dadosImagem
+     } // end dataImagem
 
      /**
       * Load a new image outside builder
       * @param String path of the image to load
       * @return Object current instance of the object, for chained method
       **/
-     public function carrega( $origem = '' )
+     public function carrega( $origin = '' )
      {
-          $this->origem = $origem;
-          $this->dados();
+          $this->origin = $origin;
+          $this->data();
           return $this;
      } // end carrega
 
@@ -129,7 +129,7 @@ class canvas {
       **/
      private function dimensoes()
      {
-        $dimensoes                  = getimagesize( $this->origem );
+        $dimensoes                  = getimagesize( $this->origin );
         $this->widht              = $dimensoes[0];
         $this->height               = $dimensoes[1];
 
@@ -145,10 +145,10 @@ class canvas {
       * Search file data
       * @return void
       **/
-     private function dadosfile()
+     private function datafile()
      {
           // source image
-          $pathinfo            = pathinfo( $this->origem );
+          $pathinfo            = pathinfo( $this->origin );
           
           if(array_key_exists('extension', $pathinfo))
           {
@@ -161,7 +161,7 @@ class canvas {
              
           $this->file       = $pathinfo['basename'];
           $this->path     = $pathinfo['dirname'];
-     } // end dadosfile
+     } // end datafile
 
      /**
       * Checks if the specified file is an image
@@ -170,7 +170,7 @@ class canvas {
      private function eImagem()
      {
           // filter extension
-          $valida = getimagesize( $this->origem );
+          $valida = getimagesize( $this->origin );
           if ( !is_array( $valida ) || empty( $valida ) )
           {
               return false;
@@ -209,8 +209,8 @@ class canvas {
      **/
      public function carregaUrl( $url )
      {
-          $this->origem = $url;
-          $pathinfo = pathinfo( $this->origem );
+          $this->origin = $url;
+          $pathinfo = pathinfo( $this->origin );
           $this->extension = strtolower( $pathinfo['extension'] );
 
           switch( $this->extension )
@@ -247,19 +247,19 @@ class canvas {
           switch ( $this->format )
           {
                case 1:
-                    $this->img = imagecreatefromgif( $this->origem );
+                    $this->img = imagecreatefromgif( $this->origin );
                     $this->extension = 'gif';
                     break;
                case 2:
-                    $this->img = imagecreatefromjpeg( $this->origem );
+                    $this->img = imagecreatefromjpeg( $this->origin );
                     $this->extension = 'jpg';
                     break;
                case 3:
-                    $this->img = imagecreatefrompng( $this->origem );
+                    $this->img = imagecreatefrompng( $this->origin );
                     $this->extension = 'png';
                     break;
                case 6:
-                    $this->img = imagecreatefrombmp( $this->origem );
+                    $this->img = imagecreatefrombmp( $this->origin );
                     $this->extension = 'bmp';
                     break;
                default:
@@ -312,8 +312,8 @@ class canvas {
       * Stores positions x and y for crop
       * @param Int x - position x of crop
 			* @param Int y - position y of crop
-			* @param Int w - width  - widhtOrigem (by OctaAugusto)
-			* @param Int h - height - heightOrigem (by OctaAugusto)
+			* @param Int w - width  - widhtOrigin (by OctaAugusto)
+			* @param Int h - height - heightOrigin (by OctaAugusto)
       * @return Object current instance of the object, for chained method
       **/
      public function posicaoCrop( $x, $y, $w=0, $h=0 )

@@ -109,7 +109,7 @@ class canvas {
                log_it("Image file not found!");
           }
 
-     } // end dataImagem
+     } // end dataimage
 
      /**
       * Load a new image outside builder
@@ -179,7 +179,7 @@ class canvas {
           {
               return true;
           }
-     } // end validaImagem
+     } // end validaimage
 
      /**
       * Create a new image to be worked with texts, etc.
@@ -194,9 +194,9 @@ class canvas {
           $this->height     = $height;
           $this->img = imagecreatetruecolor( $this->widht, $this->height );
           
-          $cor_fundo = color_background();
+          $color_background = color_background();
 
-          imagefill( $this->img, 0, 0, $cor_fundo );
+          imagefill( $this->img, 0, 0, $color_background );
           $this->extension = 'jpg';
           return $this;
     } // end newImage
@@ -439,9 +439,9 @@ class canvas {
       **/
      private function fillImage()
      {
-          $cor_fundo = color_background();
+          $color_background = color_background();
           
-          imagefill( $this->img_temp, 0, 0, $cor_fundo );
+          imagefill( $this->img_temp, 0, 0, $color_background );
      } // end fillImage
 
      /**
@@ -506,7 +506,7 @@ class canvas {
                $dif_h = $this->new_widht/$ratio_orig;
             }
 
-          // cria imagem de destino temporária
+          // cria image de path temporária
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
          
           // Resample
@@ -595,19 +595,19 @@ class canvas {
           //inteligents arrays
           switch( $this->position_crop[ 0 ]  ){
             
-            case 'esquerdo':
+            case 'left':
                             
                 $this->position_x = 0;
             
             break;
             
-        case 'direito':
+        case 'right':
         
             $this->position_x = $this->widht - $this->new_widht;
             
         break;
             
-        case 'meio':
+        case 'middle':
             
             $this->position_x = ( $this->widht - $this->new_widht ) / 2;
             
@@ -623,19 +623,19 @@ class canvas {
           
            switch( $this->position_crop[ 1 ] ){
             
-            case 'topo':
+            case 'top':
                 
                 $this->position_y = 0;
             
         break;
             
-        case 'inferior':
+        case 'bottom':
             
             $this->position_y = $this->height - $this->new_heigth;
             
         break;
             
-        case 'meio':
+        case 'middle':
             
             $this->position_y = ( $this->height - $this->new_heigth ) / 2;
                 
@@ -704,15 +704,15 @@ class canvas {
      /**
       * Rotate image
       * @param Int $graus grau para giro
-      * @return Object instância atual do objeto, para métodos encadeados
+      * @return Object current instance of the object, for chained method
       **/
      
 
-     public function gira( $graus )
+     public function rotate( $graus )
      {
-          $cor_fundo = color_background();
+          $color_background = color_background();
 
-          $this->img     = imagerotate( $this->img, $graus, $cor_fundo );
+          $this->img     = imagerotate( $this->img, $graus, $color_background );
 
           imagealphablending( $this->img, true );
           imagesavealpha( $this->img, true );
@@ -721,7 +721,7 @@ class canvas {
           $this->height = imagesx( $this->img );
 
           return $this;
-     } // fim girar
+     } // fim rotate
 
      /**
       * add text in the image
@@ -729,12 +729,12 @@ class canvas {
       * @param Int $size font size
       * @param Int $x x position text in the image
       * @param Int $y y position text in the image
-      * @param Array/String $cor_fundo array whith RGB colors or string with hexadecimal colors
+      * @param Array/String $color_background array whith RGB colors or string with hexadecimal colors
       * @param Boolean $truetype true for font truetype, false for system font
       * @param String $fonte font name truetype to use
       * @return void
       **/
-     public function legenda( $text, $size = 5, $x = 0, $y = 0, $cor_fundo = '', 
+     public function subtitle( $text, $size = 5, $x = 0, $y = 0, $color_background = '', 
         $truetype = false, $fonte = '' )
      {
           $cor_text = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
@@ -757,28 +757,28 @@ class canvas {
 
           if( is_string( $x ) && is_string( $y ) )
           {
-               list( $x, $y ) = $this->calculaPosicaoLegenda( $x . '_' . $y, $widht_text, $height_text );
+               list( $x, $y ) = $this->calculateSubtitlePosition( $x . '_' . $y, $widht_text, $height_text );
           }
 
           /**
            * Create a new image to use Legend background
            **/
-          if( $cor_fundo )
+          if( $color_background )
           {
-               if( is_array( $cor_fundo ) )
+               if( is_array( $color_background ) )
                {
-                    $this->rgb = $cor_fundo;
+                    $this->rgb = $color_background;
                }
-               elseif( strlen( $cor_fundo ) > 3 )
+               elseif( strlen( $color_background ) > 3 )
                {
-                    $this->hexa( $cor_fundo );
+                    $this->hexa( $color_background );
                }
 
                $this->img_temp = imagecreatetruecolor( $widht_text, $height_text );
                
-               $cor_fundo = color_background();
+               $color_background = color_background();
 
-               imagefill( $this->img_temp, 0, 0, $cor_fundo );
+               imagefill( $this->img_temp, 0, 0, $color_background );
 
                imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $widht_text, $height_text );
           }
@@ -793,110 +793,111 @@ class canvas {
                imagestring( $this->img, $size, $x, $y, $text, $cor_text );
           }
           return $this;
-     } // end legenda
+     } // end subtitle
 
-     public function color_background($cor_fundo)
+     public function color_background($color_background)
      {
-        $cor_fundo = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+        $color_background = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
      }
 
     /**
      * Calculates the position of the legend according to string passed via parameter
      *
-     * @param String $posicao predefined values(topo_esquerda, meio_centro etc.)
+     * @param String $position predefined values(topo_esquerda, meio_centro etc.)
      * @param Integer $widht image widht
      * @param Integer $height image height
      * @return void
      **/
-     private function calculaPosicaoLegenda( $posicao, $widht, $height )
+     private function calculateSubtitlePosition( $position, $widht, $height )
      {
           // sets X and Y to position
-          switch( $posicao )
+          switch( $position )
           {
-               case 'topo_esquerda':
+               case 'top_left':
                     $x = 0;
                     $y = 0;
                     break;
-               case 'topo_centro':
+               case 'top_center':
                     $x = ( $this->widht - $widht ) / 2;
                     $y = 0;
                     break;
-               case 'topo_direita':
+               case 'top_right':
                     $x = $this->widht - $widht;
                     $y = 0;
                     break;
-               case 'meio_esquerda':
+               case 'middle_left':
                     $x = 0;
                     $y = ( $this->height / 2 ) - ( $height / 2 );
                     break;
-               case 'meio_centro':
+               case 'middle_center':
                     $x = ( $this->widht - $widht ) / 2;
                     $y = ( $this->height - $height ) / 2 ;
                     break;
-               case 'meio_direita':
+               case 'middle_right':
                     $x = $this->widht - $widht;
                     $y = ( $this->height / 2) - ( $height / 2 );
                     break;
-               case 'baixo_esquerda':
+               case 'bottom_left':
                     $x = 0;
                     $y = $this->height - $height;
                     break;
-               case 'baixo_centro':
+               case 'bottom_center':
                     $x = ( $this->widht - $widht ) / 2;
                     $y = $this->height - $height;
                     break;
-               case 'baixo_direita':
+               case 'bottom_right':
                     $x = $this->widht - $widht;
                     $y = $this->height - $height;
                     break;
                default:
                     return false;
                     break;
-          } // end switch posicao
+          } // end switch position
 
           return array( $x, $y );
-     } // end calculaPosicaoLegenda
+     } // end calculateSubtitlePosition
 
      const MAX_TRANSPARENCE_QUALITY = 100;
      const LOWER_TRANSPARENCE_QUALITY = 0;
 
      /**
       * add image watermark
-      * @param String $imagem watermark image path
-      * @param Int/String $x x position of the brand in the picture or constant for marcaFixa()
-      * @param Int/Sring $y y position of the brand in the picture or constant for marcaFixa()
+      * @param String $image watermark image path
+      * @param Int/String $x x position of the brand in the picture or constant for markFixed()
+      * @param Int/Sring $y y position of the brand in the picture or constant for markFixed()
       * @return Boolean true/false depending on the result of the operation
-      * @param Int $alfa alpha value (0-100)
+      * @param Int $alpha alpha value (0-100)
       *                 -> using alpha, the imagecopymerge function does not preserve
       *                 -> the native alpha PNG
       * @return Object current instance of the object, for chained method
       **/
-     public function marca( $imagem, $x = 0, $y = 0, $alfa = MAX_TRANSPARENCE_QUALITY)
+     public function mark( $image, $x = 0, $y = 0, $alpha = MAX_TRANSPARENCE_QUALITY)
      {
-          // cria imagem temporária para merge
-          if ( $imagem ) {
+          // create a temporary image for merge
+          if ( $image ) {
                if( is_string( $x ) && is_string( $y ) )
                {
-                    return $this->marcaFixa( $imagem, $x . '_' . $y, $alfa );
+                    return $this->markFixed( $image, $x . '_' . $y, $alpha );
                }
-               $pathinfo = pathinfo( $imagem );
+               $pathinfo = pathinfo( $image );
                switch( strtolower( $pathinfo['extension'] ) )
                {
                     case 'jpg':
                     case 'jpeg':
-                         $marcadagua = imagecreatefromjpeg( $imagem );
+                         $whatermark = imagecreatefromjpeg( $image );
                          break;
                     case 'png':
-                         $marcadagua = imagecreatefrompng( $imagem );
+                         $whatermark = imagecreatefrompng( $image );
                          break;
                     case 'gif':
-                         $marcadagua = imagecreatefromgif( $imagem );
+                         $whatermark = imagecreatefromgif( $image );
                          break;
                     case 'bmp':
-                         $marcadagua = imagecreatefrombmp( $imagem );
+                         $whatermark = imagecreatefrombmp( $image );
                          break;
                     default:
-                         trigger_error( 'Arquivo de marca d\'água inválido.', E_USER_ERROR );
+                         trigger_error( 'Arquivo de mark d\'água inválido.', E_USER_ERROR );
+                         log_it("Invalid watermark file!");
                          return false;
                }
           }
@@ -905,101 +906,101 @@ class canvas {
                return false;
           }
           // dimensões
-          $marca_w     = imagesx( $marcadagua );
-          $marca_h     = imagesy( $marcadagua );
-          // retorna imagens com marca d'água
-          if ( is_numeric( $alfa ) && ( ( $alfa > LOWER_TRANSPARENCE_QUALITY ) && 
-            ( $alfa < MAX_TRANSPARENCE_QUALITY ) ) ) 
+          $mark_w     = imagesx( $whatermark );
+          $mark_h     = imagesy( $whatermark );
+          // retorna imagens com mark d'água
+          if ( is_numeric( $alpha ) && ( ( $alpha > LOWER_TRANSPARENCE_QUALITY ) && 
+            ( $alpha < MAX_TRANSPARENCE_QUALITY ) ) ) 
           {
-               imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
+               imagecopymerge( $this->img, $whatermark, $x, $y, 0, 0, $mark_w, $mark_h, $alpha );
           } 
           else 
           {
-               imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
+               imagecopy( $this->img, $whatermark, $x, $y, 0, 0, $mark_w, $mark_h );
           }
           return $this;
-     } // fim marca
+     } // fim mark
 
      /**
       * add image watermark, with fixed values
-      * @param String $imagem image path with whatermark
-      * @param String $posicao position / orientation fixed watermark
-      * @param Int $alfa value for transparency (0-100)
+      * @param String $image image path with whatermark
+      * @param String $position position / orientation fixed watermark
+      * @param Int $alpha value for transparency (0-100)
       * @return void
       **/
-     private function marcaFixa( $imagem, $posicao, $alfa = MAX_TRANSPARENCE_QUALITY)
+     private function markFixed( $image, $position, $alpha = MAX_TRANSPARENCE_QUALITY)
      {
 
           // watermark size
-          list( $marca_w, $marca_h ) = getimagesize( $imagem );
+          list( $mark_w, $mark_h ) = getimagesize( $image );
 
           // sets X and Y to position
-          switch( $posicao )
+          switch( $position )
           {
-               case 'topo_esquerda':
+               case 'top_left':
                     $x = 0;
                     $y = 0;
                     break;
-               case 'topo_centro':
-                    $x = ( $this->widht - $marca_w ) / 2;
+               case 'top_center':
+                    $x = ( $this->widht - $mark_w ) / 2;
                     $y = 0;
                     break;
-               case 'topo_direita':
-                    $x = $this->widht - $marca_w;
+               case 'top_right':
+                    $x = $this->widht - $mark_w;
                     $y = 0;
                     break;
-               case 'meio_esquerda':
+               case 'middle_left':
                     $x = 0;
-                    $y = ( $this->height / 2 ) - ( $marca_h / 2 );
+                    $y = ( $this->height / 2 ) - ( $mark_h / 2 );
                     break;
-               case 'meio_centro':
-                    $x = ( $this->widht - $marca_w ) / 2;
-                    $y = ( $this->height / 2 ) - ( $marca_h / 2 );
+               case 'middle_center':
+                    $x = ( $this->widht - $mark_w ) / 2;
+                    $y = ( $this->height / 2 ) - ( $mark_h / 2 );
                     break;
-               case 'meio_direita':
-                    $x = $this->widht - $marca_w;
-                    $y = ( $this->height / 2) - ( $marca_h / 2 );
+               case 'middle_right':
+                    $x = $this->widht - $mark_w;
+                    $y = ( $this->height / 2) - ( $mark_h / 2 );
                     break;
-               case 'baixo_esquerda':
+               case 'bottom_left':
                     $x = 0;
-                    $y = $this->height - $marca_h;
+                    $y = $this->height - $mark_h;
                     break;
-               case 'baixo_centro':
-                    $x = ( $this->widht - $marca_w ) / 2;
-                    $y = $this->height - $marca_h;
+               case 'bottom_center':
+                    $x = ( $this->widht - $mark_w ) / 2;
+                    $y = $this->height - $mark_h;
                     break;
-               case 'baixo_direita':
-                    $x = $this->widht - $marca_w;
-                    $y = $this->height - $marca_h;
+               case 'bottom_right':
+                    $x = $this->widht - $mark_w;
+                    $y = $this->height - $mark_h;
                     break;
                default:
                     return false;
                     break;
-          } // end switch posicao
+          } // end switch position
 
           // create brand
-          $this->marca( $imagem, $x, $y, $alfa );
+          $this->mark( $image, $x, $y, $alpha );
           return $this;
-     } // end marcaFixa
+     } // end markFixed
 
     /**
       * Apply advanced filters to the brightness, contrast, pixelate, blur
       * Requires GD compiled with the imagefilter function ()
       * http://br.php.net/imagefilter
-      * @param String $filtro constant / filter name
-      * @param Integer $quantidade number of times the filter should be applied
+      * @param String $fillter constant / filter name
+      * @param Integer $quantity number of times the filter should be applied
       *            used in blur, edge, emboss, and pixel draft
       * @param $arg1, $arg2 e $arg3 - see function manual imagefilter
       * @return Object current instance of the object, for chained method
      **/
-    public function filtra( $filtro, $quantidade = 1, $arg1 = NULL, $arg2 = NULL, $arg3 = NULL, $arg4 = NULL )
+    public function fillters( $fillter, $quantity = 1, $arg1 = NULL, $arg2 = NULL, $arg3 = NULL, $arg4 = NULL )
     {
-         switch( $filtro )
+         switch( $fillter )
          {
              case 'blur':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_GAUSSIAN_BLUR );
                     }
@@ -1010,9 +1011,9 @@ class canvas {
                 }
                 break;
             case 'blur2':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SELECTIVE_BLUR );
                     }
@@ -1035,9 +1036,9 @@ class canvas {
                 imagefilter( $this->img, IMG_FILTER_CONTRAST, $arg1 );
                 break;
             case 'edge':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EDGEDETECT );
                     }
@@ -1048,9 +1049,9 @@ class canvas {
                 }
                 break;
             case 'emboss':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_EMBOSS );
                     }
@@ -1064,9 +1065,9 @@ class canvas {
                 imagefilter( $this->img, IMG_FILTER_NEGATE );
                 break;
             case 'ruido':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_MEAN_REMOVAL );
                     }
@@ -1077,9 +1078,9 @@ class canvas {
                 }
                 break;
             case 'suave':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_SMOOTH, $arg1 );
                     }
@@ -1091,9 +1092,9 @@ class canvas {
                 break;
             // JUST 5.3 or higher
             case 'pixel':
-                if( is_numeric( $quantidade ) && $quantidade > 1 )
+                if( is_numeric( $quantity ) && $quantity > 1 )
                 {
-                    for( $i = 1; $i <= $quantidade; $i = $i + 1 )
+                    for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
                         imagefilter( $this->img, IMG_FILTER_PIXELATE, $arg1, $arg2 );
                     }
@@ -1107,7 +1108,7 @@ class canvas {
                 break;
          }
           return $this;
-    } // end filtrar
+    } // end fillters
     
     
     /**  
@@ -1116,15 +1117,15 @@ class canvas {
      **/
     function imagesharpen() {
     
-        $qualidade = array(
+        $quality = array(
             array(-1, -1, -1),
             array(-1, 16, -1),
             array(-1, -1, -1),
         );
     
-        $divisao = array_sum(array_map('array_sum', $qualidade));
+        $division = array_sum(array_map('array_sum', $quality));
         $offset = 0; 
-        imageconvolution($this->img, $qualidade, $divisao, $offset);
+        imageconvolution($this->img, $quality, $division, $offset);
         
         return $this;
     }   
@@ -1133,52 +1134,52 @@ class canvas {
 
      /**
       * return output to screen or file
-      * @param String $destino path and file name to be created
-      * @param Int $qualidade image quality in the case of JPEG (0-100)
+      * @param String $path path and file name to be created
+      * @param Int $quality image quality in the case of JPEG (0-100)
       * @return void
       **/
-     public function grava( $destino='', $qualidade = MAX_IMAGE_QUALITY )
+     public function save( $path='', $quality = MAX_IMAGE_QUALITY )
      {
           // target file data
-          if ( $destino )
+          if ( $path )
           {
-               $pathinfo               = pathinfo( $destino );
-               $dir_destino          = $pathinfo['dirname'];
-               $extension_destino     = strtolower( $pathinfo['extension'] );
+               $pathinfo               = pathinfo( $path );
+               $dir_path          = $pathinfo['dirname'];
+               $extension_path     = strtolower( $pathinfo['extension'] );
 
                // validate directory
-               if ( !is_dir( $dir_destino ) )
+               if ( !is_dir( $dir_path ) )
                {
                     trigger_error( 'Invalid or absent path!', E_USER_ERROR );
                     log_it("Invalid or absent path!");
                }
           }
 
-          if ( !isset( $extension_destino ) )
+          if ( !isset( $extension_path ) )
           {
-               $extension_destino = $this->extension;
+               $extension_path = $this->extension;
           }
 
-          switch( $extension_destino )
+          switch( $extension_path )
           {
                case 'jpg':
                case 'jpeg':
                case 'bmp':
-                    if ( $destino )
+                    if ( $path )
                     {
-                         imagejpeg( $this->img, $destino, $qualidade );
+                         imagejpeg( $this->img, $path, $quality );
                     }
                     else
                     {
                          header( "Content-type: image/jpeg" );
-                         imagejpeg( $this->img, NULL, $qualidade );
+                         imagejpeg( $this->img, NULL, $quality );
                          imagedestroy( $this->img );
                     }
                     break;
                case 'png':
-                    if ( $destino )
+                    if ( $path )
                     {
-                         imagepng( $this->img, $destino );
+                         imagepng( $this->img, $path );
                     }
                     else
                     {
@@ -1188,9 +1189,9 @@ class canvas {
                     }
                     break;
                case 'gif':
-                    if ( $destino )
+                    if ( $path )
                     {
-                         imagegif( $this->img, $destino );
+                         imagegif( $this->img, $path );
                     }
                     else
                     {
@@ -1206,7 +1207,7 @@ class canvas {
           
      return $this;
 
-     } // end grava
+     } // end save
 
 } // end of class
 

@@ -1,9 +1,7 @@
 <?php
 
 /**
-*
 * Class of application functions
-*
 **/
 
 require_once 'model/Event.php';
@@ -49,8 +47,9 @@ function lastEvent()
     return $row[0];
 }
 
-function log_it($error_message){
-	error_log($error_message, 3, "\\PartyPay-PHP\php_error.log");
+function log_it($error_message)
+{
+    error_log($error_message, 3, "\\PartyPay-PHP\php_error.log");
 }
 
 ?>

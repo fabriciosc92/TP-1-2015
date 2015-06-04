@@ -11,7 +11,7 @@ class canvas {
     /**
      * Variables for storing files/imgs
      **/
-    private $origem, $img, $img_temp;
+    private $origin, $img, $img_temp;
 
     /**
      * Store the size of the current image and the new image if available
@@ -43,14 +43,14 @@ class canvas {
      * @param $string path to image to be loaded [optional]
      * @return void
      **/
-     public function __construct( $origem = '' )
+     public function __construct( $origin = '' )
      {
 
-          $this->origem = $origem;
+          $this->origin = $origin;
 
-          if ( $this->origem )
+          if ( $this->origin )
           {
-               $this->dados();
+               $this->data();
           }
 
           // RGB default -> white
@@ -58,14 +58,13 @@ class canvas {
      } // end constructor
      
      /**
-     * Reset variables in order to use object in long threads
-     * @return void
-     **/
-     public function resetar()
+      * Reset variables in order to use object in long threads
+      * @return void
+      **/
+     public function reset()
      {
-<<<<<< HEAD
-			
-		$reset_variables = $this->origem = $this->img = $this->img_temp = $this->widht = $this->height = 
+	
+		    $reset_variables = $this->origin = $this->img = $this->img_temp = $this->widht = $this->height = 
         $this->new_widht = $this->new_heigth = $this->size_html = $this->position_x = 
         $this->position_y = $this->format = $this->extension = $this->size = $this->file = 
         $this->path = $this->position_crop;
@@ -74,38 +73,34 @@ class canvas {
 	
 	    $this->rgb( 255, 255, 255 );
      }// end resetar
-=======
-        
->>>>>>> master
-     
 
-     /**
-      * Return image data
-      * @return void
-      **/
-     private function dados()
+    /**
+     * Return image data
+     * @return void
+     **/
+     private function data()
      {
 
           // checks for image
-          if ( is_file( $this->origem ) )
+          if ( is_file( $this->origin ) )
           {
 
                // files data
-               $this->dadosfile();
+               $this->datafile();
 
                // checks if is an image
-               if ( !$this->eImagem() )
+               if ( !$this->eImage() )
                {
-                    trigger_error( 'Erro: file '.$this->origem.' is not a image!', E_USER_ERROR );
-                    log_it("File is not a image: " $this->origem.);
+                    trigger_error( 'Erro: file '.$this->origin.' is not a image!', E_USER_ERROR );
+                    log_it("File is not a image: " $this->origin.);
                }
                else
                {
                     // search dimensions of the sent image
-                    $this->dimensoes();
+                    $this->dimensions();
 
                     // create image for php
-                    $this->criaImagem();
+                    $this->createImage();
                }
           }
           else
@@ -114,74 +109,75 @@ class canvas {
                log_it("Image file not found!");
           }
 
-     } // end dadosImagem
+     } // end dataImagem
 
      /**
       * Load a new image outside builder
       * @param String path of the image to load
       * @return Object current instance of the object, for chained method
       **/
-     public function carrega( $origem = '' )
+     public function load( $origin = '' )
      {
-          $this->origem = $origem;
-          $this->dados();
+          $this->origin = $origin;
+          $this->data();
           return $this;
-     } // end carrega
+     } // end load
 
      /**
       * Search dimensions and real image format
       * @return void
       **/
-     private function dimensoes()
+     private function dimensions()
      {
-    $dimensoes                  = getimagesize( $this->origem );
-    $this->widht              = $dimensoes[0];
-    $this->height               = $dimensoes[1];
-    /**
-    * 1 = gif, 2 = jpeg, 3 = png, 6 = BMP
-    * http://br2.php.net/manual/en/function.exif-imagetype.php
-    **/
-    $this->format               = $dimensoes[2];
-    $this->size_html          = $dimensoes[3];
-     } // end dimensoes
+        $dimensions                  = getimagesize( $this->origin );
+        $this->widht              = $dimensions[0];
+        $this->height               = $dimensions[1];
+
+       /**
+        * 1 = gif, 2 = jpeg, 3 = png, 6 = BMP
+        * http://br2.php.net/manual/en/function.exif-imagetype.php
+        **/
+        $this->format               = $dimensions[2];
+        $this->size_html          = $dimensions[3];
+     } // end dimensions
 
      /**
       * Search file data
       * @return void
       **/
-     private function dadosfile()
+     private function datafile()
      {
           // source image
-          $pathinfo            = pathinfo( $this->origem );
+          $pathinfo            = pathinfo( $this->origin );
           
           if(array_key_exists('extension', $pathinfo))
           {
-                $this->extension = strtolower($pathinfo['extension']);
+              $this->extension = strtolower($pathinfo['extension']);
           }
           else
           {
-                $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
+              $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
           }
              
           $this->file       = $pathinfo['basename'];
           $this->path     = $pathinfo['dirname'];
-     } // end dadosfile
+     } // end datafile
 
      /**
       * Checks if the specified file is an image
       * @return Boolean true/false
       **/
-     private function eImagem()
+     private function eImage()
      {
           // filter extension
-          $valida = getimagesize( $this->origem );
+          $valida = getimagesize( $this->origin );
           if ( !is_array( $valida ) || empty( $valida ) )
           {
-               return false;
+              return false;
           }
           else
           {
-               return true;
+              return true;
           }
      } // end validaImagem
 
@@ -192,7 +188,7 @@ class canvas {
       * @param String $height of the image to be created
       * @return Object current instance of the object, for chained method
       **/
-     public function novaImagem( $widht, $height )
+     public function newImage( $widht, $height )
      {
           $this->widht     = $widht;
           $this->height     = $height;
@@ -203,18 +199,18 @@ class canvas {
           imagefill( $this->img, 0, 0, $cor_fundo );
           $this->extension = 'jpg';
           return $this;
-    } // end novaImagem
+    } // end newImage
 
     /**
      * Upload an image via URL
      * Note: depends on the server settings for remote access files
      * @param String $url image path
-      * @return Object current instance of the object, for chained method
+     * @return Object current instance of the object, for chained method
      **/
-     public function carregaUrl( $url )
+     public function loadUrl( $url )
      {
-          $this->origem = $url;
-          $pathinfo = pathinfo( $this->origem );
+          $this->origin = $url;
+          $pathinfo = pathinfo( $this->origin );
           $this->extension = strtolower( $pathinfo['extension'] );
 
           switch( $this->extension )
@@ -234,45 +230,36 @@ class canvas {
                     break;
                default:
                     break;
-     }
-<<<<<< HEAD
-          $this->criaImagem();
+          }
+
+     $this->createImage();
      $this->widht     = imagesx( $this->img );
-          $this->height     = imagesy( $this->img );
-          return $this;
-     } // end carregaUrl
-=======
-
-        $this->criaImagem();
-        $this->widht     = imagesx( $this->img );
-        $this->height     = imagesy( $this->img );
-
+     $this->height     = imagesy( $this->img );
      return $this;
-     } // fim carregaUrl
->>>>>>> master
+     } // end loadUrl
 
      /**
       * Create image object for manipulation in GD
       * @return void
       **/
-     private function criaImagem()
+     private function createImage()
      {
           switch ( $this->format )
           {
                case 1:
-                    $this->img = imagecreatefromgif( $this->origem );
+                    $this->img = imagecreatefromgif( $this->origin );
                     $this->extension = 'gif';
                     break;
                case 2:
-                    $this->img = imagecreatefromjpeg( $this->origem );
+                    $this->img = imagecreatefromjpeg( $this->origin );
                     $this->extension = 'jpg';
                     break;
                case 3:
-                    $this->img = imagecreatefrompng( $this->origem );
+                    $this->img = imagecreatefrompng( $this->origin );
                     $this->extension = 'png';
                     break;
                case 6:
-                    $this->img = imagecreatefrombmp( $this->origem );
+                    $this->img = imagecreatefrombmp( $this->origin );
                     $this->extension = 'bmp';
                     break;
                default:
@@ -280,7 +267,7 @@ class canvas {
                     log_it("Invalid file!" E_USER_ERROR);
                     break;
           }
-     } // end criaImagem
+     } // end createImage
 
      /**
       * Stores the RGB values for resizing to fill
@@ -319,52 +306,32 @@ class canvas {
             hexdec( substr( $cor, 4, 2 ) ),
           );
           return $this;
-     }  // end hexa
+     }// end hexa
 
      /**
-<<<<<<< HEAD
       * Stores positions x and y for crop
       * @param Int x - position x of crop
 			* @param Int y - position y of crop
-			* @param Int w - width  - widhtOrigem (by OctaAugusto)
-			* @param Int h - height - heightOrigem (by OctaAugusto)
+			* @param Int w - width  - widhtOrigin (by OctaAugusto)
+			* @param Int h - height - heightOrigin (by OctaAugusto)
       * @return Object current instance of the object, for chained method
       **/
-     public function posicaoCrop( $x, $y, $w=0, $h=0 )
+     public function cropPosition( $x, $y, $w=0, $h=0 )
      {
           // no width or manually sitting height, image original handle
-		  		if(!$w) $w = $this->widht;
-		  		if(!$h) $h = $this->height;
-		  
-=======
-      * Armazena posições x e y para crop
-      * @param Int x - posicao x do crop
-            * @param Int y - posicao y do crop
-            * @param Int w - width  - widhtOrigem (by OctaAugusto)
-            * @param Int h - height - heightOrigem (by OctaAugusto)
-      * @return Object instância atual do objeto, para métodos encadeados
-      **/
-     public function posicaoCrop( $x, $y, $w=0, $h=0 )
-     {
-          // sem widht ou height setada manualmente, pega original da imagem
-                if(!$w) 
-                {
-                    $w = $this->widht;
-                } 
-                elseif(!$h) 
-                {
-                    $h = $this->height;
-                }
-                else
-                {
+		  		if(!$w)
+          {
+            $w = $this->widht;
+          }
+		  		if(!$h)
+          {
+            $h = $this->height;
+          } 
 
-                }
-          
->>>>>>> master
           $this->position_crop = array( $x, $y, $w, $h );
 
           return $this;
-     } // end position_crop
+     }
 
      /**
       * Resize image
@@ -373,7 +340,7 @@ class canvas {
       * @param String $tipo method for scaling (default [empty], fill or crop)
       * @return Object current instance of the object, for chained method
       **/
-     public function redimensiona( $new_widht = 0, $new_heigth = 0, $tipo = '' )
+     public function resize( $new_widht = 0, $new_heigth = 0, $tipo = '' )
      {
 
           // to set variables passed via parameter
@@ -430,17 +397,17 @@ class canvas {
           switch( $tipo )
           {
                case 'crop':
-                    $this->redimensionaCrop();
+                    $this->resizeCrop();
                     break;
                case 'preenchimento':
-                    $this->redimensionaPreenchimento();
+                    $this->resizeFill();
                     break;
                case 'proporcional': 
                    // proportionally unfilled
-                    $this->redimensionaProporcional();
+                    $this->resizeProportionl();
                     break;      
                default:
-                    $this->redimensionaSimples();
+                    $this->resizeSimple();
                     break;
           }
 
@@ -449,60 +416,54 @@ class canvas {
           $this->widht     = $this->new_widht;
 
           return $this;
-     } // end redimensiona
+     } // end resize
 
      /**
       * Resize image, standard mode without crop or fill
       * (distorting case has passed both height and width)
       * @return void
       **/
-     private function redimensionaSimples()
+     private function resizeSimple()
      {
           // create temporary destination image
           $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
           imagecopyresampled( $this->img_temp, $this->img, 0, 0, 0, 0, $this->new_widht, 
-            $this->new_heigth, $this->widht, $this->height );
+          $this->new_heigth, $this->widht, $this->height );
           $this->img     = $this->img_temp;
-     } // end redimensiona()
+     } // end resize()
 
      /**
       * Add image to the background color
       * @return void
       **/
-     private function preencheImagem()
+     private function fillImage()
      {
           $cor_fundo = color_background();
           
           imagefill( $this->img_temp, 0, 0, $cor_fundo );
-     } // end preencheImagem
+     } // end fillImage
 
      /**
       * Resize image whitout crop, propotionaly
       * filling empty space with specified RGB color
       * @return void
       **/
-     private function redimensionaPreenchimento()
+     private function resizeFill()
      {
-          // create a temporary image
+          // create temporary image path
           $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
-          // add background color to new image
-          $this->preencheImagem();
+          // add backgroung color to new imaage
+          $this->fillImage();
 
-          // save variables to centralization
+          // saved variables for centralization
           $dif_x = $dif_w = $this->new_widht;
           $dif_y = $dif_h = $this->new_heigth;
 
-          /**
-<<<<<<< HEAD
-      		 * Check height and width
-      		 */
-=======
-             * Verifica height e widht
-             * Calculo corrigido por Gilton Guma <http://www.gsguma.com.br/>
-             */
->>>>>>> master
+         /**
+          * Verify height e widht
+          */
           if ( ($this->widht / $this->new_widht ) > ( $this->height / $this->new_heigth ) )
           {
               $fator = $this->widht / $this->new_widht;
@@ -511,34 +472,30 @@ class canvas {
           {
               $fator = $this->height / $this->new_heigth;
           }
+
           $dif_w = $this->widht / $fator;
           $dif_h = $this->height  / $fator;
 
-          // copies with the new size, centralizing
+          // copia com o novo tamanho, centralizando
           $dif_x = ( $dif_x - $dif_w ) / 2;
           $dif_y = ( $dif_y - $dif_h ) / 2;
 
           imagecopyresampled( $this->img_temp, $this->img, $dif_x, $dif_y, 0, 0, $dif_w, $dif_h, 
-            $this->widht, $this->height );
+
+          $this->widht, $this->height );
           $this->img     = $this->img_temp;
-     } // end redimensionaPreenchimento()
+     } // end resizeFill()
 
      /**
       * Resize image without cutting in proportion and unfilled.
       * @return void
       **/
-     private function redimensionaProporcional()
+     private function resizeProportionl()
      {
-<<<<<< HEAD
-	   /**
-           * Check height and width proportionaly.
-=======
-       /**
+          /**
            * Verifica height e widht proporcional.
->>>>>>> master
            **/
-           $ratio_orig = $this->widht/$this->height;
-
+            $ratio_orig = $this->widht/$this->height;
             if ($this->new_widht/$this->new_heigth > $ratio_orig) {
                $dif_w = $this->new_heigth*$ratio_orig;
                $dif_h = $this->new_heigth;
@@ -549,14 +506,14 @@ class canvas {
                $dif_h = $this->new_widht/$ratio_orig;
             }
 
-          // create e temporary image
+          // cria imagem de destino temporária
           $this->img_temp = imagecreatetruecolor( $dif_w, $dif_h );
          
           // Resample
-      imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->widht,
-       $this->height);
+          imagecopyresampled($this->img_temp, $this->img, 0, 0, 0, 0, $dif_w, $dif_h, $this->widht,
+          $this->height);
           $this->img   = $this->img_temp;
-     } // end redimensionaProporcional()
+     } // fim resizeProportionl()
 
 
      /**
@@ -565,7 +522,7 @@ class canvas {
       * The 2 indexes and 3 correspond to the size of the crop
       * @return void
       **/
-     private function calculaPosicaoCrop()
+     private function calculateCropPosition()
      {
           // media widht/height
           $hm     = $this->height / $this->new_heigth;
@@ -585,6 +542,7 @@ class canvas {
                     $this->position_crop[0]     = ( $this->position_crop[2] / 2 ) - $h_width;
                     $this->position_crop[1]     = 0;
                }
+
                // widht <= height
                elseif ( ( $wm <= $hm ) )
                {
@@ -598,20 +556,20 @@ class canvas {
 
                }
           }
-     } // end calculaPosicaoCrop
+     } // end calculateCropPosition
 
      /**
       * Resize image
       * @return void
       **/
-     private function redimensionaCrop()
+     private function resizeCrop()
      {
           // calculate crop position automaticaly
           if(!is_array($this->position_crop))
           {
 <<<<<< HEAD
           	$auto=1; 
-          	$this->calculaPosicaoCrop(); 
+          	$this->calculateCropPosition(); 
 		  		}
 		  		// crop position manualy
 		  		else {
@@ -619,7 +577,7 @@ class canvas {
 		  		}
 =======
             $auto=1; 
-            $this->calculaPosicaoCrop(); 
+            $this->calculateCropPosition(); 
           }
                 // posicionamento do crop setado manualmente
                 else 
@@ -632,7 +590,7 @@ class canvas {
           $this->img_temp = imagecreatetruecolor( $this->new_widht, $this->new_heigth );
 
           // add background color 
-          $this->preencheImagem();
+          $this->fillImage();
           
           //inteligents arrays
           switch( $this->position_crop[ 0 ]  ){
@@ -707,7 +665,7 @@ class canvas {
                 $this->position_crop[2], $this->position_crop[3] );
           }
           $this->img     = $this->img_temp;
-     } // end redimensionaCrop
+     } // end resizeCrop
 
      /**
       * flip/invert image
@@ -767,7 +725,7 @@ class canvas {
 
      /**
       * add text in the image
-      * @param String $texto text to be added
+      * @param String $text text to be added
       * @param Int $size font size
       * @param Int $x x position text in the image
       * @param Int $y y position text in the image
@@ -776,30 +734,30 @@ class canvas {
       * @param String $fonte font name truetype to use
       * @return void
       **/
-     public function legenda( $texto, $size = 5, $x = 0, $y = 0, $cor_fundo = '', 
+     public function legenda( $text, $size = 5, $x = 0, $y = 0, $cor_fundo = '', 
         $truetype = false, $fonte = '' )
      {
-          $cor_texto = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
+          $cor_text = imagecolorallocate( $this->img, $this->rgb[0], $this->rgb[1], $this->rgb[2] );
 
           /**
            * Sets size of the caption for fixed positions and legend background
            **/
           if( $truetype  === true )
           {
-               $dimensoes_texto     = imagettfbbox( $size, 0, $fonte, $texto );
-               $widht_texto          = $dimensoes_texto[4];
-               $height_texto          = $size;
+               $dimensions_text     = imagettfbbox( $size, 0, $fonte, $text );
+               $widht_text          = $dimensions_text[4];
+               $height_text          = $size;
           }
           else
           {
                if( $size > 5 ) $size = 5;
-               $widht_texto     = imagefontwidth( $size ) * strlen( $texto );
-               $height_texto     = imagefontheight( $size );
+               $widht_text     = imagefontwidth( $size ) * strlen( $text );
+               $height_text     = imagefontheight( $size );
           }
 
           if( is_string( $x ) && is_string( $y ) )
           {
-               list( $x, $y ) = $this->calculaPosicaoLegenda( $x . '_' . $y, $widht_texto, $height_texto );
+               list( $x, $y ) = $this->calculaPosicaoLegenda( $x . '_' . $y, $widht_text, $height_text );
           }
 
           /**
@@ -816,23 +774,23 @@ class canvas {
                     $this->hexa( $cor_fundo );
                }
 
-               $this->img_temp = imagecreatetruecolor( $widht_texto, $height_texto );
+               $this->img_temp = imagecreatetruecolor( $widht_text, $height_text );
                
                $cor_fundo = color_background();
 
                imagefill( $this->img_temp, 0, 0, $cor_fundo );
 
-               imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $widht_texto, $height_texto );
+               imagecopy( $this->img, $this->img_temp, $x, $y, 0, 0, $widht_text, $height_text );
           }
 
           if ( $truetype === true )
           {
                $y = $y + $size;
-               imagettftext( $this->img, $size, 0, $x, $y, $cor_texto, $fonte, $texto );
+               imagettftext( $this->img, $size, 0, $x, $y, $cor_text, $fonte, $text );
           }
           else
           {
-               imagestring( $this->img, $size, $x, $y, $texto, $cor_texto );
+               imagestring( $this->img, $size, $x, $y, $text, $cor_text );
           }
           return $this;
      } // end legenda
@@ -915,14 +873,12 @@ class canvas {
       **/
      public function marca( $imagem, $x = 0, $y = 0, $alfa = MAX_TRANSPARENCE_QUALITY)
      {
-          // create temporary image for merge
+          // cria imagem temporária para merge
           if ( $imagem ) {
-
                if( is_string( $x ) && is_string( $y ) )
                {
                     return $this->marcaFixa( $imagem, $x . '_' . $y, $alfa );
                }
-
                $pathinfo = pathinfo( $imagem );
                switch( strtolower( $pathinfo['extension'] ) )
                {
@@ -940,8 +896,7 @@ class canvas {
                          $marcadagua = imagecreatefrombmp( $imagem );
                          break;
                     default:
-                         trigger_error( 'Invalid whatermak file!', E_USER_ERROR );
-                         log_it("Invalid whatermak file!");
+                         trigger_error( 'Arquivo de marca d\'água inválido.', E_USER_ERROR );
                          return false;
                }
           }
@@ -949,23 +904,13 @@ class canvas {
           {
                return false;
           }
-<<<<<<  HEAD
-          // sizes
-          $marca_w     = imagesx( $marcadagua );
-          $marca_h     = imagesy( $marcadagua );
-          // return images with whatemarks
-          if ( is_numeric( $alfa ) && ( ( $alfa > 0 ) && ( $alfa < 100 ) ) ) {
-=======
-
           // dimensões
           $marca_w     = imagesx( $marcadagua );
           $marca_h     = imagesy( $marcadagua );
-
           // retorna imagens com marca d'água
           if ( is_numeric( $alfa ) && ( ( $alfa > LOWER_TRANSPARENCE_QUALITY ) && 
             ( $alfa < MAX_TRANSPARENCE_QUALITY ) ) ) 
           {
->>>>>>> master
                imagecopymerge( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h, $alfa );
           } 
           else 
@@ -973,7 +918,7 @@ class canvas {
                imagecopy( $this->img, $marcadagua, $x, $y, 0, 0, $marca_w, $marca_h );
           }
           return $this;
-     } // end marca
+     } // fim marca
 
      /**
       * add image watermark, with fixed values
@@ -1166,12 +1111,10 @@ class canvas {
     
     
     /**  
-    Adds the best filter to sharpen the images
-    Use GD image objects 
-    **/
-    
-   
-   function imagesharpen() {
+     *Adds the best filter to sharpen the images
+     *Use GD image objects 
+     **/
+    function imagesharpen() {
     
         $qualidade = array(
             array(-1, -1, -1),

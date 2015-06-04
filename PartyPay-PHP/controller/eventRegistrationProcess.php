@@ -1,12 +1,6 @@
 <?php
 
-require_once '../model/Event.php'
-<<<<<<< HEAD
-or log_it("Couldnt include Event.php");
-=======
-    or log_it("Couldnt include Event.php");
->>>>>>> setima_entrega
-
+require_once '../model/Event.php';
 require '../tratamentoDeExcecao/AuthenticateRegistration.php';
 
 /*
@@ -33,8 +27,8 @@ $idOrganizer = $_SESSION['idOrganizer']; // Organizer registration code
 $ageClassification = $_POST['ageClassification']; // Age rating of the event
 $event = new Event(); // Varible that receives event's data
 
-require_once 'eventUploadImage.php'
-<<<<<<< HEAD
+require_once 'eventUploadImage.php';
+<<<<<< HEAD
 or log_it("Couldnt include eventUploadImage");
 =======
     or log_it("Couldnt include eventUploadImage");

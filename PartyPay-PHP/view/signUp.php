@@ -11,7 +11,7 @@ require_once('header.php');
 <section class="container">
     <h3>Novo Usu&aacute;rio</h3>
     <div class="row">
-        <form class="form-horizontal" method="post" action="controller/processaCadastroPessoa.php" enctype="multipart/form-data">
+        <form class="form-horizontal" method="post" action="controller/userRegistrarionProcess.php" enctype="multipart/form-data">
             <div class="control-group">
                 <label class="control-label" for="nome">Primeiro Nome</label>
                 <div class="controls">

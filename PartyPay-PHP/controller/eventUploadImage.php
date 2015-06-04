@@ -5,9 +5,7 @@
  * FIle responsible for uploading the event image.
  */   
 
-require 'canvas.php'
-<<<<<<< HEAD
-	or log_it("Could not include canvas.php file");
+require 'canvas.php';
 const NO_ERROR = 0;
 const MAX_FILE_SIZE = 2;
 const MAX_FILE_SIZE_TYPE = "MB";
@@ -27,7 +25,7 @@ or log_it("Could not include canvas.php file");
 // Pasta onde o arquivo vai ser salvo.
 $_UP['pasta'] = 'view/images/';
 
-<<<<<<< HEAD
+<<<<<< HEAD
 // Tamanho máximo do arquivo (em Bytes)
 
 $_UP['tamanho'] = (FILE_SIZE_MULTIPLYER * 1024) * MAX_FILE_SIZE; // 2Mb
@@ -61,7 +59,7 @@ $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 
 
 // Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
-<<<<<<< HEAD
+<<<<<< HEAD
 
 if ($_FILES['arquivo']['error'] != NO_ERROR) {
 	
@@ -89,7 +87,7 @@ $var = explode('.', $_FILES['arquivo']['name']);
 
 $extension = strtolower(end($var));
 
-<<<<<<< HEAD
+<<<<<< HEAD
 if (array_search($extension, $_UP['extensoes']) === INVALID_EXTENSION) {
 	
 	log_it("Error on image upload: invalid file extension");
@@ -105,7 +103,7 @@ if (array_search($extension, $_UP['extensoes']) === false) {
   // Faz a verificação do tamanho do arquivo
 } else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
 
-<<<<<<< HEAD
+<<<<<< HEAD
 // Faz a verificação do tamanho do arquivo
 else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
 	

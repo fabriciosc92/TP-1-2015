@@ -27,12 +27,8 @@ $idOrganizer = $_SESSION['idOrganizer']; // Organizer registration code
 $ageClassification = $_POST['ageClassification']; // Age rating of the event
 $event = new Event(); // Varible that receives event's data
 
-require_once 'eventUploadImage.php';
-<<<<<< HEAD
-or log_it("Couldnt include eventUploadImage");
-=======
+require_once 'eventUploadImage.php'
     or log_it("Couldnt include eventUploadImage");
->>>>>>> setima_entrega
 
 $event->setEventName($eventName);
 $event->setEventBeginDate($eventBeginDate);

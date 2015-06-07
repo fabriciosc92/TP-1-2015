@@ -1,8 +1,8 @@
 <?php
 
-include '../model/User.php';
-include '../tratamentoDeExcecao/AuthenticateRegistration.php';
-include 'generateConfimationCode.php';
+require '../model/User.php';
+require '../tratamentoDeExcecao/AuthenticateRegistration.php';
+require 'generateConfimationCode.php';
 
 /**
  * Class name: editUserData.

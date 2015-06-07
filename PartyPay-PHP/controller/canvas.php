@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Class for image manipulation using the GD extension and advanced features filters. 
  * Requires PHP 5 or higher.
  *
@@ -8,34 +7,23 @@
 
 class canvas {
     
-    /**
-     * Variables for storing files/imgs
-     **/
+    
+    // Variables for storing files/imgs.
     private $origin, $img, $img_temp;
 
-    /**
-     * Store the size of the current image and the new image if available
-     **/
+    // Store the size of the current image and the new image if available.
     private $widht, $height, $new_widht, $new_heigth, $size_html;
-    
-    /**
-    * Variables for positioning the crop
-    **/
+     
+    // Variables for positioning the crop.
     private $position_x, $position_y;
     
-    /**
-     * Information about the uploaded file and directory
-     **/
+    // Information about the uploaded file and directory.
     private $format, $extension, $size, $file, $path;
 
-    /**
-     * Array RGB resize with background fill
-     **/
+    // Array RGB resize with background fill.
     private $rgb;
 
-    /**
-     * Coordinates for positioning crop
-     **/
+    // Coordinates for positioning crop.
     private $position_crop;
 
     /**
@@ -48,8 +36,7 @@ class canvas {
 
           $this->origin = $origin;
 
-          if ( $this->origin )
-          {
+          if ( $this->origin ) {
                $this->data();
           }
 
@@ -82,29 +69,23 @@ class canvas {
      {
 
           // checks for image
-          if ( is_file( $this->origin ) )
-          {
+          if ( is_file( $this->origin ) ) {
 
                // files data
                $this->datafile();
 
                // checks if is an image
-               if ( !$this->eImage() )
-               {
+               if ( !$this->eImage() ) {
                     trigger_error( 'Erro: file '.$this->origin.' is not a image!', E_USER_ERROR );
                     log_it("File is not a image: " $this->origin.);
-               }
-               else
-               {
+               } else {
                     // search dimensions of the sent image
                     $this->dimensions();
 
                     // create image for php
                     $this->createImage();
                }
-          }
-          else
-          {
+          } else {
                trigger_error( 'Erro: image file not found!', E_USER_ERROR );
                log_it("Image file not found!");
           }
@@ -150,12 +131,9 @@ class canvas {
           // source image
           $pathinfo            = pathinfo( $this->origin );
           
-          if(array_key_exists('extension', $pathinfo))
-          {
+          if(array_key_exists('extension', $pathinfo)) {
               $this->extension = strtolower($pathinfo['extension']);
-          }
-          else
-          {
+          } else {
               $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
           }
              
@@ -171,12 +149,9 @@ class canvas {
      {
           // filter extension
           $valida = getimagesize( $this->origin );
-          if ( !is_array( $valida ) || empty( $valida ) )
-          {
+          if ( !is_array( $valida ) || empty( $valida ) ) {
               return false;
-          }
-          else
-          {
+          } else {
               return true;
           }
      } // end validaimage
@@ -213,8 +188,7 @@ class canvas {
           $pathinfo = pathinfo( $this->origin );
           $this->extension = strtolower( $pathinfo['extension'] );
 
-          switch( $this->extension )
-          {
+          switch( $this->extension ) {
                case 'jpg':
                case 'jpeg':
                     $this->format = 2;
@@ -244,8 +218,7 @@ class canvas {
       **/
      private function createImage()
      {
-          switch ( $this->format )
-          {
+          switch ( $this->format ) {
                case 1:
                     $this->img = imagecreatefromgif( $this->origin );
                     $this->extension = 'gif';
@@ -289,14 +262,11 @@ class canvas {
      {
           $cor = str_replace( '#', '', $cor );
 
-          if( strlen( $cor ) == 3 ) 
-          {
+          if( strlen( $cor ) == 3 ) {
             
             $cor .= $cor; // #fff, #000 etc.
 
-          } 
-          else 
-          {
+          } else {
 
           }
 
@@ -319,12 +289,10 @@ class canvas {
      public function cropPosition( $x, $y, $w=0, $h=0 )
      {
           // no width or manually sitting height, image original handle
-		  		if(!$w)
-          {
+		  		if(!$w) {
             $w = $this->widht;
           }
-		  		if(!$h)
-          {
+		  		if(!$h) {
             $h = $this->height;
           } 
 

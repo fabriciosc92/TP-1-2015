@@ -1,13 +1,12 @@
 <?php
 
-include '../model/User.php';
-include '../tratamentoDeExcecao/AuthenticateRegistration.php';
-include 'generateConfirmationCode.php';
+require '../model/User.php';
+require '../tratamentoDeExcecao/AuthenticateRegistration.php';
+require 'generateConfirmationCode.php';
 
 /**
-*
-* Class responsible for user's registration
-*
+* File name: userRegistrationProcess.
+* Class responsible for user's registration.
 **/
 
 $userFirstName = addslashes($_POST['userFirstName']); // First name of the user
@@ -27,7 +26,7 @@ addcslashes($userGender, $strList);
 addcslashes($userCpf, $strList);
 addcslashes($userPhone, $strList);
 
-//Validação comentada para rodar no localhost
+// Validation to run localhost
 $validator = new ValidaCadastro(); // Variable responsible to validate
 $validator->validaruserEmail($userEmail);
 $validator->validarTelefone($phone);

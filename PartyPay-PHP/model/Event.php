@@ -6,7 +6,7 @@ require_once 'DAC/EventDAC.php';
  * Class name: Event
  * Class responsible to define model elements in events.
  */
-class Event 
+class Event
 {
 
     private $eventName; // Store the name of the event.

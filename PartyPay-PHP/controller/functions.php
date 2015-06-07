@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Class of application functions
+* Class for application functions.
 **/
 
 require_once 'model/Event.php';

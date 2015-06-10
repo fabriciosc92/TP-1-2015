@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de Dados: `payparty`
+-- Banco de Dados: `partypay`
 --
 
 -- --------------------------------------------------------
@@ -26,16 +26,16 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `cartoesdecredito`
 --
 
-CREATE TABLE IF NOT EXISTS `cartoesdecredito` (
+CREATE TABLE IF NOT EXISTS `creditCards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bandeira` varchar(50) NOT NULL,
-  `numero` varchar(50) NOT NULL,
-  `codSeguranca` varchar(50) NOT NULL,
-  `validade` varchar(50) NOT NULL,
-  `nomeTitular` varchar(50) NOT NULL,
-  `enderecoTitular` varchar(50) NOT NULL,
-  `telefoneTitular` varchar(50) NOT NULL,
-  `pessoaID` int(11) NOT NULL,
+  `flag` varchar(50) NOT NULL,
+  `number` varchar(50) NOT NULL,
+  `securityCode` varchar(50) NOT NULL,
+  `validity` varchar(50) NOT NULL,
+  `holdersName` varchar(50) NOT NULL,
+  `holdersAddress` varchar(50) NOT NULL,
+  `holdersPhone` varchar(50) NOT NULL,
+  `personID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -45,24 +45,24 @@ CREATE TABLE IF NOT EXISTS `cartoesdecredito` (
 -- Estrutura da tabela `eventos`
 --
 
-CREATE TABLE IF NOT EXISTS `eventos` (
-  `nome` varchar(50) NOT NULL,
-  `dataInicio` date NOT NULL,
-  `dataTermino` date NOT NULL,
-  `imagem` varchar(50) NOT NULL,
-  `precoMasc` float NOT NULL,
-  `precoFem` float NOT NULL,
-  `organizadorID` int(11) NOT NULL,
-  `localID` int(11) DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `events` (
+  `name` varchar(50) NOT NULL,
+  `startingDate` date NOT NULL,
+  `endingDate` date NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `menPrice` float NOT NULL,
+  `womenPrice` float NOT NULL,
+  `promoterID` int(11) NOT NULL,
+  `placeID` int(11) DEFAULT NULL,
   `facebookEventPage` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dataCriacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `descricao` text NOT NULL,
-  `numeroIngressos` int(11) NOT NULL,
-  `horaInicio` time NOT NULL,
-  `horaTermino` time NOT NULL,
-  `miniatura` varchar(50) NOT NULL,
-  `classificacao` varchar(50) NOT NULL,
+  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` text NOT NULL,
+  `numberOfTickets` int(11) NOT NULL,
+  `startingTime` time NOT NULL,
+  `endingTime` time NOT NULL,
+  `thumbnail` varchar(50) NOT NULL,
+  `classification` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `eventos` (
 -- Extraindo dados da tabela `eventos`
 --
 
-INSERT INTO `eventos` (`nome`, `dataInicio`, `dataTermino`, `imagem`, `precoMasc`, `precoFem`, `organizadorID`, `localID`, `facebookEventPage`, `id`, `dataCriacao`, `descricao`, `numeroIngressos`, `horaInicio`, `horaTermino`, `miniatura`) VALUES
+INSERT INTO `events` (`name`, `startingDate`, `endingDate`, `image`, `menPrice`, `womenPrice`, `promoterID`, `placeID`, `facebookEventPage`, `id`, `creationDate`, `description`, `numberOfTickets`, `startingTime`, `endingTime`, `thumbnail`) VALUES
 ('as', '2013-06-06', '2013-06-15', '../view/images/1370319982.jpg', 12, 12, 3, 0, 'as', 18, '0000-00-00 00:00:00', 'as', 25, '00:00:16', '00:00:16', '../view/images/thumb1370319982.jpg'),
 ('as', '2013-06-06', '2013-06-15', '../view/images/1370322873.jpg', 12, 12, 3, 0, 'as', 19, '0000-00-00 00:00:00', 'as', 25, '00:00:16', '00:00:16', '../view/images/thumb1370322873.jpg');
 
@@ -80,15 +80,15 @@ INSERT INTO `eventos` (`nome`, `dataInicio`, `dataTermino`, `imagem`, `precoMasc
 -- Estrutura da tabela `ingressos`
 --
 
-CREATE TABLE IF NOT EXISTS `ingressos` (
+CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int(11) NOT NULL,
-  `pessoaID` int(11) NOT NULL,
-  `eventoID` int(11) NOT NULL,
+  `personID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
   `qr` varchar(50) NOT NULL,
-  `numero` varchar(50) NOT NULL,
-  `validade` varchar(50) NOT NULL,
-  `instrucoes` text NOT NULL,
-  `tipo` varchar(10) NOT NULL DEFAULT 'Inteira'
+  `number` varchar(50) NOT NULL,
+  `validity` varchar(50) NOT NULL,
+  `instructions` text NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'Inteira'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -97,20 +97,20 @@ CREATE TABLE IF NOT EXISTS `ingressos` (
 -- Estrutura da tabela `locais`
 --
 
-CREATE TABLE IF NOT EXISTS `locais` (
+CREATE TABLE IF NOT EXISTS `places` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `endereco` varchar(50) NOT NULL,
-  `coordenadasGoogleMaps` varchar(50) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `numero` varchar(5) NOT NULL,
-  `complemento` varchar(50) NOT NULL,
-  `bairro` varchar(50) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `pais` varchar(50) NOT NULL,
-  `cep` varchar(50) NOT NULL,
-  `estado` varchar(50) NOT NULL,
-  `miniatura` varchar(50) NOT NULL,
-  `fotos` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `GoogleMapsCordenates` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `number` varchar(5) NOT NULL,
+  `complement` varchar(50) NOT NULL,
+  `neighborhood` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `zip` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `thumbnail` varchar(50) NOT NULL,
+  `photos` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `locais` (
 -- Extraindo dados da tabela `locais`
 --
 
-INSERT INTO `locais` (`id`, `endereco`, `coordenadasGoogleMaps`, `nome`, `numero`, `complemento`, `bairro`, `cidade`, `pais`, `cep`, `estado`, `miniatura`, `fotos`) VALUES
+INSERT INTO `places` (`id`, `address`, `GoogleMapsCordenates`, `name`, `number`, `complement`, `neighborhood`, `city`, `country`, `zip`, `state`, `thumbnail`, `photos`) VALUES
 (16, 'peknf', '', 'sapkljsdpa', '3413', 'açldknf', 'çadknf', 'açldkn', '~çknsd', '12333-333', '~pkenf', '../view/images/thumb1370320010.jpg', '../view/images/1370320010.jpg');
 
 -- --------------------------------------------------------
@@ -127,10 +127,10 @@ INSERT INTO `locais` (`id`, `endereco`, `coordenadasGoogleMaps`, `nome`, `numero
 -- Estrutura da tabela `locaisdoseventos`
 --
 
-CREATE TABLE IF NOT EXISTS `locaisdoseventos` (
+CREATE TABLE IF NOT EXISTS `eventsPlaces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `localID` int(11) NOT NULL,
-  `eventoID` int(11) NOT NULL,
+  `placeID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
@@ -138,25 +138,25 @@ CREATE TABLE IF NOT EXISTS `locaisdoseventos` (
 -- Extraindo dados da tabela `locaisdoseventos`
 --
 
-INSERT INTO `locaisdoseventos` (`id`, `localID`, `eventoID`) VALUES
+INSERT INTO `eventsPlaces` (`id`, `placeID`, `eventID`) VALUES
 (9, 16, 18);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `organizadores`
+-- Estrutura da tabela `promoters`
 --
 
-CREATE TABLE IF NOT EXISTS `organizadores` (
+CREATE TABLE IF NOT EXISTS `promoters` (
   `cnpj` varchar(50) NOT NULL,
   `cpf` varchar(50) NOT NULL,
-  `informaçoesBancarias` varchar(50) NOT NULL,
-  `telefoneContato` varchar(50) NOT NULL,
-  `nomeFantasia` varchar(50) NOT NULL,
+  `bankingInformation` varchar(50) NOT NULL,
+  `contactPhone` varchar(50) NOT NULL,
+  `tradingName` varchar(50) NOT NULL,
   `website` varchar(50) NOT NULL,
   `facebookFanPage` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pessoaID` int(11) NOT NULL,
+  `personID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -166,11 +166,11 @@ CREATE TABLE IF NOT EXISTS `organizadores` (
 -- Estrutura da tabela `organizadorescriameventos`
 --
 
-CREATE TABLE IF NOT EXISTS `organizadorescriameventos` (
+CREATE TABLE IF NOT EXISTS `promotersMakeEvents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `organizadorID` int(11) NOT NULL,
-  `eventoID` int(11) NOT NULL,
-  `dataCriacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `promoterID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
+  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -180,9 +180,9 @@ CREATE TABLE IF NOT EXISTS `organizadorescriameventos` (
 -- Estrutura da tabela `participantes`
 --
 
-CREATE TABLE IF NOT EXISTS `participantes` (
+CREATE TABLE IF NOT EXISTS `participants` (
   `id` int(11) NOT NULL,
-  `pessoaID` int(11) NOT NULL,
+  `personID` int(11) NOT NULL,
   `cpf` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -193,10 +193,10 @@ CREATE TABLE IF NOT EXISTS `participantes` (
 -- Estrutura da tabela `participantesdoseventosatuais`
 --
 
-CREATE TABLE IF NOT EXISTS `participantesdoseventosatuais` (
+CREATE TABLE IF NOT EXISTS `todaysEventsParticipants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `participanteID` int(11) NOT NULL,
-  `eventoID` int(11) NOT NULL,
+  `participantsID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -206,10 +206,10 @@ CREATE TABLE IF NOT EXISTS `participantesdoseventosatuais` (
 -- Estrutura da tabela `participantestemingressos`
 --
 
-CREATE TABLE IF NOT EXISTS `participantestemingressos` (
+CREATE TABLE IF NOT EXISTS `participantsHaveTickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ingressoID` int(11) NOT NULL,
-  `participanteID` int(11) NOT NULL,
+  `ticketID` int(11) NOT NULL,
+  `participantID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -219,17 +219,17 @@ CREATE TABLE IF NOT EXISTS `participantestemingressos` (
 -- Estrutura da tabela `pessoas`
 --
 
-CREATE TABLE IF NOT EXISTS `pessoas` (
-  `primeiroNome` varchar(50) NOT NULL,
-  `sobreNome` varchar(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `people` (
+  `firstName` varchar(50) NOT NULL,
+  `SurName` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `senha` varchar(50) NOT NULL,
-  `sexo` varchar(50) NOT NULL,
-  `emailConfirmado` tinyint(1) NOT NULL,
-  `codConfirmacao` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `confirmedEmail` tinyint(1) NOT NULL,
+  `confirmationCode` varchar(50) NOT NULL,
   `cpf` varchar(50) NOT NULL,
-  `telefoneContato` varchar(50) NOT NULL,   
+  `contactPhone` varchar(50) NOT NULL,   
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `pessoas` (
 -- Extraindo dados da tabela `pessoas`
 --
 
-INSERT INTO `pessoas` (`primeiroNome`, `sobreNome`, `email`, `id`, `senha`, `sexo`, `emailConfirmado`, `codConfirmacao`, `cpf`, `telefoneContato`) VALUES
+INSERT INTO `people` (`firstName`, `surName`, `email`, `id`, `password`, `gender`, `confirmedEmail`, `confirmationCode`, `cpf`, `contactPhone`) VALUES
 ('Andre', 'Ferraz', '234', 3, '202cb962ac59075b964b07152d234b70', 'Masculino', 0, '', '111.111.111-11', '(11) 1111-1111');
 
 -- --------------------------------------------------------
@@ -246,10 +246,10 @@ INSERT INTO `pessoas` (`primeiroNome`, `sobreNome`, `email`, `id`, `senha`, `sex
 -- Estrutura da tabela `pessoasjaparticiparamdoevento`
 --
 
-CREATE TABLE IF NOT EXISTS `pessoasjaparticiparamdoevento` (
+CREATE TABLE IF NOT EXISTS `peopleAttendedTheEvent` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `participanteID` int(11) NOT NULL,
-  `eventoID` int(11) NOT NULL,
+  `participantID` int(11) NOT NULL,
+  `eventID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -259,10 +259,10 @@ CREATE TABLE IF NOT EXISTS `pessoasjaparticiparamdoevento` (
 -- Estrutura da tabela `pessoastemcartoes`
 --
 
-CREATE TABLE IF NOT EXISTS `pessoastemcartoes` (
+CREATE TABLE IF NOT EXISTS `peopleHaveCreditCards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pessoaID` int(11) NOT NULL,
-  `cartaoID` int(11) NOT NULL,
+  `personID` int(11) NOT NULL,
+  `creditCardID` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

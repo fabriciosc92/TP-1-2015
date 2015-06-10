@@ -23,7 +23,7 @@ $beginHour = $_POST['beginHour']; // Receives the start hour of the event
 $startMinute = $_POST['startMinute']; // Receives the start minute of the event
 $endMinute = $_POST['endMinute']; // Receives the end hour of the event
 $endHour = $_POST['endHour']; // Receives the end minute of the event
-$idOrganizer = $_SESSION['idOrganizer']; // Organizer registration code
+$idPromoter = $_SESSION['idPromoter']; // Promoter registration code
 $ageClassification = $_POST['ageClassification']; // Age rating of the event
 $event = new Event(); // Varible that receives event's data
 
@@ -36,12 +36,12 @@ $event->setEndDate($endDate);
 $event->setBeginHour($beginHour . ":" . $startMinute);
 $event->setEndHour($endHour . ":" . $endMinute);
 $event->setNumberOfTickets($numberOfTickets);
-$event->setEventOrganizer("1");
+$event->setEventPromoter("1");
 $event->setFemaleEventPrice($emaleEventPrice);
 $event->setMasculineEventPrice($masculineEventPrice);
 $event->setFacebookEventPage($facebookEventPage);
 $event->setEventDescription($eventDescription);
-$event->setIdOrganizer($idOrganizer);
+$event->setIdPromoter($idPromoter);
 $event->setAgeClassification($ageClassification);
 
 $validator = new ValidaCadastro(); // Variable responsible to validate

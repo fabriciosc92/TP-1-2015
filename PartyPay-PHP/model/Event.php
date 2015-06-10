@@ -16,7 +16,7 @@ class Event
     private $eventImage; //input do tipo file name arquivo
     private $masculineEventPrice; // Price that a man has to pay for the event. In Real.
     private $femaleEventPrice; // Price that a woman has to pay for the event. In Real.
-    private $eventOrganizer; // Store the person that is organizing the event.
+    private $eventPromoter; // Store the person that is organizing the event.
     private $eventLocal; // Local where the event is happening.
     private $facebookEventPage; // Keeps the linking to the facebook page of the event.
     private $eventDescription; // Description of the event.
@@ -213,16 +213,16 @@ class Event
         $this->femaleEventPrice = $femaleEventPrice;
     }
 
-    // Access variable eventOrganizer.
+    // Access variable eventPromoter.
     public function getEventOrganizer() 
     {
-        return $this->eventOrganizer;
+        return $this->eventPromoter;
     }
 
-    // Modify variable eventOrganizer.
-    public function setEventOrganizer($eventOrganizer) 
+    // Modify variable eventPromoter.
+    public function setEventPromoter($eventPromoter) 
     {
-        $this->eventOrganizer = $eventOrganizer;
+        $this->eventPomoter = $eventPromoter;
     }
 
     // Access variable eventLocal.

@@ -40,15 +40,15 @@ require_once 'header.php';
                     <li class="span4">
                         <div class="thumbnail">
                             <a href="event.php?id=<?php echo (lastEvent() - $i); ?>">
-                                <img src="<?php the_image($num - $i); ?>" alt="">
+                                <img src="<?php event_image($num - $i); ?>" alt="">
                             </a>
                             <div class="caption">
                                 <h3>
                                     <a href="event.php?id=<?php echo (lastEvent() - $i); ?>">
-                                        <?php the_name($num - $i); ?>
+                                        <?php event_name($num - $i); ?>
                                     </a>
                                 </h3>
-                                <p><?php the_description($num - $i); ?></p>
+                                <p><?php event_description($num - $i); ?></p>
                                 <p>
                                     <a href="event.php?id=<?php echo (lastEvent() - $i); ?>" class="btn">Ver</a>
                                     <a href="#" class="btn btn-success">Comprar ingresso</a>

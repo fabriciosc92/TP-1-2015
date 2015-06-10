@@ -6,7 +6,7 @@
  */
 
 $server = 'localhost';
-$db = 'payparty';
+$db = 'partypay';
 //MODIFIQUE AQUI O USER.NAME E A SENHA DO SEU MYSQL
 $user = 'root';
 $password = '';

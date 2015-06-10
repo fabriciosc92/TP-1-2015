@@ -76,7 +76,7 @@ class EventDac
             $event->setEventImage($row['eventImage']);
             $event->setMasculineEventPrice($row['masculineEventPrice']);
             $event->setFemaleEventPrice($row['femaleEventPrice']);
-            $event->seteventrganizer($row['eventrganizerID']);
+            $event->seteventpromoter($row['eventpromoterID']);
             $event->setFacebookEventPage($row['facebookEventPage']);
             $event->setEventCriationDate($row['eventCriationDate']);
             $event->setEventDescription($row['eventDescription']);

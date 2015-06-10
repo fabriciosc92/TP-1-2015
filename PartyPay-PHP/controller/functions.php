@@ -41,8 +41,8 @@ function event_image($id)
 // Function that returns the last registered event
 function lastEvent() 
 {
-    $mysqli = new mysqli("localhost", "root", "", "payparty");
-    $result = $mysqli->query("SELECT MAX(id) FROM eventos");
+    $mysqli = new mysqli("localhost", "root", "", "partypay");
+    $result = $mysqli->query("SELECT MAX(id) FROM events");
     $row = $result->fetch_array(MYSQLI_NUM);
     return $row[0];
 }

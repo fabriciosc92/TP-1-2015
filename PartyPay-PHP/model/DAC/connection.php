@@ -1,17 +1,17 @@
 <?php
 
 /**
- * File name: conexao
+ * File name: connection
  * Connection  with database.
  */
 
 $server = 'localhost';
 $db = 'partypay';
-//MODIFIQUE AQUI O USER.NAME E A SENHA DO SEU MYSQL
+//CHANGE HERE THE USER.NAME AND YOUR MYSQL PASSWORD
 $user = 'root';
 $password = '';
 
 $conexao = mysql_connect($server, $user, $password);
-@mysql_select_db($db) OR DIE("Banco não encontrado.");
+@mysql_select_db($db) OR DIE("DataBase not found!");
 
 ?>

@@ -45,7 +45,7 @@ require_once('header.php');
                     </select>
                 </div>
 
-                <!-- cod confirmação -->
+                <!-- confimartion code -->
 
                 <div class="control-group">
                     <label class="control-label" for="cpf">CPF</label>
@@ -59,7 +59,7 @@ require_once('header.php');
                         <input type="text" id="telefone" name="phoneNumber" placeholder="Telefone de Contato" value="<?php echo $phoneNumber; ?>" required>
                     </div>
                 </div>
-                <?php $id = 9; // consultar id na sessao ?>
+                <?php $id = 9; // Consult id in Session ?>
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn btn-success">Enviar</button>

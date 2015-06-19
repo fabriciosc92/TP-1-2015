@@ -3,7 +3,8 @@
 /**
  * Class name: LocalDac
  * Class to connect Local to the database
- */
+*/
+
 class LocalDAC 
 {
 
@@ -11,7 +12,7 @@ class LocalDAC
     public static function insertLocalDAC(Local $local) 
     {
         include_once 'connection.php';
-        $sql = "INSERT INTO `locais`(`id`, `eventAddress`, `coordenadasGoogleMaps`, 
+        $sql = "INSERT INTO `places`(`id`, `eventAddress`, `coordenadasGoogleMaps`, 
             `eventLocalName`, `addressNumber`, `addressComplement`, `eventNeighborhood`, `eventCity`, `localCep`, `eventCountry`, 
             `eventLocalPictures`, `eventState`,`localMiniature`) 
             VALUES (NULL,'" . $local->getEventAddress() . "','"
@@ -38,7 +39,7 @@ class LocalDAC
     public static function updateInformationDAC(Local $local, $atributo, $atributoNovo) 
 
         include_once 'connection.php';
-        $sql = "UPDATE `locais` SET `$atributo`=$atributoNovo WHERE id=" . $local->getId();
+        $sql = "UPDATE `places` SET `$atributo`=$atributoNovo WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($connection);
     }
@@ -47,7 +48,7 @@ class LocalDAC
     public static function deleteLocalDAC(Local $local) 
     {
         include_once 'connection.php';
-        $sql = "deleteLocalDAC FROM `locais` WHERE id=" . $local->getId();
+        $sql = "deleteLocalDAC FROM `places` WHERE id=" . $local->getId();
         mysql_query($sql) or die(mysql_error());
         mysql_close($connection);
     }

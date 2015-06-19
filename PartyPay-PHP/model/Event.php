@@ -5,7 +5,8 @@ require_once 'DAC/EventDAC.php';
 /**
  * Class name: Event
  * Class responsible to define model elements in events.
- */
+*/
+
 class Event
 {
 
@@ -214,7 +215,7 @@ class Event
     }
 
     // Access variable eventPromoter.
-    public function getEventOrganizer() 
+    public function getEventPromoter() 
     {
         return $this->eventPromoter;
     }

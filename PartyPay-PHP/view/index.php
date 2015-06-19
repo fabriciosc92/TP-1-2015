@@ -32,9 +32,11 @@ require_once 'header.php';
 
             <ul class="thumbnails">
                 <?php
-                $num = lastEvent();
+				
+				$num = lastEvent();
 
-                for ($i = 0; $i < 6; $i++) {
+				for ($i = 0; $i < 6; $i++) {
+					
 				?>
 
                     <li class="span4">
@@ -56,8 +58,10 @@ require_once 'header.php';
                             </div>
                         </div>
                     </li>
-                <?php 
+                <?php
+				
 				}
+				
 				?>
             </ul>
         </div>

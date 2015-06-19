@@ -5,7 +5,8 @@ require_once 'DAC/LocalDAC.php';
 /**
  * Class name: Local
  * Class responsible to define model elements in local.
- */
+*/
+ 
 class Local 
 {
 

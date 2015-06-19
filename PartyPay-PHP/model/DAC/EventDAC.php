@@ -3,7 +3,8 @@
 /**
  * Class name: EventDac
  * Class to connect event to the database.
- */
+*/
+
 class EventDac 
 {
 
@@ -23,7 +24,7 @@ class EventDac
         $sql.=$event->getEventImage() . "','";
         $sql.=$event->getMasculineEventPrice() . "','";
         $sql.=$event->getFemaleEventPrice() . "','";
-        $sql.=$event->getEventOrganizer() . "','";
+        $sql.=$event->getEventPromoter() . "','";
         $sql.=$event->getFacebookEventPage() . "', NULL,'";
         $sql.=$event->getEventCriationDate() . "','";
         $sql.=$event->getEventDescription() . "','";

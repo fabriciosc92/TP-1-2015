@@ -1,9 +1,10 @@
 <?php
 /**
+ *
  * Class for image manipulation using the GD extension and advanced features filters. 
  * Requires PHP 5 or higher.
  *
- **/
+**/
 
 class canvas {
     
@@ -31,6 +32,7 @@ class canvas {
      * @param $string path to image to be loaded [optional]
      * @return void
      **/
+	 
      public function __construct( $origin = '' )
      {
 
@@ -236,7 +238,7 @@ class canvas {
                     $this->extension = 'bmp';
                     break;
                default:
-                    trigger_error( 'file inválido!', E_USER_ERROR );
+                    trigger_error( 'invalid file!', E_USER_ERROR );
                     log_it("Invalid file!" E_USER_ERROR);
                     break;
           }

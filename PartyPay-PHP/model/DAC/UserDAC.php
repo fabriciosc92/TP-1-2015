@@ -3,7 +3,8 @@
 /**
  * Class name: UserDAC
  * Class to connect user to the database.
- */
+*/
+
 class UserDAC 
 {
 
@@ -12,7 +13,7 @@ class UserDAC
     {
 
         include_once 'connection.php';
-        $sql = "INSERT INTO users(`userFirstName`, `userLastName`, `userEmail`, `senha`,`userSex`, 
+        $sql = "INSERT INTO users(`userFirstName`, `userLastName`, `userEmail`, `password`,`userSex`, 
             `userEmailConfirmado` , `confirmationCode`, `userCpf`, `userPhone`) VALUES 
             ('" . $user->getuserFirstName() . "','" . $user->getUserLastName() . "',
                 '" . $user->getUserEmail() . "','" . $user->getUserPassword() . "',

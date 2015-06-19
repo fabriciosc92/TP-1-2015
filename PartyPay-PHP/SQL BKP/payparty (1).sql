@@ -2,14 +2,15 @@
 -- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tempo de Geração: 
--- Versão do Servidor: 5.5.27
--- Versão do PHP: 5.4.7
+-- Server: 127.0.0.1
+-- Generation Time: 
+-- Server Version: 5.5.27
+-- PHP version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de Dados: `partypay`
+-- Database: `partypay`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cartoesdecredito`
+-- Table Structure `credicCards`
 --
 
 CREATE TABLE IF NOT EXISTS `creditCards` (
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `creditCards` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `eventos`
+-- Table Structure `events`
 --
 
 CREATE TABLE IF NOT EXISTS `events` (
@@ -67,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
--- Extraindo dados da tabela `eventos`
+-- Extracting data form table `events`
 --
 
 INSERT INTO `events` (`name`, `startingDate`, `endingDate`, `image`, `menPrice`, `womenPrice`, `promoterID`, `placeID`, `facebookEventPage`, `id`, `creationDate`, `description`, `numberOfTickets`, `startingTime`, `endingTime`, `thumbnail`) VALUES
@@ -77,7 +78,7 @@ INSERT INTO `events` (`name`, `startingDate`, `endingDate`, `image`, `menPrice`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ingressos`
+-- Table Structure `tickets`
 --
 
 CREATE TABLE IF NOT EXISTS `tickets` (
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `locais`
+-- Table Structure `places`
 --
 
 CREATE TABLE IF NOT EXISTS `places` (
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `places` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
--- Extraindo dados da tabela `locais`
+-- Extracting data form table `places`
 --
 
 INSERT INTO `places` (`id`, `address`, `GoogleMapsCordenates`, `name`, `number`, `complement`, `neighborhood`, `city`, `country`, `zip`, `state`, `thumbnail`, `photos`) VALUES
@@ -124,7 +125,7 @@ INSERT INTO `places` (`id`, `address`, `GoogleMapsCordenates`, `name`, `number`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `locaisdoseventos`
+-- Table Structure `eventsPlaces`
 --
 
 CREATE TABLE IF NOT EXISTS `eventsPlaces` (
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `eventsPlaces` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Extraindo dados da tabela `locaisdoseventos`
+-- Extracting data form table `eventsPlaces`
 --
 
 INSERT INTO `eventsPlaces` (`id`, `placeID`, `eventID`) VALUES
@@ -144,7 +145,7 @@ INSERT INTO `eventsPlaces` (`id`, `placeID`, `eventID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `promoters`
+-- Table Structure `promoters`
 --
 
 CREATE TABLE IF NOT EXISTS `promoters` (
@@ -163,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `promoters` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `organizadorescriameventos`
+-- Table Structure `promotersMakeEvents`
 --
 
 CREATE TABLE IF NOT EXISTS `promotersMakeEvents` (
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `promotersMakeEvents` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `participantes`
+-- Table Structure `participants`
 --
 
 CREATE TABLE IF NOT EXISTS `participants` (
@@ -190,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `participants` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `participantesdoseventosatuais`
+-- Table Structure `todaysEventsParticipants`
 --
 
 CREATE TABLE IF NOT EXISTS `todaysEventsParticipants` (
@@ -203,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `todaysEventsParticipants` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `participantestemingressos`
+-- Table Structure `participantsHaveTickets`
 --
 
 CREATE TABLE IF NOT EXISTS `participantsHaveTickets` (
@@ -216,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `participantsHaveTickets` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pessoas`
+-- Table Structure `people`
 --
 
 CREATE TABLE IF NOT EXISTS `people` (
@@ -234,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `people` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Extraindo dados da tabela `pessoas`
+-- Extracting data form table `people`
 --
 
 INSERT INTO `people` (`firstName`, `surName`, `email`, `id`, `password`, `gender`, `confirmedEmail`, `confirmationCode`, `cpf`, `contactPhone`) VALUES
@@ -243,7 +244,7 @@ INSERT INTO `people` (`firstName`, `surName`, `email`, `id`, `password`, `gender
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pessoasjaparticiparamdoevento`
+-- Table Structure `peopleAttendedTheEvent`
 --
 
 CREATE TABLE IF NOT EXISTS `peopleAttendedTheEvent` (
@@ -256,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `peopleAttendedTheEvent` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pessoastemcartoes`
+-- Table Structure `peopleHaveCreditCards`
 --
 
 CREATE TABLE IF NOT EXISTS `peopleHaveCreditCards` (
@@ -269,3 +270,5 @@ CREATE TABLE IF NOT EXISTS `peopleHaveCreditCards` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------

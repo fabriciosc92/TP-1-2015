@@ -5,7 +5,8 @@ include 'DAC/UserDAC.php';
 /**
  * Class name: User
  * Class responsible to define model elements in users.
- */
+*/
+ 
 class User
 {
 

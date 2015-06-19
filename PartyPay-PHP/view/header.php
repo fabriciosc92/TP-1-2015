@@ -95,7 +95,7 @@ if (isset($_SESSION['id'])) {
                         <a href="cadastrarPessoa.php" class="btn btn-primary">Registrar</a>
                     </div>
                 </div>
-                <!-- Modal Recuperar-->
+                <!-- Modal Recover Password-->
                 <div id="recuperarSenha" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">x</button>
@@ -114,7 +114,7 @@ if (isset($_SESSION['id'])) {
                         <a href="signUp.php" class="btn btn-primary">Registrar</a>
                     </div>
                 </div>
-                <!-- Modal Cadastrar-->
+                <!-- Modal Sign In-->
                 <div id="cadastrar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">x</button>
@@ -157,7 +157,7 @@ if (isset($_SESSION['id'])) {
                                     </div>
                                 </div>
 
-                                <!-- cod confirmação -->
+                                <!-- confrimation code -->
 
                                 <div class="control-group">
                                     <label class="control-label" for="nome">CPF</label>

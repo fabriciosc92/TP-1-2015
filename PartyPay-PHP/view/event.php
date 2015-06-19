@@ -8,7 +8,9 @@
 require_once ('header.php');
 
 if (isset($event)) {
+	
     unset($event);
+	
 }
 
 $event = new Event();
@@ -22,7 +24,7 @@ $eventEndDate = $event->getEventEndDate();
 $eventImage = $event->getEventImage();
 $masculineEventPrice = $event->getMasculineEventPrice();
 $femaleEventPrice = $event->getFemaleEventPrice();
-$eventOrganizer = $event->getEventOrganizer();
+$eventPromoter = $event->getEventPromoter();
 $facebookEventPage = $event->getFacebookEventPage();
 $eventCreationDate = $event->getEventCriationDate();
 $eventDescription = $event->getEventDescription();
@@ -31,6 +33,7 @@ $beginHour = $event->getBeginHour();
 $endHour = $event->getEndHour();
 $eventMiniature = $event->getEventMiniature();
 $ageClassification = $event->getAgeClassification();
+
 ?>
 
 <div class="container">
@@ -46,8 +49,7 @@ $ageClassification = $event->getAgeClassification();
                 <h4>Data</h4>
                 <span class="horario">
 					<?php
-						echo ("De " . $startingDate . " at&eacute; "
-													. $endingDate); 
+						echo ("De " . $startingDate . " at&eacute; " . $endingDate); 
 					?>
 				</span>
             </div>
@@ -66,6 +68,7 @@ $ageClassification = $event->getAgeClassification();
 </div>
 
 <?php
+
 require_once ('footer.php');
 
 ?>

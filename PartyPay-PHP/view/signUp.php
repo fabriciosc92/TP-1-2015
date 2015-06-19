@@ -46,7 +46,7 @@ require_once('header.php');
                 </div>
             </div>
 
-            <!-- cod confirmação -->
+            <!-- confrimation code -->
 
             <div class="control-group">
                 <label class="control-label" for="nome">CPF</label>

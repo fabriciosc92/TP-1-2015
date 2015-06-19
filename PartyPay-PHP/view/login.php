@@ -3,7 +3,7 @@
 /**
  * File name: login
  * Login the user creating a new session
- */
+**/
 
 include 'model/User.php';
 

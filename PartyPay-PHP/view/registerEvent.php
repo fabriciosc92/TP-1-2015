@@ -3,7 +3,7 @@
 /**
  * File name: registerEvent
  * Shows the event registering form
- */
+**/
 
 
 require_once('header.php');

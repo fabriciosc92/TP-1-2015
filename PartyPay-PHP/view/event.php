@@ -3,7 +3,7 @@
 /**
  * File name: event
  * Page responsible to show the event information
- */
+**/
 
 require_once ('header.php');
 

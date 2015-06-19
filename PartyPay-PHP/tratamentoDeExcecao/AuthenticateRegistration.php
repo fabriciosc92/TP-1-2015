@@ -4,13 +4,13 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
+**/
 /**
  * Class: AuthenticateRegistration
  * Description: Class that validate registrations fields.
  *
  * @author Fagner-note
- */
+**/
 
 require_once '../model/DAC/UserDAC.php'
     or log_it("Could not include UserDAC file");
@@ -79,7 +79,7 @@ class AuthenticateRegistration
     // Authenticate CEP (xxxxx-xxx)
     function authenticateCep($cep) 
     {
-        if(!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) 
+        if (!preg_match('/^[0-9]{5,5}([- ]?[0-9]{3,3})?$/', $cep)) 
         {
             echo $this->messages(1, 'cep', null, null);
             exit();
@@ -219,7 +219,7 @@ class AuthenticateRegistration
         // Calculate second digit.
         for($i = 0, $x = 11; $i <= 9; $i = $i + 1, $x = $x - 1)
         {
-            if(str_repeat($i, 11) == $cpf)
+            if (str_repeat($i, 11) == $cpf)
             {
                 echo $this->messages(5, 'cpf', null, null);
                 exit();
@@ -227,7 +227,7 @@ class AuthenticateRegistration
             $secondDigit = $secondDigit + $cpf[$i] * $x;
         }
          
-        if(($firstDigit%CPF_SIZE) < 2)
+        if (($firstDigit%CPF_SIZE) < 2)
         {
             $firstCalculation = 0;
         }
@@ -235,7 +235,7 @@ class AuthenticateRegistration
         {
             $firstCalculation = CPF_SIZE-($firstDigit%CPF_SIZE);
         }
-        if(($secondDigit%CPF_SIZE) < 2)
+        if (($secondDigit%CPF_SIZE) < 2)
         {
             $secondCalculation = 0;
         }
@@ -243,7 +243,7 @@ class AuthenticateRegistration
         {
             $secondCalculation = CPF_SIZE-($secondDigit%CPF_SIZE);
         }
-        if($firstCalculation <> $cpf[9] || $secondCalculation <> $cpf[10])
+        if ($firstCalculation <> $cpf[9] || $secondCalculation <> $cpf[10])
         {
             echo $this->messages(5, 'cpf', null, null);
             exit();

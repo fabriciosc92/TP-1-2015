@@ -5,7 +5,7 @@ include '../../model/Local.php';
 /**
  * Class name: ProcessaCadastroLocalTest.
  * Tests function in class ProcessaCadastroLocal.
- */
+**/
 
 class ProcessaCadastroLocalTEST extends PHPUnit_Framework_TestCase 
 {

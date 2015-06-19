@@ -6,7 +6,7 @@ require '../tratamentoDeExcecao/AuthenticateRegistration.php';
 /*
  * File: eventRegistrationProcess.
  * File responsible for event registration.
- */
+**/
 
 session_start();
 

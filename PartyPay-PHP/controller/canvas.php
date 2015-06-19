@@ -133,7 +133,7 @@ class canvas {
           // source image
           $pathinfo            = pathinfo( $this->origin );
           
-          if(array_key_exists('extension', $pathinfo)) {
+          if (array_key_exists('extension', $pathinfo)) {
               $this->extension = strtolower($pathinfo['extension']);
           } else {
               $this->extension = strtolower(str_replace('image/', '', $obj['mime']));
@@ -222,7 +222,7 @@ class canvas {
      {
           switch ( $this->format ) {
                case 1:
-                    $this->img = imagecreatefromgif( $this->origin );
+                    $this->img = imagecreatefromgif ( $this->origin );
                     $this->extension = 'gif';
                     break;
                case 2:
@@ -264,7 +264,7 @@ class canvas {
      {
           $cor = str_replace( '#', '', $cor );
 
-          if( strlen( $cor ) == 3 ) {
+          if ( strlen( $cor ) == 3 ) {
             
             $cor .= $cor; // #fff, #000 etc.
 
@@ -291,10 +291,10 @@ class canvas {
      public function cropPosition( $x, $y, $w=0, $h=0 )
      {
           // no width or manually sitting height, image original handle
-		  		if(!$w) {
+		  		if (!$w) {
             $w = $this->widht;
           }
-		  		if(!$h) {
+		  		if (!$h) {
             $h = $this->height;
           } 
 
@@ -321,7 +321,7 @@ class canvas {
           // widht %
           $pos = strpos( $this->new_widht, '%' );
 
-          if( $pos !== false && $pos > 0 )
+          if ( $pos !== false && $pos > 0 )
           {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->new_widht ) ) / 100;
                $this->new_widht          = round( $this->widht * $porcentagem );
@@ -333,7 +333,7 @@ class canvas {
           // height %
           $pos = strpos( $this->new_heigth, '%' );
 
-          if( $pos !== false && $pos > 0 )
+          if ( $pos !== false && $pos > 0 )
           {
                $porcentagem               = ( ( int ) str_replace( '%', '', $this->new_heigth ) ) / 100;
                $this->new_heigth          = $this->height * $porcentagem;
@@ -433,7 +433,7 @@ class canvas {
 
          /**
           * Verify height e widht
-          */
+         **/
           if ( ($this->widht / $this->new_widht ) > ( $this->height / $this->new_heigth ) )
           {
               $fator = $this->widht / $this->new_widht;
@@ -503,7 +503,7 @@ class canvas {
           $h_width  = $this->new_widht / 2;
 
           // calcula novas widht e height
-          if( !is_array( $this->position_crop ) )
+          if ( !is_array( $this->position_crop ) )
           {
                if ( $wm > $hm )
                {
@@ -535,7 +535,7 @@ class canvas {
      private function resizeCrop()
      {
           // calculate crop position automaticaly
-          if(!is_array($this->position_crop))
+          if (!is_array($this->position_crop))
           {
 <<<<<< HEAD
           	$auto=1; 
@@ -563,7 +563,7 @@ class canvas {
           $this->fillImage();
           
           //inteligents arrays
-          switch( $this->position_crop[ 0 ]  ){
+          switch( $this->position_crop[ 0 ]  ) {
             
             case 'left':
                             
@@ -591,7 +591,7 @@ class canvas {
         
            }
           
-           switch( $this->position_crop[ 1 ] ){
+           switch( $this->position_crop[ 1 ] ) {
             
             case 'top':
                 
@@ -622,7 +622,7 @@ class canvas {
       $this->position_crop[ 0 ] = $this->position_x;
       $this->position_crop[ 1 ] = $this->position_y;
 
-          if($auto)
+          if ($auto)
           {
                 imagecopyresampled( $this->img_temp, $this->img, -$this->position_crop[0],
            -$this->position_crop[1], 0, 0, $this->position_crop[2], $this->position_crop[3], $this->widht,
@@ -712,7 +712,7 @@ class canvas {
           /**
            * Sets size of the caption for fixed positions and legend background
            **/
-          if( $truetype  === true )
+          if ( $truetype  === true )
           {
                $dimensions_text     = imagettfbbox( $size, 0, $fonte, $text );
                $widht_text          = $dimensions_text[4];
@@ -720,12 +720,12 @@ class canvas {
           }
           else
           {
-               if( $size > 5 ) $size = 5;
+               if ( $size > 5 ) $size = 5;
                $widht_text     = imagefontwidth( $size ) * strlen( $text );
                $height_text     = imagefontheight( $size );
           }
 
-          if( is_string( $x ) && is_string( $y ) )
+          if ( is_string( $x ) && is_string( $y ) )
           {
                list( $x, $y ) = $this->calculateSubtitlePosition( $x . '_' . $y, $widht_text, $height_text );
           }
@@ -733,13 +733,13 @@ class canvas {
           /**
            * Create a new image to use Legend background
            **/
-          if( $color_background )
+          if ( $color_background )
           {
-               if( is_array( $color_background ) )
+               if ( is_array( $color_background ) )
                {
                     $this->rgb = $color_background;
                }
-               elseif( strlen( $color_background ) > 3 )
+               elseif ( strlen( $color_background ) > 3 )
                {
                     $this->hexa( $color_background );
                }
@@ -845,7 +845,7 @@ class canvas {
      {
           // create a temporary image for merge
           if ( $image ) {
-               if( is_string( $x ) && is_string( $y ) )
+               if ( is_string( $x ) && is_string( $y ) )
                {
                     return $this->markFixed( $image, $x . '_' . $y, $alpha );
                }
@@ -860,7 +860,7 @@ class canvas {
                          $whatermark = imagecreatefrompng( $image );
                          break;
                     case 'gif':
-                         $whatermark = imagecreatefromgif( $image );
+                         $whatermark = imagecreatefromgif ( $image );
                          break;
                     case 'bmp':
                          $whatermark = imagecreatefrombmp( $image );
@@ -968,7 +968,7 @@ class canvas {
          switch( $fillter )
          {
              case 'blur':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -981,7 +981,7 @@ class canvas {
                 }
                 break;
             case 'blur2':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1006,7 +1006,7 @@ class canvas {
                 imagefilter( $this->img, IMG_FILTER_CONTRAST, $arg1 );
                 break;
             case 'edge':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1019,7 +1019,7 @@ class canvas {
                 }
                 break;
             case 'emboss':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1035,7 +1035,7 @@ class canvas {
                 imagefilter( $this->img, IMG_FILTER_NEGATE );
                 break;
             case 'ruido':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1048,7 +1048,7 @@ class canvas {
                 }
                 break;
             case 'suave':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1062,7 +1062,7 @@ class canvas {
                 break;
             // JUST 5.3 or higher
             case 'pixel':
-                if( is_numeric( $quantity ) && $quantity > 1 )
+                if ( is_numeric( $quantity ) && $quantity > 1 )
                 {
                     for( $i = 1; $i <= $quantity; $i = $i + 1 )
                     {
@@ -1161,12 +1161,12 @@ class canvas {
                case 'gif':
                     if ( $path )
                     {
-                         imagegif( $this->img, $path );
+                         imagegif ( $this->img, $path );
                     }
                     else
                     {
                          header( "Content-type: image/gif" );
-                         imagegif( $this->img );
+                         imagegif ( $this->img );
                          imagedestroy( $this->img );
                     }
                     break;
@@ -1185,13 +1185,13 @@ class canvas {
 //------------------------------------------------------------------------------
 // Support for handling BMP
 
-/*********************************************/
-/* Function: ImageCreateFromBMP              */
-/* Author:   DHKold                          */
-/* Contact:  admin@dhkold.com                */
-/* Date:     The 15th of June 2005           */
-/* Version:  2.0B                            */
-/*********************************************/
+/*******************************************
+ Function: ImageCreateFromBMP             
+ Author:   DHKold                         
+ Contact:  admin@dhkold.com               
+ Date:     The 15th of June 2005          
+ Version:  2.0B                           
+********************************************/
 
 function imagecreatefrombmp($filename) {
  //Ouverture du fichier en mode binaire

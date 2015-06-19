@@ -3,7 +3,7 @@
 /**
  * File name: logout
  * Logout user destroying all data registered to a session
- */
+**/
 
 session_start();
 session_destroy(); //destroys session data

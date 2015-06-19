@@ -3,7 +3,7 @@
 /**
  * File name: signUp
  * Shows the person registering form
- */
+**/
 	
 require_once('header.php'); 
 

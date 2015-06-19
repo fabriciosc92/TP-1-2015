@@ -3,7 +3,7 @@
 /**
  * File name: header
  * Page responsible to be the header of all view pages
- */
+**/
 
 include 'model/User.php';
 include 'controller/functions.php';

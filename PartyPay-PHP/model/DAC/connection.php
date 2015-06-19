@@ -3,7 +3,7 @@
 /**
  * File name: connection
  * Connection  with database.
- */
+**/
 
 $server = 'localhost';
 $db = 'partypay';

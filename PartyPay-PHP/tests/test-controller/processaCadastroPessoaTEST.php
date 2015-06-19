@@ -5,7 +5,7 @@ include '../../model/Pessoa.php';
 /**
  * Class name: ProcessaCadastroPessoaTEST.
  * Tests function in class ProcessaCadastroPessoa.
- */
+**/
 
 class ProcessaCadastroPessoaTEST extends PHPUnit_Framework_TestCase 
 {

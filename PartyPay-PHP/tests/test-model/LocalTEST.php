@@ -5,7 +5,7 @@ include '../../model/Local.php';
 /**
  * Class name: LocalTest
  * Tests the functions in class Local.
- */
+**/
 
 class LocalTEST extends PHPUnit_Framework_TestCase 
 {

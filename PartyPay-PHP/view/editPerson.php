@@ -3,7 +3,7 @@
 /**
  * File name: editPerson
  * Shows the user edition form
- */
+**/
 
 require_once('header.php'); 
 

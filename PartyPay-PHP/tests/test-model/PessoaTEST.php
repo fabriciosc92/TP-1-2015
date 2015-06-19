@@ -5,7 +5,7 @@ include '../../model/Pessoa.php';
 /**
  * Class name: PessoaTest
  * Tests the functions in model Pessoa.
- */
+**/
 
 class PessoaTEST extends PHPUnit_Framework_TestCase 
 {
@@ -70,7 +70,7 @@ class PessoaTEST extends PHPUnit_Framework_TestCase
      * test de inserção de Sexo passando, era só uma modificação no setSexo,
      * estava setId
      * Fazer os demais parametros
-     */
+    **/
 
     // Tests the function set and get InsercaoCodConfirmacao in class Pessoa.
     public function testInsercaoCodConfirmacao() 

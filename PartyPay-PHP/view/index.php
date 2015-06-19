@@ -3,7 +3,7 @@
 /**
  * File name: index
  * First UI page to be seen
- */
+**/
 
 require_once 'header.php'; 
 

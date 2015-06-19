@@ -3,7 +3,7 @@
 /**
  * File name: register-local-event
  * Shows the local event registering form
- */
+**/
  
 require_once ('header.php'); 
 

@@ -3,7 +3,7 @@
 /**
  * File name: eventUploadImage.
  * FIle responsible for uploading the event image.
- */   
+**/   
 
 require 'canvas.php';
 const NO_ERROR = 0;
@@ -82,7 +82,7 @@ if ($_FILES['arquivo']['error'] != 0) {
   * Caso script chegue a esse ponto, não houve erro com o upload e o 
   * PHP pode continuar.
   * Faz a verificação da extensão do arquivo.
-  */
+ **/
 $var = explode('.', $_FILES['arquivo']['name']);
 
 $extension = strtolower(end($var));
@@ -117,7 +117,7 @@ else if ($_UP['tamanho'] < $_FILES['arquivo']['size']) {
  /**
   * O arquivo passou em todas as verificações, hora de 
   * tentar movê-lo para a pasta.
-  */
+ **/
 } else {
 
     // Primeiro verifica se deve trocar o nome do arquivo

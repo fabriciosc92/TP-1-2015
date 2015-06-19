@@ -66,7 +66,7 @@ class UserDAC
         $resultado = mysql_query($sql) or die(mysql_error());
         $row = mysql_fetch_array($resultado);
 
-        if (mysql_num_rows($resultado)==1){
+        if (mysql_num_rows($resultado)==1) {
            $user->setUserFirstName($row['userFirstName']);
            $user->setUserLastName($row['userLastName']);
            $user->setUserEmail($row['userEmail']);

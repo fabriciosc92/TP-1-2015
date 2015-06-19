@@ -7,7 +7,7 @@ include 'generateConfirmationCode.php';
 /*
  * File name: loginProcess.
  * File responsible for user's loggin.
- */
+**/
 
 
 session_start();
@@ -17,7 +17,7 @@ $host = "localhost"; // Host name.
 $username = "root"; // Mysql username - Change here the MYSQL username.
 $password = ""; // Mysql password - Change here the MYSQL password.
 $db_name = "payparty"; // DB name.
-$tbl_name = "pessoas"; // Table name.
+$tbl_name = "people"; // Table name.
 
 // Connection with server and Data Base.
 mysql_connect("$host", "$username", "$password") or die("cannot connect");

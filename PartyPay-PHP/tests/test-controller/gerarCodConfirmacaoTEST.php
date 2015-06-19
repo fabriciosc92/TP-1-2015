@@ -5,7 +5,7 @@ require_once '../../controller/gerarCodConfirmacao.php';
 /**
  * Class name: GerarCodConfirmacaoTEST.
  * Tests class GerarCodConfirmacao.
- */
+**/
 
 class GerarCodConfirmacaoTEST extends PHPUnit_Framework_TestCase 
 {

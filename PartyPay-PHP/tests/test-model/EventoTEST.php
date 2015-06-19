@@ -5,7 +5,7 @@ include '../../model/Evento.php';
 /**
  * Class name: EventoTest
  * Tests functions in class Evento to check the entries.
- */
+**/
 
 class EventoTEST extends PHPUnit_Framework_TestCase 
 {

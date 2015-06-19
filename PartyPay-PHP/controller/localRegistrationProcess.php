@@ -9,7 +9,7 @@ require_once '../model/DAC/EventoLocalDAC.php'
 /*
  * File name: localRegistrationProcess.
  * File responsible for local registration.
- */
+**/
 
 session_start();
 $address = $_POST['address']; // Receives the address of the event.

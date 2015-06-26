@@ -11,7 +11,7 @@ $db = 'partypay';
 $user = 'root';
 $password = '';
 
-$conexao = mysql_connect($server, $user, $password);
+$connection = mysql_connect($server, $user, $password);
 @mysql_select_db($db) OR DIE("Banco não encontrado.");
 
 ?>

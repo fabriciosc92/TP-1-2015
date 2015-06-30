@@ -8,7 +8,7 @@ require_once \dirname(__FILE__) . '\..\..\model\User.php';
  * Class name: UserDACTEST.
  * Unit test class UserDAC.
  */
-class CandidatoDAOTest extends PHPUnit_Framework_TestCase 
+class UserDACTEST extends PHPUnit_Framework_TestCase 
 {
 	protected $user;
     

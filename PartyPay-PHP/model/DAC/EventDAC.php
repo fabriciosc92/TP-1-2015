@@ -8,7 +8,7 @@ class EventDac
 {
 
     // Inserts data from event into database.
-    public static function insertEventDAC(event $event) 
+    public static function insertEvent(event $event) 
     {
         include_once 'connection.php';
         $sql = "INSERT INTO `events`(`eventName`, 

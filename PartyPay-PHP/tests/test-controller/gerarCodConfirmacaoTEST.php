@@ -1,20 +1,25 @@
 <?php
 
-require_once '../../controller/gerarCodConfirmacao.php';
+require_once '../../controller/generateConfirmationCode.php';
 
 /**
  * Class name: GerarCodConfirmacaoTEST.
  * Tests class GerarCodConfirmacao.
 **/
 
-class GerarCodConfirmacaoTEST extends PHPUnit_Framework_TestCase 
+class GenerateConfirmationCodeTEST extends PHPUnit_Framework_TestCase 
 {
     public $test;
     
-	// Unit test the code generation.
-    public function testaGeracaoDeCodigo() 
+    public function setUp()
     {
-        $codigo = gerarCodigoConfirmaçao();
-        $this->assertTrue($codigo == !Null);
+    	$this->test = new generateConfirmationCode();
+    }
+    
+	// Unit test the code generation.
+    public function testGenerateCodConfirmation() 
+    {
+        $code = generateCodConfirmation();
+        $this->assertTrue($code == !Null);
     }
 }

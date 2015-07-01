@@ -17,5 +17,4 @@ function generateCodConfirmation()
     $code = md5($seed . time()); // Variable that creates a code according to the seed number
     return($code);
 }
-
-?>
+ 

@@ -1,6 +1,6 @@
 <?php
 
-include '../../model/Evento.php';
+include '../../model/Event.php';
 
 /**
  * Class name: EventoTest

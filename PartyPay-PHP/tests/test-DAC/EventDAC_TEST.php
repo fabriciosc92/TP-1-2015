@@ -1,7 +1,7 @@
 <?php
-require_once \dirname(__FILE__) . '\..\..\DAO\eventDAC.php';
-require_once \dirname(__FILE__) . '\..\..\controle\connectionBanco.php';
-require_once \dirname(__FILE__) . '\..\..\modelo\event.php';
+require_once \dirname(__FILE__) . '\..\..\DAC\EventDAC.php';
+require_once \dirname(__FILE__) . '\..\..\DAC\connection.php';
+require_once \dirname(__FILE__) . '\..\..\model\Event.php';
 
 /**
  * Class name: EventDAC_TEST.
@@ -25,8 +25,8 @@ class EventDAC_TEST extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() 
     {
-        $this->object = new eventDAC;
-        $this->eventDAC = new eventDAC;
+        $this->object = new EventDAC;
+        $this->eventDAC = new EventDAC;
          $this->connection = new connection;
          $this->event = new Event;
         return $this->connection->conect();
@@ -40,10 +40,7 @@ class EventDAC_TEST extends PHPUnit_Framework_TestCase {
     {
         
     }
-    /**
-     * @covers eventDAC::insereEventDAC
-     * @todo   Implement testInsereEvent().
-     */
+
     public function testInsertEvent() {
        
         $this->event->set('eventName', 'teste');
@@ -60,7 +57,7 @@ class EventDAC_TEST extends PHPUnit_Framework_TestCase {
         $this->event->set('eventMiniature', 'teste.png');
         $this->event->set('ageClassification', '18');
 
-        $this->eventDAC = new eventDAC();
+        $this->eventDAC = new EventDAC();
         $this->id = null;
         $this->assertNull($this->id);
     }
